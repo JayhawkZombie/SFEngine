@@ -1,0 +1,837 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{667EFDE7-8AF3-446E-A68C-393D3B86BC2F}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>SFEngine</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;SFML_STATIC;TGUI_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Source\Public;$(SolutionDir)\Dependencies;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalOptions>/std:c++14 /volatile:iso %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)\Dependencies\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-s-d.lib;sfml-window-s-d.lib;sfml-audio-s-d.lib;sfml-system-s-d.lib;thor-s-d.lib;flac.lib;freetype.lib;jpeg.lib;ogg.lib;openal32.lib;vorbis.lib;vorbisenc.lib;vorbisfile.lib;opengl32.lib;winmm.lib;sfml-main-d.lib;tgui-s-d.lib;jsoncpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Dependencies\Aurora\Config.hpp" />
+    <ClInclude Include="Dependencies\Aurora\Dispatch.hpp" />
+    <ClInclude Include="Dependencies\Aurora\Dispatch\DispatchTraits.hpp" />
+    <ClInclude Include="Dependencies\Aurora\Dispatch\DoubleDispatcher.hpp" />
+    <ClInclude Include="Dependencies\Aurora\Dispatch\SingleDispatcher.hpp" />
+    <ClInclude Include="Dependencies\Aurora\doc\Documentation.hpp" />
+    <ClInclude Include="Dependencies\Aurora\include\Aurora\Config.hpp" />
+    <ClInclude Include="Dependencies\Aurora\include\Aurora\Dispatch.hpp" />
+    <ClInclude Include="Dependencies\Aurora\include\Aurora\Dispatch\DispatchTraits.hpp" />
+    <ClInclude Include="Dependencies\Aurora\include\Aurora\Dispatch\DoubleDispatcher.hpp" />
+    <ClInclude Include="Dependencies\Aurora\include\Aurora\Dispatch\SingleDispatcher.hpp" />
+    <ClInclude Include="Dependencies\Aurora\include\Aurora\Meta.hpp" />
+    <ClInclude Include="Dependencies\Aurora\include\Aurora\Meta\Preprocessor.hpp" />
+    <ClInclude Include="Dependencies\Aurora\include\Aurora\Meta\Templates.hpp" />
+    <ClInclude Include="Dependencies\Aurora\include\Aurora\Meta\Tuple.hpp" />
+    <ClInclude Include="Dependencies\Aurora\include\Aurora\Meta\Variadic.hpp" />
+    <ClInclude Include="Dependencies\Aurora\include\Aurora\SmartPtr.hpp" />
+    <ClInclude Include="Dependencies\Aurora\include\Aurora\SmartPtr\ClonersAndDeleters.hpp" />
+    <ClInclude Include="Dependencies\Aurora\include\Aurora\SmartPtr\CopiedPtr.hpp" />
+    <ClInclude Include="Dependencies\Aurora\include\Aurora\SmartPtr\Detail\Factories.hpp" />
+    <ClInclude Include="Dependencies\Aurora\include\Aurora\SmartPtr\Detail\PtrOwner.hpp" />
+    <ClInclude Include="Dependencies\Aurora\include\Aurora\SmartPtr\MakeUnique.hpp" />
+    <ClInclude Include="Dependencies\Aurora\include\Aurora\Tools.hpp" />
+    <ClInclude Include="Dependencies\Aurora\include\Aurora\Tools\Algorithms.hpp" />
+    <ClInclude Include="Dependencies\Aurora\include\Aurora\Tools\Any.hpp" />
+    <ClInclude Include="Dependencies\Aurora\include\Aurora\Tools\Downcast.hpp" />
+    <ClInclude Include="Dependencies\Aurora\include\Aurora\Tools\Exceptions.hpp" />
+    <ClInclude Include="Dependencies\Aurora\include\Aurora\Tools\ForEach.hpp" />
+    <ClInclude Include="Dependencies\Aurora\include\Aurora\Tools\Hash.hpp" />
+    <ClInclude Include="Dependencies\Aurora\include\Aurora\Tools\NamedTuple.hpp" />
+    <ClInclude Include="Dependencies\Aurora\include\Aurora\Tools\NonCopyable.hpp" />
+    <ClInclude Include="Dependencies\Aurora\include\Aurora\Tools\Optional.hpp" />
+    <ClInclude Include="Dependencies\Aurora\include\Aurora\Tools\PImpl.hpp" />
+    <ClInclude Include="Dependencies\Aurora\include\Aurora\Tools\SafeBool.hpp" />
+    <ClInclude Include="Dependencies\Aurora\include\Aurora\Tools\Swap.hpp" />
+    <ClInclude Include="Dependencies\Aurora\include\Aurora\Tools\Typeid.hpp" />
+    <ClInclude Include="Dependencies\Aurora\Meta.hpp" />
+    <ClInclude Include="Dependencies\Aurora\Meta\Preprocessor.hpp" />
+    <ClInclude Include="Dependencies\Aurora\Meta\Templates.hpp" />
+    <ClInclude Include="Dependencies\Aurora\Meta\Tuple.hpp" />
+    <ClInclude Include="Dependencies\Aurora\Meta\Variadic.hpp" />
+    <ClInclude Include="Dependencies\Aurora\SmartPtr.hpp" />
+    <ClInclude Include="Dependencies\Aurora\SmartPtr\ClonersAndDeleters.hpp" />
+    <ClInclude Include="Dependencies\Aurora\SmartPtr\CopiedPtr.hpp" />
+    <ClInclude Include="Dependencies\Aurora\SmartPtr\Detail\Factories.hpp" />
+    <ClInclude Include="Dependencies\Aurora\SmartPtr\Detail\PtrOwner.hpp" />
+    <ClInclude Include="Dependencies\Aurora\SmartPtr\MakeUnique.hpp" />
+    <ClInclude Include="Dependencies\Aurora\Tools.hpp" />
+    <ClInclude Include="Dependencies\Aurora\Tools\Algorithms.hpp" />
+    <ClInclude Include="Dependencies\Aurora\Tools\Any.hpp" />
+    <ClInclude Include="Dependencies\Aurora\Tools\Downcast.hpp" />
+    <ClInclude Include="Dependencies\Aurora\Tools\Exceptions.hpp" />
+    <ClInclude Include="Dependencies\Aurora\Tools\ForEach.hpp" />
+    <ClInclude Include="Dependencies\Aurora\Tools\Hash.hpp" />
+    <ClInclude Include="Dependencies\Aurora\Tools\NamedTuple.hpp" />
+    <ClInclude Include="Dependencies\Aurora\Tools\NonCopyable.hpp" />
+    <ClInclude Include="Dependencies\Aurora\Tools\Optional.hpp" />
+    <ClInclude Include="Dependencies\Aurora\Tools\PImpl.hpp" />
+    <ClInclude Include="Dependencies\Aurora\Tools\SafeBool.hpp" />
+    <ClInclude Include="Dependencies\Aurora\Tools\Swap.hpp" />
+    <ClInclude Include="Dependencies\Aurora\Tools\Typeid.hpp" />
+    <ClInclude Include="Dependencies\Catch\Catch.hpp" />
+    <ClInclude Include="Dependencies\cereal\access.hpp" />
+    <ClInclude Include="Dependencies\cereal\archives\adapters.hpp" />
+    <ClInclude Include="Dependencies\cereal\archives\binary.hpp" />
+    <ClInclude Include="Dependencies\cereal\archives\json.hpp" />
+    <ClInclude Include="Dependencies\cereal\archives\portable_binary.hpp" />
+    <ClInclude Include="Dependencies\cereal\archives\xml.hpp" />
+    <ClInclude Include="Dependencies\cereal\cereal.hpp" />
+    <ClInclude Include="Dependencies\cereal\details\helpers.hpp" />
+    <ClInclude Include="Dependencies\cereal\details\polymorphic_impl.hpp" />
+    <ClInclude Include="Dependencies\cereal\details\polymorphic_impl_fwd.hpp" />
+    <ClInclude Include="Dependencies\cereal\details\static_object.hpp" />
+    <ClInclude Include="Dependencies\cereal\details\traits.hpp" />
+    <ClInclude Include="Dependencies\cereal\details\util.hpp" />
+    <ClInclude Include="Dependencies\cereal\external\base64.hpp" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\allocators.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\document.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\encodedstream.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\encodings.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\error\en.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\error\error.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\filereadstream.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\filewritestream.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\fwd.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\internal\biginteger.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\internal\diyfp.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\internal\dtoa.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\internal\ieee754.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\internal\itoa.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\internal\meta.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\internal\pow10.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\internal\regex.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\internal\stack.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\internal\strfunc.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\internal\strtod.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\internal\swap.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\istreamwrapper.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\memorybuffer.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\memorystream.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\msinttypes\inttypes.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\msinttypes\stdint.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\ostreamwrapper.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\pointer.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\prettywriter.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\rapidjson.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\reader.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\schema.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\stream.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\stringbuffer.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidjson\writer.h" />
+    <ClInclude Include="Dependencies\cereal\external\rapidxml\rapidxml.hpp" />
+    <ClInclude Include="Dependencies\cereal\external\rapidxml\rapidxml_iterators.hpp" />
+    <ClInclude Include="Dependencies\cereal\external\rapidxml\rapidxml_print.hpp" />
+    <ClInclude Include="Dependencies\cereal\external\rapidxml\rapidxml_utils.hpp" />
+    <ClInclude Include="Dependencies\cereal\macros.hpp" />
+    <ClInclude Include="Dependencies\cereal\types\array.hpp" />
+    <ClInclude Include="Dependencies\cereal\types\base_class.hpp" />
+    <ClInclude Include="Dependencies\cereal\types\bitset.hpp" />
+    <ClInclude Include="Dependencies\cereal\types\boost_variant.hpp" />
+    <ClInclude Include="Dependencies\cereal\types\chrono.hpp" />
+    <ClInclude Include="Dependencies\cereal\types\common.hpp" />
+    <ClInclude Include="Dependencies\cereal\types\complex.hpp" />
+    <ClInclude Include="Dependencies\cereal\types\concepts\pair_associative_container.hpp" />
+    <ClInclude Include="Dependencies\cereal\types\deque.hpp" />
+    <ClInclude Include="Dependencies\cereal\types\forward_list.hpp" />
+    <ClInclude Include="Dependencies\cereal\types\functional.hpp" />
+    <ClInclude Include="Dependencies\cereal\types\list.hpp" />
+    <ClInclude Include="Dependencies\cereal\types\map.hpp" />
+    <ClInclude Include="Dependencies\cereal\types\memory.hpp" />
+    <ClInclude Include="Dependencies\cereal\types\polymorphic.hpp" />
+    <ClInclude Include="Dependencies\cereal\types\queue.hpp" />
+    <ClInclude Include="Dependencies\cereal\types\set.hpp" />
+    <ClInclude Include="Dependencies\cereal\types\stack.hpp" />
+    <ClInclude Include="Dependencies\cereal\types\string.hpp" />
+    <ClInclude Include="Dependencies\cereal\types\tuple.hpp" />
+    <ClInclude Include="Dependencies\cereal\types\unordered_map.hpp" />
+    <ClInclude Include="Dependencies\cereal\types\unordered_set.hpp" />
+    <ClInclude Include="Dependencies\cereal\types\utility.hpp" />
+    <ClInclude Include="Dependencies\cereal\types\valarray.hpp" />
+    <ClInclude Include="Dependencies\cereal\types\vector.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\chaiscript.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\chaiscript_basic.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\chaiscript_defines.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\chaiscript_stdlib.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\chaiscript_threading.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\any.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\bad_boxed_cast.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\bind_first.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\bootstrap.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\bootstrap_stl.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\boxed_cast.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\boxed_cast_helper.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\boxed_number.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\boxed_value.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\callable_traits.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\dispatchkit.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\dynamic_object.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\dynamic_object_detail.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\exception_specification.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\function_call.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\function_call_detail.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\handle_return.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\operators.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\proxy_constructors.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\proxy_functions.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\proxy_functions_detail.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\register_function.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\short_alloc.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\type_conversions.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\type_info.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\language\chaiscript_algebraic.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\language\chaiscript_common.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\language\chaiscript_engine.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\language\chaiscript_eval.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\language\chaiscript_optimizer.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\language\chaiscript_parser.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\language\chaiscript_posix.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\language\chaiscript_prelude.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\language\chaiscript_prelude_docs.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\language\chaiscript_tracer.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\language\chaiscript_unknown.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\language\chaiscript_windows.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\utility\fnv1a.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\utility\json.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\utility\json_wrap.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\utility\static_string.hpp" />
+    <ClInclude Include="Dependencies\Chaiscript\utility\utility.hpp" />
+    <ClInclude Include="Dependencies\IMGUI\imconfig-SFML.h" />
+    <ClInclude Include="Dependencies\IMGUI\imconfig.h" />
+    <ClInclude Include="Dependencies\IMGUI\imgui-SFML.h" />
+    <ClInclude Include="Dependencies\IMGUI\imgui.h" />
+    <ClInclude Include="Dependencies\IMGUI\imgui_internal.h" />
+    <ClInclude Include="Dependencies\IMGUI\stb_rect_pack.h" />
+    <ClInclude Include="Dependencies\IMGUI\stb_textedit.h" />
+    <ClInclude Include="Dependencies\IMGUI\stb_truetype.h" />
+    <ClInclude Include="Dependencies\jsoncpp\allocator.h" />
+    <ClInclude Include="Dependencies\jsoncpp\assertions.h" />
+    <ClInclude Include="Dependencies\jsoncpp\autolink.h" />
+    <ClInclude Include="Dependencies\jsoncpp\config.h" />
+    <ClInclude Include="Dependencies\jsoncpp\features.h" />
+    <ClInclude Include="Dependencies\jsoncpp\forwards.h" />
+    <ClInclude Include="Dependencies\jsoncpp\json.h" />
+    <ClInclude Include="Dependencies\jsoncpp\reader.h" />
+    <ClInclude Include="Dependencies\jsoncpp\value.h" />
+    <ClInclude Include="Dependencies\jsoncpp\version.h" />
+    <ClInclude Include="Dependencies\jsoncpp\writer.h" />
+    <ClInclude Include="Dependencies\PhysicsEngine\arcSeg.h" />
+    <ClInclude Include="Dependencies\PhysicsEngine\ball.h" />
+    <ClInclude Include="Dependencies\PhysicsEngine\ball_go.h" />
+    <ClInclude Include="Dependencies\PhysicsEngine\block.h" />
+    <ClInclude Include="Dependencies\PhysicsEngine\decayPolygon.h" />
+    <ClInclude Include="Dependencies\PhysicsEngine\expandPolygon.h" />
+    <ClInclude Include="Dependencies\PhysicsEngine\lineBumper.h" />
+    <ClInclude Include="Dependencies\PhysicsEngine\lineSeg.h" />
+    <ClInclude Include="Dependencies\PhysicsEngine\lineSegConveyor.h" />
+    <ClInclude Include="Dependencies\PhysicsEngine\lineSegElevator.h" />
+    <ClInclude Include="Dependencies\PhysicsEngine\lineSegFlip.h" />
+    <ClInclude Include="Dependencies\PhysicsEngine\lineSegRotate.h" />
+    <ClInclude Include="Dependencies\PhysicsEngine\lineSegSwing.h" />
+    <ClInclude Include="Dependencies\PhysicsEngine\mvHit.h" />
+    <ClInclude Include="Dependencies\PhysicsEngine\pipeSeg.h" />
+    <ClInclude Include="Dependencies\PhysicsEngine\polyHitFuncs.h" />
+    <ClInclude Include="Dependencies\PhysicsEngine\rec.h" />
+    <ClInclude Include="Dependencies\PhysicsEngine\regPolygon.h" />
+    <ClInclude Include="Dependencies\PhysicsEngine\segHit.h" />
+    <ClInclude Include="Dependencies\PhysicsEngine\stateTypes.h" />
+    <ClInclude Include="Dependencies\PhysicsEngine\vec2d.h" />
+    <ClInclude Include="Dependencies\PhysicsEngine\waveSeg.h" />
+    <ClInclude Include="Dependencies\rapidxml\rapidxml.hpp" />
+    <ClInclude Include="Dependencies\rapidxml\rapidxml_iterators.hpp" />
+    <ClInclude Include="Dependencies\rapidxml\rapidxml_print.hpp" />
+    <ClInclude Include="Dependencies\rapidxml\rapidxml_utils.hpp" />
+    <ClInclude Include="Dependencies\SelbaWard\BitmapFont.hpp" />
+    <ClInclude Include="Dependencies\SelbaWard\BitmapText.hpp" />
+    <ClInclude Include="Dependencies\SelbaWard\Common.hpp" />
+    <ClInclude Include="Dependencies\SelbaWard\ConsoleScreen.hpp" />
+    <ClInclude Include="Dependencies\SelbaWard\ConsoleScreenOld.hpp" />
+    <ClInclude Include="Dependencies\SelbaWard\Crosshair.hpp" />
+    <ClInclude Include="Dependencies\SelbaWard\Exception.hpp" />
+    <ClInclude Include="Dependencies\SelbaWard\GallerySprite.hpp" />
+    <ClInclude Include="Dependencies\SelbaWard\Line.hpp" />
+    <ClInclude Include="Dependencies\SelbaWard\NinePatch.hpp" />
+    <ClInclude Include="Dependencies\SelbaWard\PaletteEnums.hpp" />
+    <ClInclude Include="Dependencies\SelbaWard\PieChart.hpp" />
+    <ClInclude Include="Dependencies\SelbaWard\ProgressBar.hpp" />
+    <ClInclude Include="Dependencies\SelbaWard\Ring.hpp" />
+    <ClInclude Include="Dependencies\SelbaWard\SpinningCard.hpp" />
+    <ClInclude Include="Dependencies\SelbaWard\Spline.hpp" />
+    <ClInclude Include="Dependencies\SelbaWard\Sprite3d.hpp" />
+    <ClInclude Include="Dependencies\SelbaWard\Starfield.hpp" />
+    <ClInclude Include="Dependencies\SelbaWard\TileMap.hpp" />
+    <ClInclude Include="Dependencies\SFML\Audio.hpp" />
+    <ClInclude Include="Dependencies\SFML\Audio\AlResource.hpp" />
+    <ClInclude Include="Dependencies\SFML\Audio\Export.hpp" />
+    <ClInclude Include="Dependencies\SFML\Audio\InputSoundFile.hpp" />
+    <ClInclude Include="Dependencies\SFML\Audio\Listener.hpp" />
+    <ClInclude Include="Dependencies\SFML\Audio\Music.hpp" />
+    <ClInclude Include="Dependencies\SFML\Audio\OutputSoundFile.hpp" />
+    <ClInclude Include="Dependencies\SFML\Audio\Sound.hpp" />
+    <ClInclude Include="Dependencies\SFML\Audio\SoundBuffer.hpp" />
+    <ClInclude Include="Dependencies\SFML\Audio\SoundBufferRecorder.hpp" />
+    <ClInclude Include="Dependencies\SFML\Audio\SoundFileFactory.hpp" />
+    <ClInclude Include="Dependencies\SFML\Audio\SoundFileReader.hpp" />
+    <ClInclude Include="Dependencies\SFML\Audio\SoundFileWriter.hpp" />
+    <ClInclude Include="Dependencies\SFML\Audio\SoundRecorder.hpp" />
+    <ClInclude Include="Dependencies\SFML\Audio\SoundSource.hpp" />
+    <ClInclude Include="Dependencies\SFML\Audio\SoundStream.hpp" />
+    <ClInclude Include="Dependencies\SFML\Config.hpp" />
+    <ClInclude Include="Dependencies\SFML\Graphics.hpp" />
+    <ClInclude Include="Dependencies\SFML\Graphics\BlendMode.hpp" />
+    <ClInclude Include="Dependencies\SFML\Graphics\CircleShape.hpp" />
+    <ClInclude Include="Dependencies\SFML\Graphics\Color.hpp" />
+    <ClInclude Include="Dependencies\SFML\Graphics\ConvexShape.hpp" />
+    <ClInclude Include="Dependencies\SFML\Graphics\Drawable.hpp" />
+    <ClInclude Include="Dependencies\SFML\Graphics\Export.hpp" />
+    <ClInclude Include="Dependencies\SFML\Graphics\Font.hpp" />
+    <ClInclude Include="Dependencies\SFML\Graphics\Glsl.hpp" />
+    <ClInclude Include="Dependencies\SFML\Graphics\Glyph.hpp" />
+    <ClInclude Include="Dependencies\SFML\Graphics\Image.hpp" />
+    <ClInclude Include="Dependencies\SFML\Graphics\PrimitiveType.hpp" />
+    <ClInclude Include="Dependencies\SFML\Graphics\Rect.hpp" />
+    <ClInclude Include="Dependencies\SFML\Graphics\RectangleShape.hpp" />
+    <ClInclude Include="Dependencies\SFML\Graphics\RenderStates.hpp" />
+    <ClInclude Include="Dependencies\SFML\Graphics\RenderTarget.hpp" />
+    <ClInclude Include="Dependencies\SFML\Graphics\RenderTexture.hpp" />
+    <ClInclude Include="Dependencies\SFML\Graphics\RenderWindow.hpp" />
+    <ClInclude Include="Dependencies\SFML\Graphics\Shader.hpp" />
+    <ClInclude Include="Dependencies\SFML\Graphics\Shape.hpp" />
+    <ClInclude Include="Dependencies\SFML\Graphics\Sprite.hpp" />
+    <ClInclude Include="Dependencies\SFML\Graphics\Text.hpp" />
+    <ClInclude Include="Dependencies\SFML\Graphics\Texture.hpp" />
+    <ClInclude Include="Dependencies\SFML\Graphics\Transform.hpp" />
+    <ClInclude Include="Dependencies\SFML\Graphics\Transformable.hpp" />
+    <ClInclude Include="Dependencies\SFML\Graphics\Vertex.hpp" />
+    <ClInclude Include="Dependencies\SFML\Graphics\VertexArray.hpp" />
+    <ClInclude Include="Dependencies\SFML\Graphics\View.hpp" />
+    <ClInclude Include="Dependencies\SFML\Main.hpp" />
+    <ClInclude Include="Dependencies\SFML\Network.hpp" />
+    <ClInclude Include="Dependencies\SFML\Network\Export.hpp" />
+    <ClInclude Include="Dependencies\SFML\Network\Ftp.hpp" />
+    <ClInclude Include="Dependencies\SFML\Network\Http.hpp" />
+    <ClInclude Include="Dependencies\SFML\Network\IpAddress.hpp" />
+    <ClInclude Include="Dependencies\SFML\Network\Packet.hpp" />
+    <ClInclude Include="Dependencies\SFML\Network\Socket.hpp" />
+    <ClInclude Include="Dependencies\SFML\Network\SocketHandle.hpp" />
+    <ClInclude Include="Dependencies\SFML\Network\SocketSelector.hpp" />
+    <ClInclude Include="Dependencies\SFML\Network\TcpListener.hpp" />
+    <ClInclude Include="Dependencies\SFML\Network\TcpSocket.hpp" />
+    <ClInclude Include="Dependencies\SFML\Network\UdpSocket.hpp" />
+    <ClInclude Include="Dependencies\SFML\OpenGL.hpp" />
+    <ClInclude Include="Dependencies\SFML\System.hpp" />
+    <ClInclude Include="Dependencies\SFML\System\Clock.hpp" />
+    <ClInclude Include="Dependencies\SFML\System\Err.hpp" />
+    <ClInclude Include="Dependencies\SFML\System\Export.hpp" />
+    <ClInclude Include="Dependencies\SFML\System\FileInputStream.hpp" />
+    <ClInclude Include="Dependencies\SFML\System\InputStream.hpp" />
+    <ClInclude Include="Dependencies\SFML\System\Lock.hpp" />
+    <ClInclude Include="Dependencies\SFML\System\MemoryInputStream.hpp" />
+    <ClInclude Include="Dependencies\SFML\System\Mutex.hpp" />
+    <ClInclude Include="Dependencies\SFML\System\NativeActivity.hpp" />
+    <ClInclude Include="Dependencies\SFML\System\NonCopyable.hpp" />
+    <ClInclude Include="Dependencies\SFML\System\Sleep.hpp" />
+    <ClInclude Include="Dependencies\SFML\System\String.hpp" />
+    <ClInclude Include="Dependencies\SFML\System\Thread.hpp" />
+    <ClInclude Include="Dependencies\SFML\System\ThreadLocal.hpp" />
+    <ClInclude Include="Dependencies\SFML\System\ThreadLocalPtr.hpp" />
+    <ClInclude Include="Dependencies\SFML\System\Time.hpp" />
+    <ClInclude Include="Dependencies\SFML\System\Utf.hpp" />
+    <ClInclude Include="Dependencies\SFML\System\Vector2.hpp" />
+    <ClInclude Include="Dependencies\SFML\System\Vector3.hpp" />
+    <ClInclude Include="Dependencies\SFML\Window.hpp" />
+    <ClInclude Include="Dependencies\SFML\Window\Context.hpp" />
+    <ClInclude Include="Dependencies\SFML\Window\ContextSettings.hpp" />
+    <ClInclude Include="Dependencies\SFML\Window\Event.hpp" />
+    <ClInclude Include="Dependencies\SFML\Window\Export.hpp" />
+    <ClInclude Include="Dependencies\SFML\Window\GlResource.hpp" />
+    <ClInclude Include="Dependencies\SFML\Window\Joystick.hpp" />
+    <ClInclude Include="Dependencies\SFML\Window\Keyboard.hpp" />
+    <ClInclude Include="Dependencies\SFML\Window\Mouse.hpp" />
+    <ClInclude Include="Dependencies\SFML\Window\Sensor.hpp" />
+    <ClInclude Include="Dependencies\SFML\Window\Touch.hpp" />
+    <ClInclude Include="Dependencies\SFML\Window\VideoMode.hpp" />
+    <ClInclude Include="Dependencies\SFML\Window\Window.hpp" />
+    <ClInclude Include="Dependencies\SFML\Window\WindowHandle.hpp" />
+    <ClInclude Include="Dependencies\SFML\Window\WindowStyle.hpp" />
+    <ClInclude Include="Dependencies\TGUI\Animation.hpp" />
+    <ClInclude Include="Dependencies\TGUI\Borders.hpp" />
+    <ClInclude Include="Dependencies\TGUI\BoxLayout.hpp" />
+    <ClInclude Include="Dependencies\TGUI\Callback.hpp" />
+    <ClInclude Include="Dependencies\TGUI\Clipboard.hpp" />
+    <ClInclude Include="Dependencies\TGUI\Clipping.hpp" />
+    <ClInclude Include="Dependencies\TGUI\Color.hpp" />
+    <ClInclude Include="Dependencies\TGUI\Config.hpp" />
+    <ClInclude Include="Dependencies\TGUI\Container.hpp" />
+    <ClInclude Include="Dependencies\TGUI\DefaultFont.hpp" />
+    <ClInclude Include="Dependencies\TGUI\Exception.hpp" />
+    <ClInclude Include="Dependencies\TGUI\Font.hpp" />
+    <ClInclude Include="Dependencies\TGUI\Global.hpp" />
+    <ClInclude Include="Dependencies\TGUI\Gui.hpp" />
+    <ClInclude Include="Dependencies\TGUI\HorizontalLayout.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\SFML\System\Android\Activity.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\SFML\Window\EGLCheck.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\SFML\Window\EglContext.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\SFML\Window\GlContext.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Animation.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Borders.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\BoxLayout.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Callback.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Clipboard.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Clipping.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Color.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Config.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Container.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\DefaultFont.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Exception.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Font.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Global.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Gui.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\HorizontalLayout.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Layout.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Loading\DataIO.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Loading\Deserializer.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Loading\ObjectConverter.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Loading\Serializer.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Loading\Theme.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Loading\ThemeLoader.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Loading\WidgetConverter.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Loading\WidgetLoader.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Loading\WidgetSaver.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Signal.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Texture.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\TextureData.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\TextureManager.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\TGUI.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Transformable.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\VerticalLayout.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widget.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\Button.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\Canvas.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\ChatBox.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\CheckBox.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\ChildWindow.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\ClickableWidget.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\ComboBox.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\devel\RichTextLabel.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\devel\Table.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\devel\TableItem.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\devel\TableRow.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\EditBox.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\Grid.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\Knob.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\Label.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\ListBox.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\MenuBar.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\MessageBox.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\Panel.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\Picture.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\ProgressBar.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\RadioButton.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\Scrollbar.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\Slider.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\SpinButton.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\Tab.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\TextBox.hpp" />
+    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\ToolTip.hpp" />
+    <ClInclude Include="Dependencies\TGUI\Layout.hpp" />
+    <ClInclude Include="Dependencies\TGUI\Loading\DataIO.hpp" />
+    <ClInclude Include="Dependencies\TGUI\Loading\Deserializer.hpp" />
+    <ClInclude Include="Dependencies\TGUI\Loading\ObjectConverter.hpp" />
+    <ClInclude Include="Dependencies\TGUI\Loading\Serializer.hpp" />
+    <ClInclude Include="Dependencies\TGUI\Loading\Theme.hpp" />
+    <ClInclude Include="Dependencies\TGUI\Loading\ThemeLoader.hpp" />
+    <ClInclude Include="Dependencies\TGUI\Loading\WidgetConverter.hpp" />
+    <ClInclude Include="Dependencies\TGUI\Loading\WidgetLoader.hpp" />
+    <ClInclude Include="Dependencies\TGUI\Loading\WidgetSaver.hpp" />
+    <ClInclude Include="Dependencies\TGUI\Signal.hpp" />
+    <ClInclude Include="Dependencies\TGUI\Texture.hpp" />
+    <ClInclude Include="Dependencies\TGUI\TextureData.hpp" />
+    <ClInclude Include="Dependencies\TGUI\TextureManager.hpp" />
+    <ClInclude Include="Dependencies\TGUI\TGUI.hpp" />
+    <ClInclude Include="Dependencies\TGUI\Transformable.hpp" />
+    <ClInclude Include="Dependencies\TGUI\VerticalLayout.hpp" />
+    <ClInclude Include="Dependencies\TGUI\Widget.hpp" />
+    <ClInclude Include="Dependencies\TGUI\widgets\Button.hpp" />
+    <ClInclude Include="Dependencies\TGUI\widgets\Canvas.hpp" />
+    <ClInclude Include="Dependencies\TGUI\widgets\ChatBox.hpp" />
+    <ClInclude Include="Dependencies\TGUI\widgets\CheckBox.hpp" />
+    <ClInclude Include="Dependencies\TGUI\widgets\ChildWindow.hpp" />
+    <ClInclude Include="Dependencies\TGUI\widgets\ClickableWidget.hpp" />
+    <ClInclude Include="Dependencies\TGUI\widgets\ComboBox.hpp" />
+    <ClInclude Include="Dependencies\TGUI\widgets\devel\RichTextLabel.hpp" />
+    <ClInclude Include="Dependencies\TGUI\widgets\devel\Table.hpp" />
+    <ClInclude Include="Dependencies\TGUI\widgets\devel\TableItem.hpp" />
+    <ClInclude Include="Dependencies\TGUI\widgets\devel\TableRow.hpp" />
+    <ClInclude Include="Dependencies\TGUI\widgets\EditBox.hpp" />
+    <ClInclude Include="Dependencies\TGUI\widgets\Grid.hpp" />
+    <ClInclude Include="Dependencies\TGUI\widgets\Knob.hpp" />
+    <ClInclude Include="Dependencies\TGUI\widgets\Label.hpp" />
+    <ClInclude Include="Dependencies\TGUI\widgets\ListBox.hpp" />
+    <ClInclude Include="Dependencies\TGUI\widgets\MenuBar.hpp" />
+    <ClInclude Include="Dependencies\TGUI\widgets\MessageBox.hpp" />
+    <ClInclude Include="Dependencies\TGUI\widgets\Panel.hpp" />
+    <ClInclude Include="Dependencies\TGUI\widgets\Picture.hpp" />
+    <ClInclude Include="Dependencies\TGUI\widgets\ProgressBar.hpp" />
+    <ClInclude Include="Dependencies\TGUI\widgets\RadioButton.hpp" />
+    <ClInclude Include="Dependencies\TGUI\widgets\Scrollbar.hpp" />
+    <ClInclude Include="Dependencies\TGUI\widgets\Slider.hpp" />
+    <ClInclude Include="Dependencies\TGUI\widgets\SpinButton.hpp" />
+    <ClInclude Include="Dependencies\TGUI\widgets\Tab.hpp" />
+    <ClInclude Include="Dependencies\TGUI\widgets\TextBox.hpp" />
+    <ClInclude Include="Dependencies\TGUI\widgets\ToolTip.hpp" />
+    <ClInclude Include="Dependencies\Thor\Animations.hpp" />
+    <ClInclude Include="Dependencies\Thor\Animations\AnimationMap.hpp" />
+    <ClInclude Include="Dependencies\Thor\Animations\AnimationPrimitives.hpp" />
+    <ClInclude Include="Dependencies\Thor\Animations\Animator.hpp" />
+    <ClInclude Include="Dependencies\Thor\Animations\ColorAnimation.hpp" />
+    <ClInclude Include="Dependencies\Thor\Animations\Detail\PlaybackSchemes.hpp" />
+    <ClInclude Include="Dependencies\Thor\Animations\FadeAnimation.hpp" />
+    <ClInclude Include="Dependencies\Thor\Animations\FrameAnimation.hpp" />
+    <ClInclude Include="Dependencies\Thor\Animations\Playback.hpp" />
+    <ClInclude Include="Dependencies\Thor\Animations\RefAnimation.hpp" />
+    <ClInclude Include="Dependencies\Thor\Config.hpp" />
+    <ClInclude Include="Dependencies\Thor\Graphics.hpp" />
+    <ClInclude Include="Dependencies\Thor\Graphics\BigSprite.hpp" />
+    <ClInclude Include="Dependencies\Thor\Graphics\BigTexture.hpp" />
+    <ClInclude Include="Dependencies\Thor\Graphics\ColorGradient.hpp" />
+    <ClInclude Include="Dependencies\Thor\Graphics\ToString.hpp" />
+    <ClInclude Include="Dependencies\Thor\Graphics\UniformAccess.hpp" />
+    <ClInclude Include="Dependencies\Thor\Input.hpp" />
+    <ClInclude Include="Dependencies\Thor\Input\Action.hpp" />
+    <ClInclude Include="Dependencies\Thor\Input\ActionContext.hpp" />
+    <ClInclude Include="Dependencies\Thor\Input\ActionMap.hpp" />
+    <ClInclude Include="Dependencies\Thor\Input\Connection.hpp" />
+    <ClInclude Include="Dependencies\Thor\Input\Detail\ActionOperations.hpp" />
+    <ClInclude Include="Dependencies\Thor\Input\Detail\ConnectionImpl.hpp" />
+    <ClInclude Include="Dependencies\Thor\Input\Detail\EventListener.hpp" />
+    <ClInclude Include="Dependencies\Thor\Input\EventSystem.hpp" />
+    <ClInclude Include="Dependencies\Thor\Input\InputNames.hpp" />
+    <ClInclude Include="Dependencies\Thor\Input\Joystick.hpp" />
+    <ClInclude Include="Dependencies\Thor\Math.hpp" />
+    <ClInclude Include="Dependencies\Thor\Math\Distribution.hpp" />
+    <ClInclude Include="Dependencies\Thor\Math\Distributions.hpp" />
+    <ClInclude Include="Dependencies\Thor\Math\Random.hpp" />
+    <ClInclude Include="Dependencies\Thor\Math\Triangulation.hpp" />
+    <ClInclude Include="Dependencies\Thor\Math\TriangulationFigures.hpp" />
+    <ClInclude Include="Dependencies\Thor\Math\Trigonometry.hpp" />
+    <ClInclude Include="Dependencies\Thor\Particles.hpp" />
+    <ClInclude Include="Dependencies\Thor\Particles\Affectors.hpp" />
+    <ClInclude Include="Dependencies\Thor\Particles\EmissionInterface.hpp" />
+    <ClInclude Include="Dependencies\Thor\Particles\Emitters.hpp" />
+    <ClInclude Include="Dependencies\Thor\Particles\Particle.hpp" />
+    <ClInclude Include="Dependencies\Thor\Particles\ParticleSystem.hpp" />
+    <ClInclude Include="Dependencies\Thor\Resources.hpp" />
+    <ClInclude Include="Dependencies\Thor\Resources\Detail\ResourceLoaderHelpers.hpp" />
+    <ClInclude Include="Dependencies\Thor\Resources\KnownIdStrategy.hpp" />
+    <ClInclude Include="Dependencies\Thor\Resources\OwnershipModels.hpp" />
+    <ClInclude Include="Dependencies\Thor\Resources\ResourceExceptions.hpp" />
+    <ClInclude Include="Dependencies\Thor\Resources\ResourceHolder.hpp" />
+    <ClInclude Include="Dependencies\Thor\Resources\ResourceLoader.hpp" />
+    <ClInclude Include="Dependencies\Thor\Resources\SfmlLoaders.hpp" />
+    <ClInclude Include="Dependencies\Thor\Shapes.hpp" />
+    <ClInclude Include="Dependencies\Thor\Shapes\Arrow.hpp" />
+    <ClInclude Include="Dependencies\Thor\Shapes\ConcaveShape.hpp" />
+    <ClInclude Include="Dependencies\Thor\Shapes\Shapes.hpp" />
+    <ClInclude Include="Dependencies\Thor\Time.hpp" />
+    <ClInclude Include="Dependencies\Thor\Time\CallbackTimer.hpp" />
+    <ClInclude Include="Dependencies\Thor\Time\StopWatch.hpp" />
+    <ClInclude Include="Dependencies\Thor\Time\Timer.hpp" />
+    <ClInclude Include="Dependencies\Thor\Vectors.hpp" />
+    <ClInclude Include="Dependencies\Thor\Vectors\PolarVector2.hpp" />
+    <ClInclude Include="Dependencies\Thor\Vectors\VectorAlgebra2D.hpp" />
+    <ClInclude Include="Dependencies\Thor\Vectors\VectorAlgebra3D.hpp" />
+    <ClInclude Include="Source\Public\Actors\Actor.h" />
+    <ClInclude Include="Source\Public\ASync\LevelStreaming.h" />
+    <ClInclude Include="Source\Public\BasicIncludes.h" />
+    <ClInclude Include="Source\Public\Camera\Camera2D.h" />
+    <ClInclude Include="Source\Public\DebugDefs.h" />
+    <ClInclude Include="Source\Public\DefsX64.h" />
+    <ClInclude Include="Source\Public\DefsX86.h" />
+    <ClInclude Include="Source\Public\DependencyInterface.h" />
+    <ClInclude Include="Source\Public\EditorDefs.h" />
+    <ClInclude Include="Source\Public\EngineTypes.h" />
+    <ClInclude Include="Source\Public\Engine\BaseEngineInterface.h" />
+    <ClInclude Include="Source\Public\Engine\Engine.h" />
+    <ClInclude Include="Source\Public\Engine\EngineConfiguration.h" />
+    <ClInclude Include="Source\Public\Engine\ReturnValues.h" />
+    <ClInclude Include="Source\Public\Events\EventHandler.h" />
+    <ClInclude Include="Source\Public\Events\Events.h" />
+    <ClInclude Include="Source\Public\Events\EventSequence.h" />
+    <ClInclude Include="Source\Public\Events\UserEvent.h" />
+    <ClInclude Include="Source\Public\Exceptions\Exceptions.hpp" />
+    <ClInclude Include="Source\Public\Globals.h" />
+    <ClInclude Include="Source\Public\Level\BasicLevel.h" />
+    <ClInclude Include="Source\Public\Objects\GameObject.h" />
+    <ClInclude Include="Source\Public\Messaging\Messager.h" />
+    <ClInclude Include="Source\Public\OSXDefs.h" />
+    <ClInclude Include="Source\Public\Physics\Collider.h" />
+    <ClInclude Include="Source\Public\Resources\Resources.h" />
+    <ClInclude Include="Source\Public\State\DeviceState.h" />
+    <ClInclude Include="Source\Public\UI\UIMacros.h" />
+    <ClInclude Include="Source\Public\Utils\Conversion.h" />
+    <ClInclude Include="Source\Public\Utils\ReadIni.h" />
+    <ClInclude Include="Source\Public\Utils\SplinePath.h" />
+    <ClInclude Include="Source\Public\Utils\TimedSequence.h" />
+    <ClInclude Include="Source\Public\Utils\UntimedSequence.h" />
+    <ClInclude Include="Source\Public\Weather\Lightning.h" />
+    <ClInclude Include="Source\Public\Weather\WeatherSystem.h" />
+    <ClInclude Include="Source\Public\WindowsDefs.h" />
+    <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Dependencies\IMGUI\imgui-SFML.cpp" />
+    <ClCompile Include="Dependencies\IMGUI\imgui.cpp" />
+    <ClCompile Include="Dependencies\IMGUI\imgui_demo.cpp" />
+    <ClCompile Include="Dependencies\IMGUI\imgui_draw.cpp" />
+    <ClCompile Include="Dependencies\PhysicsEngine\arcSeg.cpp" />
+    <ClCompile Include="Dependencies\PhysicsEngine\ball.cpp" />
+    <ClCompile Include="Dependencies\PhysicsEngine\ball_go.cpp" />
+    <ClCompile Include="Dependencies\PhysicsEngine\block.cpp" />
+    <ClCompile Include="Dependencies\PhysicsEngine\decayPolygon.cpp" />
+    <ClCompile Include="Dependencies\PhysicsEngine\expandPolygon.cpp" />
+    <ClCompile Include="Dependencies\PhysicsEngine\lineBumper.cpp" />
+    <ClCompile Include="Dependencies\PhysicsEngine\lineSeg.cpp" />
+    <ClCompile Include="Dependencies\PhysicsEngine\lineSegConveyor.cpp" />
+    <ClCompile Include="Dependencies\PhysicsEngine\lineSegElevator.cpp" />
+    <ClCompile Include="Dependencies\PhysicsEngine\lineSegFlip.cpp" />
+    <ClCompile Include="Dependencies\PhysicsEngine\lineSegRotate.cpp" />
+    <ClCompile Include="Dependencies\PhysicsEngine\lineSegSwing.cpp" />
+    <ClCompile Include="Dependencies\PhysicsEngine\mvHit.cpp" />
+    <ClCompile Include="Dependencies\PhysicsEngine\pipeSeg.cpp" />
+    <ClCompile Include="Dependencies\PhysicsEngine\polyHitFuncs.cpp" />
+    <ClCompile Include="Dependencies\PhysicsEngine\rec.cpp" />
+    <ClCompile Include="Dependencies\PhysicsEngine\regPolygon.cpp" />
+    <ClCompile Include="Dependencies\PhysicsEngine\segHit.cpp" />
+    <ClCompile Include="Dependencies\PhysicsEngine\vec2d.cpp" />
+    <ClCompile Include="Dependencies\PhysicsEngine\waveSeg.cpp" />
+    <ClCompile Include="Dependencies\SelbaWard\BitmapFont.cpp" />
+    <ClCompile Include="Dependencies\SelbaWard\BitmapText.cpp" />
+    <ClCompile Include="Dependencies\SelbaWard\ConsoleScreen.cpp" />
+    <ClCompile Include="Dependencies\SelbaWard\ConsoleScreenOld.cpp" />
+    <ClCompile Include="Dependencies\SelbaWard\Crosshair.cpp" />
+    <ClCompile Include="Dependencies\SelbaWard\GallerySprite.cpp" />
+    <ClCompile Include="Dependencies\SelbaWard\Line.cpp" />
+    <ClCompile Include="Dependencies\SelbaWard\NinePatch.cpp" />
+    <ClCompile Include="Dependencies\SelbaWard\PieChart.cpp" />
+    <ClCompile Include="Dependencies\SelbaWard\ProgressBar.cpp" />
+    <ClCompile Include="Dependencies\SelbaWard\Ring.cpp" />
+    <ClCompile Include="Dependencies\SelbaWard\SpinningCard.cpp" />
+    <ClCompile Include="Dependencies\SelbaWard\Spline.cpp" />
+    <ClCompile Include="Dependencies\SelbaWard\Sprite3d.cpp" />
+    <ClCompile Include="Dependencies\SelbaWard\Starfield.cpp" />
+    <ClCompile Include="Dependencies\SelbaWard\TileMap.cpp" />
+    <ClCompile Include="SFEngine.cpp" />
+    <ClCompile Include="Source\Private\Actors\Actor.cpp" />
+    <ClCompile Include="Source\Private\Camera\Camera2D.cpp" />
+    <ClCompile Include="Source\Private\DependencyInterface.cpp" />
+    <ClCompile Include="Source\Private\Engine\AddLevel.cpp" />
+    <ClCompile Include="Source\Private\Engine\BaseEngineInterface.cpp" />
+    <ClCompile Include="Source\Private\Engine\Engine.cpp" />
+    <ClCompile Include="Source\Private\Engine\GameLoop.cpp" />
+    <ClCompile Include="Source\Private\Engine\GetCurrentLevel.cpp" />
+    <ClCompile Include="Source\Private\Engine\Go.cpp" />
+    <ClCompile Include="Source\Private\Engine\HandleKeyEvent.cpp" />
+    <ClCompile Include="Source\Private\Engine\HandleMouseEvent.cpp" />
+    <ClCompile Include="Source\Private\Engine\HandleWindowClosed.cpp" />
+    <ClCompile Include="Source\Private\Engine\Init.cpp" />
+    <ClCompile Include="Source\Private\Engine\InitRenderWindow.cpp" />
+    <ClCompile Include="Source\Private\Engine\RenderPass.cpp" />
+    <ClCompile Include="Source\Private\Engine\ShutDown.cpp" />
+    <ClCompile Include="Source\Private\Engine\Startup.cpp" />
+    <ClCompile Include="Source\Private\Engine\StepSimulation.cpp" />
+    <ClCompile Include="Source\Private\Engine\UpdatePass.cpp" />
+    <ClCompile Include="Source\Private\Events\EventHandler.cpp" />
+    <ClCompile Include="Source\Private\Globals.cpp" />
+    <ClCompile Include="Source\Private\Level\BasicLevel.cpp" />
+    <ClCompile Include="Source\Private\Messaging\Messager.cpp" />
+    <ClCompile Include="Source\Private\Objects\GameObject.cpp" />
+    <ClCompile Include="Source\Private\Physics\Collider.cpp" />
+    <ClCompile Include="Source\Private\Resources\Resources.cpp" />
+    <ClCompile Include="Source\Private\ASync\LevelStreaming.cpp" />
+    <ClCompile Include="Source\Private\State\DeviceState.cpp" />
+    <ClCompile Include="Source\Private\Utils\Conversion.cpp" />
+    <ClCompile Include="Source\Private\Utils\ReadIni.cpp" />
+    <ClCompile Include="Source\Private\Utils\SplinePath.cpp" />
+    <ClCompile Include="Source\Private\Utils\TimedSequence.cpp" />
+    <ClCompile Include="Source\Private\Utils\UntimedSequence.cpp" />
+    <ClCompile Include="Source\Private\Weather\Lightning.cpp" />
+    <ClCompile Include="Source\Private\Weather\WeatherSystem.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Dependencies\Aurora\Dispatch\Detail\DoubleDispatcher.inl" />
+    <None Include="Dependencies\Aurora\Dispatch\Detail\SingleDispatcher.inl" />
+    <None Include="Dependencies\Aurora\include\Aurora\Dispatch\Detail\DoubleDispatcher.inl" />
+    <None Include="Dependencies\Aurora\include\Aurora\Dispatch\Detail\SingleDispatcher.inl" />
+    <None Include="Dependencies\cereal\external\rapidxml\manual.html" />
+    <None Include="Dependencies\rapidxml\manual.html" />
+    <None Include="Dependencies\SelbaWard\TileMap.inl" />
+    <None Include="Dependencies\SFML\Audio\SoundFileFactory.inl" />
+    <None Include="Dependencies\SFML\Graphics\Glsl.inl" />
+    <None Include="Dependencies\SFML\Graphics\Rect.inl" />
+    <None Include="Dependencies\SFML\System\String.inl" />
+    <None Include="Dependencies\SFML\System\Thread.inl" />
+    <None Include="Dependencies\SFML\System\ThreadLocalPtr.inl" />
+    <None Include="Dependencies\SFML\System\Utf.inl" />
+    <None Include="Dependencies\SFML\System\Vector2.inl" />
+    <None Include="Dependencies\SFML\System\Vector3.inl" />
+    <None Include="Dependencies\Thor\Animations\Detail\AnimationMap.inl" />
+    <None Include="Dependencies\Thor\Animations\Detail\Animator.inl" />
+    <None Include="Dependencies\Thor\Animations\Detail\RefAnimation.inl" />
+    <None Include="Dependencies\Thor\Graphics\Detail\ToString.inl" />
+    <None Include="Dependencies\Thor\Graphics\Detail\UniformAccess.inl" />
+    <None Include="Dependencies\Thor\Input\Detail\ActionMap.inl" />
+    <None Include="Dependencies\Thor\Input\Detail\EventSystem.inl" />
+    <None Include="Dependencies\Thor\Math\Detail\Triangulation.inl" />
+    <None Include="Dependencies\Thor\Math\Detail\TriangulationFigures.inl" />
+    <None Include="Dependencies\Thor\Resources\Detail\ResourceHolder.inl" />
+    <None Include="Dependencies\Thor\Vectors\Detail\PolarVector2.inl" />
+    <None Include="Dependencies\Thor\Vectors\Detail\VectorAlgebra2D.inl" />
+    <None Include="Dependencies\Thor\Vectors\Detail\VectorAlgebra3D.inl" />
+    <None Include="Source\Public\DependencyInterface.inl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
