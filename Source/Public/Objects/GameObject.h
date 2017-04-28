@@ -6,6 +6,7 @@
 // MIT License
 //
 // Copyright(c) 2017 Kurt Slagle - kurt_slagle@yahoo.com
+// Copyright(c) 2017 Austin Bailey
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files(the "Software"), to deal
@@ -54,6 +55,10 @@
 /************************************************************************/
 /*                                                                      */
 /*                       File Description                               */
+/************************************************************************/
+
+/************************************************************************/
+/* Last Edit: Kurt Slagle - 2017/04/27                                  */
 /************************************************************************/
 
 namespace SFEngine

@@ -90,6 +90,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)\Source\Public;$(SolutionDir)\Dependencies;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <AdditionalOptions>/std:c++14 /volatile:iso %(AdditionalOptions)</AdditionalOptions>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -703,6 +704,7 @@
     <ClInclude Include="Source\Public\Exceptions\Exceptions.hpp" />
     <ClInclude Include="Source\Public\Globals.h" />
     <ClInclude Include="Source\Public\Level\BasicLevel.h" />
+    <ClInclude Include="Source\Public\Lights\LightSystem.h" />
     <ClInclude Include="Source\Public\Objects\GameObject.h" />
     <ClInclude Include="Source\Public\Messaging\Messager.h" />
     <ClInclude Include="Source\Public\OSXDefs.h" />

@@ -3,6 +3,7 @@
 // MIT License
 //
 // Copyright(c) 2017 Kurt Slagle - kurt_slagle@yahoo.com
+// Copyright(c) 2017 Austin Bailey
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files(the "Software"), to deal
@@ -45,6 +46,10 @@
 /*                      Engine main entry point                         */
 /************************************************************************/
 /* Main entry point for the application                                 */
+/************************************************************************/
+
+/************************************************************************/
+/* Last Edit: Kurt Slagle - 2017/04/27                                  */
 /************************************************************************/
 
 #pragma warning( disable : 4503 ) //Disable "decorated name length exceeded, name was truncated"
