@@ -67,7 +67,7 @@ namespace SFEngine
     }
     catch (EngineRuntimeError& e)
     {
-    	
+      throw;
     }
   }
 

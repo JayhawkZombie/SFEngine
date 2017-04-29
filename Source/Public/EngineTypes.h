@@ -61,7 +61,7 @@
 /************************************************************************/
 
 /************************************************************************/
-/* Last Edit: Kurt Slagle - 2017/04/27                                  */
+/* Last Edit: Kurt Slagle - 2017/04/29                                  */
 /************************************************************************/
 
 #if defined ( _WIN32 ) || defined ( _WIN64 )
@@ -133,11 +133,9 @@ using FPtrVoid    = std::function<void(void)>;
 using SharedMutex = SPtrShared<SMutex>;
 using SConditionVariable      = std::condition_variable;
 using SharedConditionVariable = SPtrShared<SConditionVariable>;
-template<typename T>
-using SPtrWeak        = std::weak_ptr<T>;
+template<typename T> using SPtrWeak = std::weak_ptr<T>;
 using SPtrSharedMutex = SPtrShared<std::mutex>;
-template<typename T>
-using SPtrUnique = std::unique_ptr<T>;
+template<typename T> using SPtrUnique = std::unique_ptr<T>;
 using SClockHigh = std::chrono::high_resolution_clock;
 using SClockSys  = std::chrono::system_clock;
 template<typename T, typename U>

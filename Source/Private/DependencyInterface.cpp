@@ -301,26 +301,37 @@ namespace SFEngine
       /************************************************************************/
       /* Detect collider & collider collisions                                */
       /************************************************************************/
-      for (SSIZE_T i = 0; i < Colliders.size(); ++i) {
+      for (SSIZE_T _i = 0; _i < Colliders.size(); ++_i) {
         for (SSIZE_T j = 0; j < Colliders.size(); ++j) {
-          if (i == j)
+          if (_i == j)
             continue;
 
-          auto Mesh1 = Colliders[i]->GetMesh().lock();
+          auto Mesh1 = Colliders[_i]->GetMesh().lock();
           auto Mesh2 = Colliders[j]->GetMesh().lock();
 
           if (!Mesh1 || !Mesh2)
             continue;
 
-          if (Colliders[i]->IsRespondingToCollisions() && Colliders[j]->IsRespondingToCollisions())
+          if (Colliders[_i]->IsRespondingToCollisions() && Colliders[j]->IsRespondingToCollisions())
             if (Mesh1->hit(*Mesh2)) {
-              Colliders[i]->HandleCollision(Colliders[j]);
-              Colliders[j]->HandleCollision(Colliders[i]);
+              Colliders[_i]->HandleCollision(Colliders[j]);
+              Colliders[j]->HandleCollision(Colliders[_i]);
             }
 
         }
       } // Detect collider & Collider collisions
     } // for SSIZE_T i = 0 -> Steps
   } // UpdatePhysics
+
+  void SetGravity(::vec2d & gravityPtr)
+  {
+    CurrentGravity = gravityPtr;
+  }
+
+  void AssignBoundaries(float WindowWidth, float WindowHeight)
+  {
+    MeshBase::wdwH = WindowHeight;
+    MeshBase::wdwW = WindowWidth;
+  }
 
 }

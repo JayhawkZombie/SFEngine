@@ -33,6 +33,7 @@
 /*                         Internal  Headers                            */
 /************************************************************************/
 #include "Engine\Engine.h"
+#include "Engine\EngineConfiguration.h"
 
 /************************************************************************/
 /*                       Dependency  Headers                            */
@@ -49,7 +50,7 @@
 /************************************************************************/
 
 /************************************************************************/
-/* Last Edit: Kurt Slagle - 2017/04/27                                  */
+/* Last Edit: Kurt Slagle - 2017/04/29                                  */
 /************************************************************************/
 
 #pragma warning( disable : 4503 ) //Disable "decorated name length exceeded, name was truncated"
@@ -145,6 +146,11 @@
 
 int main(int argc, char **argv)
 {
-  return SFEngine::Engine::Go(argc, argv);
+  SFEngine::EngineConfig Config;
+  Config.WindowSize = SVector2U(1700, 900);
+  Config.ShowSplashScreen = true;
+  Config.SplashScreenTexturePath = "./Demos/MainMenu/Assets/Textures/SFEngineLogoLarge.png";
+
+  return SFEngine::Engine::Go(argc, argv, Config);
 }
 #endif

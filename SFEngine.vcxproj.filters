@@ -18,9 +18,6 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="targetver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Public\DefsX64.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -117,85 +114,19 @@
     <ClInclude Include="Source\Public\Objects\GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Public\Actors\Actor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Public\Camera\Camera2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\PhysicsEngine\arcSeg.h">
+    <ClInclude Include="Source\Public\Utils\ReadIni.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\PhysicsEngine\ball.h">
+    <ClInclude Include="Source\Public\Utils\Conversion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\PhysicsEngine\ball_go.h">
+    <ClInclude Include="Source\Public\Lights\LightSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\PhysicsEngine\block.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\PhysicsEngine\decayPolygon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\PhysicsEngine\expandPolygon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\PhysicsEngine\lineBumper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\PhysicsEngine\lineSeg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\PhysicsEngine\lineSegConveyor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\PhysicsEngine\lineSegElevator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\PhysicsEngine\lineSegFlip.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\PhysicsEngine\lineSegRotate.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\PhysicsEngine\lineSegSwing.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\PhysicsEngine\mvHit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\PhysicsEngine\pipeSeg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\PhysicsEngine\polyHitFuncs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\PhysicsEngine\rec.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\PhysicsEngine\regPolygon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\PhysicsEngine\segHit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\PhysicsEngine\stateTypes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\PhysicsEngine\vec2d.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\PhysicsEngine\waveSeg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\Aurora\Dispatch\DispatchTraits.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\Aurora\Dispatch\DoubleDispatcher.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\Aurora\Dispatch\SingleDispatcher.hpp">
+    <ClInclude Include="Source\Public\Actors\Actor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Dependencies\Aurora\doc\Documentation.hpp">
@@ -291,88 +222,310 @@
     <ClInclude Include="Dependencies\Aurora\include\Aurora\Tools.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Aurora\Meta\Preprocessor.hpp">
+    <ClInclude Include="Dependencies\Catch\external\clara.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Aurora\Meta\Templates.hpp">
+    <ClInclude Include="Dependencies\Catch\external\tbc_text_format.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Aurora\Meta\Tuple.hpp">
+    <ClInclude Include="Dependencies\Catch\internal\catch_approx.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Aurora\Meta\Variadic.hpp">
+    <ClInclude Include="Dependencies\Catch\internal\catch_assertionresult.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Aurora\SmartPtr\Detail\Factories.hpp">
+    <ClInclude Include="Dependencies\Catch\internal\catch_assertionresult.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Aurora\SmartPtr\Detail\PtrOwner.hpp">
+    <ClInclude Include="Dependencies\Catch\internal\catch_capture.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Aurora\SmartPtr\ClonersAndDeleters.hpp">
+    <ClInclude Include="Dependencies\Catch\internal\catch_clara.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Aurora\SmartPtr\CopiedPtr.hpp">
+    <ClInclude Include="Dependencies\Catch\internal\catch_commandline.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Aurora\SmartPtr\MakeUnique.hpp">
+    <ClInclude Include="Dependencies\Catch\internal\catch_common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Aurora\Tools\Algorithms.hpp">
+    <ClInclude Include="Dependencies\Catch\internal\catch_common.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Aurora\Tools\Any.hpp">
+    <ClInclude Include="Dependencies\Catch\internal\catch_compiler_capabilities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Aurora\Tools\Downcast.hpp">
+    <ClInclude Include="Dependencies\Catch\internal\catch_config.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Aurora\Tools\Exceptions.hpp">
+    <ClInclude Include="Dependencies\Catch\internal\catch_console_colour.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Aurora\Tools\ForEach.hpp">
+    <ClInclude Include="Dependencies\Catch\internal\catch_console_colour_impl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Aurora\Tools\Hash.hpp">
+    <ClInclude Include="Dependencies\Catch\internal\catch_context.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Aurora\Tools\NamedTuple.hpp">
+    <ClInclude Include="Dependencies\Catch\internal\catch_context_impl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Aurora\Tools\NonCopyable.hpp">
+    <ClInclude Include="Dependencies\Catch\internal\catch_debugger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Aurora\Tools\Optional.hpp">
+    <ClInclude Include="Dependencies\Catch\internal\catch_debugger.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Aurora\Tools\PImpl.hpp">
+    <ClInclude Include="Dependencies\Catch\internal\catch_default_main.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Aurora\Tools\SafeBool.hpp">
+    <ClInclude Include="Dependencies\Catch\internal\catch_errno_guard.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Aurora\Tools\Swap.hpp">
+    <ClInclude Include="Dependencies\Catch\internal\catch_evaluate.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Aurora\Tools\Typeid.hpp">
+    <ClInclude Include="Dependencies\Catch\internal\catch_exception_translator_registry.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Aurora\Config.hpp">
+    <ClInclude Include="Dependencies\Catch\internal\catch_expression_lhs.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Aurora\Dispatch.hpp">
+    <ClInclude Include="Dependencies\Catch\internal\catch_fatal_condition.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Aurora\Meta.hpp">
+    <ClInclude Include="Dependencies\Catch\internal\catch_generators.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Aurora\SmartPtr.hpp">
+    <ClInclude Include="Dependencies\Catch\internal\catch_generators_impl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Aurora\Tools.hpp">
+    <ClInclude Include="Dependencies\Catch\internal\catch_impl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Catch\Catch.hpp">
+    <ClInclude Include="Dependencies\Catch\internal\catch_interfaces_capture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_interfaces_config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_interfaces_exception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_interfaces_generators.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_interfaces_registry_hub.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_interfaces_reporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_interfaces_runner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_interfaces_tag_alias_registry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_interfaces_testcase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_legacy_reporter_adapter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_legacy_reporter_adapter.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_list.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_matchers.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_matchers_string.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_matchers_string.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_matchers_vector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_message.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_message.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_notimplemented_exception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_notimplemented_exception.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_objc.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_objc_arc.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_option.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_platform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_ptr.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_reenable_warnings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_registry_hub.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_reporter_registrars.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_reporter_registry.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_result_builder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_result_builder.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_result_type.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_run_context.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_section.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_section.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_section_info.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_section_info.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_stream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_stream.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_streambuf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_suppress_warnings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_tag_alias.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_tag_alias_registry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_tag_alias_registry.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_test_case_info.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_test_case_info.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_test_case_registry_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_test_case_tracker.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_test_registry.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_test_spec.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_test_spec_parser.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_text.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_timer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_tostring.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_tostring.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_totals.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_type_traits.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_version.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_wildcard_pattern.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_windows_h_proxy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\internal\catch_xmlwriter.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\reporters\catch_reporter_automake.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\reporters\catch_reporter_bases.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\reporters\catch_reporter_compact.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\reporters\catch_reporter_console.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\reporters\catch_reporter_junit.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\reporters\catch_reporter_multi.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\reporters\catch_reporter_tap.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\reporters\catch_reporter_teamcity.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\reporters\catch_reporter_xml.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\catch.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\catch_session.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Catch\catch_with_main.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Dependencies\cereal\archives\adapters.hpp">
@@ -612,151 +765,148 @@
     <ClInclude Include="Dependencies\cereal\macros.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\any.hpp">
+    <ClInclude Include="Dependencies\chaiscript\dispatchkit\any.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\bad_boxed_cast.hpp">
+    <ClInclude Include="Dependencies\chaiscript\dispatchkit\bad_boxed_cast.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\bind_first.hpp">
+    <ClInclude Include="Dependencies\chaiscript\dispatchkit\bind_first.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\bootstrap.hpp">
+    <ClInclude Include="Dependencies\chaiscript\dispatchkit\bootstrap.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\bootstrap_stl.hpp">
+    <ClInclude Include="Dependencies\chaiscript\dispatchkit\bootstrap_stl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\boxed_cast.hpp">
+    <ClInclude Include="Dependencies\chaiscript\dispatchkit\boxed_cast.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\boxed_cast_helper.hpp">
+    <ClInclude Include="Dependencies\chaiscript\dispatchkit\boxed_cast_helper.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\boxed_number.hpp">
+    <ClInclude Include="Dependencies\chaiscript\dispatchkit\boxed_number.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\boxed_value.hpp">
+    <ClInclude Include="Dependencies\chaiscript\dispatchkit\boxed_value.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\callable_traits.hpp">
+    <ClInclude Include="Dependencies\chaiscript\dispatchkit\callable_traits.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\dispatchkit.hpp">
+    <ClInclude Include="Dependencies\chaiscript\dispatchkit\dispatchkit.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\dynamic_object.hpp">
+    <ClInclude Include="Dependencies\chaiscript\dispatchkit\dynamic_object.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\dynamic_object_detail.hpp">
+    <ClInclude Include="Dependencies\chaiscript\dispatchkit\dynamic_object_detail.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\exception_specification.hpp">
+    <ClInclude Include="Dependencies\chaiscript\dispatchkit\exception_specification.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\function_call.hpp">
+    <ClInclude Include="Dependencies\chaiscript\dispatchkit\function_call.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\function_call_detail.hpp">
+    <ClInclude Include="Dependencies\chaiscript\dispatchkit\function_call_detail.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\handle_return.hpp">
+    <ClInclude Include="Dependencies\chaiscript\dispatchkit\handle_return.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\operators.hpp">
+    <ClInclude Include="Dependencies\chaiscript\dispatchkit\operators.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\proxy_constructors.hpp">
+    <ClInclude Include="Dependencies\chaiscript\dispatchkit\proxy_constructors.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\proxy_functions.hpp">
+    <ClInclude Include="Dependencies\chaiscript\dispatchkit\proxy_functions.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\proxy_functions_detail.hpp">
+    <ClInclude Include="Dependencies\chaiscript\dispatchkit\proxy_functions_detail.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\register_function.hpp">
+    <ClInclude Include="Dependencies\chaiscript\dispatchkit\register_function.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\short_alloc.hpp">
+    <ClInclude Include="Dependencies\chaiscript\dispatchkit\short_alloc.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\type_conversions.hpp">
+    <ClInclude Include="Dependencies\chaiscript\dispatchkit\type_conversions.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\dispatchkit\type_info.hpp">
+    <ClInclude Include="Dependencies\chaiscript\dispatchkit\type_info.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\language\chaiscript_algebraic.hpp">
+    <ClInclude Include="Dependencies\chaiscript\language\chaiscript_algebraic.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\language\chaiscript_common.hpp">
+    <ClInclude Include="Dependencies\chaiscript\language\chaiscript_common.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\language\chaiscript_engine.hpp">
+    <ClInclude Include="Dependencies\chaiscript\language\chaiscript_engine.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\language\chaiscript_eval.hpp">
+    <ClInclude Include="Dependencies\chaiscript\language\chaiscript_eval.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\language\chaiscript_optimizer.hpp">
+    <ClInclude Include="Dependencies\chaiscript\language\chaiscript_optimizer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\language\chaiscript_parser.hpp">
+    <ClInclude Include="Dependencies\chaiscript\language\chaiscript_parser.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\language\chaiscript_posix.hpp">
+    <ClInclude Include="Dependencies\chaiscript\language\chaiscript_posix.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\language\chaiscript_prelude.hpp">
+    <ClInclude Include="Dependencies\chaiscript\language\chaiscript_prelude.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\language\chaiscript_prelude_docs.hpp">
+    <ClInclude Include="Dependencies\chaiscript\language\chaiscript_prelude_docs.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\language\chaiscript_tracer.hpp">
+    <ClInclude Include="Dependencies\chaiscript\language\chaiscript_tracer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\language\chaiscript_unknown.hpp">
+    <ClInclude Include="Dependencies\chaiscript\language\chaiscript_unknown.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\language\chaiscript_windows.hpp">
+    <ClInclude Include="Dependencies\chaiscript\language\chaiscript_windows.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\utility\fnv1a.hpp">
+    <ClInclude Include="Dependencies\chaiscript\utility\fnv1a.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\utility\json.hpp">
+    <ClInclude Include="Dependencies\chaiscript\utility\json.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\utility\json_wrap.hpp">
+    <ClInclude Include="Dependencies\chaiscript\utility\json_wrap.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\utility\static_string.hpp">
+    <ClInclude Include="Dependencies\chaiscript\utility\static_string.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\utility\utility.hpp">
+    <ClInclude Include="Dependencies\chaiscript\utility\utility.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\chaiscript.hpp">
+    <ClInclude Include="Dependencies\chaiscript\chaiscript.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\chaiscript_basic.hpp">
+    <ClInclude Include="Dependencies\chaiscript\chaiscript_basic.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\chaiscript_defines.hpp">
+    <ClInclude Include="Dependencies\chaiscript\chaiscript_defines.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\chaiscript_stdlib.hpp">
+    <ClInclude Include="Dependencies\chaiscript\chaiscript_stdlib.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Chaiscript\chaiscript_threading.hpp">
+    <ClInclude Include="Dependencies\chaiscript\chaiscript_threading.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Dependencies\IMGUI\imconfig.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\IMGUI\imconfig-SFML.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Dependencies\IMGUI\imgui.h">
@@ -765,19 +915,91 @@
     <ClInclude Include="Dependencies\IMGUI\imgui_internal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\IMGUI\imgui-SFML.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Dependencies\IMGUI\stb_rect_pack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Dependencies\IMGUI\stb_textedit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\IMGUI\stb_truetype.h">
+    <ClInclude Include="Dependencies\imgui-sfml\imconfig-SFML.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\imgui-sfml\imgui-SFML.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Dependencies\jsoncpp\json.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\jsoncpp\json-forwards.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Physics\arcSeg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Physics\ball.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Physics\ball_go.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Physics\block.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Physics\common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Physics\decayPolygon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Physics\expandPolygon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Physics\lineBumper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Physics\lineSeg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Physics\lineSegConveyor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Physics\lineSegElevator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Physics\lineSegFlip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Physics\lineSegRotate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Physics\lineSegSwing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Physics\mvHit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Physics\pipeSeg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Physics\polyHitFuncs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Physics\rec.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Physics\regPolygon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Physics\segHit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Physics\stateTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Physics\vec2d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Physics\waveSeg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Dependencies\rapidxml\rapidxml.hpp">
@@ -1131,201 +1353,6 @@
     <ClInclude Include="Dependencies\SFML\Window.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\SFML\System\Android\Activity.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\SFML\Window\EGLCheck.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\SFML\Window\EglContext.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\SFML\Window\GlContext.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Loading\DataIO.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Loading\Deserializer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Loading\ObjectConverter.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Loading\Serializer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Loading\Theme.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Loading\ThemeLoader.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Loading\WidgetConverter.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Loading\WidgetLoader.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Loading\WidgetSaver.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\devel\RichTextLabel.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\devel\Table.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\devel\TableItem.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\devel\TableRow.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\Button.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\Canvas.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\ChatBox.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\CheckBox.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\ChildWindow.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\ClickableWidget.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\ComboBox.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\EditBox.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\Grid.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\Knob.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\Label.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\ListBox.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\MenuBar.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\MessageBox.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\Panel.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\Picture.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\ProgressBar.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\RadioButton.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\Scrollbar.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\Slider.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\SpinButton.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\Tab.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\TextBox.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widgets\ToolTip.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Animation.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Borders.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\BoxLayout.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Callback.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Clipboard.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Clipping.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Color.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Config.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Container.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\DefaultFont.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Exception.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Font.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Global.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Gui.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\HorizontalLayout.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Layout.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Signal.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Texture.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\TextureData.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\TextureManager.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\TGUI.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Transformable.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\VerticalLayout.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\include\TGUI\Widget.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Dependencies\TGUI\Loading\DataIO.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1353,88 +1380,88 @@
     <ClInclude Include="Dependencies\TGUI\Loading\WidgetSaver.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\widgets\devel\RichTextLabel.hpp">
+    <ClInclude Include="Dependencies\TGUI\Widgets\devel\RichTextLabel.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\widgets\devel\Table.hpp">
+    <ClInclude Include="Dependencies\TGUI\Widgets\devel\Table.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\widgets\devel\TableItem.hpp">
+    <ClInclude Include="Dependencies\TGUI\Widgets\devel\TableItem.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\widgets\devel\TableRow.hpp">
+    <ClInclude Include="Dependencies\TGUI\Widgets\devel\TableRow.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\widgets\Button.hpp">
+    <ClInclude Include="Dependencies\TGUI\Widgets\Button.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\widgets\Canvas.hpp">
+    <ClInclude Include="Dependencies\TGUI\Widgets\Canvas.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\widgets\ChatBox.hpp">
+    <ClInclude Include="Dependencies\TGUI\Widgets\ChatBox.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\widgets\CheckBox.hpp">
+    <ClInclude Include="Dependencies\TGUI\Widgets\CheckBox.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\widgets\ChildWindow.hpp">
+    <ClInclude Include="Dependencies\TGUI\Widgets\ChildWindow.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\widgets\ClickableWidget.hpp">
+    <ClInclude Include="Dependencies\TGUI\Widgets\ClickableWidget.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\widgets\ComboBox.hpp">
+    <ClInclude Include="Dependencies\TGUI\Widgets\ComboBox.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\widgets\EditBox.hpp">
+    <ClInclude Include="Dependencies\TGUI\Widgets\EditBox.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\widgets\Grid.hpp">
+    <ClInclude Include="Dependencies\TGUI\Widgets\Grid.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\widgets\Knob.hpp">
+    <ClInclude Include="Dependencies\TGUI\Widgets\Knob.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\widgets\Label.hpp">
+    <ClInclude Include="Dependencies\TGUI\Widgets\Label.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\widgets\ListBox.hpp">
+    <ClInclude Include="Dependencies\TGUI\Widgets\ListBox.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\widgets\MenuBar.hpp">
+    <ClInclude Include="Dependencies\TGUI\Widgets\MenuBar.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\widgets\MessageBox.hpp">
+    <ClInclude Include="Dependencies\TGUI\Widgets\MessageBox.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\widgets\Panel.hpp">
+    <ClInclude Include="Dependencies\TGUI\Widgets\Panel.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\widgets\Picture.hpp">
+    <ClInclude Include="Dependencies\TGUI\Widgets\Picture.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\widgets\ProgressBar.hpp">
+    <ClInclude Include="Dependencies\TGUI\Widgets\ProgressBar.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\widgets\RadioButton.hpp">
+    <ClInclude Include="Dependencies\TGUI\Widgets\RadioButton.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\widgets\Scrollbar.hpp">
+    <ClInclude Include="Dependencies\TGUI\Widgets\Scrollbar.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\widgets\Slider.hpp">
+    <ClInclude Include="Dependencies\TGUI\Widgets\Slider.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\widgets\SpinButton.hpp">
+    <ClInclude Include="Dependencies\TGUI\Widgets\SpinButton.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\widgets\Tab.hpp">
+    <ClInclude Include="Dependencies\TGUI\Widgets\Tab.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\widgets\TextBox.hpp">
+    <ClInclude Include="Dependencies\TGUI\Widgets\TextBox.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\TGUI\widgets\ToolTip.hpp">
+    <ClInclude Include="Dependencies\TGUI\Widgets\ToolTip.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Dependencies\TGUI\Animation.hpp">
@@ -1692,43 +1719,13 @@
     <ClInclude Include="Dependencies\Thor\Vectors.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Public\Utils\ReadIni.h">
+    <ClInclude Include="Dependencies\SelbaWard.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Public\Utils\Conversion.h">
+    <ClInclude Include="Dependencies\IMGUI\stb_truetype.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\jsoncpp\allocator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\jsoncpp\assertions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\jsoncpp\autolink.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\jsoncpp\config.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\jsoncpp\features.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\jsoncpp\forwards.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\jsoncpp\reader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\jsoncpp\value.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\jsoncpp\version.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dependencies\jsoncpp\writer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Public\Lights\LightSystem.h">
+    <ClInclude Include="Demos\MainMenu\Classes\Levels\MainMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1835,67 +1832,10 @@
     <ClCompile Include="Source\Private\Camera\Camera2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Dependencies\PhysicsEngine\arcSeg.cpp">
+    <ClCompile Include="Source\Private\Utils\ReadIni.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Dependencies\PhysicsEngine\ball.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Dependencies\PhysicsEngine\ball_go.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Dependencies\PhysicsEngine\block.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Dependencies\PhysicsEngine\decayPolygon.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Dependencies\PhysicsEngine\expandPolygon.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Dependencies\PhysicsEngine\lineBumper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Dependencies\PhysicsEngine\lineSeg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Dependencies\PhysicsEngine\lineSegConveyor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Dependencies\PhysicsEngine\lineSegElevator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Dependencies\PhysicsEngine\lineSegFlip.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Dependencies\PhysicsEngine\lineSegRotate.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Dependencies\PhysicsEngine\lineSegSwing.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Dependencies\PhysicsEngine\mvHit.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Dependencies\PhysicsEngine\pipeSeg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Dependencies\PhysicsEngine\polyHitFuncs.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Dependencies\PhysicsEngine\rec.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Dependencies\PhysicsEngine\regPolygon.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Dependencies\PhysicsEngine\segHit.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Dependencies\PhysicsEngine\vec2d.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Dependencies\PhysicsEngine\waveSeg.cpp">
+    <ClCompile Include="Source\Private\Utils\Conversion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Dependencies\IMGUI\imgui.cpp">
@@ -1907,7 +1847,7 @@
     <ClCompile Include="Dependencies\IMGUI\imgui_draw.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Dependencies\IMGUI\imgui-SFML.cpp">
+    <ClCompile Include="Dependencies\imgui-sfml\imgui-SFML.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Dependencies\SelbaWard\BitmapFont.cpp">
@@ -1958,21 +1898,15 @@
     <ClCompile Include="Dependencies\SelbaWard\TileMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Private\Utils\ReadIni.cpp">
+    <ClCompile Include="Dependencies\jsoncpp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Private\Utils\Conversion.cpp">
+    <ClCompile Include="Demos\MainMenu\Classes\Levels\MainMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Public\DependencyInterface.inl">
-      <Filter>Header Files</Filter>
-    </None>
-    <None Include="Dependencies\Aurora\Dispatch\Detail\DoubleDispatcher.inl">
-      <Filter>Header Files</Filter>
-    </None>
-    <None Include="Dependencies\Aurora\Dispatch\Detail\SingleDispatcher.inl">
       <Filter>Header Files</Filter>
     </None>
     <None Include="Dependencies\Aurora\include\Aurora\Dispatch\Detail\DoubleDispatcher.inl">

@@ -50,7 +50,7 @@
 /************************************************************************/
 
 /************************************************************************/
-/* Last Edit: Kurt Slagle - 2017/04/27                                  */
+/* Last Edit: Kurt Slagle - 2017/04/29                                  */
 /************************************************************************/
 
 namespace SFEngine
@@ -61,6 +61,7 @@ namespace SFEngine
   SharedLevel                  Engine::StartingLevel;
   SharedLevel                  Engine::m_CurrentLevel;
   SPtrShared<tgui::Gui>        Engine::m_EngineGUI;
+  UINT32                       Engine::m_Flags = Engine::VSyncOff;
 
   Engine::Engine()
   {

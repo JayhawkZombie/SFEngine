@@ -65,6 +65,11 @@ namespace SFEngine
     UINT32 MaxIDGenerationAttempts = 30;
   }
 
+  /************************************************************************/
+  /* Extern variables                                                     */
+  /************************************************************************/
+  SVector2U WindowSize;
+
   bool IsIDUsed(const UINT32 & ID)
   {
     return (UsedIDs.find(ID) != UsedIDs.end());;

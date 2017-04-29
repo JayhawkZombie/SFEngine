@@ -52,7 +52,7 @@
 /************************************************************************/
 
 /************************************************************************/
-/* Last Edit: Kurt Slagle - 2017/04/27                                  */
+/* Last Edit: Kurt Slagle - 2017/04/29                                  */
 /************************************************************************/
 
 namespace SFEngine
@@ -81,6 +81,7 @@ namespace SFEngine
     {
       std::string Message = "Failed to create Collider2D: " + std::string(e.what());
       ERR << EXCEPTION_MESSAGE(Message);
+      throw;
     }
   }
 

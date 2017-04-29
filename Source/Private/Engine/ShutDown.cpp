@@ -33,6 +33,9 @@
 /*                         Internal  Headers                            */
 /************************************************************************/
 #include "Engine\Engine.h"
+#include "Level\BasicLevel.h"
+#include "Resources\Resources.h"
+#include "Messaging\Messager.h"
 
 /************************************************************************/
 /*                       Dependency  Headers                            */
@@ -50,7 +53,7 @@
 /************************************************************************/
 
 /************************************************************************/
-/* Last Edit: Kurt Slagle - 2017/04/27                                  */
+/* Last Edit: Kurt Slagle - 2017/04/29                                  */
 /************************************************************************/
 
 namespace SFEngine
@@ -58,7 +61,29 @@ namespace SFEngine
 
   UINT32 Engine::ShutDown()
   {
-    return 0;
+
+    for (auto & level : m_StaticCurrentEngine->m_Levels) {
+      level.second->Unload();
+      level.second->CleanUp();
+    }
+
+    m_CurrentLevel.reset();
+    for (auto & level : m_StaticCurrentEngine->m_Levels) {
+      if (level.second)
+        level.second.reset();
+    }
+
+    ClearTextures();
+    ClearShaders();
+    ClearFonts();
+    ClearSoundBuffers();
+
+    m_EngineGUI.reset();
+
+    Messager::PurgeLogsToFile("MessageCachePurge.log", "ActivityLogPurge.log", "RankedMessageLogPurge.log");
+    Messager::Shutdown();
+
+    return Success::GAMELOOP_SUCCESS;
   }
 
 } // namespace SFEngine

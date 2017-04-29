@@ -41,6 +41,7 @@
 /************************************************************************/
 /*                       Dependency  Headers                            */
 /************************************************************************/
+#include <Physics\common.h>
 
 /************************************************************************/
 /*                     Standard  Library  Headers                       */
@@ -54,7 +55,7 @@
 /************************************************************************/
 
 /************************************************************************/
-/* Last Edit: Kurt Slagle - 2017/04/27                                  */
+/* Last Edit: Kurt Slagle - 2017/04/29                                  */
 /************************************************************************/
 
 namespace SFEngine
@@ -62,77 +63,98 @@ namespace SFEngine
 
   UINT32 Engine::GameLoop()
   {
-    sf::Event SEvent;
+    Messager::PostLogMessage(0, SystemMessage(SystemMessageType::ActivityLog, 0, 0, "Engine GameLoop"), MessageLogLevel::Normal);
 
-    SFENGINE_ASSERT(m_CurrentRenderWindow != nullptr);
-
-    SharedRTexture LevelTexture = std::make_shared<RTexture>();
-    auto Size = m_CurrentRenderWindow->getSize();
-    LevelTexture->create(Size.x, Size.y);
-
-    SRectShape LevelRect;
-    LevelRect.setPosition(SVector2F(0.f, 0.f));
-    LevelRect.setSize(SVector2F(SF_TOFLOAT(Size.x), SF_TOFLOAT(Size.y)));
-    LevelRect.setTexture(&(LevelTexture->getTexture()));
-    LevelRect.setTextureRect(SINTRECT(0, 0, SF_TOINT(Size.x), SF_TOINT(Size.y)));
-
-    SFENGINE_ASSERT(StartingLevel);
-    m_CurrentLevel = StartingLevel;
-
-    STime fTime;
-    
-    auto CEngine = GetCurrentEngine();
-    SFENGINE_ASSERT(CEngine);
-
-    bool Closed = false;
-
-    SClockHigh::time_point LastTickStart = SClockHigh::now();
-    SClockHigh::time_point CurrentTickStart = SClockHigh::now();
-
+    SClockHigh::time_point LastFrameStart = std::chrono::high_resolution_clock::now();
+    SClockHigh::time_point CurrentFrameStart = std::chrono::high_resolution_clock::now();
+    SClockHigh::time_point TickEnd;
     SClockHigh::time_point UpdateStart;
     SClockHigh::time_point UpdateEnd;
     SClockHigh::time_point RenderStart;
     SClockHigh::time_point RenderEnd;
 
-    SFLOAT STickDelta = 0.f;
-    SFLOAT SUpdateDelta = 0.f;
-    SFLOAT SRenderDelta = 0.f;
-    SFLOAT STickDeltaAccumulator = 0.f;
-    SFLOAT STickAccumulatorRemainder = 0.f;
+    SharedRTexture EditorTexture = std::make_shared<RTexture>();
+    EditorTexture->create(static_cast<unsigned int>(std::ceil(WindowSize.x)), static_cast<unsigned int>(std::ceil(WindowSize.y)));
+    EditorTexture->clear(sf::Color::Transparent);
 
-    for (;;) {
-      Closed = CEngine->m_Handler.PollEvents(m_CurrentRenderWindow, SEvent, true);
+    SFLOAT TickDelta = 0.0;
+    SFLOAT RenderDelta = 0.0;
+    SFLOAT UpdateDelta = 0.0;
+    sf::Event evnt;
 
-      if (Closed || CEngine->m_SignalForClose || !m_CurrentRenderWindow || !m_CurrentRenderWindow->isOpen())
+    m_CurrentRenderWindow->setVerticalSyncEnabled(false);
+    m_CurrentRenderWindow->setKeyRepeatEnabled(false);
+    bool Closed = false;
+
+    ::vec2d Gravity;
+    AssignBoundaries((float)WindowSize.x, (float)WindowSize.y);
+
+    //There MUST be a valid InitialLevel instance to start from
+    SFENGINE_ASSERT(StartingLevel);
+    sf::Time fTime{ sf::seconds(0) };
+    sf::Clock _clock;
+
+    //Draw rect to screen (filled with the render texture)
+    SRectShape LevelRect;
+    LevelRect.setSize(static_cast<sf::Vector2f>(WindowSize));
+
+    for ( ; ; ) {
+      auto EngineInst = GetCurrentEngine();
+      SFENGINE_ASSERT(EngineInst);
+
+      Closed = EngineInst->m_Handler.PollEvents(EngineInst->m_CurrentRenderWindow, evnt, true);
+      if (Closed || ((m_Flags & Exit) != 0) | !EngineInst->m_CurrentRenderWindow || !EngineInst->m_CurrentRenderWindow->isOpen())
         break;
-
+      
       try
       {
-        CurrentTickStart = SClockHigh::now();
-        STickDelta = STimeDuration<SFLOAT, std::milli>(CurrentTickStart - LastTickStart).count();
-        if (STickDelta > 0.25f)
-          STickDelta = 0.25f;
 
-        STickDeltaAccumulator += STickDelta;
+        CurrentFrameStart = SClockHigh::now();
+        TickDelta = STimeDuration<SFLOAT, std::milli>(CurrentFrameStart - LastFrameStart).count();
+        UpdateDelta = STimeDuration<SFLOAT, std::milli>(UpdateEnd - UpdateStart).count();
+        RenderDelta = STimeDuration<SFLOAT, std::milli>(RenderEnd - RenderStart).count();
 
-        while (STickDeltaAccumulator >= STickAccumulatorRemainder) {
-          CEngine->StepSimulation(STickDelta, STickAccumulatorRemainder);
-          STickDeltaAccumulator -= STickAccumulatorRemainder;
-        }
+        UpdateStart = SClockHigh::now();
+        fTime = _clock.restart();
 
-        CEngine->RenderPass(LevelTexture, LevelRect);
+#ifdef WITH_EDITOR
+        ImGui::SFML::Update(*EngineInst->m_CurrentRenderWindow, fTime);
+#endif
 
-        GUI()->draw();
-        m_CurrentRenderWindow->display();
+        SFENGINE_ASSERT(m_CurrentLevel);
+        m_CurrentLevel->TickUpdate(TickDelta);
+
+        UpdateEnd = SClockHigh::now();
+        RenderStart = SClockHigh::now();
+
+        /************************************************************************/
+        /* Rendering the current level (+ GUI)                                  */
+        /************************************************************************/
+        auto win = m_StaticCurrentEngine->m_CurrentRenderWindow;
+        win->clear(sf::Color::Black);
+        EditorTexture->clear(sf::Color::Transparent);
+        m_CurrentLevel->RenderOnTexture(EditorTexture);
+        EditorTexture->display();
+
+        win->draw(LevelRect);
+        Engine::GUI()->draw();
+#ifdef WITH_EDITOR
+        ImGui::Render();
+#endif
+        win->display();
+        RenderEnd = SClockHigh::now();
+        LastFrameStart = CurrentFrameStart;
       }
       catch (EngineRuntimeError& e)
       {
-        ERR << "Runtime Exception (Uncaught) : " << e.what() << std::endl;
+        std::cerr << "EngineRumTimeError: " << e.what() << std::endl;
       }
 
-    } // for (;;)
+    } // for ( ; ; )
 
-    return 0;
+    EditorTexture.reset();
+
+    return m_StaticCurrentEngine->ShutDown();
   } // Engine::GameLoop
 
 }

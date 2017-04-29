@@ -54,7 +54,7 @@
 /************************************************************************/
 
 /************************************************************************/
-/* Last Edit: Kurt Slagle - 2017/04/27                                  */
+/* Last Edit: Kurt Slagle - 2017/04/29                                  */
 /************************************************************************/
 
 namespace SFEngine
@@ -83,6 +83,8 @@ namespace SFEngine
   extern void   SwitchLevel_RawPtr(BasicLevel *Level);
   extern void   LoadMainLevel();
   extern void   LoadLevelByName(const SString &Name);
+
+  extern SVector2U WindowSize;
 }
 
 #endif // SFEngine_Globals_H

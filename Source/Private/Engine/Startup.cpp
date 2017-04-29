@@ -50,7 +50,7 @@
 /************************************************************************/
 
 /************************************************************************/
-/* Last Edit: Kurt Slagle - 2017/04/27                                  */
+/* Last Edit: Kurt Slagle - 2017/04/29                                  */
 /************************************************************************/
 
 namespace SFEngine
@@ -58,6 +58,9 @@ namespace SFEngine
 
   UINT32 Engine::Startup()
   {
+    m_EngineGUI = std::make_shared<tgui::Gui>(*m_StaticCurrentEngine->m_CurrentRenderWindow);
+    SFENGINE_ASSERT(m_EngineGUI);
+
     return m_StaticCurrentEngine->GameLoop();
   }
 

@@ -40,26 +40,7 @@
 /************************************************************************/
 /*                       Dependency  Headers                            */
 /************************************************************************/
-#include <PhysicsEngine\mvHit.h>
-#include <PhysicsEngine\segHit.h>
-#include <PhysicsEngine\arcSeg.h>
-#include <PhysicsEngine\ball.h>
-#include <PhysicsEngine\ball_go.h>
-#include <PhysicsEngine\block.h>
-#include <PhysicsEngine\decayPolygon.h>
-#include <PhysicsEngine\expandPolygon.h>
-#include <PhysicsEngine\lineBumper.h>
-#include <PhysicsEngine\lineSeg.h>
-#include <PhysicsEngine\lineSegConveyor.h>
-#include <PhysicsEngine\lineSegElevator.h>
-#include <PhysicsEngine\lineSegFlip.h>
-#include <PhysicsEngine\lineSegRotate.h>
-#include <PhysicsEngine\lineSegSwing.h>
-#include <PhysicsEngine\pipeSeg.h>
-#include <PhysicsEngine\polyHitFuncs.h>
-#include <PhysicsEngine\rec.h>
-#include <PhysicsEngine\regPolygon.h>
-#include <PhysicsEngine\waveSeg.h>
+#include <Physics\common.h>
 
 /************************************************************************/
 /*                     Standard  Library  Headers                       */
@@ -76,7 +57,7 @@
 /************************************************************************/
 
 /************************************************************************/
-/* Last Edit: Kurt Slagle - 2017/04/27                                  */
+/* Last Edit: Kurt Slagle - 2017/04/29                                  */
 /************************************************************************/
 
 namespace SFEngine
@@ -189,6 +170,8 @@ namespace SFEngine
   /* Wraps physics engine update code & interfaces with collider classes  */
   /************************************************************************/
   void UpdatePhysics(CollideVector &Colliders, STDVector<SegmentMeshPtr> Segments, UINT32 Steps = 1);
+  void SetGravity(::vec2d &gravityPtr);
+  void AssignBoundaries(float WindowWidth, float WindowHeight);
 }
 
 #include "DependencyInterface.inl"

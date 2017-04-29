@@ -50,7 +50,7 @@
 /************************************************************************/
 
 /************************************************************************/
-/* Last Edit: Kurt Slagle - 2017/04/27                                  */
+/* Last Edit: Kurt Slagle - 2017/04/29                                  */
 /************************************************************************/
 
 namespace SFEngine
@@ -59,6 +59,44 @@ namespace SFEngine
   UINT32 Engine::Init(int argc, char **argv)
   {
     SFENGINE_ASSERT(m_StaticCurrentEngine != nullptr);
+
+    SFENGINE_ASSERT(m_StaticCurrentEngine->m_Configuration.WindowSize.x != 0 &&
+                    m_StaticCurrentEngine->m_Configuration.WindowSize.y != 0);
+
+    auto size = m_StaticCurrentEngine->m_Configuration.WindowSize;
+    auto title = m_StaticCurrentEngine->m_Configuration.WindowTitle;
+    sf::Uint32 style;
+
+    if (m_StaticCurrentEngine->m_Configuration.Resizable)
+      style |= sf::Style::Resize;
+    if (m_StaticCurrentEngine->m_Configuration.HasTitlebar)
+      style |= sf::Style::Titlebar;
+    if (m_StaticCurrentEngine->m_Configuration.ShowCloseButton)
+      style |= sf::Style::Close;
+    if (m_StaticCurrentEngine->m_Configuration.Fullscreen)
+      style |= sf::Style::Fullscreen;
+
+    sf::ContextSettings _csettings = m_StaticCurrentEngine->m_Configuration.__context_settings;
+
+    m_StaticCurrentEngine->m_CurrentRenderWindow = new sf::RenderWindow(sf::VideoMode(size.x, size.y), title, style, _csettings);
+
+    sf::Texture texture;
+    sf::RectangleShape SplashRect;
+    SplashRect.setSize(static_cast<sf::Vector2f>(size));
+
+    //Should we show a splash screen while this thing boots up?
+    if (m_StaticCurrentEngine->m_Configuration.ShowSplashScreen) {
+      texture.loadFromFile(m_StaticCurrentEngine->m_Configuration.SplashScreenTexturePath);
+      SplashRect.setTexture(&texture);
+    }
+    else {
+      texture.loadFromFile("./Source/Assets/Logos/SFEngineLogoLarge.png");
+      SplashRect.setTexture(&texture);
+    }
+
+    m_StaticCurrentEngine->m_CurrentRenderWindow->clear(sf::Color::Black);
+    m_StaticCurrentEngine->m_CurrentRenderWindow->draw(SplashRect);
+    m_StaticCurrentEngine->m_CurrentRenderWindow->display();
 
     return m_StaticCurrentEngine->Startup();
   }

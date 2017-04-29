@@ -40,6 +40,7 @@
 #include "Engine\BaseEngineInterface.h"
 #include "Engine\EngineConfiguration.h"
 #include "Engine\ReturnValues.h"
+#include "Engine\EngineConfiguration.h"
 
 /************************************************************************/
 /*                       Dependency  Headers                            */
@@ -59,7 +60,7 @@
 /************************************************************************/
 
 /************************************************************************/
-/* Last Edit: Kurt Slagle - 2017/04/27                                  */
+/* Last Edit: Kurt Slagle - 2017/04/29                                  */
 /************************************************************************/
 
 namespace SFEngine
@@ -73,7 +74,7 @@ namespace SFEngine
     Engine(const Engine &&) = delete;
     ~Engine();
 
-    static UINT32 Go(int argc, char **argv);
+    static UINT32 Go(int argc, char **argv, EngineConfig &Config);
     static Engine* GetCurrentEngine();
     static sf::RenderWindow* GetCurrentRenderWindow();
     static SharedLevel GetCurrentLevel();
@@ -89,11 +90,23 @@ namespace SFEngine
 
     static SPtrShared<tgui::Gui> GUI();
 
+    /************************************************************************/
+    /* Flags to signal behavior to the engine                               */
+    /************************************************************************/
+    enum Flags
+    {
+      VSyncOn = 1,
+      VSyncOff = 2,
+      Exit = 4,
+      Throttle = 8
+    };
+
   private:
     static Engine* m_StaticCurrentEngine;
     static STDMap<SString, SharedLevel> m_Levels;
     static SharedLevel m_CurrentLevel;
     static SPtrShared<tgui::Gui> m_EngineGUI;
+    static UINT32 m_Flags;
     sf::RenderWindow *m_CurrentRenderWindow;
 
     UINT32 Startup();
@@ -106,7 +119,7 @@ namespace SFEngine
     void   RenderPass(SharedRTexture Texture, SRectShape &LevelRect);
 
     UserEvent    m_UEvent;
-    Config       m_Configuration;
+    EngineConfig m_Configuration;
     EventHandler m_Handler;
     bool         m_SignalForClose;
 

@@ -58,7 +58,7 @@
 namespace SFEngine
 {
 
-  struct Config
+  struct EngineConfig
   {
     /**
     * Settings pulled from ini file
@@ -69,35 +69,44 @@ namespace SFEngine
     */
 
     //Diagnostic ini settings
-    bool           Diagnostic_bDisplayFrameStats; //Whether to display the FPS/Timing counter in the corner
-    bool           Diagnostic_bBenchmarkShaders;  //Whether to benchmark increase in rendering times due to using shaders, can identify slow pipelines
-    unsigned int   Diagnostic_uiLogLevel;         //How high of log levels to log
-    std::string    Diagnostic_strDiagnosticFont;  //Font to use for rendered text
+    bool           DisplayFrameStats = false; //Whether to display the FPS/Timing counter in the corner
+    bool           BenchmarkShaders = false;  //Whether to benchmark increase in rendering times due to using shaders, can identify slow pipelines
+    unsigned int   LogLevel = 1;         //How high of log levels to log
+    std::string    DiagnosticFont = "";  //Font to use for rendered text
 
                                                   //Render ini settings
-    bool               Render_bVsyncEnabled;
-    bool               Render_bUseRenderTexture;
-    bool               Render_bTextureSmoothingEnabled;
-    unsigned int       Render_uiAALevel;
-    bool               Render_bShadersEnabled;
+    bool               VsyncEnabled = false;
+    bool               UseRenderTexture = true;
+    bool               TextureSmoothingEnabled = true;
+    unsigned int       AALevel = 8;
+    bool               ShadersEnabled = true;
 
     //Timing ini settings
-    float              Timing_fMinTick;
-    float              Timing_fMaxTick;
+    float              MinTick = 0.f;
+    float              MaxTick = 33.33f;
 
     //Window ini settings
-    sf::Vector2f       Window_v2fWindowSize;
-    bool               Window_bFullscreen;
-    bool               Window_bShowSplashScreen;
-    bool               Window_bPlaySplashScreenAudio;
-    UINT32             Window_uiDepthBits;
-    UINT32             Window_uiStencilBits;
+    sf::Vector2u       WindowSize = SVector2U(1700, 900);
+    SString            WindowTitle = "SFEngine";
+    bool               ShowCloseButton = true;
+    bool               Resizable = true;
+    bool               HasTitlebar = true;
+    bool               Fullscreen = false;
+    bool               ShowSplashScreen = true;
+    sf::Vector2u       SplashScreenSize = SVector2U(0, 0);
+    SString            SplashScreenTexturePath = "";
+    bool               PlaySplashScreenAudio = true;
+    UINT32             DepthBits;
+    UINT32             StencilBits;
 
     //Effects ini settings
-    bool              Effects_bPostProcessEnabled;
-    UINT32            Effects_uiMaxNumParticles;
-    std::vector<std::string> Effects_strShaderPath; //Vector of paths to shaders
-    std::vector<std::string> Effects_strShader;     //Vector of the names of the shaders
+    bool              PostProcessEnabled = true;
+    UINT32            MaxNumParticles;
+    std::vector<std::string> ShaderPath; //Vector of paths to shaders
+    std::vector<std::string> Shader;     //Vector of the names of the shaders
+
+
+    sf::ContextSettings __context_settings;
   };
 
 }

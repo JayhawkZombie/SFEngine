@@ -53,7 +53,7 @@
 /************************************************************************/
 
 /************************************************************************/
-/* Last Edit: Kurt Slagle - 2017/04/27                                  */
+/* Last Edit: Kurt Slagle - 2017/04/29                                  */
 /************************************************************************/
 
 namespace SFEngine
@@ -81,10 +81,29 @@ namespace SFEngine
 
   void BasicLevel::TickUpdate(const SFLOAT & delta)
   {
+    for (auto & Object : m_GameObjects) {
+      Object->TickUpdate(delta);
+    }
+
   }
 
   void BasicLevel::Render(SharedRTexture Target)
   {
+
+#ifdef RENDER_COLLISION_BOXES
+
+    for (auto & Object : m_GameObjects) {
+
+      for (auto & Collider : Object->GetColliders()) {
+        auto mesh = Collider->GetMesh();
+        if (mesh.lock())
+          mesh.lock()->draw(*Target);
+      }
+
+    }
+
+#endif
+
   }
 
   void BasicLevel::OnShutDown()
@@ -137,6 +156,14 @@ namespace SFEngine
   }
 
   void BasicLevel::RenderOnTexture(SharedRTexture Texture)
+  {
+  }
+
+  void BasicLevel::Load()
+  {
+  }
+
+  void BasicLevel::Unload()
   {
   }
 

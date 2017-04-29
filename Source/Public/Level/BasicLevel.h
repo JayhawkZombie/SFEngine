@@ -38,6 +38,8 @@
 #include "BasicIncludes.h"
 #include "Engine\BaseEngineInterface.h"
 #include "Globals.h"
+#include "Camera\Camera2D.h"
+#include "Objects\GameObject.h"
 
 /************************************************************************/
 /*                       Dependency  Headers                            */
@@ -57,7 +59,7 @@
 /************************************************************************/
 
 /************************************************************************/
-/* Last Edit: Kurt Slagle - 2017/04/27                                  */
+/* Last Edit: Kurt Slagle - 2017/04/29                                  */
 /************************************************************************/
 
 namespace SFEngine
@@ -106,8 +108,9 @@ namespace SFEngine
     virtual void CleanUp();
     virtual void SpawnActor(std::shared_ptr<GenericActor> Actor, const sf::Vector2f &Position);
     virtual void SpawnObject(std::shared_ptr<LevelObject> Object, const sf::Vector2f &Position);
-
     virtual void RenderOnTexture(SharedRTexture Texture) = 0;
+    virtual void Load() = 0;
+    virtual void Unload() = 0;
 
   protected:
     /************************************************************************/
@@ -135,6 +138,8 @@ namespace SFEngine
     SVector2U   m_Size;
     sw::TileMap m_TileMap;
     STexture    m_TileMapTexture;
+    Camera2D    m_ViewCamera;
+    STDVector<SPtrShared<GameObject>> m_GameObjects;
 
     /************************************************************************/
     /* SFML Content - Textures/Autio/Etc                                    */

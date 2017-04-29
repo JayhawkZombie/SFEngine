@@ -34,6 +34,7 @@
 /*                         Internal  Headers                            */
 /************************************************************************/
 #include "Engine\Engine.h"
+#include "Level\BasicLevel.h"
 
 /************************************************************************/
 /*                       Dependency  Headers                            */
@@ -59,7 +60,11 @@ namespace SFEngine
 
   void Engine::StepSimulation(SFLOAT STick, SFLOAT STickDt)
   {
+    auto ptrToCurrentLevel = GetCurrentLevel();
 
+    if (ptrToCurrentLevel) {
+      ptrToCurrentLevel->TickUpdate(STick);
+    }
   }
 
 } // namespace SFEngine
