@@ -1,7 +1,7 @@
 # SFEngine
 SFEngine - A free, open-source game engine built on SFML  
 
-**Temporarily private while code is migrated from the old project repository**  
+**This code is in the process of being migrated - it is not ready to be used yet**  
 
 [**GitBook Documentation**](https://jayhawkzombie.gitbooks.io/sfengine/content/)  
 
