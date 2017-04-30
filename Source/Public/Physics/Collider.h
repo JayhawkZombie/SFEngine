@@ -54,7 +54,7 @@
 /************************************************************************/
 
 /************************************************************************/
-/* Last Edit: Kurt Slagle - 2017/04/27                                  */
+/* Last Edit: Kurt Slagle - 2017/04/29                                  */
 /************************************************************************/
 
 namespace SFEngine
@@ -73,6 +73,7 @@ namespace SFEngine
     Block,
     ExpandPolygon
   };
+  class ColliderPartitioner;
 
   class Collider2D
   {
@@ -110,6 +111,7 @@ namespace SFEngine
     void SetProperty(UINT32 Property);
     void SetCollisionCallback(std::function<void(GameObject *)> Callback);
     void SetSegmentCollisionCallback(std::function<void(SegmentMesh *)> Callback);
+    void SetOwnerPartitioner(ColliderPartitioner *Partitioner);
 
     /************************************************************************/
     /* Getters                                                              */
@@ -124,6 +126,7 @@ namespace SFEngine
     bool GetProperty(UINT32 Property) const;
     GameObject* GetOwningObject() const;
     SFLOATRECT GetGlobalBounds() const;
+    ColliderPartitioner* GetOwnerPartitioner() const;
 
     /************************************************************************/
     /* Property manipulators                                                */
@@ -141,6 +144,7 @@ namespace SFEngine
     UINT32 m_Status;
     MeshBasePtr m_Mesh;
     GameObject* m_OwnerObject;
+    ColliderPartitioner *m_OwnerPartitioner;
 
     /************************************************************************/
     /* Callback methods                                                     */

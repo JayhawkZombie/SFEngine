@@ -169,7 +169,7 @@ namespace SFEngine
   /* Physics update methods                                               */
   /* Wraps physics engine update code & interfaces with collider classes  */
   /************************************************************************/
-  void UpdatePhysics(CollideVector &Colliders, STDVector<SegmentMeshPtr> Segments, UINT32 Steps = 1);
+  void UpdatePhysicsMeshes(CollideVector &Colliders, STDVector<SegmentMeshPtr> Segments, UINT32 Steps = 1);
   void SetGravity(::vec2d &gravityPtr);
   void AssignBoundaries(float WindowWidth, float WindowHeight);
 }

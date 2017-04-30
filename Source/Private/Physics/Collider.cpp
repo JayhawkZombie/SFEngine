@@ -35,6 +35,7 @@
 #include "Physics\Collider.h"
 #include "Exceptions\Exceptions.hpp"
 #include "Objects\GameObject.h"
+#include "Physics\ColliderPartitioner.h"
 
 /************************************************************************/
 /*                       Dependency  Headers                            */
@@ -128,6 +129,11 @@ namespace SFEngine
     m_SegmentCollisionCallback = Callback;
   }
 
+  void Collider2D::SetOwnerPartitioner(ColliderPartitioner * Partitioner)
+  {
+    m_OwnerPartitioner = Partitioner;
+  }
+
   /************************************************************************/
   /* Getters                                                              */
   /************************************************************************/
@@ -188,6 +194,11 @@ namespace SFEngine
     auto size = m_Mesh->siz;
 
     return SFLOATRECT(pos.x, pos.y, size.x, size.y);
+  }
+
+  ColliderPartitioner * Collider2D::GetOwnerPartitioner() const
+  {
+    return m_OwnerPartitioner;
   }
 
   /************************************************************************/

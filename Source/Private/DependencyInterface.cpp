@@ -54,6 +54,10 @@
 /*                                                                      */
 /************************************************************************/
 
+/************************************************************************/
+/* Last Edit: Kurt Slagle - 2017/04/29                                  */
+/************************************************************************/
+
 namespace SFEngine
 {
 
@@ -269,7 +273,7 @@ namespace SFEngine
     }
   } // BuildWaveSegmentMesh2D
 
-  void UpdatePhysics(CollideVector & Colliders, STDVector<SegmentMeshPtr> Segments, UINT32 Steps)
+  void UpdatePhysicsMeshes(CollideVector & Colliders, STDVector<SegmentMeshPtr> Segments, UINT32 Steps)
   {
     for (SSIZE_T i = 0; i < Steps; ++i) {
 

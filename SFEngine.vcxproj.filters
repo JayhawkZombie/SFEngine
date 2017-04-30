@@ -1728,6 +1728,21 @@
     <ClInclude Include="Demos\MainMenu\Classes\Levels\MainMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Public\Physics\ColliderPartitioner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\Physics\PartitionNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\Physics\PartitionerRecord.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\Utils\Various.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\Serialization\BasicTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SFEngine.cpp">
@@ -1800,9 +1815,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Private\Utils\TimedSequence.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Private\Utils\SplinePath.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Private\Utils\UntimedSequence.cpp">
@@ -1904,6 +1916,21 @@
     <ClCompile Include="Demos\MainMenu\Classes\Levels\MainMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Private\Physics\ColliderPartitioner.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Private\Physics\PartitionNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Private\Utils\Various.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Private\Utils\SplinePath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Private\Serialization\BasicTypes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Public\DependencyInterface.inl">
@@ -1986,5 +2013,36 @@
     <None Include="Dependencies\Thor\Vectors\Detail\VectorAlgebra3D.inl">
       <Filter>Header Files</Filter>
     </None>
+    <None Include="Dependencies\Lib\Debug\sfml-audio-s-d.pdb" />
+    <None Include="Dependencies\Lib\Debug\sfml-graphics-s-d.pdb" />
+    <None Include="Dependencies\Lib\Debug\sfml-network-s-d.pdb" />
+    <None Include="Dependencies\Lib\Debug\sfml-system-s-d.pdb" />
+    <None Include="Dependencies\Lib\Debug\sfml-window-s-d.pdb" />
+    <None Include="Source\Public\Utils\Various.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Source\Public\Level\BasicLevel.inl">
+      <Filter>Header Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Dependencies\Lib\Debug\flac.lib" />
+    <Library Include="Dependencies\Lib\Debug\freetype.lib" />
+    <Library Include="Dependencies\Lib\Debug\jpeg.lib" />
+    <Library Include="Dependencies\Lib\Debug\jsoncpp.lib" />
+    <Library Include="Dependencies\Lib\Debug\ogg.lib" />
+    <Library Include="Dependencies\Lib\Debug\openal32.lib" />
+    <Library Include="Dependencies\Lib\Debug\PhysicsLibrary.lib" />
+    <Library Include="Dependencies\Lib\Debug\sfml-audio-s-d.lib" />
+    <Library Include="Dependencies\Lib\Debug\sfml-graphics-s-d.lib" />
+    <Library Include="Dependencies\Lib\Debug\sfml-main-d.lib" />
+    <Library Include="Dependencies\Lib\Debug\sfml-network-s-d.lib" />
+    <Library Include="Dependencies\Lib\Debug\sfml-system-s-d.lib" />
+    <Library Include="Dependencies\Lib\Debug\sfml-window-s-d.lib" />
+    <Library Include="Dependencies\Lib\Debug\tgui-s-d.lib" />
+    <Library Include="Dependencies\Lib\Debug\thor-s-d.lib" />
+    <Library Include="Dependencies\Lib\Debug\vorbis.lib" />
+    <Library Include="Dependencies\Lib\Debug\vorbisenc.lib" />
+    <Library Include="Dependencies\Lib\Debug\vorbisfile.lib" />
   </ItemGroup>
 </Project>

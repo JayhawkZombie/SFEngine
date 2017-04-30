@@ -710,7 +710,11 @@
     <ClInclude Include="Source\Public\Messaging\Messager.h" />
     <ClInclude Include="Source\Public\OSXDefs.h" />
     <ClInclude Include="Source\Public\Physics\Collider.h" />
+    <ClInclude Include="Source\Public\Physics\ColliderPartitioner.h" />
+    <ClInclude Include="Source\Public\Physics\PartitionerRecord.h" />
+    <ClInclude Include="Source\Public\Physics\PartitionNode.h" />
     <ClInclude Include="Source\Public\Resources\Resources.h" />
+    <ClInclude Include="Source\Public\Serialization\BasicTypes.h" />
     <ClInclude Include="Source\Public\State\DeviceState.h" />
     <ClInclude Include="Source\Public\UI\UIMacros.h" />
     <ClInclude Include="Source\Public\Utils\Conversion.h" />
@@ -718,6 +722,7 @@
     <ClInclude Include="Source\Public\Utils\SplinePath.h" />
     <ClInclude Include="Source\Public\Utils\TimedSequence.h" />
     <ClInclude Include="Source\Public\Utils\UntimedSequence.h" />
+    <ClInclude Include="Source\Public\Utils\Various.h" />
     <ClInclude Include="Source\Public\Weather\Lightning.h" />
     <ClInclude Include="Source\Public\Weather\WeatherSystem.h" />
     <ClInclude Include="Source\Public\WindowsDefs.h" />
@@ -771,14 +776,18 @@
     <ClCompile Include="Source\Private\Messaging\Messager.cpp" />
     <ClCompile Include="Source\Private\Objects\GameObject.cpp" />
     <ClCompile Include="Source\Private\Physics\Collider.cpp" />
+    <ClCompile Include="Source\Private\Physics\ColliderPartitioner.cpp" />
+    <ClCompile Include="Source\Private\Physics\PartitionNode.cpp" />
     <ClCompile Include="Source\Private\Resources\Resources.cpp" />
     <ClCompile Include="Source\Private\ASync\LevelStreaming.cpp" />
+    <ClCompile Include="Source\Private\Serialization\BasicTypes.cpp" />
     <ClCompile Include="Source\Private\State\DeviceState.cpp" />
     <ClCompile Include="Source\Private\Utils\Conversion.cpp" />
     <ClCompile Include="Source\Private\Utils\ReadIni.cpp" />
     <ClCompile Include="Source\Private\Utils\SplinePath.cpp" />
     <ClCompile Include="Source\Private\Utils\TimedSequence.cpp" />
     <ClCompile Include="Source\Private\Utils\UntimedSequence.cpp" />
+    <ClCompile Include="Source\Private\Utils\Various.cpp" />
     <ClCompile Include="Source\Private\Weather\Lightning.cpp" />
     <ClCompile Include="Source\Private\Weather\WeatherSystem.cpp" />
   </ItemGroup>
@@ -786,6 +795,11 @@
     <None Include="Dependencies\Aurora\include\Aurora\Dispatch\Detail\DoubleDispatcher.inl" />
     <None Include="Dependencies\Aurora\include\Aurora\Dispatch\Detail\SingleDispatcher.inl" />
     <None Include="Dependencies\cereal\external\rapidxml\manual.html" />
+    <None Include="Dependencies\Lib\Debug\sfml-audio-s-d.pdb" />
+    <None Include="Dependencies\Lib\Debug\sfml-graphics-s-d.pdb" />
+    <None Include="Dependencies\Lib\Debug\sfml-network-s-d.pdb" />
+    <None Include="Dependencies\Lib\Debug\sfml-system-s-d.pdb" />
+    <None Include="Dependencies\Lib\Debug\sfml-window-s-d.pdb" />
     <None Include="Dependencies\rapidxml\manual.html" />
     <None Include="Dependencies\SelbaWard\TileMap.inl" />
     <None Include="Dependencies\SFML\Audio\SoundFileFactory.inl" />
@@ -811,6 +825,28 @@
     <None Include="Dependencies\Thor\Vectors\Detail\VectorAlgebra2D.inl" />
     <None Include="Dependencies\Thor\Vectors\Detail\VectorAlgebra3D.inl" />
     <None Include="Source\Public\DependencyInterface.inl" />
+    <None Include="Source\Public\Level\BasicLevel.inl" />
+    <None Include="Source\Public\Utils\Various.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Dependencies\Lib\Debug\flac.lib" />
+    <Library Include="Dependencies\Lib\Debug\freetype.lib" />
+    <Library Include="Dependencies\Lib\Debug\jpeg.lib" />
+    <Library Include="Dependencies\Lib\Debug\jsoncpp.lib" />
+    <Library Include="Dependencies\Lib\Debug\ogg.lib" />
+    <Library Include="Dependencies\Lib\Debug\openal32.lib" />
+    <Library Include="Dependencies\Lib\Debug\PhysicsLibrary.lib" />
+    <Library Include="Dependencies\Lib\Debug\sfml-audio-s-d.lib" />
+    <Library Include="Dependencies\Lib\Debug\sfml-graphics-s-d.lib" />
+    <Library Include="Dependencies\Lib\Debug\sfml-main-d.lib" />
+    <Library Include="Dependencies\Lib\Debug\sfml-network-s-d.lib" />
+    <Library Include="Dependencies\Lib\Debug\sfml-system-s-d.lib" />
+    <Library Include="Dependencies\Lib\Debug\sfml-window-s-d.lib" />
+    <Library Include="Dependencies\Lib\Debug\tgui-s-d.lib" />
+    <Library Include="Dependencies\Lib\Debug\thor-s-d.lib" />
+    <Library Include="Dependencies\Lib\Debug\vorbis.lib" />
+    <Library Include="Dependencies\Lib\Debug\vorbisenc.lib" />
+    <Library Include="Dependencies\Lib\Debug\vorbisfile.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

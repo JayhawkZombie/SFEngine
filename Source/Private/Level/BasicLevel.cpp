@@ -108,6 +108,12 @@ namespace SFEngine
 
   void BasicLevel::OnShutDown()
   {
+    m_Textures.clear();
+    m_SoundBuffers.clear();
+    
+    for (auto & object : m_GameObjects)
+      object->OnShutDown();
+    m_GameObjects.clear();
   }
 
   void BasicLevel::SerializeOut(SOFStream & out)
@@ -148,10 +154,14 @@ namespace SFEngine
   void BasicLevel::CleanUp()
   {
   }
+
   void BasicLevel::SpawnActor(std::shared_ptr<GenericActor> Actor, const sf::Vector2f & Position)
   {
+    Actor->SetPosition(Position);
+    m_GameObjects.push_back(Actor);
   }
-  void BasicLevel::SpawnObject(std::shared_ptr<LevelObject> Object, const sf::Vector2f & Position)
+
+  void BasicLevel::SpawnObject(std::shared_ptr<GameObject> Object, const sf::Vector2f & Position)
   {
   }
 
@@ -220,7 +230,19 @@ namespace SFEngine
 
   void BasicLevel::LoadTextures(const Json::Value & value)
   {
+    std::string texname{ "" };
+    std::string path{ "" };
+
+    for (auto & tex : value) {
+      texname = tex["Name"].asString();
+      path = m_ProjectPath + tex["Path"].asString();
+      m_Textures[texname] = LoadTexture(path, texname);// std::make_shared<sf::Texture>();
+      if (!m_Textures[texname]) {
+        std::cerr << "Unable to load texture: " << path << std::endl;
+      }
+    }
   }
+
   void BasicLevel::LoadTileSheets(const Json::Value & value)
   {
   }
@@ -230,4 +252,33 @@ namespace SFEngine
   void BasicLevel::LoadAnimations(const Json::Value & value)
   {
   }
-}
+
+  void BasicLevel::UpdatePhysics(STDVector<Collider2D> Colliders, STDVector<SegmentMeshPtr> Segments, UINT32 Steps)
+  {
+    static STDVector<SPtrShared<Collider2D>> MeshVector;
+    static STDVector<SegmentMeshPtr> SegmentVector;
+
+    MeshVector.clear();
+    SegmentVector.clear();
+
+    for (auto & object : m_GameObjects) {
+      auto vec = object->GetColliders();
+      for (auto & mesh : vec)
+        MeshVector.push_back(mesh);
+    }
+
+    for (auto & seg : Segments) {
+      SegmentVector.push_back(seg);
+    }
+
+    UpdatePhysicsMeshes(MeshVector, SegmentVector, Steps);
+  }
+
+  template<class Archive>
+  void BasicLevel::serialize(Archive &ar)
+  {
+    ar(cereal::virtual_base_class<BaseEngineInterface>(this),
+       this->m_DoUpdatePhysics, m_ProjectPath);
+  }
+
+} // namespace SFEngine

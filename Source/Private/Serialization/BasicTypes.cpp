@@ -1,13 +1,10 @@
-#ifndef SFEngine_BaseEngineInterface_H
-#define SFEngine_BaseEngineInterface_H
-
 ////////////////////////////////////////////////////////////
 //
 // MIT License
 //
 // Copyright(c) 2017 Kurt Slagle - kurt_slagle@yahoo.com
-// Copyright(c) 2017 Austin Bailey
-// 
+// Copyright(c) 2017 Austin Bailey 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files(the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
@@ -35,87 +32,53 @@
 /************************************************************************/
 /*                         Internal  Headers                            */
 /************************************************************************/
-#include "BasicIncludes.h"
-#include "Events\EventHandler.h"
-#include "Events\UserEvent.h"
+#include "Serialization\BasicTypes.h"
 
 /************************************************************************/
 /*                       Dependency  Headers                            */
 /************************************************************************/
+#include <cereal\access.hpp>
 #include <cereal\archives\binary.hpp>
+#include <cereal\cereal.hpp>
+
+#include <EngineTypes.h>
 
 /************************************************************************/
 /*                     Standard  Library  Headers                       */
 /************************************************************************/
 
 /************************************************************************/
-/*                        BaseEngineInterface                           */
+/*                         BasicTypes                                   */
 /************************************************************************/
 /*                                                                      */
 /*                                                                      */
 /************************************************************************/
 
 /************************************************************************/
-/* Last Edit: Kurt Slagle - 2017/04/27                                  */
+/* Last Edit: Kurt Slagle - 2017/04/29                                  */
 /************************************************************************/
 
 namespace SFEngine
 {
 
-#define TYPEDEF_PARENT_CLASS(PARENTCLASS) \
-  typedef PARENTCLASS Super; 
-
-  class BaseEngineInterface
+  namespace Serialize
   {
-  public:
-    BaseEngineInterface();
-    BaseEngineInterface(const BaseEngineInterface &b);
-    BaseEngineInterface& operator=(const BaseEngineInterface &) = delete;
-    virtual ~BaseEngineInterface();
+    template<>
+    void load(cereal::BinaryInputArchive &ar, SFLOATRECT &Rect)
+    {
+      ar(Rect.left, Rect.top, Rect.width, Rect.height);
+    }
 
-    /************************************************************************/
-    /* Pure virtual interface methods                                       */
-    /************************************************************************/
-    virtual SPtrShared<BaseEngineInterface> Clone() const = 0;
-    virtual void TickUpdate(const SFLOAT &delta) = 0;
-    virtual void Render(SharedRTexture Target) = 0;
-    virtual void OnShutDown() = 0;
-    virtual void SerializeOut(SOFStream &out) = 0;
-    virtual void SerializeIn(SIFStream &in) = 0;
-    virtual void EventUpdate(sf::Event event);
-    virtual void HandleInputEvent(const UserEvent &evnt);
-
-    EventHandler Handler;
-
-    /************************************************************************/
-    /* Getters                                                              */
-    /************************************************************************/
-    virtual SString GetID() const;
-    virtual UINT32 GetInternalID() const;
-    virtual SString GetClass() const = 0;
-
-    /************************************************************************/
-    /* Setters                                                              */
-    /************************************************************************/
-    virtual void SetInternalD(const UINT32 &ID);
-    virtual void SetID(const SString &ID);
-
-  protected:
-    static void NO_ACTION(BaseEngineInterface *item, const SVector2I &i);
-    static void NO_ACTION(BaseEngineInterface *item, const sf::Mouse::Button &);
-    static void NO_ACTION(BaseEngineInterface *item, const sf::Keyboard::Key &);
-    static void NO_ACTION(BaseEngineInterface *item);
-
-    SString ItemID = "";
-    UINT32 InternalID = 0;
-  };
-
-  template<class Archive>
-  void serialize(Archive &ar, BaseEngineInterface &base)
-  {
-    ar(base.InternalID, base.ItemID);
+    template<>
+    void save(cereal::BinaryOutputArchive &ar, const SFLOATRECT &Rect)
+    {
+      ar(Rect.left, Rect.top, Rect.width, Rect.height);
+    }
   }
+} // namespace SFEngine
+
+
+namespace cereal
+{
 
 }
-
-#endif // SFEngine_BaseEngineInterface_H

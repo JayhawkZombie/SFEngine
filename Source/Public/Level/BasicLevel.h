@@ -65,7 +65,7 @@
 namespace SFEngine
 {
 
-  class LevelObject;
+  class GameObject;
   class TileSheet;
   class Animation;
   class Collider2D;
@@ -107,10 +107,16 @@ namespace SFEngine
     virtual void Reset();
     virtual void CleanUp();
     virtual void SpawnActor(std::shared_ptr<GenericActor> Actor, const sf::Vector2f &Position);
-    virtual void SpawnObject(std::shared_ptr<LevelObject> Object, const sf::Vector2f &Position);
+    virtual void SpawnObject(std::shared_ptr<GameObject> Object, const sf::Vector2f &Position);
     virtual void RenderOnTexture(SharedRTexture Texture) = 0;
     virtual void Load() = 0;
     virtual void Unload() = 0;
+
+    /************************************************************************/
+    /* And last, but not least, serialization (I hope)                      */
+    /************************************************************************/
+    template<class Archive>
+    void serialize(Archive &ar);
 
   protected:
     /************************************************************************/
@@ -123,6 +129,7 @@ namespace SFEngine
     virtual void LoadTileSheets(const Json::Value &value);
     virtual void LoadSheet(const Json::Value &value);
     virtual void LoadAnimations(const Json::Value &value);
+    virtual void UpdatePhysics(STDVector<Collider2D> Colliders, STDVector<SegmentMeshPtr> Segments, UINT32 Steps = 1);
 
     /************************************************************************/
     /* Conditional variables                                                */
@@ -148,6 +155,7 @@ namespace SFEngine
     SStringSoundBufferMap m_SoundBuffers;
   };
 
+#include "BasicLevel.inl"
 }
 
 #endif // SFEngine_BasicLevel_H

@@ -52,6 +52,7 @@
 #include <fstream>
 #include <unordered_map>
 #include <queue>
+#include <deque>
 
 /************************************************************************/
 /*                        EngineTypes                                   */
@@ -142,6 +143,7 @@ template<typename T, typename U>
 using STimeDuration = std::chrono::duration<T, U>;
 template<typename T>
 using STDVector = std::vector<T>;
+template<typename T> using STDVector2D = STDVector<STDVector<T>>;
 using SOFStream = std::ofstream;
 using SIFStream = std::ifstream;
 using SOStream = std::ostream;
@@ -165,6 +167,8 @@ using SharedPairQueue = SPtrShared<STDPairQueue<T, U>>;
 
 template<typename T>
 using SUniqueLock = std::unique_lock<T>;
+
+template<typename T> using STDDeque = std::deque<T>;
 
 /************************************************************************/
 /* SFML Resource type typdefs                                           */
