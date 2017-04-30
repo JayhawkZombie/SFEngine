@@ -59,28 +59,8 @@
 /* Last Edit: Kurt Slagle - 2017/04/29                                  */
 /************************************************************************/
 
-namespace SFEngine
+namespace cereal
 {
-  namespace Serialize
-  {
-    class BaseEngineInterface;
-    class GameObject;
-    class Collider2D;
-    class Actor;
-    class Camera2D;
-    class Engine;
-
-    template<class Archive, class T>
-    void save(Archive &ar, const T& Save);
-
-    template<class Archive, class T>
-    void load(Archive &ar, T &Load);
-
-
-  }
-}
-
-namespace cereal {
 
 }
 

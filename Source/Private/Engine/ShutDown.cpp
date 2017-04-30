@@ -61,29 +61,36 @@ namespace SFEngine
 
   UINT32 Engine::ShutDown()
   {
-
+    Messager::PostToActivityLog(SystemMessage(SystemMessageType::ActivityLog, 0, 0, SString("m_StaticCurrentEngine::ShutDown()")));
     for (auto & level : m_StaticCurrentEngine->m_Levels) {
       level.second->Unload();
       level.second->CleanUp();
     }
 
     m_CurrentLevel.reset();
-    for (auto & level : m_StaticCurrentEngine->m_Levels) {
-      if (level.second)
-        level.second.reset();
-    }
+    m_StaticCurrentEngine->m_Levels.clear();
 
     ClearTextures();
     ClearShaders();
     ClearFonts();
     ClearSoundBuffers();
 
+    return Success::GAMELOOP_SUCCESS;
+  }
+
+  UINT32 Engine::StaticShutDown()
+  {
+    Messager::PostToActivityLog(SystemMessage(SystemMessageType::ActivityLog, 0, 0, SString("Engine::StaticShutDown()")));
+    SFENGINE_ASSERT(m_StaticCurrentEngine != nullptr);
+
+    delete m_StaticCurrentEngine;
+    m_StaticCurrentEngine = nullptr;
     m_EngineGUI.reset();
 
     Messager::PurgeLogsToFile("MessageCachePurge.log", "ActivityLogPurge.log", "RankedMessageLogPurge.log");
     Messager::Shutdown();
 
-    return Success::GAMELOOP_SUCCESS;
+    return 0;
   }
 
 } // namespace SFEngine

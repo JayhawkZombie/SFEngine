@@ -1,5 +1,5 @@
-#ifndef SFEngine_Various_Inl_H
-#define SFEngine_Various_Inl_H
+#ifndef SFEngine_BasicTypes_Int_H
+#define SFEngine_BasicTypes_Int_H
 
 ////////////////////////////////////////////////////////////
 //
@@ -46,20 +46,29 @@
 /************************************************************************/
 
 /************************************************************************/
-/*                            Various                                   */
+/*                         BasicTypes                                   */
 /************************************************************************/
 /*                                                                      */
 /*                       File Description                               */
 /************************************************************************/
 
 /************************************************************************/
-/* Last Edit: Kurt Slagle - 2017/04/29                                  */
+/* Last Edit: Kurt Slagle - 2017/04/30                                  */
 /************************************************************************/
 
-namespace SFEngine
+namespace cereal
 {
 
-
+  template<class Archive>
+  void load(Archive &ar, sf::FloatRect &FRect)
+  {
+    ar(FRect.left, FRect.top, FRect.width, FRect.height);
+  }
+  template<class Archive>
+  void save(Archive &ar, const sf::FloatRect &FRect)
+  {
+    ar(FRect.left, FRect.top, FRect.width, FRect.height);
+  }
 }
 
-#endif // SFEngine_Various_H 
+#endif // SFEngine_BasicTypes_H 

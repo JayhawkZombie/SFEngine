@@ -33,6 +33,7 @@
 /*                         Internal  Headers                            */
 /************************************************************************/
 #include "Engine\Engine.h"
+#include "Messaging\Messager.h"
 
 /************************************************************************/
 /*                       Dependency  Headers                            */
@@ -50,7 +51,7 @@
 /************************************************************************/
 
 /************************************************************************/
-/* Last Edit: Kurt Slagle - 4 / 29 / 2017                               */
+/* Last Edit: Kurt Slagle - 4 / 30 / 2017                               */
 /************************************************************************/
 
 namespace SFEngine
@@ -58,6 +59,8 @@ namespace SFEngine
 
   UINT32 Engine::Go(int argc, char **argv, EngineConfig &Config)
   {
+    Messager::Init();
+
     SFENGINE_ASSERT(m_StaticCurrentEngine == nullptr);
 
     m_StaticCurrentEngine = new Engine;

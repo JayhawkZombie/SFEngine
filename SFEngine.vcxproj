@@ -715,6 +715,7 @@
     <ClInclude Include="Source\Public\Physics\PartitionNode.h" />
     <ClInclude Include="Source\Public\Resources\Resources.h" />
     <ClInclude Include="Source\Public\Serialization\BasicTypes.h" />
+    <ClInclude Include="Source\Public\Serialization\BasicTypes.hpp" />
     <ClInclude Include="Source\Public\State\DeviceState.h" />
     <ClInclude Include="Source\Public\UI\UIMacros.h" />
     <ClInclude Include="Source\Public\Utils\Conversion.h" />
@@ -825,8 +826,6 @@
     <None Include="Dependencies\Thor\Vectors\Detail\VectorAlgebra2D.inl" />
     <None Include="Dependencies\Thor\Vectors\Detail\VectorAlgebra3D.inl" />
     <None Include="Source\Public\DependencyInterface.inl" />
-    <None Include="Source\Public\Level\BasicLevel.inl" />
-    <None Include="Source\Public\Utils\Various.inl" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="Dependencies\Lib\Debug\flac.lib" />

@@ -38,8 +38,6 @@
 /*                       Dependency  Headers                            */
 /************************************************************************/
 #include <cereal\access.hpp>
-#include <cereal\archives\binary.hpp>
-#include <cereal\cereal.hpp>
 
 #include <EngineTypes.h>
 
@@ -55,30 +53,89 @@
 /************************************************************************/
 
 /************************************************************************/
-/* Last Edit: Kurt Slagle - 2017/04/29                                  */
+/* Last Edit: Kurt Slagle - 2017/04/30                                  */
 /************************************************************************/
-
-namespace SFEngine
-{
-
-  namespace Serialize
-  {
-    template<>
-    void load(cereal::BinaryInputArchive &ar, SFLOATRECT &Rect)
-    {
-      ar(Rect.left, Rect.top, Rect.width, Rect.height);
-    }
-
-    template<>
-    void save(cereal::BinaryOutputArchive &ar, const SFLOATRECT &Rect)
-    {
-      ar(Rect.left, Rect.top, Rect.width, Rect.height);
-    }
-  }
-} // namespace SFEngine
-
 
 namespace cereal
 {
+  /****************************************************************************************************/
+  /* SFML Type Serialization                                                                          */
+  /****************************************************************************************************/
 
-}
+  //FloatRect
+  //template<class Archive>
+  //void load(Archive &ar, SFLOATRECT &Frect)
+  //{
+  //  ar(Frect.left, Frect.top, Frect.width, Frect.height);
+  //}
+
+  //template<class Archive>
+  //void save(Archive &ar, const SFLOATRECT &Frect)
+  //{
+  //  ar(Frect.left, Frect.top, Frect.width, Frect.height);
+  //}
+
+  ////IntRect
+  //template<class Archive>
+  //void load(Archive &ar, SINTRECT &Irect)
+  //{
+  //  ar(Irect.left, Irect.top, Irect.width, Irect.height);
+  //}
+
+  //template<class Archive>
+  //void save(Archive &ar, const SINTRECT &Irect)
+  //{
+  //  ar(Irect.left, Irect.top, Irect.width, Irect.height);
+  //}
+
+  ////Vector2f
+  //template<class Archive>
+  //void load(Archive &ar, SVector2F &V)
+  //{
+  //  ar(V.x, V.y);
+  //}
+
+  //template<class Archive>
+  //void save(Archive &ar, const SVector2F &V)
+  //{
+  //  ar(V.x, V.y);
+  //}
+
+  ////sf::Vector2u
+  //template<class Archive>
+  //void load(Archive &ar, SVector2U &V)
+  //{
+  //  ar(V.x, V.y);
+  //}
+
+  //template<class Archive>
+  //void load(Archive &ar, const SVector2U &V)
+  //{
+  //  ar(V.x, V.y);
+  //}
+
+  ////sf::Color
+  //template<class Archive>
+  //void load(Archive &ar, sf::Color &Color)
+  //{
+  //  ar(Color.r, Color.g, Color.b, Colo.a);
+  //}
+
+  //template<class Archive>
+  //void save(Archive &ar, const sf::Color &Color)
+  //{
+  //  ar(Color.r, Color.g, Color.b, Colo.a);
+  //}
+  //template<>
+  //void load(cereal::BinaryInputArchive &ar, SFLOATRECT &Rect)
+  //{
+  //  ar(Rect.left, Rect.top, Rect.width, Rect.height);
+  //}
+
+  //template<>
+  //void save(cereal::BinaryOutputArchive &ar, const SFLOATRECT &Rect)
+  //{
+  //  ar(Rect.left, Rect.top, Rect.width, Rect.height);
+  //}
+  
+} // namespace SFEngine

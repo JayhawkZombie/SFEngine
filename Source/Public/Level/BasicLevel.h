@@ -59,7 +59,7 @@
 /************************************************************************/
 
 /************************************************************************/
-/* Last Edit: Kurt Slagle - 2017/04/29                                  */
+/* Last Edit: Kurt Slagle - 2017/04/30                                  */
 /************************************************************************/
 
 namespace SFEngine
@@ -115,8 +115,6 @@ namespace SFEngine
     /************************************************************************/
     /* And last, but not least, serialization (I hope)                      */
     /************************************************************************/
-    template<class Archive>
-    void serialize(Archive &ar);
 
   protected:
     /************************************************************************/
@@ -155,7 +153,6 @@ namespace SFEngine
     SStringSoundBufferMap m_SoundBuffers;
   };
 
-#include "BasicLevel.inl"
 }
 
 #endif // SFEngine_BasicLevel_H

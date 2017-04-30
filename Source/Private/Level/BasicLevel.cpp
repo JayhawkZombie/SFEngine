@@ -53,7 +53,7 @@
 /************************************************************************/
 
 /************************************************************************/
-/* Last Edit: Kurt Slagle - 2017/04/29                                  */
+/* Last Edit: Kurt Slagle - 2017/04/30                                  */
 /************************************************************************/
 
 namespace SFEngine
@@ -274,11 +274,8 @@ namespace SFEngine
     UpdatePhysicsMeshes(MeshVector, SegmentVector, Steps);
   }
 
-  template<class Archive>
-  void BasicLevel::serialize(Archive &ar)
-  {
-    ar(cereal::virtual_base_class<BaseEngineInterface>(this),
-       this->m_DoUpdatePhysics, m_ProjectPath);
-  }
+  /************************************************************************/
+  /* Serialization                                                        */
+  /************************************************************************/
 
 } // namespace SFEngine

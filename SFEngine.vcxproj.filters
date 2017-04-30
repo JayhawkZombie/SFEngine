@@ -1743,6 +1743,9 @@
     <ClInclude Include="Source\Public\Serialization\BasicTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Public\Serialization\BasicTypes.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SFEngine.cpp">
@@ -2018,12 +2021,6 @@
     <None Include="Dependencies\Lib\Debug\sfml-network-s-d.pdb" />
     <None Include="Dependencies\Lib\Debug\sfml-system-s-d.pdb" />
     <None Include="Dependencies\Lib\Debug\sfml-window-s-d.pdb" />
-    <None Include="Source\Public\Utils\Various.inl">
-      <Filter>Header Files</Filter>
-    </None>
-    <None Include="Source\Public\Level\BasicLevel.inl">
-      <Filter>Header Files</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Library Include="Dependencies\Lib\Debug\flac.lib" />

@@ -45,6 +45,7 @@
 /************************************************************************/
 /*                       Dependency  Headers                            */
 /************************************************************************/
+#include <cereal\access.hpp>
 #include <SFML\Graphics.hpp>
 #include <TGUI\TGUI.hpp>
 
@@ -60,7 +61,7 @@
 /************************************************************************/
 
 /************************************************************************/
-/* Last Edit: Kurt Slagle - 2017/04/29                                  */
+/* Last Edit: Kurt Slagle - 2017/04/30                                  */
 /************************************************************************/
 
 namespace SFEngine
@@ -69,6 +70,7 @@ namespace SFEngine
   class Engine
   {
   public:
+    friend class cereal::access;
     Engine();
     Engine(const Engine &) = delete; //No copy constructor allowed
     Engine(const Engine &&) = delete;
@@ -102,6 +104,12 @@ namespace SFEngine
     };
 
   private:
+    template<class Archive>
+    void save(Archive &ar) const;
+
+    template<class Archive>
+    void load(Archive &ar);
+
     static Engine* m_StaticCurrentEngine;
     static STDMap<SString, SharedLevel> m_Levels;
     static SharedLevel m_CurrentLevel;
@@ -112,6 +120,7 @@ namespace SFEngine
     UINT32 Startup();
     UINT32 GameLoop();
     UINT32 ShutDown();
+    static UINT32 StaticShutDown();
     UINT32 Init(int argc, char **argv);
     UINT32 InitRenderWindow();
     void   StepSimulation(SFLOAT STick, SFLOAT STickDt);
@@ -159,6 +168,10 @@ namespace SFEngine
     void HandleMouseScroll(const sf::Vector2i &v, sf::Mouse::Wheel wheel, float delta);
     std::function<void(const sf::Vector2i &v, sf::Mouse::Wheel, float delta)> Callback_MouseScrolled;
   };
+
+}
+
+namespace cereal {
 
 }
 

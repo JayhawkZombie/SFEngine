@@ -53,7 +53,7 @@
 /************************************************************************/
 
 /************************************************************************/
-/* Last Edit: Kurt Slagle - 2017/04/27                                  */
+/* Last Edit: Kurt Slagle - 2017/04/30                                  */
 /************************************************************************/
 
 namespace SFEngine
@@ -82,7 +82,7 @@ namespace SFEngine
     , RUNTIME_ENGINE_NOCURRWINDOW
     , RUNTIME_MEMORY_ALLOC
     , RUNTIME_UNKNOWN_ERROR
-    ,
+    , NO_STARTING_LEVEL
   };
 
   enum Warning

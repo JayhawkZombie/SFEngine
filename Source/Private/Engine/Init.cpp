@@ -33,6 +33,8 @@
 /*                         Internal  Headers                            */
 /************************************************************************/
 #include "Engine\Engine.h"
+#include "Globals.h"
+#include "Messaging\Messager.h"
 
 /************************************************************************/
 /*                       Dependency  Headers                            */
@@ -65,20 +67,10 @@ namespace SFEngine
 
     auto size = m_StaticCurrentEngine->m_Configuration.WindowSize;
     auto title = m_StaticCurrentEngine->m_Configuration.WindowTitle;
-    sf::Uint32 style;
 
-    if (m_StaticCurrentEngine->m_Configuration.Resizable)
-      style |= sf::Style::Resize;
-    if (m_StaticCurrentEngine->m_Configuration.HasTitlebar)
-      style |= sf::Style::Titlebar;
-    if (m_StaticCurrentEngine->m_Configuration.ShowCloseButton)
-      style |= sf::Style::Close;
-    if (m_StaticCurrentEngine->m_Configuration.Fullscreen)
-      style |= sf::Style::Fullscreen;
+    WindowSize = size;
 
-    sf::ContextSettings _csettings = m_StaticCurrentEngine->m_Configuration.__context_settings;
-
-    m_StaticCurrentEngine->m_CurrentRenderWindow = new sf::RenderWindow(sf::VideoMode(size.x, size.y), title, style, _csettings);
+    m_StaticCurrentEngine->m_CurrentRenderWindow = new sf::RenderWindow(sf::VideoMode(size.x, size.y), title, m_StaticCurrentEngine->m_Configuration.Style, m_StaticCurrentEngine->m_Configuration.__context_settings);
 
     sf::Texture texture;
     sf::RectangleShape SplashRect;

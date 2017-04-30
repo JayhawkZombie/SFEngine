@@ -56,7 +56,7 @@
 /************************************************************************/
 
 /************************************************************************/
-/* Last Edit: Kurt Slagle - 2017/04/27                                  */
+/* Last Edit: Kurt Slagle - 2017/04/30                                  */
 /************************************************************************/
 
 namespace SFEngine
@@ -109,12 +109,6 @@ namespace SFEngine
     SString ItemID = "";
     UINT32 InternalID = 0;
   };
-
-  template<class Archive>
-  void serialize(Archive &ar, BaseEngineInterface &base)
-  {
-    ar(base.InternalID, base.ItemID);
-  }
 
 }
 

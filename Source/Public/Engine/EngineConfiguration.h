@@ -52,7 +52,7 @@
 /************************************************************************/
 
 /************************************************************************/
-/* Last Edit: Kurt Slagle - 2017/04/27                                  */
+/* Last Edit: Kurt Slagle - 2017/04/30                                  */
 /************************************************************************/
 
 namespace SFEngine
@@ -104,9 +104,9 @@ namespace SFEngine
     UINT32            MaxNumParticles;
     std::vector<std::string> ShaderPath; //Vector of paths to shaders
     std::vector<std::string> Shader;     //Vector of the names of the shaders
+    sf::Uint32 Style = sf::Style::Resize | sf::Style::Close | sf::Style::Titlebar;
 
-
-    sf::ContextSettings __context_settings;
+    sf::ContextSettings __context_settings = sf::ContextSettings(0, 0, 8, 3, 2, sf::ContextSettings::Default, false);
   };
 
 }

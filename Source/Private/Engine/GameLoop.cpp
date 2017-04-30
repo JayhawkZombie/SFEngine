@@ -55,7 +55,7 @@
 /************************************************************************/
 
 /************************************************************************/
-/* Last Edit: Kurt Slagle - 2017/04/29                                  */
+/* Last Edit: Kurt Slagle - 2017/04/30                                  */
 /************************************************************************/
 
 namespace SFEngine
@@ -90,7 +90,9 @@ namespace SFEngine
     AssignBoundaries((float)WindowSize.x, (float)WindowSize.y);
 
     //There MUST be a valid InitialLevel instance to start from
-    SFENGINE_ASSERT(StartingLevel);
+    if (!StartingLevel)
+      return m_StaticCurrentEngine->ShutDown();
+
     sf::Time fTime{ sf::seconds(0) };
     sf::Clock _clock;
 

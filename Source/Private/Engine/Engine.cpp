@@ -37,10 +37,14 @@
 /************************************************************************/
 /*                       Dependency  Headers                            */
 /************************************************************************/
+#include <cereal\access.hpp>
+#include <cereal\archives\portable_binary.hpp>
+#include <cereal\types\string.hpp>
 
 /************************************************************************/
 /*                     Standard  Library  Headers                       */
 /************************************************************************/
+#include <sstream>
 
 /************************************************************************/
 /*                             Engine                                   */
@@ -50,7 +54,7 @@
 /************************************************************************/
 
 /************************************************************************/
-/* Last Edit: Kurt Slagle - 2017/04/29                                  */
+/* Last Edit: Kurt Slagle - 2017/04/30                                  */
 /************************************************************************/
 
 namespace SFEngine
@@ -70,7 +74,14 @@ namespace SFEngine
 
   Engine::~Engine()
   {
+    /* Not yet saving these configs. Just for testing */
+    std::ofstream saveinit("Engine.init", std::ios::binary);
+    {
+      cereal::BinaryOutputArchive outArchive(saveinit);
 
+      outArchive(*this);
+    } //Archive must go out of scope before it flushes contents to the stream
+    saveinit.close();
   }
 
   Engine* Engine::GetCurrentEngine()
@@ -100,4 +111,28 @@ namespace SFEngine
     return m_EngineGUI;
   }
 
-}
+  /************************************************************************/
+  /* Serialization                                                        */
+  /************************************************************************/
+  template<class Archive>
+  void Engine::load(Archive &ar)
+  {
+    ar(m_Configuration.DisplayFrameStats, m_Configuration.BenchmarkShaders,
+       m_Configuration.LogLevel, m_Configuration.DiagnosticFont,
+       m_Configuration.VsyncEnabled, m_Configuration.UseRenderTexture,
+       m_Configuration.TextureSmoothingEnabled, m_Configuration.AALevel,
+       m_Configuration.WindowSize, m_Configuration.WindowTitle
+    );
+  }
+
+  template<class Archive>
+  void Engine::save(Archive &ar) const
+  {
+    ar(m_Configuration.DisplayFrameStats, m_Configuration.BenchmarkShaders,
+       m_Configuration.LogLevel, m_Configuration.DiagnosticFont,
+       m_Configuration.VsyncEnabled, m_Configuration.UseRenderTexture,
+       m_Configuration.TextureSmoothingEnabled, m_Configuration.AALevel
+    );
+  }
+
+} // namespace SFEngine

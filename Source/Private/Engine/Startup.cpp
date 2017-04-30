@@ -61,7 +61,10 @@ namespace SFEngine
     m_EngineGUI = std::make_shared<tgui::Gui>(*m_StaticCurrentEngine->m_CurrentRenderWindow);
     SFENGINE_ASSERT(m_EngineGUI);
 
-    return m_StaticCurrentEngine->GameLoop();
+    int LoopReturn = m_StaticCurrentEngine->GameLoop();
+    StaticShutDown();
+
+    return LoopReturn;
   }
 
 }
