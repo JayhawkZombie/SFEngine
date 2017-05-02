@@ -37,6 +37,7 @@
 /************************************************************************/
 #include "BasicIncludes.h"
 #include "DependencyInterface.h"
+#include "Physics\stateTypes.h"
 
 /************************************************************************/
 /*                       Dependency  Headers                            */
@@ -138,19 +139,73 @@ namespace SFEngine
     void SetPosition(const SVector2F &Delta);
     bool HandleCollision(SPtrWeak<Collider2D> Collider);
     bool HandleCollisionWithSegment(SPtrWeak<SegmentMesh> Segment);
+    void RememberPrevPosition();
 
-  protected:    
+    /*****************************************************************************/
+    /* For processing timestep updates (these are quantized for physics objects) */
+    /*****************************************************************************/
+    void InterpolateState(SFLOAT Alpha);
+
+    /************************************************************************/
+    /* Cuz why not                                                          */
+    /************************************************************************/
+    void Render(SFLOAT Alpha, SharedRTexture Texture);
+    void Reset();
+
+  protected:
     MeshType m_Type;
     UINT32 m_Status;
     MeshBasePtr m_Mesh;
+    //Interpolated for smoothness, but it may lag behind the physics by a tick
     GameObject* m_OwnerObject;
     ColliderPartitioner *m_OwnerPartitioner;
+
+    /******************************************************************************/
+    /* We need to hold information about our previous state so we can interpolate */
+    /******************************************************************************/
+    ::vec2d m_PrevColliderPos;
+    ::vec2d m_PrevVelocity;
 
     /************************************************************************/
     /* Callback methods                                                     */
     /************************************************************************/
     std::function<void(GameObject *)> m_ColliderCollisionCallback;
     std::function<void(SegmentMesh *)> m_SegmentCollisionCallback;
+
+    /************************************************************************/
+    /* State restoration (default) data                                     */
+    /************************************************************************/
+    ::vec2d m_InitialPositon;
+    ::vec2d m_InitialVelocity;
+
+  public:
+    /************************************************************************/
+    /* Static automatic creation methods for certain meshes                 */
+    /************************************************************************/
+    static SPtrShared<Collider2D> CreateCircularMesh
+    (
+      MeshType type,
+      const sf::Vector2f &position,
+      const sf::Vector2f &velocity,
+      unsigned int radius,
+      float mass,
+      float coeffOfRest,
+      sf::Color color = sf::Color::Transparent
+    );
+
+    static SPtrShared<Collider2D> CreatePolygonMesh
+    (
+      unsigned int num_sides,
+      float radius,
+      float init_rotation,
+      const sf::Vector2f & InitialPosition,
+      const sf::Vector2f & InitialVelocity,
+      float mass,
+      float CoeffOfRest,
+      sf::Color color = sf::Color::Transparent,
+      bool CastShadows = false
+    );
+
   };
 
   using SharedCollider2D = SPtrShared<Collider2D>;

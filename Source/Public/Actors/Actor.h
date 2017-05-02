@@ -71,7 +71,7 @@ namespace SFEngine
     /* Required overrides                                                   */
     /************************************************************************/
     virtual void TickUpdate(const SFLOAT &delta) override;
-    virtual void Render(SharedRTexture Target) override;
+    virtual void Render(SFLOAT Alpha, SharedRTexture Target) override;
     virtual void OnShutDown() override;
     virtual void SerializeOut(SOFStream &out) override;
     virtual void SerializeIn(SIFStream &in) override;
@@ -82,6 +82,7 @@ namespace SFEngine
     virtual void HandleCollisionWithSegment(SegmentMesh *Segment) override;
     virtual void HandleInputEvent(const UserEvent &evnt) override;
     virtual bool WantsInputEvent(const Events &evnt) const;
+    virtual void StepSimulation(SFLOAT Dt) override;
 
 
     /************************************************************************/

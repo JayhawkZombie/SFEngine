@@ -76,15 +76,14 @@ namespace SFEngine
     /************************************************************************/
     /* Pure virtual interface methods                                       */
     /************************************************************************/
-    virtual SPtrShared<BaseEngineInterface> Clone() const = 0;
     virtual void TickUpdate(const SFLOAT &delta) = 0;
-    virtual void Render(SharedRTexture Target) = 0;
+    virtual void Render(SFLOAT Alpha, SharedRTexture Target) = 0;
     virtual void OnShutDown() = 0;
     virtual void SerializeOut(SOFStream &out) = 0;
     virtual void SerializeIn(SIFStream &in) = 0;
     virtual void EventUpdate(sf::Event event);
     virtual void HandleInputEvent(const UserEvent &evnt);
-
+    virtual void StepSimulation(SFLOAT Dt) = 0;
     EventHandler Handler;
 
     /************************************************************************/

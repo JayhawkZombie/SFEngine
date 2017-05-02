@@ -33,6 +33,7 @@
 /*                         Internal  Headers                            */
 /************************************************************************/
 #include "Engine\Engine.h"
+#include "Level\BasicLevel.h"
 
 /************************************************************************/
 /*                       Dependency  Headers                            */
@@ -61,7 +62,13 @@ namespace SFEngine
     m_EngineGUI = std::make_shared<tgui::Gui>(*m_StaticCurrentEngine->m_CurrentRenderWindow);
     SFENGINE_ASSERT(m_EngineGUI);
 
-    int LoopReturn = m_StaticCurrentEngine->GameLoop();
+    if (Engine::StartingLevel) {
+      Engine::StartingLevel->Load();
+    }
+
+    Engine::m_CurrentLevel = Engine::StartingLevel;
+
+    int LoopReturn = GameLoop();
     StaticShutDown();
 
     return LoopReturn;

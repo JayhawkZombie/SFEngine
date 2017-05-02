@@ -86,19 +86,34 @@ namespace SFEngine
     ColliderPartitioner(SVector2F LTCorner, SVector2F Size, UINT32 MaxDepth, SVector2U MinDim, UINT32 MyDepth, ColliderPartitioner *Parent);
     ~ColliderPartitioner();
     void TickUpdate(const SFLOAT &TickDelta, SFLOATRECT LevelView);
-    void RenderOnTexture(SharedRTexture Texture, SFLOATRECT LevelView);
+    void UpdateObjectPhysics(SFLOATRECT LevelView);
+    void RenderOnTexture(SFLOAT Alpha, SharedRTexture Texture, SFLOATRECT LevelView);
     void PhysicsUpdate(SFLOATRECT LevelView, STDDeque<CollisionRecord> &IntersectRecords);
     void CheckForCollisions(SPtrShared<Collider2D> TestAgainst, STDDeque<CollisionRecord> &Records);
     void RepositionItem(SPtrShared<Collider2D> Collider);
     void InsertItem(SPtrShared<Collider2D> Collider);
+    UINT32 GetSize() const;
 
   private:
+    /************************************************************************/
+    /* Recalculate the size of the tre after a physics update               */
+    /* Will also cause nodes to begin a death countdown if they have become */
+    /* empty as well as all their children                                  */
+    /************************************************************************/
+    UINT32 RecalcSize();
     void BuildPartition(STDVector<SPtrShared<Collider2D>> Colliders);
     void Subdivide();
     void SubdivideNW();
     void SubdivideNE();
     void SubdivideSE();
     void SubdivideSW();
+
+    void GiveToParent(SPtrShared<Collider2D> Collider);
+    void GetFromChild(SPtrShared<Collider2D> Collider);
+    void GiveToNW(SPtrShared<Collider2D> Collider);
+    void GiveToNE(SPtrShared<Collider2D> Collider);
+    void GiveToSE(SPtrShared<Collider2D> Collider);
+    void GiveToSW(SPtrShared<Collider2D> Collider);
 
     void PlaceInNW(SPtrShared<Collider2D> Collider);
     void PlaceInNE(SPtrShared<Collider2D> Collider);
@@ -114,14 +129,21 @@ namespace SFEngine
       ColliderPartitioner *ownerCollider2,
       STDDeque<CollisionRecord> &Records);
 
-    UINT32 m_MaxDepth = 10;
-    SVector2U m_MinDim = SVector2U(10, 10);
-    SPtrShared<ColliderPartitioner> m_NW, m_SW, m_SE, m_NE;
-    ColliderPartitioner *ParentPartitioner = nullptr;
+    sf::RectangleShape m_BoundsShape;
+#ifdef _DEBUG
+    bool m_DrawBounds = false;
+#else
+    bool m_DrawBounds = true;
+#endif
+    UINT32     m_MaxDepth = 10;
+    UINT32     m_Size = 0; //Holds our size + size of all children
+    SVector2U  m_MinDim = SVector2U(10, 10);
     SFLOATRECT m_Bounds;
     SFLOATRECT m_NWBounds, m_NEBounds, m_SEBounds, m_SWBounds;
-    SVector2F m_Center;
-    UINT32 m_Depth = 0;
+    SVector2F  m_Center;
+    UINT32     m_Depth = 0;
+    ColliderPartitioner *ParentPartitioner = nullptr;
+    SPtrShared<ColliderPartitioner> m_NW, m_SW, m_SE, m_NE;
     STDVector<SPtrShared<Collider2D>> m_Colliders;
   };
 

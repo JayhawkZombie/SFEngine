@@ -69,6 +69,30 @@ namespace cereal
   {
     ar(FRect.left, FRect.top, FRect.width, FRect.height);
   }
+
+  template<class Archive>
+  void load(Archive &ar, sf::Vector2f &V)
+  {
+    ar(V.x, V.y);
+  }
+
+  template<class Archive>
+  void save(Archive &ar, const sf::Vector2f &V)
+  {
+    ar(V.x, V.y);
+  }
+
+  template<class Archive>
+  void load(Archive &ar, sf::Vector2u &V)
+  {
+    ar(V.x, V.y);
+  }
+
+  template<class Archive>
+  void save(Archive &ar, const sf::Vector2u &V)
+  {
+    ar(V.x, V.y);
+  }
 }
 
 #endif // SFEngine_BasicTypes_H 

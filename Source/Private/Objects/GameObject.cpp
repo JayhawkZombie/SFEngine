@@ -40,6 +40,7 @@
 /*                       Dependency  Headers                            */
 /************************************************************************/
 #include <cereal\access.hpp>
+#include <Plinth\all.hpp>
 
 /************************************************************************/
 /*                     Standard  Library  Headers                       */
@@ -83,22 +84,11 @@ namespace SFEngine
   /************************************************************************/
   /* Required overrides                                                   */
   /************************************************************************/
-  SPtrShared<BaseEngineInterface> GameObject::Clone() const
-  {
-    try
-    {
-      SPtrShared<GameObject> Object = std::make_shared<GameObject>();
-      return Object;
-    }
-    catch (EngineRuntimeError& e)
-    {
-      ERR << "Failed to clone GameObject: " << e.what() << std::endl;
-      return nullptr;
-    }
-  }
 
   void GameObject::TickUpdate(const SFLOAT &delta)
   {
+    m_PrevPosition = m_Position;
+
     static sf::Clock _Clock;
     auto _time = _Clock.restart();
 
@@ -106,8 +96,10 @@ namespace SFEngine
     m_Animator.animate(m_Sprite);
   }
 
-  void GameObject::Render(SharedRTexture Target)
+  void GameObject::Render(SFLOAT Alpha, SharedRTexture Target)
   {
+    SVector2F Interp = plinth::Tween::linear(m_PrevPosition, m_Position, Alpha);
+    m_Sprite.setPosition(Interp);
     Target->draw(m_Sprite);
   }
 
@@ -132,6 +124,10 @@ namespace SFEngine
   }
 
   void GameObject::OnShutDown()
+  {
+  }
+
+  void GameObject::StepSimulation(SFLOAT Dt)
   {
   }
 
@@ -261,6 +257,7 @@ namespace SFEngine
   void GameObject::SetPosition(const SVector2F &pos)
   {
     m_Position = pos;
+    m_PrevPosition = pos;
   }
 
   void GameObject::SetSize(const SVector2F &size)

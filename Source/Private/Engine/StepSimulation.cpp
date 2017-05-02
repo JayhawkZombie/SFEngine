@@ -58,12 +58,18 @@
 namespace SFEngine
 {
 
-  void Engine::StepSimulation(SFLOAT STick, SFLOAT STickDt)
+  void Engine::StepSimulation(SFLOAT Dt)
+  {
+    if (m_CurrentLevel)
+      m_CurrentLevel->TickUpdate(Dt);
+  }
+
+  void Engine::InterpolateState(SFLOAT Alpha)
   {
     auto ptrToCurrentLevel = GetCurrentLevel();
 
     if (ptrToCurrentLevel) {
-      ptrToCurrentLevel->TickUpdate(STick);
+      ptrToCurrentLevel->InterpolateState(Alpha);
     }
   }
 

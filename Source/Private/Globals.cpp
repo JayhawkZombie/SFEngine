@@ -69,6 +69,7 @@ namespace SFEngine
   /* Extern variables                                                     */
   /************************************************************************/
   SVector2U WindowSize;
+  bool   DoInterpolateRender;
 
   bool IsIDUsed(const UINT32 & ID)
   {

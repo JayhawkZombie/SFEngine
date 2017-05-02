@@ -34,10 +34,12 @@
 /*                         Internal  Headers                            */
 /************************************************************************/
 #include "Engine\Engine.h"
+#include "Level\BasicLevel.h"
 
 /************************************************************************/
 /*                       Dependency  Headers                            */
 /************************************************************************/
+#include <Plinth\Common.hpp>
 
 /************************************************************************/
 /*                     Standard  Library  Headers                       */
@@ -57,9 +59,28 @@
 namespace SFEngine
 {
 
-  void Engine::UpdatePass(SFLOAT STick, SFLOAT STickDt)
+  SFLOAT Engine::UpdatePass()
   {
+    m_FPS.update();
+    m_TimeStep.addFrame();
+    static unsigned int PhysicsUpdateCount = 0;
 
+    /* While there is time stepping that we need to manage, we
+     *  must update the simulation
+     * */
+    while (m_TimeStep.isUpdateRequired()) {
+      float dt = m_TimeStep.getStepAsFloat();
+      PhysicsUpdateCount++;
+      StepSimulation(dt);
+    }
+
+    float InterpolatedRemainingStep = m_TimeStep.getInterpolationAlphaAsFloat();
+    fpsText.setString("FPS: " + std::to_string((int)(ceil)(m_FPS.getFps())) + 
+                      "\nInterpolating? " + (DoInterpolateRender ? "Yes" : "No") + 
+                      "\nTimeStep : " + std::to_string(m_TimeStep.getStepAsFloat()) + 
+                      "\nTimeSpeed: " + std::to_string(m_TimeStep.getTimeSpeed()));
+    
+    return InterpolatedRemainingStep;
   }
 
 } // namespace SFEngine

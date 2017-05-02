@@ -33,6 +33,7 @@
 /*                         Internal  Headers                            */
 /************************************************************************/
 #include "Engine\Engine.h"
+#include "Serialization\BasicTypes.hpp"
 
 /************************************************************************/
 /*                       Dependency  Headers                            */
@@ -98,7 +99,7 @@ namespace SFEngine
 
   void Engine::SignalForClose()
   {
-
+    m_Flags |= Exit;
   }
 
   void Engine::SignalForThrottle()
@@ -106,9 +107,48 @@ namespace SFEngine
 
   }
 
+  bool Engine::IsGamePaused()
+  {
+    if (m_StaticCurrentEngine)
+      return m_StaticCurrentEngine->m_IsPaused;
+    return false;
+  }
+
   SPtrShared<tgui::Gui> Engine::GUI()
   {
     return m_EngineGUI;
+  }
+
+  void Engine::IncreaseTimeStep(SFLOAT Delta)
+  {
+    if (m_StaticCurrentEngine) {
+      SFLOAT Current = m_StaticCurrentEngine->m_TimeStep.getStep();
+      m_StaticCurrentEngine->m_TimeStep.setStep(Current + Delta);
+    }
+  }
+
+  void Engine::DecreaseTimeStep(SFLOAT Delta)
+  {
+    if (m_StaticCurrentEngine) {
+      SFLOAT Current = m_StaticCurrentEngine->m_TimeStep.getStep();
+      m_StaticCurrentEngine->m_TimeStep.setStep(Current - Delta);
+    }
+  }
+
+  void Engine::IncreaseTimeSpeed(SFLOAT Delta)
+  {
+    if (m_StaticCurrentEngine) {
+      SFLOAT Current = m_StaticCurrentEngine->m_TimeStep.getTimeSpeed();
+      m_StaticCurrentEngine->m_TimeStep.setTimeSpeed(Current + Delta);
+    }
+  }
+
+  void Engine::DecreaseTimeSpeed(SFLOAT Delta)
+  {
+    if (m_StaticCurrentEngine) {
+      SFLOAT Current = m_StaticCurrentEngine->m_TimeStep.getTimeSpeed();
+      m_StaticCurrentEngine->m_TimeStep.setTimeSpeed(Current - Delta);
+    }
   }
 
   /************************************************************************/
@@ -131,7 +171,8 @@ namespace SFEngine
     ar(m_Configuration.DisplayFrameStats, m_Configuration.BenchmarkShaders,
        m_Configuration.LogLevel, m_Configuration.DiagnosticFont,
        m_Configuration.VsyncEnabled, m_Configuration.UseRenderTexture,
-       m_Configuration.TextureSmoothingEnabled, m_Configuration.AALevel
+       m_Configuration.TextureSmoothingEnabled, m_Configuration.AALevel,
+       m_Configuration.WindowSize, m_Configuration.WindowTitle
     );
   }
 

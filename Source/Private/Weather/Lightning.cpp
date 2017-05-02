@@ -72,7 +72,7 @@ namespace SFEngine
     UpdateBolt(delta);
   }
 
-  void LightningBolt::Render(SharedRTexture Target)
+  void LightningBolt::Render(SFLOAT Alpha, SharedRTexture Target)
   {
     if (m_IsAlive) {
       for (auto & seg : m_Points)
@@ -321,7 +321,7 @@ namespace SFEngine
     UpdateBolt(delta);
   }
 
-  void CrawlingLightningBolt::Render(SharedRTexture Target)
+  void CrawlingLightningBolt::Render(SFLOAT Alpha, SharedRTexture Target)
   {
     if (m_IsAlive) {
       for (auto & seg : m_DisplayedPoints)

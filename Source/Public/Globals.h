@@ -84,6 +84,8 @@ namespace SFEngine
   extern void   LoadMainLevel();
   extern void   LoadLevelByName(const SString &Name);
 
+  extern bool   DoInterpolateRender;
+
   extern SVector2U WindowSize;
 }
 

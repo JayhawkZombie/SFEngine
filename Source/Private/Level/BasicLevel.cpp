@@ -63,15 +63,13 @@ namespace SFEngine
   /************************************************************************/
 
   BasicLevel::BasicLevel()
+    : m_ColliderTree(SVector2F(0.f, 0.f), 0u, SVector2U(0, 0)), m_Gravity(0.f, 0.f)
   {
 
-  }
-
-  BasicLevel::BasicLevel(const BaseEngineInterface & Copy)
-  {
   }
 
   BasicLevel::BasicLevel(const sf::Vector2u & LevelSize, const sf::FloatRect & DefaultView, bool showlines, const sf::Vector2f & GridSpacing)
+    : m_ColliderTree((SVector2F)LevelSize, 10u, SVector2U(10u, 10u)), m_Gravity(0.f, 0.f)
   {
   }
 
@@ -85,24 +83,11 @@ namespace SFEngine
       Object->TickUpdate(delta);
     }
 
+    UpdatePhysics();
   }
 
-  void BasicLevel::Render(SharedRTexture Target)
+  void BasicLevel::Render(SFLOAT Alpha, SharedRTexture Target)
   {
-
-#ifdef RENDER_COLLISION_BOXES
-
-    for (auto & Object : m_GameObjects) {
-
-      for (auto & Collider : Object->GetColliders()) {
-        auto mesh = Collider->GetMesh();
-        if (mesh.lock())
-          mesh.lock()->draw(*Target);
-      }
-
-    }
-
-#endif
 
   }
 
@@ -125,6 +110,27 @@ namespace SFEngine
   }
 
   void BasicLevel::HandleInputEvent(const UserEvent & evnt)
+  {
+  }
+
+  void BasicLevel::StepSimulation(SFLOAT Dt)
+  {
+    m_TimeStepAccumulated += Dt;
+    UpdatePhysics();
+  }
+
+  void BasicLevel::InterpolatePhysics(SFLOAT Alpha)
+  {
+    for (auto & collider : m_Colliders)
+      collider->InterpolateState(Alpha);
+  }
+
+  void BasicLevel::InterpolateState(SFLOAT Alpha)
+  {
+    InterpolatePhysics(Alpha);
+  }
+
+  void BasicLevel::EventUpdate(sf::Event Event)
   {
   }
 
@@ -165,12 +171,19 @@ namespace SFEngine
   {
   }
 
-  void BasicLevel::RenderOnTexture(SharedRTexture Texture)
+  void BasicLevel::RenderOnTexture(SFLOAT Alpha, SharedRTexture Texture)
   {
+    for (auto & Object : m_GameObjects) {
+      Object->Render(Alpha, Texture);
+    }
+    
+    for (auto & Collider : m_Colliders)
+      Collider->Render(Alpha, Texture);
   }
 
   void BasicLevel::Load()
   {
+    
   }
 
   void BasicLevel::Unload()
@@ -253,29 +266,27 @@ namespace SFEngine
   {
   }
 
-  void BasicLevel::UpdatePhysics(STDVector<Collider2D> Colliders, STDVector<SegmentMeshPtr> Segments, UINT32 Steps)
+  void BasicLevel::UpdatePhysics(UINT32 Steps)
   {
-    static STDVector<SPtrShared<Collider2D>> MeshVector;
-    static STDVector<SegmentMeshPtr> SegmentVector;
+    //static STDVector<SPtrShared<Collider2D>> MeshVector;
+    //static STDVector<SegmentMeshPtr> SegmentVector;
 
-    MeshVector.clear();
-    SegmentVector.clear();
+    //MeshVector.clear();
+    //SegmentVector.clear();
 
-    for (auto & object : m_GameObjects) {
-      auto vec = object->GetColliders();
-      for (auto & mesh : vec)
-        MeshVector.push_back(mesh);
-    }
+    //for (auto & object : m_GameObjects) {
+    //  auto vec = object->GetColliders();
+    //  for (auto & mesh : vec)
+    //    MeshVector.push_back(mesh);
+    //}
+    //for (auto & collider : m_Colliders)
+    //  MeshVector.emplace_back(collider);
 
-    for (auto & seg : Segments) {
-      SegmentVector.push_back(seg);
-    }
+    //for (auto & seg : m_Segments) {
+    //  SegmentVector.push_back(seg);
+    //}
 
-    UpdatePhysicsMeshes(MeshVector, SegmentVector, Steps);
+    UpdatePhysicsMeshes(m_Colliders, m_Segments, Steps);
   }
-
-  /************************************************************************/
-  /* Serialization                                                        */
-  /************************************************************************/
 
 } // namespace SFEngine

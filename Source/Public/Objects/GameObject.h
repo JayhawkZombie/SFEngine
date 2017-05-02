@@ -76,14 +76,14 @@ namespace SFEngine
     /************************************************************************/
     /* Required overrides                                                   */
     /************************************************************************/
-    virtual SPtrShared<BaseEngineInterface> Clone() const override;
     virtual void TickUpdate(const SFLOAT &delta) override;
-    virtual void Render(SharedRTexture Target) override;
+    virtual void Render(SFLOAT Alpha, SharedRTexture Target) override;
     virtual void SerializeOut(SOFStream &out) override;
     virtual void SerializeIn(SIFStream &in) override;
     virtual SString GetClass() const override;
     virtual void SetID(const SString &ID) override;
     virtual void OnShutDown() override;
+    virtual void StepSimulation(SFLOAT Dt) override;
 
     /************************************************************************/
     /* Level "Event" Methods                                                */
@@ -149,6 +149,11 @@ namespace SFEngine
     bool m_Frozen = false;
     SVector2F m_Position = { 0.f, 0.f };
     SVector2F m_Size = { 0.f, 0.f };
+
+    /************************************************************************/
+    /* Interpolation Variables to use between tick updates for rendering    */
+    /************************************************************************/
+    SVector2F m_PrevPosition = { 0.f, 0.f };
 
     //Animation data
     thor::AnimationMap<SSprite, SString> m_AnimationMap;

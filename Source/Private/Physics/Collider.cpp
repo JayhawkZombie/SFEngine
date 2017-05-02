@@ -36,10 +36,12 @@
 #include "Exceptions\Exceptions.hpp"
 #include "Objects\GameObject.h"
 #include "Physics\ColliderPartitioner.h"
+#include "Globals.h"
 
 /************************************************************************/
 /*                       Dependency  Headers                            */
 /************************************************************************/
+#include <Plinth\all.hpp>
 
 /************************************************************************/
 /*                     Standard  Library  Headers                       */
@@ -93,6 +95,8 @@ namespace SFEngine
       Copy->m_Mesh = std::shared_ptr<MeshBase>(m_Mesh->clone());
     }
     Copy->m_ColliderCollisionCallback = m_ColliderCollisionCallback;
+    Copy->m_PrevColliderPos = m_PrevColliderPos;
+    Copy->m_PrevVelocity = m_PrevVelocity;
     Copy->m_OwnerObject = m_OwnerObject;
     Copy->m_SegmentCollisionCallback = m_SegmentCollisionCallback;
     Copy->m_Type = m_Type;
@@ -108,6 +112,8 @@ namespace SFEngine
   void Collider2D::SetMesh(MeshBasePtr Mesh)
   {
     m_Mesh = Mesh;
+    m_PrevColliderPos = m_Mesh->pos;
+    m_PrevVelocity = m_Mesh->v;
   }
 
   void Collider2D::SetProperty(UINT32 Property)
@@ -231,14 +237,17 @@ namespace SFEngine
 
   void Collider2D::Update(const::vec2d & Gravity)
   {
-    if (m_Mesh)
+    if (m_Mesh) {
+      m_PrevColliderPos = m_Mesh->pos;
       m_Mesh->update(Gravity);
+    }
   }
 
   void Collider2D::SetPosition(const SVector2F & Delta)
   {
     if (m_Mesh) {
       m_Mesh->pos = ::vec2d(Delta.x, Delta.y);
+      m_PrevColliderPos = m_Mesh->pos;
     }
   }
 
@@ -262,4 +271,100 @@ namespace SFEngine
 
     return false;
   }
+  void Collider2D::RememberPrevPosition()
+  {
+    m_PrevColliderPos = m_Mesh->pos;
+  }
+  void Collider2D::InterpolateState(SFLOAT Alpha)
+  {
+    if (m_Mesh) {
+
+      //m_Mesh->setPosition(
+      //  plinth::Tween::linear(m_PrevColliderPos, m_Mesh->pos, Alpha)
+      //);
+      //::vec2d nPos{ 0, 0 };
+      //::vec2d oPos = m_PrevColliderPos;
+      //nPos = plinth::Tween::linear(m_PrevColliderPos, m_Mesh->pos, Alpha);
+      //m_Mesh->setPosition(nPos);
+      //m_PrevColliderPos = nPos;
+      //m_Mesh->v = plinth::Tween::linear(m_PrevVelocity, m_Mesh->v, Alpha);
+
+      //::vec2d nVel{ 0, 0 };
+      //::vec2d oVel = m_PrevVelocity;
+      //nVel = plinth::Tween::linear(m_PrevVelocity, m_Mesh->v, Alpha);
+      //m_Mesh->v = nVel;
+      //m_PrevVelocity = m_Mesh->v;
+    }
+  }
+
+  void Collider2D::Render(SFLOAT Alpha, SharedRTexture Texture)
+  {
+    if (DoInterpolateRender) {
+      ::vec2d Interp = (m_PrevColliderPos) * (1.f - Alpha) + (Alpha * m_Mesh->pos);
+      m_PrevColliderPos = m_Mesh->pos;
+      m_Mesh->setPosition(Interp);
+    }
+
+    m_Mesh->draw(*Texture);
+
+    if (DoInterpolateRender) {
+      m_Mesh->setPosition(m_PrevColliderPos);
+    }
+  }
+
+  void Collider2D::Reset()
+  {
+    if (m_Mesh) {
+      m_Mesh->setPosition(m_InitialPositon);
+      m_Mesh->v = m_InitialVelocity;
+    }
+  }
+
+  /************************************************************************/
+  /* Static automatic creation methods for certain meshes                 */
+  /************************************************************************/
+  SPtrShared<Collider2D> Collider2D::CreateCircularMesh
+  (
+    MeshType type, 
+    const sf::Vector2f & position, 
+    const sf::Vector2f & velocity, 
+    unsigned int radius, 
+    float mass, 
+    float coeffOfRest, 
+    sf::Color color
+  )
+  {
+    BallMeshPtr Mesh = BuildBallMesh2D('b', position, velocity, radius, mass, coeffOfRest, color);
+    SPtrShared<Collider2D> Collider = std::make_shared<Collider2D>();
+    Collider->m_InitialPositon = Mesh->pos;
+    Collider->m_InitialVelocity = ::vec2d(velocity.x, velocity.y);
+    Collider->SetMesh(Mesh);
+
+    return Collider;
+  }
+
+  SPtrShared<Collider2D> Collider2D::CreatePolygonMesh
+  (
+    unsigned int num_sides, 
+    float radius, 
+    float init_rotation, 
+    const sf::Vector2f & InitialPosition, 
+    const sf::Vector2f & InitialVelocity, 
+    float mass, 
+    float CoeffOfRest, 
+    sf::Color color, 
+    bool CastShadows
+  )
+  {
+    PolyMeshPtr Mesh = BuildPolygonMesh2D(num_sides, radius, init_rotation, InitialPosition, InitialVelocity, mass, CoeffOfRest, color);
+    SPtrShared<Collider2D> Collider = std::make_shared<Collider2D>();
+    Collider->m_InitialPositon = ::vec2d(InitialPosition.x, InitialPosition.y);
+    Collider->m_PrevColliderPos = ::vec2d(InitialPosition.x, InitialPosition.y);
+    Collider->m_InitialVelocity = ::vec2d(InitialVelocity.x, InitialVelocity.y);
+    Collider->m_Status = DefaultState;
+    Collider->SetMesh(Mesh);
+
+    return Collider;
+  }
+
 }

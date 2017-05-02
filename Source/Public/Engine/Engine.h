@@ -48,6 +48,7 @@
 #include <cereal\access.hpp>
 #include <SFML\Graphics.hpp>
 #include <TGUI\TGUI.hpp>
+#include <Kairos\all.hpp>
 
 /************************************************************************/
 /*                     Standard  Library  Headers                       */
@@ -81,7 +82,7 @@ namespace SFEngine
     static sf::RenderWindow* GetCurrentRenderWindow();
     static SharedLevel GetCurrentLevel();
     static bool AddLevel(const SString &Name, SharedLevel LevelPtr);
-
+    static bool IsGamePaused();
     static SharedLevel StartingLevel;
     
     /************************************************************************/
@@ -103,6 +104,17 @@ namespace SFEngine
       Throttle = 8
     };
 
+    /************************************************************************/
+    /* Kairos timekeeping                                                   */
+    /************************************************************************/
+    kairos::Timestep m_TimeStep;
+    kairos::FpsLite m_FPS;
+    static void IncreaseTimeStep(SFLOAT Delta);
+    static void DecreaseTimeStep(SFLOAT Delta);
+
+    static void IncreaseTimeSpeed(SFLOAT Delta);
+    static void DecreaseTimeSpeed(SFLOAT Delta);
+
   private:
     template<class Archive>
     void save(Archive &ar) const;
@@ -116,6 +128,10 @@ namespace SFEngine
     static SPtrShared<tgui::Gui> m_EngineGUI;
     static UINT32 m_Flags;
     sf::RenderWindow *m_CurrentRenderWindow;
+    bool m_IsPaused = false;
+
+    sf::Font fpsFont;
+    sf::Text fpsText;
 
     UINT32 Startup();
     UINT32 GameLoop();
@@ -123,9 +139,10 @@ namespace SFEngine
     static UINT32 StaticShutDown();
     UINT32 Init(int argc, char **argv);
     UINT32 InitRenderWindow();
-    void   StepSimulation(SFLOAT STick, SFLOAT STickDt);
-    void   UpdatePass(SFLOAT STick, SFLOAT STickDt);   
-    void   RenderPass(SharedRTexture Texture, SRectShape &LevelRect);
+    void   StepSimulation(SFLOAT Dt);
+    void   InterpolateState(SFLOAT Alpha);
+    SFLOAT UpdatePass();   
+    void   RenderPass(SFLOAT Alpha, SharedRTexture Texture, SRectShape &LevelRect);
 
     UserEvent    m_UEvent;
     EngineConfig m_Configuration;

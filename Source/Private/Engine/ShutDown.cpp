@@ -62,10 +62,6 @@ namespace SFEngine
   UINT32 Engine::ShutDown()
   {
     Messager::PostToActivityLog(SystemMessage(SystemMessageType::ActivityLog, 0, 0, SString("m_StaticCurrentEngine::ShutDown()")));
-    for (auto & level : m_StaticCurrentEngine->m_Levels) {
-      level.second->Unload();
-      level.second->CleanUp();
-    }
 
     m_CurrentLevel.reset();
     m_StaticCurrentEngine->m_Levels.clear();
@@ -83,9 +79,19 @@ namespace SFEngine
     Messager::PostToActivityLog(SystemMessage(SystemMessageType::ActivityLog, 0, 0, SString("Engine::StaticShutDown()")));
     SFENGINE_ASSERT(m_StaticCurrentEngine != nullptr);
 
+    for (auto & level : m_StaticCurrentEngine->m_Levels) {
+      level.second->Unload();
+      level.second->CleanUp();
+    }
+
+    if (StartingLevel)
+      StartingLevel.reset();
+
+    m_EngineGUI.reset();
+    delete m_StaticCurrentEngine->m_CurrentRenderWindow;
+
     delete m_StaticCurrentEngine;
     m_StaticCurrentEngine = nullptr;
-    m_EngineGUI.reset();
 
     Messager::PurgeLogsToFile("MessageCachePurge.log", "ActivityLogPurge.log", "RankedMessageLogPurge.log");
     Messager::Shutdown();

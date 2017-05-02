@@ -42,6 +42,8 @@
 /*                       Dependency  Headers                            */
 /************************************************************************/
 #include <Physics\common.h>
+#include <Plinth\Common.hpp>
+#include <Kairos\all.hpp>
 
 /************************************************************************/
 /*                     Standard  Library  Headers                       */
@@ -65,24 +67,12 @@ namespace SFEngine
   {
     Messager::PostLogMessage(0, SystemMessage(SystemMessageType::ActivityLog, 0, 0, "Engine GameLoop"), MessageLogLevel::Normal);
 
-    SClockHigh::time_point LastFrameStart = std::chrono::high_resolution_clock::now();
-    SClockHigh::time_point CurrentFrameStart = std::chrono::high_resolution_clock::now();
-    SClockHigh::time_point TickEnd;
-    SClockHigh::time_point UpdateStart;
-    SClockHigh::time_point UpdateEnd;
-    SClockHigh::time_point RenderStart;
-    SClockHigh::time_point RenderEnd;
-
     SharedRTexture EditorTexture = std::make_shared<RTexture>();
     EditorTexture->create(static_cast<unsigned int>(std::ceil(WindowSize.x)), static_cast<unsigned int>(std::ceil(WindowSize.y)));
     EditorTexture->clear(sf::Color::Transparent);
-
-    SFLOAT TickDelta = 0.0;
-    SFLOAT RenderDelta = 0.0;
-    SFLOAT UpdateDelta = 0.0;
     sf::Event evnt;
 
-    m_CurrentRenderWindow->setVerticalSyncEnabled(false);
+    m_CurrentRenderWindow->setVerticalSyncEnabled(true);
     m_CurrentRenderWindow->setKeyRepeatEnabled(false);
     bool Closed = false;
 
@@ -98,54 +88,37 @@ namespace SFEngine
 
     //Draw rect to screen (filled with the render texture)
     SRectShape LevelRect;
-    LevelRect.setSize(static_cast<sf::Vector2f>(WindowSize));
+    LevelRect.setPosition({ 0.f, 0.f });
+    LevelRect.setSize({1700.f, 900.f});
+    LevelRect.setTexture(&EditorTexture->getTexture());
+    LevelRect.setTextureRect(SINTRECT(0, 0, 1700, 900));
 
-    for ( ; ; ) {
-      auto EngineInst = GetCurrentEngine();
-      SFENGINE_ASSERT(EngineInst);
+    auto EngineInst = GetCurrentEngine();
+    SFENGINE_ASSERT(EngineInst);
 
+    //And just before we begin the game loop, we will tell the current level to begin
+    Engine::m_CurrentLevel->OnBegin();
+
+    fpsFont.loadFromFile("./Demos/MainMenu/Assets/Fonts/Raleway-Light.ttf");
+    fpsText.setCharacterSize(25);
+    fpsText.setFont(fpsFont);
+    fpsText.setFillColor(sf::Color(99, 99, 99));
+    fpsText.setPosition({WindowSize.x - 800.f, 10.f});
+
+    SFLOAT StepAlpha = 0.f;
+    DoInterpolateRender = true;
+
+    for ( ; ; ) {  
       Closed = EngineInst->m_Handler.PollEvents(EngineInst->m_CurrentRenderWindow, evnt, true);
-      if (Closed || ((m_Flags & Exit) != 0) | !EngineInst->m_CurrentRenderWindow || !EngineInst->m_CurrentRenderWindow->isOpen())
+      if (Closed || ((m_Flags & Exit) != 0) || !EngineInst->m_CurrentRenderWindow || !EngineInst->m_CurrentRenderWindow->isOpen())
         break;
       
       try
       {
 
-        CurrentFrameStart = SClockHigh::now();
-        TickDelta = STimeDuration<SFLOAT, std::milli>(CurrentFrameStart - LastFrameStart).count();
-        UpdateDelta = STimeDuration<SFLOAT, std::milli>(UpdateEnd - UpdateStart).count();
-        RenderDelta = STimeDuration<SFLOAT, std::milli>(RenderEnd - RenderStart).count();
+        StepAlpha = UpdatePass();
 
-        UpdateStart = SClockHigh::now();
-        fTime = _clock.restart();
-
-#ifdef WITH_EDITOR
-        ImGui::SFML::Update(*EngineInst->m_CurrentRenderWindow, fTime);
-#endif
-
-        SFENGINE_ASSERT(m_CurrentLevel);
-        m_CurrentLevel->TickUpdate(TickDelta);
-
-        UpdateEnd = SClockHigh::now();
-        RenderStart = SClockHigh::now();
-
-        /************************************************************************/
-        /* Rendering the current level (+ GUI)                                  */
-        /************************************************************************/
-        auto win = m_StaticCurrentEngine->m_CurrentRenderWindow;
-        win->clear(sf::Color::Black);
-        EditorTexture->clear(sf::Color::Transparent);
-        m_CurrentLevel->RenderOnTexture(EditorTexture);
-        EditorTexture->display();
-
-        win->draw(LevelRect);
-        Engine::GUI()->draw();
-#ifdef WITH_EDITOR
-        ImGui::Render();
-#endif
-        win->display();
-        RenderEnd = SClockHigh::now();
-        LastFrameStart = CurrentFrameStart;
+        RenderPass(StepAlpha, EditorTexture, LevelRect);
       }
       catch (EngineRuntimeError& e)
       {
@@ -155,8 +128,10 @@ namespace SFEngine
     } // for ( ; ; )
 
     EditorTexture.reset();
+    if (m_CurrentLevel)
+      m_CurrentLevel->Unload();
 
-    return m_StaticCurrentEngine->ShutDown();
+    return ShutDown();
   } // Engine::GameLoop
 
 }

@@ -89,9 +89,9 @@ namespace SFEngine
 
   }
 
-  void GenericActor::Render(SharedRTexture Target)
+  void GenericActor::Render(SFLOAT Alpha, SharedRTexture Target)
   {
-
+    GameObject::Render(Alpha, Target);
   }
 
   void GenericActor::OnShutDown()
@@ -142,6 +142,10 @@ namespace SFEngine
   bool GenericActor::WantsInputEvent(const Events &evnt) const
   {
     return false;
+  }
+
+  void GenericActor::StepSimulation(SFLOAT Dt)
+  {
   }
 
   /************************************************************************/

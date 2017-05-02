@@ -43,6 +43,7 @@
 /************************************************************************/
 /*                     Standard  Library  Headers                       */
 /************************************************************************/
+#include <algorithm>
 
 /************************************************************************/
 /*                        ColliderPartitioner                           */
@@ -65,6 +66,11 @@ namespace SFEngine
     m_NEBounds = { m_Center.x, 0.f, Size.x / 2.f, Size.y / 2.f };
     m_SEBounds = { m_Center, Size / 2.f };
     m_SWBounds = { 0, m_Center.y, Size.x / 2.f, Size.y / 2.f };
+    m_BoundsShape.setPosition({ 0.f, 0.f });
+    m_BoundsShape.setSize(Size);
+    m_BoundsShape.setFillColor(sf::Color::Transparent);
+    m_BoundsShape.setOutlineColor(sf::Color::White);
+    m_BoundsShape.setOutlineThickness(-2);
   }
   
   //This one is used to create all of the child nodes
@@ -75,6 +81,11 @@ namespace SFEngine
     m_NEBounds = { m_Center.x, LTCorner.y, Size.x / 2.f, Size.y / 2.f };
     m_SEBounds = { m_Center.x, m_Center.y, Size.x / 2.f, Size.y / 2.f };
     m_SWBounds = { LTCorner.x, m_Center.y, Size.x / 2.f, Size.y / 2.f };
+    m_BoundsShape.setPosition(LTCorner);
+    m_BoundsShape.setSize(Size);
+    m_BoundsShape.setFillColor(sf::Color::Transparent);
+    m_BoundsShape.setOutlineColor(sf::Color::White);
+    m_BoundsShape.setOutlineThickness(-2);
   }
 
   ColliderPartitioner::~ColliderPartitioner()
@@ -115,7 +126,27 @@ namespace SFEngine
       m_SW->TickUpdate(TickDelta, LevelView);
   }
 
-  void ColliderPartitioner::RenderOnTexture(SharedRTexture Texture, SFLOATRECT LevelView)
+  void ColliderPartitioner::UpdateObjectPhysics(SFLOATRECT LevelView)
+  {
+    STDDeque<CollisionRecord> ObjectRecords;
+    PhysicsUpdate(LevelView, ObjectRecords);
+
+    CollisionRecord Record;
+
+    while (!ObjectRecords.empty()) {
+      Record = ObjectRecords.front();
+
+      Record
+        .Collider1
+        .m_ColliderNode->RepositionItem(Record.Collider1.m_Collider);
+      Record
+        .Collider2
+        .m_ColliderNode->RepositionItem(Record.Collider2.m_Collider);
+      ObjectRecords.pop_back();
+    }
+  }
+
+  void ColliderPartitioner::RenderOnTexture(SFLOAT Alpha, SharedRTexture Texture, SFLOATRECT LevelView)
   {
     //Same idea as TickUpdate - only render those objects that are visible
     //  Some exceptions may be made for lights, which can "bleed" into other areas
@@ -126,17 +157,20 @@ namespace SFEngine
     for (auto & collider : m_Colliders) {
       ColliderObject = collider->GetOwningObject();
       if (ColliderObject)
-        ColliderObject->Render(Texture);
+        ColliderObject->Render(Alpha, Texture);
     }
 
     if (m_NW)
-      m_NW->RenderOnTexture(Texture, LevelView);
+      m_NW->RenderOnTexture(Alpha, Texture, LevelView);
     if (m_NE)
-      m_NE->RenderOnTexture(Texture, LevelView);
+      m_NE->RenderOnTexture(Alpha, Texture, LevelView);
     if (m_SE)
-      m_SE->RenderOnTexture(Texture, LevelView);
+      m_SE->RenderOnTexture(Alpha, Texture, LevelView);
     if (m_SW)
-      m_SW->RenderOnTexture(Texture, LevelView);
+      m_SW->RenderOnTexture(Alpha, Texture, LevelView);
+
+    if (m_DrawBounds)
+      Texture->draw(m_BoundsShape);
   }
 
   /*************************************************************************/
@@ -218,6 +252,96 @@ namespace SFEngine
 
   void ColliderPartitioner::RepositionItem(SPtrShared<Collider2D> Collider)
   {
+    auto Rect = Collider->GetGlobalBounds();
+
+    if (!EntirelyWithin(Rect, m_Bounds))
+      GiveToParent(Collider);
+    else {
+      if (EntirelyWithin(Rect, m_NWBounds))
+        GiveToNW(Collider);
+      else if (EntirelyWithin(Rect, m_NEBounds))
+        GiveToNE(Collider);
+      else if (EntirelyWithin(Rect, m_SEBounds))
+        GiveToSE(Collider);
+      else if (EntirelyWithin(Rect, m_SWBounds))
+        GiveToSW(Collider);
+      //Well, then we don't need to reposition it - it can stay here
+    }
+  }
+
+  void ColliderPartitioner::GiveToParent(SPtrShared<Collider2D> Collider)
+  {
+    std::remove_if(
+      m_Colliders.begin(), 
+      m_Colliders.end(), 
+      [&Collider](auto p1) -> bool { return (p1 == Collider); }
+    );
+    ParentPartitioner->GetFromChild(Collider);
+  }
+
+  void ColliderPartitioner::GetFromChild(SPtrShared<Collider2D> Collider)
+  {
+    auto Rect = Collider->GetGlobalBounds();
+
+    if (!EntirelyWithin(Rect, m_Bounds))
+      GiveToParent(Collider);
+    else {
+      if (EntirelyWithin(Rect, m_NWBounds))
+        GiveToNW(Collider);
+      else if (EntirelyWithin(Rect, m_NEBounds))
+        GiveToNE(Collider);
+      else if (EntirelyWithin(Rect, m_SEBounds))
+        GiveToSE(Collider);
+      else if (EntirelyWithin(Rect, m_SWBounds))
+        GiveToSW(Collider);
+      else {
+      //Well, then we don't need to reposition it - it can stay here
+      // Need to check if we already own it? Could this be called again somehow?
+        auto it = std::find(m_Colliders.begin(), m_Colliders.end(), Collider);
+        if (it == m_Colliders.end()) m_Colliders.emplace_back(Collider);
+      }
+    }
+  }
+
+  void ColliderPartitioner::GiveToNW(SPtrShared<Collider2D> Collider)
+  {
+    std::remove_if(
+      m_Colliders.begin(),
+      m_Colliders.end(),
+      [&Collider](auto p1) -> bool { return (p1 == Collider); }
+    );
+
+    PlaceInNW(Collider);
+  }
+
+  void ColliderPartitioner::GiveToNE(SPtrShared<Collider2D> Collider)
+  {
+    std::remove_if(
+      m_Colliders.begin(),
+      m_Colliders.end(),
+      [&Collider](auto p1) -> bool { return (p1 == Collider); }
+    );
+    PlaceInNE(Collider);
+  }
+
+  void ColliderPartitioner::GiveToSE(SPtrShared<Collider2D> Collider)
+  {
+    std::remove_if(
+      m_Colliders.begin(),
+      m_Colliders.end(),
+      [&Collider](auto p1) -> bool { return (p1 == Collider); }
+    );
+    PlaceInSE(Collider);
+  }
+
+  void ColliderPartitioner::GiveToSW(SPtrShared<Collider2D> Collider)
+  {
+    std::remove_if(
+      m_Colliders.begin(),
+      m_Colliders.end(),
+      [&Collider](auto p1) -> bool { return (p1 == Collider); }
+    );
+    PlaceInSW(Collider);
   }
 
   void ColliderPartitioner::InsertItem(SPtrShared<Collider2D> Collider)
@@ -246,6 +370,30 @@ namespace SFEngine
         }
       } // else (from: if (m_Bounds.width <= MinDim.x || m_Bounds.height <= MinDim.y)
     } // else (from: if (m_Colliders.size() == 0)
+  }
+
+  UINT32 ColliderPartitioner::GetSize() const
+  {
+    return m_Size;
+  }
+
+  UINT32 ColliderPartitioner::RecalcSize()
+  {
+    UINT32 Temp = 0;
+
+    Temp = m_Colliders.size();
+
+    if (m_NW)
+      Temp += m_NW->RecalcSize();
+    if (m_NE)
+      Temp += m_NW->RecalcSize();
+    if (m_SE)
+      Temp += m_NE->RecalcSize();
+    if (m_SW)
+      Temp += m_SW->RecalcSize();
+
+    m_Size = Temp;
+    return Temp;
   }
 
   void ColliderPartitioner::BuildPartition(STDVector<SPtrShared<Collider2D>> Colliders)

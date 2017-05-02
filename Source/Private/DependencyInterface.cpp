@@ -101,6 +101,7 @@ namespace SFEngine
       );
 
       BallMeshPtr Mesh = std::make_shared<BallMesh>(Data);
+      Mesh->siz = 2 * Radius;
       return Mesh;
     }
     catch (EngineRuntimeError& e)
@@ -135,11 +136,12 @@ namespace SFEngine
         InitialVelocity.y, 
         mass, 
         CoeffOfRest, 
-        Color.r, 
-        Color.g, 
-        Color.b
+        (unsigned char)Color.r, 
+        (unsigned char)Color.g, 
+        (unsigned char)Color.b
       );
       PolyMeshPtr Mesh = std::make_shared<PolyMesh>(Data);
+      Mesh->siz = 2 * radius;
       return Mesh;
     }
     catch (EngineRuntimeError& e)
@@ -275,16 +277,8 @@ namespace SFEngine
 
   void UpdatePhysicsMeshes(CollideVector & Colliders, STDVector<SegmentMeshPtr> Segments, UINT32 Steps)
   {
-    for (SSIZE_T i = 0; i < Steps; ++i) {
-
-      /************************************************************************/
-      /* Collider gravity update                                              */
-      /************************************************************************/
-      for (auto & Collider : Colliders) {
-        if (!Collider->IsStatic())
-          Collider->Update(CurrentGravity);
-      }
-
+    for (auto & Collider : Colliders)
+      Collider->RememberPrevPosition();
       /************************************************************************/
       /* Segment update                                                       */
       /************************************************************************/
@@ -306,7 +300,7 @@ namespace SFEngine
       /* Detect collider & collider collisions                                */
       /************************************************************************/
       for (SSIZE_T _i = 0; _i < Colliders.size(); ++_i) {
-        for (SSIZE_T j = 0; j < Colliders.size(); ++j) {
+        for (SSIZE_T j = _i; j < Colliders.size(); ++j) {
           if (_i == j)
             continue;
 
@@ -316,16 +310,22 @@ namespace SFEngine
           if (!Mesh1 || !Mesh2)
             continue;
 
-          if (Colliders[_i]->IsRespondingToCollisions() && Colliders[j]->IsRespondingToCollisions())
-            if (Mesh1->hit(*Mesh2)) {
-              Colliders[_i]->HandleCollision(Colliders[j]);
-              Colliders[j]->HandleCollision(Colliders[_i]);
-            }
+          if (Mesh1->hit(*Mesh2)) {
+            Colliders[_i]->HandleCollision(Colliders[j]);
+            Colliders[j]->HandleCollision(Colliders[_i]);
+          }
 
         }
       } // Detect collider & Collider collisions
-    } // for SSIZE_T i = 0 -> Steps
-  } // UpdatePhysics
+
+  /************************************************************************/
+  /* Collider gravity update                                              */
+  /************************************************************************/
+  for (auto & Collider : Colliders) {
+    if (!Collider->IsStatic())
+      Collider->Update(CurrentGravity);
+  }
+} // UpdatePhysics
 
   void SetGravity(::vec2d & gravityPtr)
   {

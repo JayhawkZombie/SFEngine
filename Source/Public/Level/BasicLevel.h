@@ -40,6 +40,8 @@
 #include "Globals.h"
 #include "Camera\Camera2D.h"
 #include "Objects\GameObject.h"
+#include "Physics\ColliderPartitioner.h"
+#include "State\BasicLevelState.h"
 
 /************************************************************************/
 /*                       Dependency  Headers                            */
@@ -62,6 +64,13 @@
 /* Last Edit: Kurt Slagle - 2017/04/30                                  */
 /************************************************************************/
 
+/*********************************************************************************/
+/* NOTE:                                                                         */
+/* You CANNOT assume that any engine values are valid in the level's constructor */
+/* You should use "load" to load/set the data you need that the engine           */
+/* provides (like adding GUI elements, referncing the render window, etc         */
+/*********************************************************************************/
+
 namespace SFEngine
 {
 
@@ -81,7 +90,6 @@ namespace SFEngine
 
     //Oh gawd no please don't every try this
     BasicLevel(const BasicLevel &) = delete;
-    BasicLevel(const BaseEngineInterface &Copy);
     BasicLevel& operator=(const BasicLevel &) = delete;
     BasicLevel(const sf::Vector2u &LevelSize, const sf::FloatRect &DefaultView, bool showlines = false, const sf::Vector2f &GridSpacing = { 0,0 });
     virtual ~BasicLevel();
@@ -90,11 +98,14 @@ namespace SFEngine
     /* Required method overrides                                            */
     /************************************************************************/
     virtual void TickUpdate(const SFLOAT &delta) override;
-    virtual void Render(SharedRTexture Target) override;
+    virtual void Render(SFLOAT Alpha, SharedRTexture Target) override;
     virtual void OnShutDown() override;
     virtual void SerializeOut(SOFStream &out) override;
     virtual void SerializeIn(SIFStream &in) override;
     virtual void HandleInputEvent(const UserEvent &evnt) override;
+    virtual void StepSimulation(SFLOAT Dt) override;
+    virtual void InterpolateState(SFLOAT Alpha);
+    virtual void EventUpdate(sf::Event Event) override;
 
     /************************************************************************/
     /* Basic functionality methods                                          */
@@ -108,7 +119,7 @@ namespace SFEngine
     virtual void CleanUp();
     virtual void SpawnActor(std::shared_ptr<GenericActor> Actor, const sf::Vector2f &Position);
     virtual void SpawnObject(std::shared_ptr<GameObject> Object, const sf::Vector2f &Position);
-    virtual void RenderOnTexture(SharedRTexture Texture) = 0;
+    virtual void RenderOnTexture(SFLOAT Alpha, SharedRTexture Texture) = 0;
     virtual void Load() = 0;
     virtual void Unload() = 0;
 
@@ -127,7 +138,8 @@ namespace SFEngine
     virtual void LoadTileSheets(const Json::Value &value);
     virtual void LoadSheet(const Json::Value &value);
     virtual void LoadAnimations(const Json::Value &value);
-    virtual void UpdatePhysics(STDVector<Collider2D> Colliders, STDVector<SegmentMeshPtr> Segments, UINT32 Steps = 1);
+    virtual void UpdatePhysics(UINT32 Steps = 1);
+    virtual void InterpolatePhysics(SFLOAT Alpha);
 
     /************************************************************************/
     /* Conditional variables                                                */
@@ -138,12 +150,18 @@ namespace SFEngine
     /************************************************************************/
     /* Basic variables provided                                             */
     /************************************************************************/
+    ::vec2d     m_Gravity;
     SString     m_ProjectPath;
     SFLOATRECT  m_CurrentView;
     SVector2U   m_Size;
     sw::TileMap m_TileMap;
     STexture    m_TileMapTexture;
     Camera2D    m_ViewCamera;
+    SFLOAT      m_TimeStepAccumulated;
+    ColliderPartitioner m_ColliderTree;
+    //For testing timestep blending
+    STDVector<SPtrShared<SegmentMesh>> m_Segments;
+    STDVector<SPtrShared<Collider2D>> m_Colliders;
     STDVector<SPtrShared<GameObject>> m_GameObjects;
 
     /************************************************************************/

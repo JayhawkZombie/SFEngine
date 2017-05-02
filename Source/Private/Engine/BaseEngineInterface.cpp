@@ -130,6 +130,10 @@ namespace SFEngine
   {
   }
 
+  void BaseEngineInterface::StepSimulation(SFLOAT Dt)
+  {
+  }
+
   BaseEngineInterface::~BaseEngineInterface()
   {
 

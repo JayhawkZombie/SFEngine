@@ -76,13 +76,16 @@ namespace SFEngine
     sf::RectangleShape SplashRect;
     SplashRect.setSize(static_cast<sf::Vector2f>(size));
 
+    m_StaticCurrentEngine->m_TimeStep.setStep(1.0 / 40.0);
+    m_StaticCurrentEngine->m_TimeStep.setMaxAccumulation(0.50);
+
     //Should we show a splash screen while this thing boots up?
     if (m_StaticCurrentEngine->m_Configuration.ShowSplashScreen) {
       texture.loadFromFile(m_StaticCurrentEngine->m_Configuration.SplashScreenTexturePath);
       SplashRect.setTexture(&texture);
     }
     else {
-      texture.loadFromFile("./Source/Assets/Logos/SFEngineLogoLarge.png");
+      texture.loadFromFile("./Source/Assets/Logos/SFEngineLogoNewAnalogized.png");
       SplashRect.setTexture(&texture);
     }
 

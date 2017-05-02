@@ -57,14 +57,17 @@
 namespace SFEngine
 {
 
-  void Engine::RenderPass(SharedRTexture Texture, SRectShape &LevelRect)
+  void Engine::RenderPass(SFLOAT Alpha, SharedRTexture EditorTexture, SRectShape &LevelRect)
   {
     m_CurrentRenderWindow->clear(sf::Color::Black);
-    Texture->clear(sf::Color::Black);
-    m_CurrentLevel->RenderOnTexture(Texture);
+    EditorTexture->clear(sf::Color::Transparent);
+    m_CurrentLevel->RenderOnTexture(Alpha, EditorTexture);
+    EditorTexture->display();
 
-    Texture->display();
     m_CurrentRenderWindow->draw(LevelRect);
+    m_CurrentRenderWindow->draw(fpsText);
+    Engine::GUI()->draw();
+    m_CurrentRenderWindow->display();
   }
 
 } // namespace SFEngine

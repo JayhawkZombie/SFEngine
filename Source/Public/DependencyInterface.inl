@@ -62,7 +62,7 @@ namespace SFEngine
     if (Stream.fail())
       throw StreamException({ ExceptionCause::StreamFailure }, EXCEPTION_MESSAGE("Stream is in fail state"));
 
-    Stream << Data;
+    Stream << std::to_string(Data) << " ";
   }
 
   template<typename T>

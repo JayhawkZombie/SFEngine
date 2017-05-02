@@ -67,7 +67,7 @@ namespace SFEngine
     ~LightningBolt();
 
     void TickUpdate(const SFLOAT &delta) override;
-    void Render(SharedRTexture Target) override;
+    void Render(SFLOAT Alpha, SharedRTexture Target) override;
 
     void Spark(const SVector2F &StartPosition, const SVector2F &EndPosition);
     bool IsAlive() const;
@@ -98,7 +98,7 @@ namespace SFEngine
     ~CrawlingLightningBolt();
 
     void TickUpdate(const SFLOAT &delta) override;
-    void Render(SharedRTexture Target) override;
+    void Render(SFLOAT Alpha, SharedRTexture Target) override;
 
     void Spark(const STDVector<SVector2F> &Positions);
     bool IsAlive() const;
