@@ -59,7 +59,7 @@ namespace SFEngine
 {
 
   DefaultLevel::DefaultLevel()
-    : BasicLevel(WindowSize, SFLOATRECT(0, 0, WindowSize.x, WindowSize.y))
+    : BasicLevel(SVector2U(1700u, 900u), SFLOATRECT(0, 0, 1700.f, 900.f))
   {
   }
 
@@ -170,6 +170,7 @@ namespace SFEngine
     m_Gravity.x = 0.f;
     m_Gravity.y = 1.f;
     AssignBoundaries((float)WindowSize.x, (float)WindowSize.y);
+    m_CurrentView = SFLOATRECT(0.f, 0.f, 1700.f, 900.f);
     SetGravity(m_Gravity);
   }
 
@@ -206,6 +207,8 @@ namespace SFEngine
     BasicLevel::RenderOnTexture(Alpha, Texture);
     Texture->draw(m_Circ);
     Texture->draw(m_Text);
+
+    m_ColliderTree.RenderOnTexture(Alpha, Texture, SFLOATRECT(0.f, 0.f, 1700.f, 900.f));
   }
 
   void DefaultLevel::Load()
@@ -228,7 +231,7 @@ namespace SFEngine
     m_Text.setPosition(SVector2F(xDiff / 2.f, 100.f));
 
     m_Gravity.x = 0.f;
-    m_Gravity.y = 5.f;
+    m_Gravity.y = 3.f;
 
     m_Circ.setPosition({ 300.f, 300.f });
     m_Circ.setRadius(40.f);
@@ -244,8 +247,8 @@ namespace SFEngine
     m_Colliders.emplace_back(Collider2D::CreatePolygonMesh(4, 40.f, 0.f, SVector2F(300.f, 300.f), SVector2F(0.f, 0.f), 3.f, 0.7f, sf::Color::Red));
     m_Colliders.emplace_back(Collider2D::CreatePolygonMesh(5, 30.f, 0.f, SVector2F(700.f, 300.f), SVector2F(0.f, 0.f), 2.f, 0.5f, sf::Color::Green));
 
-    for (int i = 0; i < 100; ++i) {
-      m_Colliders.emplace_back(Collider2D::CreatePolygonMesh(5, 15, 0.f, { rand() % 1700 + 10.f, 10.f + (rand() % 100 + 10.f)  }, { 0, 0 }, 7.f, 0.9f, sf::Color::Red));
+    for (int i = 0; i < 25; ++i) {
+      m_Colliders.emplace_back(Collider2D::CreatePolygonMesh(5, 15, 0.f, { rand() % 1700 + 10.f, 10.f + (rand() % 300 + 210.f)  }, { 0, 0 }, 7.f, 0.9f, sf::Color::Red));
     }
 
   }

@@ -57,16 +57,20 @@
 namespace SFEngine
 {
 
+#if !defined ( SF_EDITOR )
   UINT32 Engine::Go(int argc, char **argv, EngineConfig &Config)
   {
-    Messager::Init();
-
     SFENGINE_ASSERT(m_StaticCurrentEngine == nullptr);
 
     m_StaticCurrentEngine = new Engine;
     m_StaticCurrentEngine->m_Configuration = Config;
 
-    return m_StaticCurrentEngine->Init(argc, argv);
+    UINT32 InitRet = m_StaticCurrentEngine->Init(argc, argv);
+    UINT32 StartupRet = m_StaticCurrentEngine->Startup();
+    UINT32 GLoopRet = m_StaticCurrentEngine->GameLoop();
+    UINT32 ShutdownRet = StaticShutDown();
+    return GLoopRet;
   }
 
+#endif
 }

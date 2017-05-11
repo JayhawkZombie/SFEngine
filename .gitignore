@@ -13,6 +13,9 @@
 # Engine init files
 *.init
 
+# Ignore boost dependencies
+Dependencies/boost_1_64_0/**
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 

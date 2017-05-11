@@ -63,6 +63,8 @@
 namespace SFEngine
 {
 
+#if !defined ( SF_EDITOR )
+
   UINT32 Engine::GameLoop()
   {
     Messager::PostLogMessage(0, SystemMessage(SystemMessageType::ActivityLog, 0, 0, "Engine GameLoop"), MessageLogLevel::Normal);
@@ -79,10 +81,6 @@ namespace SFEngine
     ::vec2d Gravity;
     AssignBoundaries((float)WindowSize.x, (float)WindowSize.y);
 
-    //There MUST be a valid InitialLevel instance to start from
-    if (!StartingLevel)
-      return m_StaticCurrentEngine->ShutDown();
-
     sf::Time fTime{ sf::seconds(0) };
     sf::Clock _clock;
 
@@ -97,7 +95,8 @@ namespace SFEngine
     SFENGINE_ASSERT(EngineInst);
 
     //And just before we begin the game loop, we will tell the current level to begin
-    Engine::m_CurrentLevel->OnBegin();
+    if (Engine::m_CurrentLevel)
+      Engine::m_CurrentLevel->OnBegin();
 
     fpsFont.loadFromFile("./Demos/MainMenu/Assets/Fonts/Raleway-Light.ttf");
     fpsText.setCharacterSize(25);
@@ -133,5 +132,7 @@ namespace SFEngine
 
     return ShutDown();
   } // Engine::GameLoop
+
+#endif
 
 }

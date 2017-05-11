@@ -218,53 +218,50 @@ using SSprite     = sf::Sprite;
 /* Standard library typedefs                                            */
 /************************************************************************/
 using SString = ::std::string;
+
+/* Ptr types */
 template<typename T>             using SPtrShared = std::shared_ptr<T>;
 template<typename T, typename U> using SPair      = std::pair<T, U>;
+template<typename T>             using SPtrWeak   = std::weak_ptr<T>;
+template<typename T>             using SPtrUnique = std::unique_ptr<T>;
+
+/* STL types */
+template<typename T, typename U> using STDMap          = std::map<T, U>;
+template<typename T, typename U> using SharedSTDMap    = SPtrShared<STDMap<T, U>>;
+template<typename T>             using STDQueue        = std::queue<T>;
+template<typename T, typename U> using STDUnorderedMap = std::unordered_map<T, U>;
+template<typename T, typename U> using STDPairQueue    = STDQueue<SPair<T, U>>;
+template<typename T, typename U> using SharedSTDUnorderedMap = SPtrShared<STDUnorderedMap<T, U>>;
+template<typename T>             using STDVector       = std::vector<T>;
+template<typename T>             using STDVector2D     = STDVector<STDVector<T>>;
+template<typename T, typename U> using SharedPairQueue = SPtrShared<STDPairQueue<T, U>>;
+template<typename T>             using STDDeque        = std::deque<T>;
+
 
 using SStringPair = SPair<SString, SString>;
-using SStream     = ::std::stringstream;
 using SSize_t     = std::size_t;
-using SThread     = std::thread;
-using SMutex      = std::mutex;
 using FPtrVoid    = std::function<void(void)>;
-using SharedMutex = SPtrShared<SMutex>;
+
+/* Threading types */
+using SThread = std::thread;
+using SMutex  = std::mutex;
+using SharedMutex             = SPtrShared<SMutex>;
 using SConditionVariable      = std::condition_variable;
 using SharedConditionVariable = SPtrShared<SConditionVariable>;
-template<typename T> using SPtrWeak = std::weak_ptr<T>;
-using SPtrSharedMutex = SPtrShared<std::mutex>;
-template<typename T> using SPtrUnique = std::unique_ptr<T>;
+using SPtrSharedMutex         = SPtrShared<std::mutex>;
+template<typename T> using SUniqueLock = std::unique_lock<T>;
+
+/* Chrono types */
 using SClockHigh = std::chrono::high_resolution_clock;
 using SClockSys  = std::chrono::system_clock;
-template<typename T, typename U>
-using STimeDuration = std::chrono::duration<T, U>;
-template<typename T>
-using STDVector = std::vector<T>;
-template<typename T> using STDVector2D = STDVector<STDVector<T>>;
+template<typename T, typename U> using STimeDuration = std::chrono::duration<T, U>;
+
+/* Stream types */
+using SStream   = ::std::stringstream;
 using SOFStream = std::ofstream;
 using SIFStream = std::ifstream;
-using SOStream = std::ostream;
-using SIStream = std::istream;
-
-template<typename T, typename U>
-using STDMap = std::map<T, U>;
-template<typename T, typename U>
-using SharedSTDMap = SPtrShared<STDMap<T, U>>;
-template<typename T>
-using STDQueue = std::queue<T>;
-template<typename T, typename U>
-using STDUnorderedMap = std::unordered_map<T, U>;
-template<typename T, typename U>
-using STDPairQueue = STDQueue<SPair<T, U>>;
-template<typename T, typename U>
-using SharedSTDUnorderedMap = SPtrShared<STDUnorderedMap<T, U>>;
-
-template<typename T, typename U>
-using SharedPairQueue = SPtrShared<STDPairQueue<T, U>>;
-
-template<typename T>
-using SUniqueLock = std::unique_lock<T>;
-
-template<typename T> using STDDeque = std::deque<T>;
+using SOStream  = std::ostream;
+using SIStream  = std::istream;
 
 /************************************************************************/
 /* SFML Resource type typdefs                                           */
@@ -275,41 +272,39 @@ using SRectShape = sf::RectangleShape;
 using SCircleShape = sf::CircleShape;
 
 //Textures
-using SharedTexture = std::shared_ptr<sf::Texture>;
-using STexture = sf::Texture;
-using RTexture = sf::RenderTexture;
+using SharedTexture  = SPtrShared<sf::Texture>;
+using STexture       = sf::Texture;
+using RTexture       = sf::RenderTexture;
 using SharedRTexture = SPtrShared<RTexture>;
-using RTarget = sf::RenderTarget;
-using SStringTextureMap = std::map<SString, SharedTexture>;
+using RTarget        = sf::RenderTarget;
+using SStringTextureMap = STDMap<SString, SharedTexture>;
 
 //Sound & Music
-using SMusic = sf::Music;
-using SSound = sf::Sound;
+using SMusic      = sf::Music;
+using SSound      = sf::Sound;
 using SharedMusic = SPtrShared<SMusic>;
-using SSoundBuffer = sf::SoundBuffer;
-using SharedSoundBuffer = SPtrShared<SSoundBuffer>;
-using SStringMusicMap = std::map<SString, SharedMusic>;
-using SStringSoundBufferMap = std::map<SString, SharedSoundBuffer>;
+using SSoundBuffer          = sf::SoundBuffer;
+using SharedSoundBuffer     = SPtrShared<SSoundBuffer>;
+using SStringMusicMap       = STDMap<SString, SharedMusic>;
+using SStringSoundBufferMap = STDMap<SString, SharedSoundBuffer>;
 
 //Shaders
-using SShader = sf::Shader;
-using SharedShader = SPtrShared<SShader>;
-using SStringShaderMap = std::map<SString, SharedShader>;
+using SShader          = sf::Shader;
+using SharedShader     = SPtrShared<SShader>;
+using SStringShaderMap = STDMap<SString, SharedShader>;
 
 //Fonts
-using SFont = sf::Font;
-using SharedFont = SPtrShared<SFont>;
-using SStringFontMap = std::map<SString, SharedFont>;
+using SFont          = sf::Font;
+using SharedFont     = SPtrShared<SFont>;
+using SStringFontMap = STDMap<SString, SharedFont>;
 
 //Text & Strings
-using SText = sf::Text;
+using SText       = sf::Text;
 using SharedSText = SPtrShared<SText>;
 
 //Time & Clocks
-using STime = sf::Time;
+using STime  = sf::Time;
 using SClock = sf::Clock;
-
-
 
 /************************************************************************/
 /* Engine typedefs                                                      */

@@ -161,7 +161,8 @@ namespace SFEngine
        m_Configuration.LogLevel, m_Configuration.DiagnosticFont,
        m_Configuration.VsyncEnabled, m_Configuration.UseRenderTexture,
        m_Configuration.TextureSmoothingEnabled, m_Configuration.AALevel,
-       m_Configuration.WindowSize, m_Configuration.WindowTitle
+       m_Configuration.WindowSize, m_Configuration.WindowTitle,
+       m_Configuration.TickRate, m_Configuration.MaxTickAccumulationTime
     );
   }
 
@@ -172,7 +173,8 @@ namespace SFEngine
        m_Configuration.LogLevel, m_Configuration.DiagnosticFont,
        m_Configuration.VsyncEnabled, m_Configuration.UseRenderTexture,
        m_Configuration.TextureSmoothingEnabled, m_Configuration.AALevel,
-       m_Configuration.WindowSize, m_Configuration.WindowTitle
+       m_Configuration.WindowSize, m_Configuration.WindowTitle,
+       m_Configuration.TickRate, m_Configuration.MaxTickAccumulationTime
     );
   }
 

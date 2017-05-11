@@ -66,12 +66,10 @@ namespace SFEngine
       Engine::StartingLevel->Load();
     }
 
+    m_LevelQueue.push(Engine::StartingLevel);
     Engine::m_CurrentLevel = Engine::StartingLevel;
 
-    int LoopReturn = GameLoop();
-    StaticShutDown();
-
-    return LoopReturn;
+    return 0;
   }
 
 }

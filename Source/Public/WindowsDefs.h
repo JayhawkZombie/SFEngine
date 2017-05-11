@@ -95,6 +95,8 @@
 #endif // __SPLATFORM_WINDOWS_H
 #endif //SPLATFORM_WINDOWS
 
-
+#ifdef _WINUSER_
+#undef _WINUSER_
+#endif // ifdef _WINUSER_
 
 #endif // SFEngine_WindowsDefs_H

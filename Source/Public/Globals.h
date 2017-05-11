@@ -36,6 +36,10 @@
 /*                         Internal  Headers                            */
 /************************************************************************/
 #include "BasicIncludes.h"
+#ifdef _WINUSER_
+#pragma push_macro(_WINUSER_)
+#undef _WINUSER_
+#endif // ifdef _WINUSER_
 
 /************************************************************************/
 /*                       Dependency  Headers                            */
@@ -60,6 +64,9 @@
 namespace SFEngine
 {
 
+#define SF_EDITOR
+
+
 #ifndef ____PI
 #define ____PI 3.141592653f
 #endif
@@ -72,7 +79,7 @@ namespace SFEngine
           static_cast<int>(X)
 
   class BasicLevel;
-
+  extern std::map<SString, SString> Env;
   extern bool   IsIDUsed(const UINT32 &ID);
   extern void   FreeID(const UINT32 &ID); //Make an ID available for use again
   extern UINT32 GenerateID();

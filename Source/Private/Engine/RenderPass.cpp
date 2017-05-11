@@ -57,6 +57,18 @@
 namespace SFEngine
 {
 
+#if defined (SF_EDITOR)
+
+  void Engine::RenderFromEditor(SFLOAT Alpha, SharedRTexture Texture, SRectShape &LevelRect)
+  {
+    Texture->clear(sf::Color::Transparent);
+    if (m_CurrentLevel)
+      m_CurrentLevel->Render(Alpha, Texture);
+    Texture->draw(LevelRect);
+  }
+
+#else
+
   void Engine::RenderPass(SFLOAT Alpha, SharedRTexture EditorTexture, SRectShape &LevelRect)
   {
     m_CurrentRenderWindow->clear(sf::Color::Black);
@@ -69,5 +81,7 @@ namespace SFEngine
     Engine::GUI()->draw();
     m_CurrentRenderWindow->display();
   }
+
+#endif
 
 } // namespace SFEngine

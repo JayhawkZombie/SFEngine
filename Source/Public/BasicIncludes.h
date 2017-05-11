@@ -40,6 +40,11 @@
 #include "Utils\Various.h"
 #include "Serialization\BasicTypes.h"
 
+#ifdef _WINUSER_
+#pragma push_macro(_WINUSER_)
+#undef _WINUSER_
+#endif // ifdef _WINUSER_
+
 /************************************************************************/
 /*                       Dependency  Headers                            */
 /************************************************************************/

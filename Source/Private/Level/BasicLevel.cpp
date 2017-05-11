@@ -53,7 +53,7 @@
 /************************************************************************/
 
 /************************************************************************/
-/* Last Edit: Kurt Slagle - 2017/04/30                                  */
+/* Last Edit: Kurt Slagle - 2017/05/02                                  */
 /************************************************************************/
 
 namespace SFEngine
@@ -69,7 +69,7 @@ namespace SFEngine
   }
 
   BasicLevel::BasicLevel(const sf::Vector2u & LevelSize, const sf::FloatRect & DefaultView, bool showlines, const sf::Vector2f & GridSpacing)
-    : m_ColliderTree((SVector2F)LevelSize, 10u, SVector2U(10u, 10u)), m_Gravity(0.f, 0.f)
+    : m_ColliderTree((SVector2F)LevelSize, 10u, SVector2U(10u, 10u)), m_Gravity(0.f, 0.f), m_CurrentView(0.f, 0.f, (float)LevelSize.x, (float)LevelSize.y)
   {
   }
 

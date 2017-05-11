@@ -87,17 +87,17 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;SFML_STATIC;TGUI_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\Kairos;$(SolutionDir)\Dependencies\Plinth;$(SolutionDir)\Dependencies\jsoncpp;$(SolutionDir)\Dependencies\Thor;$(SolutionDir)\Dependencies\TGUI;$(SolutionDir)\Dependencies\SFML;$(SolutionDir)\Dependencies\SelbaWard;$(SolutionDir)\Dependencies\rapidxml;$(SolutionDir)\Dependencies\Physics;$(SolutionDir)\Dependencies\imgui-sfml;$(SolutionDir)\Dependencies\IMGUI;$(SolutionDir)\Dependencies\ChaiScript;$(SolutionDir)\Dependencies\cereal;$(SolutionDir)\Dependencies\Aurora\include;$(SolutionDir)\Source\Public;$(SolutionDir)\Dependencies;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\NuklearTemplates\Public;$(SolutionDir)\NuklearTemplates;$(SolutionDir)\Dependencies\glad\include;$(SolutionDir)\Dependencies\boost_1_64_0;$(SolutionDir)\Editor\Public;$(SolutionDir)\Dependencies\Kairos;$(SolutionDir)\Dependencies\Plinth;$(SolutionDir)\Dependencies\jsoncpp;$(SolutionDir)\Dependencies\Thor;$(SolutionDir)\Dependencies\TGUI;$(SolutionDir)\Dependencies\SFML;$(SolutionDir)\Dependencies\SelbaWard;$(SolutionDir)\Dependencies\rapidxml;$(SolutionDir)\Dependencies\Physics;$(SolutionDir)\Dependencies\imgui-sfml;$(SolutionDir)\Dependencies\IMGUI;$(SolutionDir)\Dependencies\ChaiScript;$(SolutionDir)\Dependencies\cereal;$(SolutionDir)\Dependencies\Aurora\include;$(SolutionDir)\Source\Public;$(SolutionDir)\Dependencies;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <AdditionalOptions>/std:c++14 /volatile:iso %(AdditionalOptions)</AdditionalOptions>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
-      <DisableSpecificWarnings>4305; 4800;4100</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4305; 4800;4100;4055;4054;</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\Kurt\Documents\Visual Studio 2015\Projects\SFEngine\Dependencies\Lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-s-d.lib;sfml-window-s-d.lib;sfml-audio-s-d.lib;sfml-system-s-d.lib;thor-s-d.lib;flac.lib;freetype.lib;jpeg.lib;ogg.lib;openal32.lib;vorbis.lib;vorbisenc.lib;vorbisfile.lib;opengl32.lib;winmm.lib;sfml-main-d.lib;tgui-s-d.lib;jsoncpp.lib;PhysicsLibrary.lib;SelbaWardLibs.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics-s-d.lib;sfml-window-s-d.lib;sfml-audio-s-d.lib;sfml-system-s-d.lib;thor-s-d.lib;flac.lib;freetype.lib;jpeg.lib;ogg.lib;openal32.lib;vorbis.lib;vorbisenc.lib;vorbisfile.lib;opengl32.lib;winmm.lib;sfml-main-d.lib;tgui-s-d.lib;jsoncpp.lib;PhysicsLibrary.lib;SelbaWardLibs.lib;libboost_atomic-vc140-mt-sgd-1_64.lib;libboost_thread-vc140-mt-sgd-1_64.lib;libboost_filesystem-vc140-mt-sgd-1_64.lib;libboost_program_options-vc140-mt-sgd-1_64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -411,6 +411,8 @@
     <ClInclude Include="Dependencies\chaiscript\utility\json_wrap.hpp" />
     <ClInclude Include="Dependencies\chaiscript\utility\static_string.hpp" />
     <ClInclude Include="Dependencies\chaiscript\utility\utility.hpp" />
+    <ClInclude Include="Dependencies\glad\include\glad\glad.h" />
+    <ClInclude Include="Dependencies\glad\include\KHR\khrplatform.h" />
     <ClInclude Include="Dependencies\imgui-sfml\imconfig-SFML.h" />
     <ClInclude Include="Dependencies\imgui-sfml\imgui-SFML.h" />
     <ClInclude Include="Dependencies\IMGUI\imconfig.h" />
@@ -432,6 +434,8 @@
     <ClInclude Include="Dependencies\Kairos\Timestep.hpp" />
     <ClInclude Include="Dependencies\Kairos\TimestepLite.hpp" />
     <ClInclude Include="Dependencies\Kairos\Yalpes.hpp" />
+    <ClInclude Include="Dependencies\nuklear\nuklear.h" />
+    <ClInclude Include="Dependencies\nuklear\stb_image.h" />
     <ClInclude Include="Dependencies\Physics\arcSeg.h" />
     <ClInclude Include="Dependencies\Physics\ball.h" />
     <ClInclude Include="Dependencies\Physics\ball_go.h" />
@@ -741,7 +745,14 @@
     <ClInclude Include="Dependencies\Thor\Vectors\PolarVector2.hpp" />
     <ClInclude Include="Dependencies\Thor\Vectors\VectorAlgebra2D.hpp" />
     <ClInclude Include="Dependencies\Thor\Vectors\VectorAlgebra3D.hpp" />
+    <ClInclude Include="Editor\Public\Launcher\Launcher.h" />
+    <ClInclude Include="Editor\Public\Launcher\LauncherDisplay.h" />
+    <ClInclude Include="Editor\Public\MainWindow\MainWindow.h" />
+    <ClInclude Include="Editor\Public\Manager\EditorManager.h" />
+    <ClInclude Include="Editor\Public\Setup\OptionTree.h" />
+    <ClInclude Include="Editor\Public\Utils\Parsing.h" />
     <ClInclude Include="Source\Public\Actors\Actor.h" />
+    <ClInclude Include="Source\Public\ApplicationEntry\MainEntryPoint.h" />
     <ClInclude Include="Source\Public\ASync\LevelStreaming.h" />
     <ClInclude Include="Source\Public\BasicIncludes.h" />
     <ClInclude Include="Source\Public\Camera\Camera2D.h" />
@@ -750,11 +761,16 @@
     <ClInclude Include="Source\Public\DefsX86.h" />
     <ClInclude Include="Source\Public\DependencyInterface.h" />
     <ClInclude Include="Source\Public\EditorDefs.h" />
+    <ClInclude Include="Source\Public\Effects\Phasers\FadePhaser.h" />
+    <ClInclude Include="Source\Public\Effects\Phasers\Phaser.h" />
+    <ClInclude Include="Source\Public\Effects\SpriteEffect.h" />
     <ClInclude Include="Source\Public\EngineTypes.h" />
     <ClInclude Include="Source\Public\Engine\BaseEngineInterface.h" />
     <ClInclude Include="Source\Public\Engine\Engine.h" />
     <ClInclude Include="Source\Public\Engine\EngineConfiguration.h" />
     <ClInclude Include="Source\Public\Engine\ReturnValues.h" />
+    <ClInclude Include="Source\Public\Enums\ActorEnums.h" />
+    <ClInclude Include="Source\Public\Enums\EnumTemplate.h" />
     <ClInclude Include="Source\Public\Events\EventHandler.h" />
     <ClInclude Include="Source\Public\Events\Events.h" />
     <ClInclude Include="Source\Public\Events\EventSequence.h" />
@@ -763,6 +779,7 @@
     <ClInclude Include="Source\Public\Globals.h" />
     <ClInclude Include="Source\Public\Level\BasicLevel.h" />
     <ClInclude Include="Source\Public\Level\DefaultLevel.h" />
+    <ClInclude Include="Source\Public\Level\StartupLevel.h" />
     <ClInclude Include="Source\Public\Lights\LightSystem.h" />
     <ClInclude Include="Source\Public\Objects\GameObject.h" />
     <ClInclude Include="Source\Public\Messaging\Messager.h" />
@@ -776,6 +793,7 @@
     <ClInclude Include="Source\Public\Serialization\BasicTypes.hpp" />
     <ClInclude Include="Source\Public\State\BasicLevelState.h" />
     <ClInclude Include="Source\Public\State\DeviceState.h" />
+    <ClInclude Include="Source\Public\State\GameState.h" />
     <ClInclude Include="Source\Public\State\ObjectState.h" />
     <ClInclude Include="Source\Public\UI\UIMacros.h" />
     <ClInclude Include="Source\Public\Utils\Conversion.h" />
@@ -790,6 +808,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Demos\MainMenu\Classes\Levels\MainMenu.cpp" />
+    <ClCompile Include="Dependencies\glad\src\glad.c" />
     <ClCompile Include="Dependencies\imgui-sfml\imgui-SFML.cpp" />
     <ClCompile Include="Dependencies\IMGUI\imgui.cpp" />
     <ClCompile Include="Dependencies\IMGUI\imgui_demo.cpp" />
@@ -834,10 +853,23 @@
     <ClCompile Include="Dependencies\SelbaWard\Sprite3d.cpp" />
     <ClCompile Include="Dependencies\SelbaWard\Starfield.cpp" />
     <ClCompile Include="Dependencies\SelbaWard\TileMap.cpp" />
+    <ClCompile Include="Editor\Private\Launcher\Launcher.cpp" />
+    <ClCompile Include="Editor\Private\Launcher\LauncherDisplay.cpp" />
+    <ClCompile Include="Editor\Private\MainWindow\MainWindow.cpp" />
+    <ClCompile Include="Editor\Private\MainWindow\UICreation.cpp" />
+    <ClCompile Include="Editor\Private\Manager\CreateUI.cpp" />
+    <ClCompile Include="Editor\Private\Manager\EditorManager.cpp" />
+    <ClCompile Include="Editor\Private\Manager\LoadingRing.cpp" />
+    <ClCompile Include="Editor\Private\Manager\MainLoop.cpp" />
+    <ClCompile Include="Editor\Private\Manager\Render.cpp" />
+    <ClCompile Include="Editor\Private\Manager\Update.cpp" />
+    <ClCompile Include="Editor\Private\Utils\Parsing.cpp" />
     <ClCompile Include="SFEngine.cpp" />
     <ClCompile Include="Source\Private\Actors\Actor.cpp" />
+    <ClCompile Include="Source\Private\ApplicationEntry\MainEntryPoint.cpp" />
     <ClCompile Include="Source\Private\Camera\Camera2D.cpp" />
     <ClCompile Include="Source\Private\DependencyInterface.cpp" />
+    <ClCompile Include="Source\Private\Effects\Phaser.cpp" />
     <ClCompile Include="Source\Private\Engine\AddLevel.cpp" />
     <ClCompile Include="Source\Private\Engine\BaseEngineInterface.cpp" />
     <ClCompile Include="Source\Private\Engine\Engine.cpp" />
@@ -858,6 +890,7 @@
     <ClCompile Include="Source\Private\Globals.cpp" />
     <ClCompile Include="Source\Private\Level\BasicLevel.cpp" />
     <ClCompile Include="Source\Private\Level\DefaultLevel.cpp" />
+    <ClCompile Include="Source\Private\Level\StartupLevel.cpp" />
     <ClCompile Include="Source\Private\Messaging\Messager.cpp" />
     <ClCompile Include="Source\Private\Objects\GameObject.cpp" />
     <ClCompile Include="Source\Private\Physics\Collider.cpp" />
@@ -934,6 +967,7 @@
     <None Include="Dependencies\Thor\Vectors\Detail\VectorAlgebra2D.inl" />
     <None Include="Dependencies\Thor\Vectors\Detail\VectorAlgebra3D.inl" />
     <None Include="Source\Public\DependencyInterface.inl" />
+    <None Include="Source\Public\Effects\Phasers\FadePhaser.inl" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="Dependencies\Lib\Debug\flac.lib" />

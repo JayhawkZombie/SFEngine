@@ -35,6 +35,10 @@
 #include "Globals.h"
 #include "Exceptions\Exceptions.hpp"
 
+#if defined ( SF_EDITOR )
+#include "Manager\EditorManager.h"
+#endif
+
 /************************************************************************/
 /*                       Dependency  Headers                            */
 /************************************************************************/
@@ -70,6 +74,7 @@ namespace SFEngine
   /************************************************************************/
   SVector2U WindowSize;
   bool   DoInterpolateRender;
+  std::map<SString, SString> Env;
 
   bool IsIDUsed(const UINT32 & ID)
   {

@@ -35,6 +35,7 @@
 /************************************************************************/
 /*                         Internal  Headers                            */
 /************************************************************************/
+#include "Globals.h"
 #include "Events\EventHandler.h"
 #include "Events\UserEvent.h"
 #include "Engine\BaseEngineInterface.h"
@@ -71,13 +72,19 @@ namespace SFEngine
   class Engine
   {
   public:
+#if defined ( SF_EDITOR )
+    friend class EditorManager;
+#endif
+
     friend class cereal::access;
     Engine();
     Engine(const Engine &) = delete; //No copy constructor allowed
     Engine(const Engine &&) = delete;
     ~Engine();
 
+#if !defined ( SF_EDITOR )
     static UINT32 Go(int argc, char **argv, EngineConfig &Config);
+#endif
     static Engine* GetCurrentEngine();
     static sf::RenderWindow* GetCurrentRenderWindow();
     static SharedLevel GetCurrentLevel();
@@ -116,6 +123,8 @@ namespace SFEngine
     static void DecreaseTimeSpeed(SFLOAT Delta);
 
   private:
+    STDQueue<SPtrShared<BasicLevel>> m_LevelQueue;
+
     template<class Archive>
     void save(Archive &ar) const;
 
@@ -134,15 +143,21 @@ namespace SFEngine
     sf::Text fpsText;
 
     UINT32 Startup();
-    UINT32 GameLoop();
     UINT32 ShutDown();
     static UINT32 StaticShutDown();
+
+#if defined( SF_EDITOR )
+    UINT32 InitFromEditor(SharedRTexture Texture);
+    void RenderFromEditor(SFLOAT Alpha, SharedRTexture Texture, SRectShape &LevelRect);
+#else
     UINT32 Init(int argc, char **argv);
+    void   RenderPass(SFLOAT Alpha, SharedRTexture Texture, SRectShape &LevelRect);
+    UINT32 GameLoop();
+#endif
     UINT32 InitRenderWindow();
     void   StepSimulation(SFLOAT Dt);
     void   InterpolateState(SFLOAT Alpha);
     SFLOAT UpdatePass();   
-    void   RenderPass(SFLOAT Alpha, SharedRTexture Texture, SRectShape &LevelRect);
 
     UserEvent    m_UEvent;
     EngineConfig m_Configuration;

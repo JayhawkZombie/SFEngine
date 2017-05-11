@@ -98,7 +98,8 @@ namespace SFEngine
     bool               PlaySplashScreenAudio = true;
     UINT32             DepthBits;
     UINT32             StencilBits;
-
+    SDOUBLE            TickRate; //Times per second
+    SDOUBLE            MaxTickAccumulationTime;
     //Effects ini settings
     bool              PostProcessEnabled = true;
     UINT32            MaxNumParticles;

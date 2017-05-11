@@ -62,30 +62,60 @@ namespace SFEngine
   ColliderPartitioner::ColliderPartitioner(SVector2F Size, UINT32 MaxDepth, SVector2U MinDim)
     : m_Center({ Size.x / 2.f, Size.y / 2.f }), m_Depth(0), m_Bounds({ {0, 0}, Size }), ParentPartitioner(nullptr), m_MinDim(MinDim), m_MaxDepth(MaxDepth)
   {
-    m_NWBounds = { 0.f, 0.f, Size.x / 2.f, Size.y / 2.f };
-    m_NEBounds = { m_Center.x, 0.f, Size.x / 2.f, Size.y / 2.f };
-    m_SEBounds = { m_Center, Size / 2.f };
-    m_SWBounds = { 0, m_Center.y, Size.x / 2.f, Size.y / 2.f };
+    SVector2F LTCorner = { 0.f, 0.f };
+
+    std::cout << m_Bounds.left << ", " << m_Bounds.top << ", " << m_Bounds.width << ", " << m_Bounds.height << std::endl;
+
+    m_NWBounds = { LTCorner.x, LTCorner.y, Size.x / 2.f, Size.y / 2.f };
+    m_NWBox.setPosition(LTCorner); m_NWBox.setSize(Size / 2.f); m_NWBox.setFillColor(sf::Color(102, 102, 102, 100));
+    m_NWBox.setOutlineColor(sf::Color::White); m_NWBox.setOutlineThickness(2);
+
+    m_NEBounds = { m_Center.x, LTCorner.y, Size.x / 2.f, Size.y / 2.f };
+    m_NEBox.setPosition(m_Center.x, LTCorner.y); m_NEBox.setSize(Size / 2.f); m_NEBox.setFillColor(sf::Color(102, 102, 102, 100));
+    m_NEBox.setOutlineColor(sf::Color::White); m_NEBox.setOutlineThickness(2);
+
+    m_SEBounds = { m_Center.x, m_Center.y, Size.x / 2.f, Size.y / 2.f };
+    m_SEBox.setPosition(m_Center); m_SEBox.setSize(Size / 2.f); m_SEBox.setFillColor(sf::Color(102, 102, 102, 100));
+    m_SEBox.setOutlineColor(sf::Color::White); m_SEBox.setOutlineThickness(2);
+
+    m_SWBounds = { LTCorner.x, m_Center.y, Size.x / 2.f, Size.y / 2.f };
+    m_SWBox.setPosition(LTCorner.x, m_Center.y); m_SWBox.setSize(Size / 2.f); m_SWBox.setFillColor(sf::Color(102, 102, 102, 100));
+    m_SWBox.setOutlineColor(sf::Color::White); m_SWBox.setOutlineThickness(2);
+
     m_BoundsShape.setPosition({ 0.f, 0.f });
     m_BoundsShape.setSize(Size);
     m_BoundsShape.setFillColor(sf::Color::Transparent);
     m_BoundsShape.setOutlineColor(sf::Color::White);
-    m_BoundsShape.setOutlineThickness(-2);
+    m_BoundsShape.setOutlineThickness(2);
   }
   
   //This one is used to create all of the child nodes
   ColliderPartitioner::ColliderPartitioner(SVector2F LTCorner, SVector2F Size, UINT32 MaxDepth, SVector2U MinDim, UINT32 MyDepth, ColliderPartitioner *Parent)
     : m_Bounds(LTCorner, Size), m_Center({ LTCorner.x + Size.x / 2.f, LTCorner.y + Size.y / 2.f }), ParentPartitioner(Parent), m_Depth(MyDepth), m_MaxDepth(MaxDepth), m_MinDim(MinDim)
   {
-    m_NWBounds = { LTCorner.x, LTCorner.y, Size.x / 2.f, Size.y / 2.f };
-    m_NEBounds = { m_Center.x, LTCorner.y, Size.x / 2.f, Size.y / 2.f };
-    m_SEBounds = { m_Center.x, m_Center.y, Size.x / 2.f, Size.y / 2.f };
+    m_NWBounds = { LTCorner.x, LTCorner.y, Size.x / 2.f, Size.y / 2.f }; 
+    m_NWBox.setPosition(LTCorner); m_NWBox.setSize(Size / 2.f); m_NWBox.setFillColor(sf::Color(102, 102, 102, 100));
+    m_NWBox.setOutlineColor(sf::Color::White); m_NWBox.setOutlineThickness(2);
+
+    std::cout << m_Bounds.left << ", " << m_Bounds.top << ", " << m_Bounds.width << ", " << m_Bounds.height << std::endl;
+
+    m_NEBounds = { m_Center.x, LTCorner.y, Size.x / 2.f, Size.y / 2.f }; 
+    m_NEBox.setPosition(m_Center.x, LTCorner.y); m_NEBox.setSize(Size / 2.f); m_NEBox.setFillColor(sf::Color(102, 102, 102, 100));
+    m_NEBox.setOutlineColor(sf::Color::White); m_NWBox.setOutlineThickness(2);
+
+    m_SEBounds = { m_Center.x, m_Center.y, Size.x / 2.f, Size.y / 2.f }; 
+    m_SEBox.setPosition(m_Center); m_SEBox.setSize(Size / 2.f); m_SEBox.setFillColor(sf::Color(102, 102, 102, 100));
+    m_SEBox.setOutlineColor(sf::Color::White); m_NWBox.setOutlineThickness(2);
+
     m_SWBounds = { LTCorner.x, m_Center.y, Size.x / 2.f, Size.y / 2.f };
+    m_SWBox.setPosition(LTCorner.x, m_Center.y); m_SWBox.setSize(Size / 2.f); m_SWBox.setFillColor(sf::Color(102, 102, 102, 100));
+    m_SWBox.setOutlineColor(sf::Color::White); m_NWBox.setOutlineThickness(2);
+
     m_BoundsShape.setPosition(LTCorner);
     m_BoundsShape.setSize(Size);
     m_BoundsShape.setFillColor(sf::Color::Transparent);
     m_BoundsShape.setOutlineColor(sf::Color::White);
-    m_BoundsShape.setOutlineThickness(-2);
+    m_BoundsShape.setOutlineThickness(2);
   }
 
   ColliderPartitioner::~ColliderPartitioner()
@@ -169,8 +199,13 @@ namespace SFEngine
     if (m_SW)
       m_SW->RenderOnTexture(Alpha, Texture, LevelView);
 
-    if (m_DrawBounds)
+    if (m_DrawBounds) {
       Texture->draw(m_BoundsShape);
+      Texture->draw(m_NWBox);
+      Texture->draw(m_NEBox);
+      Texture->draw(m_SEBox);
+      Texture->draw(m_SWBox);
+    }
   }
 
   /*************************************************************************/

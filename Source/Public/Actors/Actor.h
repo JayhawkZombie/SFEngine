@@ -37,6 +37,7 @@
 /************************************************************************/
 #include "BasicIncludes.h"
 #include "Objects\GameObject.h"
+#include "Enums\ActorEnums.h"
 
 /************************************************************************/
 /*                       Dependency  Headers                            */
@@ -120,6 +121,13 @@ namespace SFEngine
     virtual void AddCollider(SharedCollider2D Collider) override;
 
   protected:
+    /************************************************************************/
+    /* Interited drawing behaviors                                          */
+    /************************************************************************/
+    RTexture     m_RenderTarget;
+    Illumination m_IlluminationMode = Illumination::Specular | Illumination::DefaultLit;
+    Interaction  m_InteractionMode  = Interaction::Physical  | Interaction::Reactive;
+
   };
 
 }

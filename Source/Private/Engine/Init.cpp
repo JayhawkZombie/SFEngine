@@ -58,8 +58,16 @@
 namespace SFEngine
 {
 
+#if defined ( SF_EDITOR )
+  UINT32 Engine::InitFromEditor(SharedRTexture Texture)
+  {
+    return 0;
+  }
+#else
+
   UINT32 Engine::Init(int argc, char **argv)
   {
+    Messager::Init();
     SFENGINE_ASSERT(m_StaticCurrentEngine != nullptr);
 
     SFENGINE_ASSERT(m_StaticCurrentEngine->m_Configuration.WindowSize.x != 0 &&
@@ -77,7 +85,7 @@ namespace SFEngine
     SplashRect.setSize(static_cast<sf::Vector2f>(size));
 
     m_StaticCurrentEngine->m_TimeStep.setStep(1.0 / 40.0);
-    m_StaticCurrentEngine->m_TimeStep.setMaxAccumulation(0.50);
+    m_StaticCurrentEngine->m_TimeStep.setMaxAccumulation(0.10);
 
     //Should we show a splash screen while this thing boots up?
     if (m_StaticCurrentEngine->m_Configuration.ShowSplashScreen) {
@@ -93,7 +101,9 @@ namespace SFEngine
     m_StaticCurrentEngine->m_CurrentRenderWindow->draw(SplashRect);
     m_StaticCurrentEngine->m_CurrentRenderWindow->display();
 
-    return m_StaticCurrentEngine->Startup();
+    return 0;
   }
+
+#endif
 
 }

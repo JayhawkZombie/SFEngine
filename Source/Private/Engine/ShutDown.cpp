@@ -87,8 +87,8 @@ namespace SFEngine
     if (StartingLevel)
       StartingLevel.reset();
 
-    m_EngineGUI.reset();
-    delete m_StaticCurrentEngine->m_CurrentRenderWindow;
+    if (m_EngineGUI)
+      m_EngineGUI.reset();
 
     delete m_StaticCurrentEngine;
     m_StaticCurrentEngine = nullptr;

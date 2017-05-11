@@ -130,10 +130,11 @@ namespace SFEngine
       STDDeque<CollisionRecord> &Records);
 
     sf::RectangleShape m_BoundsShape;
+    sf::RectangleShape m_NWBox, m_NEBox, m_SEBox, m_SWBox;
 #ifdef _DEBUG
-    bool m_DrawBounds = false;
-#else
     bool m_DrawBounds = true;
+#else
+    bool m_DrawBounds = false;
 #endif
     UINT32     m_MaxDepth = 10;
     UINT32     m_Size = 0; //Holds our size + size of all children

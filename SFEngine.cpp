@@ -36,6 +36,7 @@
 #include "Engine\EngineConfiguration.h"
 #include "Level\DefaultLevel.h"
 
+#include "ApplicationEntry\MainEntryPoint.h"
 /************************************************************************/
 /*                       Dependency  Headers                            */
 /************************************************************************/
@@ -59,14 +60,6 @@
 
 int main(int argc, char **argv)
 {
-  SFEngine::EngineConfig Config;
-  Config.WindowSize = SVector2U(1700, 900);
-  Config.ShowSplashScreen = true;
-  Config.SplashScreenTexturePath = "./Demos/MainMenu/Assets/Textures/SFEngineLogoLarge.png";
-  
-  SPtrShared<SFEngine::DefaultLevel> DefaultLevel = std::make_shared<SFEngine::DefaultLevel>();
-  SFEngine::Engine::StartingLevel = DefaultLevel;
-
-  return SFEngine::Engine::Go(argc, argv, Config);
+  return SFEngine::MainEntry::Launch(argc, argv);
 }
 
