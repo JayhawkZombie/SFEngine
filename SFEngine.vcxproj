@@ -745,11 +745,13 @@
     <ClInclude Include="Dependencies\Thor\Vectors\PolarVector2.hpp" />
     <ClInclude Include="Dependencies\Thor\Vectors\VectorAlgebra2D.hpp" />
     <ClInclude Include="Dependencies\Thor\Vectors\VectorAlgebra3D.hpp" />
+    <ClInclude Include="Editor\EditorGlobals.h" />
     <ClInclude Include="Editor\Public\Launcher\Launcher.h" />
     <ClInclude Include="Editor\Public\Launcher\LauncherDisplay.h" />
     <ClInclude Include="Editor\Public\MainWindow\MainWindow.h" />
     <ClInclude Include="Editor\Public\Manager\EditorManager.h" />
     <ClInclude Include="Editor\Public\Setup\OptionTree.h" />
+    <ClInclude Include="Editor\Public\UI\UIEditor.h" />
     <ClInclude Include="Editor\Public\Utils\Parsing.h" />
     <ClInclude Include="Source\Public\Actors\Actor.h" />
     <ClInclude Include="Source\Public\ApplicationEntry\MainEntryPoint.h" />
@@ -776,6 +778,7 @@
     <ClInclude Include="Source\Public\Events\EventSequence.h" />
     <ClInclude Include="Source\Public\Events\UserEvent.h" />
     <ClInclude Include="Source\Public\Exceptions\Exceptions.hpp" />
+    <ClInclude Include="Source\Public\FuncPtrFwd.h" />
     <ClInclude Include="Source\Public\Globals.h" />
     <ClInclude Include="Source\Public\Level\BasicLevel.h" />
     <ClInclude Include="Source\Public\Level\DefaultLevel.h" />
@@ -863,6 +866,7 @@
     <ClCompile Include="Editor\Private\Manager\MainLoop.cpp" />
     <ClCompile Include="Editor\Private\Manager\Render.cpp" />
     <ClCompile Include="Editor\Private\Manager\Update.cpp" />
+    <ClCompile Include="Editor\Private\UI\UIEditor.cpp" />
     <ClCompile Include="Editor\Private\Utils\Parsing.cpp" />
     <ClCompile Include="SFEngine.cpp" />
     <ClCompile Include="Source\Private\Actors\Actor.cpp" />
