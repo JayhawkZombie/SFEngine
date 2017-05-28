@@ -34,7 +34,7 @@
 ////////////////////////////////////////////////////////////
 // Internal Headers
 ////////////////////////////////////////////////////////////
-#include <UI/Screen.h>
+#include <UI/Widgets/Screen.h>
 
 ////////////////////////////////////////////////////////////
 // Dependency Headers
@@ -51,36 +51,53 @@
 namespace SFUI
 {
 
-  class Window
+  class Window : public Widget
   {
   public:
     Window();
     Window(sf::RenderWindow *Win);
-    ~Window();
+    ~Window() override;
 
-    void Create(Vec2i Size, std::string Title, sf::Uint32 Style);
+    void Update() override;
+    void Render(std::shared_ptr<RenderTarget>) override;
+    void Render();
     void Add(Widget::Ptr widget, std::string ID = "");
     void Remove(std::string ID);
     void Remove(Widget::Ptr widget);
     void Close();
     void Open();
-    void Hide();
-    void Show();
-    void LaunchAndLink(Widget::Ptr Connection, std::function<void(boost::any)> DoneCB);
-    void Launch(std::function<void(boost::any)> DoneCB);
-
+    void Hide() override;
+    void Show() override;
+    void SetWindow(sf::RenderWindow *Win);
     bool IsOpen() const;
-  protected:
-    void MainLoop(std::function<void(boost::any)> DoneCB);
-    void HandleEvent(sf::Event event);
+    bool HandleEvent(const UserEvent &event);
+    void SetFont(std::shared_ptr<sf::Font> Font);
     
-    Screen::Ptr m_Screen;
+  protected:
 
+    void OnKilled() override final;
+    void OnCreated() override final;
+    void OnHover() override final;
+    void OnEnter(Vec2i where) override final;
+    void OnExit(Vec2i where) override final;
+    void AddedTo(Screen *Scr) override final;
+    void Initialize() override final;
+    void Cleanup() override final;
+
+    virtual bool HandleMousePress(const UserEvent &event) override final;
+    virtual bool HandleMouseRelease(const UserEvent &event) override final;
+    virtual bool HandleMouseMovement(const UserEvent &event) override final;
+    virtual bool HandleKeyPressed(const UserEvent &event) override final;
+    virtual bool HandleKeyReleased(const UserEvent &event) override final;
+    virtual bool HandleTextEntered(const UserEvent &event) override final;
+    
+    std::shared_ptr<sf::Font> m_Font;
+    Screen::Ptr m_Screen;
+    sf::Sprite m_Sprite;
+    std::shared_ptr<sf::RenderTexture> m_Texture;
     bool m_Open;
     bool m_Visible;
-    std::shared_ptr<std::mutex> m_Mutex;
-    std::thread m_Thread;
-    std::shared_ptr<sf::RenderWindow> m_Window;
+    sf::RenderWindow *m_Window;
     Widget::Ptr m_ConnectedWidget;
   };
 

@@ -44,31 +44,27 @@
 namespace SFUI
 {
 
-  sf::View Clickable::View() const
+  bool Clickable::HandleEvent(const UserEvent &event)
   {
-    return sf::View({ 0, 0 }, { 0, 0 });
-  }
+    bool handled = false;
+    auto typ = event.GetEventType();
+    switch (typ)
+    {
+      case EventType::MousePressed:
+      {
+        HandleMousePress(event);
+        handled = true;
+        break;
+      }
+      case EventType::MouseReleased:
+      {
+        HandleMouseRelease(event);
+        handled = true;
+        break;
+      }
+    }
 
-  bool Clickable::HandleEvent(sf::Event event)
-  {
-    return false;
-  }
-
-  sf::IntRect Clickable::Bounds() const
-  {
-    return sf::IntRect();
-  }
-
-  void Clickable::Connect(std::string slot, bsig::signal<void(void)> ftn)
-  {
-  }
-
-  void Clickable::Connect(std::string slot, bsig::signal<void(Vec2i)> ftn)
-  {
-  }
-
-  void Clickable::Connect(std::string slot, bsig::signal<void(Vec2i, MouseButton)> ftn)
-  {
+    return handled;
   }
 
   int Clickable::ClickState() const
@@ -78,7 +74,7 @@ namespace SFUI
 
   Clickable::Clickable()
   {
-    
+    m_RespondingToEvent |= (int)( EventType::MousePressed ) | (int)( EventType::MouseReleased );
   }
 
   Clickable::~Clickable()

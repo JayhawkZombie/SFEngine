@@ -32,7 +32,6 @@
 // Internal Headers
 ////////////////////////////////////////////////////////////
 #include <UI/Window.h>
-#include <UI/Rendering/Renderers/WidgetRenderer.h>
 
 ////////////////////////////////////////////////////////////
 // Dependency Headers
@@ -46,53 +45,77 @@ namespace SFUI
 {
 
   Window::Window()
-    : m_Window(nullptr), m_ConnectedWidget(nullptr), m_Open(false), m_Visible(false),
-    m_Mutex(std::make_shared<std::mutex>())
+    : m_Window(nullptr), m_ConnectedWidget(nullptr), m_Open(false), m_Visible(false), m_Texture(nullptr)
   {
 
   }
 
   Window::Window(sf::RenderWindow *Win)
-    : m_Window(Win), m_ConnectedWidget(nullptr), m_Open(false), m_Visible(false),
-    m_Mutex(std::make_shared<std::mutex>())
+    : m_Window(Win), m_ConnectedWidget(nullptr), m_Open(false), m_Visible(false)
   {
-
+    auto size = Win->getSize();
+    Win->setActive(true);
+    m_Texture = std::make_shared<sf::RenderTexture>();
+    m_Texture->create(size.x, size.y);
+    m_Sprite.setTexture(m_Texture->getTexture());
+    m_Screen = Screen::Create(m_Texture, Vec2i(size), this);
   }
 
   Window::~Window()
   {
-    if (m_Window)
-      m_Window.reset();
-    m_Mutex.reset();
+    m_Window = nullptr;
   }
 
-  void Window::Create(Vec2i Size, std::string Title, sf::Uint32 Style)
+  void Window::Update()
   {
-    if (m_Window)
-      throw std::runtime_error("Window already exists");
+    if (m_Visible && m_Window)
+      m_Screen->Update();
+  }
 
-    m_Window = std::make_shared<sf::RenderWindow>(sf::VideoMode(Size.x, Size.y), Title, Style);
-    m_Window->setVisible(false);
+  void Window::Render(std::shared_ptr<RenderTarget> Target)
+  {
+    if (!m_Visible || !m_Window)
+      return;
+
+    m_Texture->clear(sf::Color::Transparent);
+    m_Screen->Render(m_Texture);
+    m_Texture->display();
+    Target->draw(m_Sprite);
+  }
+
+  void Window::Render()
+  {
+    if (!m_Visible || !m_Window)
+      return;
+
+    m_Texture->clear(sf::Color::Transparent);
+    m_Screen->Render(m_Texture);
+    m_Texture->display();
+    m_Window->draw(m_Sprite);
   }
 
   void Window::Add(Widget::Ptr widget, std::string ID /*= ""*/)
   {
-
+    if (m_Screen)
+      m_Screen->Add(widget, ID);
   }
 
   void Window::Remove(std::string ID)
   {
-
+    if (m_Screen)
+      m_Screen->Remove(ID);
   }
 
   void Window::Remove(Widget::Ptr widget)
   {
-
+    if (m_Screen)
+      m_Screen->Remove(widget);
   }
 
   void Window::Close()
   {
-
+    if (m_Screen)
+      m_Screen->RemoveAll();
   }
 
   void Window::Open()
@@ -102,73 +125,103 @@ namespace SFUI
 
   void Window::Hide()
   {
-
+    m_Visible = false;
   }
 
   void Window::Show()
   {
-
+    m_Visible = true;
   }
 
-  void Window::LaunchAndLink(Widget::Ptr Connection, std::function<void(boost::any)> DoneCB)
+  void Window::SetWindow(sf::RenderWindow * Win)
   {
-    m_ConnectedWidget = Connection;
+    m_Window = Win;
+    auto size = Win->getSize();
+    if (!m_Texture)
+      m_Texture = std::make_shared<sf::RenderTexture>();
 
-
-    m_Thread = std::thread(
-      [CB = DoneCB, this]() -> void
-      {
-        this->MainLoop(CB);
-      }
-    );
-  }
-
-  void Window::Launch(std::function<void(boost::any)> DoneCB)
-  {
-    m_Thread = std::thread(
-      [CB = DoneCB, this]() -> void
-      {
-        this->MainLoop(CB);
-      }
-    );
+    m_Texture->create(size.x, size.y);
+    m_Sprite.setTexture(m_Texture->getTexture());
   }
 
   bool Window::IsOpen() const
   {
-    bool b = false;
-    m_Mutex->lock();
-    b = m_Window && m_Window->isOpen();
-    m_Mutex->unlock();
-    return b;
+    return m_Window && m_Window->isOpen();
   }
 
-  void Window::MainLoop(std::function<void(boost::any)> DoneCB)
+  bool Window::HandleEvent(const UserEvent &event)
   {
-    bool closed = false;
-
-    sf::Event event;
-
-    for ( ; ; ) {
-
-      while (m_Window->pollEvent(event)) {
-        HandleEvent(event);
-        closed = event.type == sf::Event::Closed;
-      }
-
-      if (closed)
-        break;
-
-      m_Window->clear(sf::Color::Black);
-
-      auto renderer = m_Screen->Renderer();
-      renderer->Render(m_Window);
-      m_Window->display();
-    }
-
+    if (m_Screen->IsActive() && m_Screen->IsVisible())
+      return m_Screen->HandleEvent(event);
+    return false;
   }
 
-  void Window::HandleEvent(sf::Event event)
+  void Window::SetFont(std::shared_ptr<sf::Font> Font)
   {
+    m_Font = Font;
+    m_Screen->SetFont(Font);
+  }
+
+  void Window::OnKilled()
+  {
+  }
+
+  void Window::OnCreated()
+  {
+  }
+
+  void Window::OnHover()
+  {
+  }
+
+  void Window::OnEnter(Vec2i where)
+  {
+  }
+
+  void Window::OnExit(Vec2i where)
+  {
+  }
+
+  void Window::AddedTo(Screen * Scr)
+  {
+  }
+
+  void Window::Initialize()
+  {
+  }
+
+  void Window::Cleanup()
+  {
+  }
+
+  bool Window::HandleMousePress(const UserEvent &event)
+  {
+    return true;
+  }
+
+  bool Window::HandleMouseRelease(const UserEvent &event)
+  {
+    return true;
+  }
+
+  bool Window::HandleMouseMovement(const UserEvent &event)
+  {
+    return true;
+  }
+
+  bool Window::HandleKeyPressed(const UserEvent &event)
+  {
+    return true;
+  }
+
+  bool Window::HandleKeyReleased(const UserEvent &event)
+  {
+    return true;
+  }
+
+  bool Window::HandleTextEntered(const UserEvent &event)
+  {
+    return true;
   }
 
 }

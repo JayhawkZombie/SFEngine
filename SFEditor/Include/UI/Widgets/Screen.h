@@ -1,5 +1,5 @@
-#ifndef SFEDITOR_SCREENGRAPH_H
-#define SFEDITOR_SCREENGRAPH_H
+#ifndef SFEDITOR_SCREEN_H
+#define SFEDITOR_SCREEN_H
 
 ////////////////////////////////////////////////////////////
 //
@@ -34,8 +34,7 @@
 ////////////////////////////////////////////////////////////
 // Internal Headers
 ////////////////////////////////////////////////////////////
-#include <SFEditor/Include/Common.h>
-#include <UI/Rendering/ScreenGraph/GraphNode.h>
+#include <UI/Widgets/GenericContainer.h>
 
 ////////////////////////////////////////////////////////////
 // Dependency Headers
@@ -48,8 +47,50 @@
 namespace SFUI
 {
 
+  class Screen : public GenericContainer
+  {
+  public:
+    PTR_TYPEDEF(Screen);
+    ~Screen() override;
+    
+    static Screen::Ptr Create(std::shared_ptr<RenderTarget> Target, Vec2i Size, Widget *parent);
+    void Render(std::shared_ptr<RenderTarget> Target) override final;
+    void Update() override;
+    bool HandleEvent(const UserEvent &event) override final;
+    sf::IntRect Bounds() const override final;
+    Vec2i GetChildOffset() const override;
 
+    virtual bool Add(Widget::Ptr widget, std::string ID = "") override;
+    virtual bool Remove(Widget::Ptr widget) override;
+    virtual bool Remove(std::string ID) override;
+    virtual bool RemoveAll() override;
+    virtual bool HideAll() override;
+    virtual bool ShowAll() override;
+    virtual std::shared_ptr<sf::RenderWindow> GetWindow() const override;
+    virtual void Destroy();
+    void SetFont(std::shared_ptr<sf::Font> Font) override;
+    virtual void SetWindow(std::shared_ptr<sf::RenderWindow> Win);
+  protected:
+    Screen(std::shared_ptr<RenderTarget> Target);
+    Screen();
+
+    virtual bool HandleMousePress(const UserEvent &event) override;
+    virtual bool HandleMouseRelease(const UserEvent &event) override;
+    virtual bool HandleMouseMovement(const UserEvent &event) override;
+    virtual bool HandleKeyPressed(const UserEvent &event) override;
+    virtual bool HandleKeyReleased(const UserEvent &event) override;
+    virtual bool HandleTextEntered(const UserEvent &event) override;
+
+    void AddedTo(Screen *Scr) override final;
+    void Initialize() override final;
+    void Cleanup() override final;
+
+    sf::Text m_TestText;
+    sf::Text m_EventText;
+    std::shared_ptr<sf::Font> m_Font;
+    std::shared_ptr<sf::RenderWindow> m_Window;
+  };
 
 }
 
-#endif // SFEDITOR_SCREENGRAPH_H
+#endif // SFEDITOR_SCREEN_H

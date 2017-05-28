@@ -34,6 +34,9 @@
 ////////////////////////////////////////////////////////////
 // Internal Headers
 ////////////////////////////////////////////////////////////
+#include <Include/UI/Globals.h>
+#include <Include/UI/Spacing.h>
+#include <Include/Events/UserEvent.h>
 
 ////////////////////////////////////////////////////////////
 // Dependency Headers
@@ -44,6 +47,20 @@
 // Standard Library Headers
 ////////////////////////////////////////////////////////////
 #include <memory>
+#include <vector>
+#include <map>
 
+using Vec2i = sf::Vector2i;
+using Vec2f = sf::Vector2f;
+using IntRect = sf::IntRect;
+using FloatRect = sf::FloatRect;
+using RenderTarget = sf::RenderTarget;
+
+template<typename T_> using SharedPtr = std::shared_ptr<T_>;
+template<typename T_> using UniquePtr = std::unique_ptr<T_>;
+template<typename T_> using Vector = std::vector<T_>;
+
+template<typename T_, typename U_> using Map  = std::map<T_, U_>;
+template<typename T_, typename U_> using Pair = std::pair<T_, U_>;
 
 #endif // SFEDITOR_COMMON_H

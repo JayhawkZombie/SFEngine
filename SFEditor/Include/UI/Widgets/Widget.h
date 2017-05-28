@@ -34,7 +34,7 @@
 ////////////////////////////////////////////////////////////
 // Internal Headers
 ////////////////////////////////////////////////////////////
-#include <Common.h>
+#include <Include/Common.h>
 
 ////////////////////////////////////////////////////////////
 // Dependency Headers
@@ -50,10 +50,12 @@
 namespace SFUI
 {
 
-  class WidgetRenderer;
   class Screen;
+  class GenericContainer;
+  class Expandable;
+  class ExpandableList;
+
   namespace bsig = boost::signals2;
-  using Vec2i = sf::Vector2i;
   using MouseButton = sf::Mouse::Button;
   using RenderTarget = sf::RenderTarget;
 
@@ -62,32 +64,68 @@ using Ptr = std::shared_ptr<CLASS>;\
 using WeakPtr = std::weak_ptr<CLASS>;\
 using RPtr = CLASS*;\
 
-  class GenericContainer;
-  class Screen;
+  enum VerticalAlignment
+  {
+      Top    = 0b00000001
+    , Bottom = 0b00000010
+    , vCenter = 0b00000100
+  };
+
+  enum HorizontalAlignment
+  {
+      Left   = 0b00001000
+    , Right  = 0b00010000
+    , hCenter = 0b00100000
+  };
+
+  enum Alignment
+  {
+      TopLeft      = VerticalAlignment::Top     | HorizontalAlignment::Left
+    , TopCenter    = VerticalAlignment::Top     | HorizontalAlignment::hCenter
+    , TopRight     = VerticalAlignment::Top     | HorizontalAlignment::Right
+    , CenterLeft   = VerticalAlignment::vCenter | HorizontalAlignment::Left
+    , Centered     = VerticalAlignment::vCenter | HorizontalAlignment::hCenter
+    , CenterRight  = VerticalAlignment::vCenter | HorizontalAlignment::Right
+    , BottomLeft   = VerticalAlignment::Bottom  | HorizontalAlignment::Left
+    , BottomCenter = VerticalAlignment::Bottom  | HorizontalAlignment::hCenter
+    , BottomRight  = VerticalAlignment::Bottom  | HorizontalAlignment::Right
+  };
+
 
   class Widget
   {
   public:
     friend class Screen;
     friend class GenericContainer;
+    friend class Expandable;
+    friend class ExpandableList;
     PTR_TYPEDEF(Widget);
-    virtual WidgetRenderer* Renderer() = 0;
-    virtual sf::View View() const;
+    virtual void Render(std::shared_ptr<RenderTarget> Target) = 0;
+    virtual void Update();
+    sf::View View() const;
 
-    virtual bool HandleEvent(sf::Event event) = 0;
+    virtual bool HandleEvent(const UserEvent &event);
     virtual void Hide();
     virtual void Show();
     virtual void Enable();
     virtual void Disable();
     virtual sf::IntRect Bounds() const;
     virtual void SetPosition(const Vec2i &v);
+    virtual void Move(const Vec2i &v);
     virtual void SetSize(const Vec2i &v);
+    virtual void SetFont(std::shared_ptr<sf::Font> Font);
+    Vec2i GetGlobalPosition();
     Vec2i GetPosition() const;
+    virtual Vec2i GetChildOffset() const;
     Vec2i GetSize() const;
+    virtual std::shared_ptr<sf::RenderWindow> GetWindow() const;
+    virtual Vec2i ToLocalCoords(Vec2i v);
+    virtual void AlignInBounds(sf::IntRect bounds, Alignment alignment);
+    virtual bool IsRespondingTo(EventType type) const;
 
-    virtual void Connect(std::string slot, bsig::signal<void(void)> ftn);
-    virtual void Connect(std::string slot, bsig::signal<void(Vec2i)> ftn);
-    virtual void Connect(std::string slot, bsig::signal<void(Vec2i, MouseButton)> ftn);
+    virtual void Connect(std::string slot, std::function<void(void)> ftn);
+    virtual void Connect(std::string slot, std::function<void(Vec2i)> ftn);
+    virtual void Connect(std::string slot, std::function<void(Vec2i, MouseButton)> ftn);
 
     enum State
     {
@@ -106,6 +144,16 @@ using RPtr = CLASS*;\
     bool IsDisabled() const;
 
   protected:
+    static bool BaseHandleEvent(Widget::RPtr widget, const UserEvent &event);
+    
+    std::function<void(void)> OnKilledCallback;
+    std::function<void(void)> OnCreatedCallback;
+    std::function<void(void)> OnInitCallback;
+    std::function<void(Vec2i)> OnMouseEnterCallback;
+    std::function<void(Vec2i)> OnMouseExitCallback;
+    std::function<void(Vec2i, MouseButton)> OnMousePressedCallback;
+    std::function<void(Vec2i, MouseButton)> OnMouseReleasedCallback;
+    
     bsig::signal<void(void)> KilledSignal;
     bsig::signal<void(void)> CreatedSignal;
     bsig::signal<void(void)> InitSignal;
@@ -114,16 +162,37 @@ using RPtr = CLASS*;\
     bsig::signal<void(Vec2i, MouseButton)> PressedSignal;
     bsig::signal<void(Vec2i, MouseButton)> ReleasedSignal;
 
-    virtual void OnKilled() = 0;
-    virtual void OnCreated() = 0;
-    virtual void OnHover() = 0;
-    virtual void OnEnter(Vec2i where) = 0;
-    virtual void OnExit(Vec2i where) = 0;
-    virtual void AddedTo(Screen *Scr) = 0;
-    virtual void Initialize() = 0;
-    virtual void Cleanup() = 0;
+    virtual void OnKilled();
+    virtual void OnCreated();
+    virtual void OnHover();
+    virtual void OnEnter(Vec2i where);
+    virtual void OnExit(Vec2i where);
+    virtual void AddedTo(Screen *Scr);
+    virtual void Initialize();
+    virtual void Cleanup();
+
+    virtual bool HandleMousePress(const UserEvent &event) = 0;
+    virtual bool HandleMouseRelease(const UserEvent &event) = 0;
+    virtual bool HandleMouseMovement(const UserEvent &event) = 0;
+    virtual bool HandleKeyPressed(const UserEvent &event) = 0;
+    virtual bool HandleKeyReleased(const UserEvent &event) = 0;
+    virtual bool HandleTextEntered(const UserEvent &event) = 0;
+
+    virtual void ChangeMousedOverWidget(Vec2i pos);
 
     int m_State = State::Active | State::Enabled;
+    int m_RespondingToEvent = 0b0000000;
+    bool m_IsVisible;
+    bool m_IsEnabled;
+    bool m_IsActive;
+    bool m_IsFocused;
+
+    bool m_RespondingToMouseMove;
+    bool m_RespondingToMousePress;
+    bool m_RespondingToMouseRelease;
+    bool m_RespondingToKeyPress;
+    bool m_RespondingToKeyRelease;
+    bool m_RespondingToTextEnter;
 
     Widget();
     virtual ~Widget();
@@ -131,7 +200,13 @@ using RPtr = CLASS*;\
     RPtr    m_Parent;
     Screen *m_Screen;
     Vec2i   m_Position;
+    Vec2i   m_GlobalPosition;
     Vec2i   m_Size;
+    std::shared_ptr<sf::Font> m_Font;
+    static Widget::RPtr MouseOverWidget;
+
+    BoundingBox m_BoundingBox;
+    Point m_PPosition;
   };
 
 }

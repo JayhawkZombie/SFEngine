@@ -34,6 +34,14 @@
 /************************************************************************/
 /*                         Internal  Headers                            
 /************************************************************************/
+#include <UI/Window.h>
+#include <UI/Widgets/Screen.h>
+#include <UI/Widgets/Label.h>
+#include <UI/Widgets/FlatButton.h>
+#include <UI/Widgets/SolidButton.h>
+#include <UI/Widgets/ExpandableList.h>
+
+#include <Include/Events/UserEvent.h>
 
 /************************************************************************/
 /*                       Dependency  Headers                            

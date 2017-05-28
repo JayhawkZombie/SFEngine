@@ -1,3 +1,6 @@
+#ifndef SFEDITOR_EXPANDABLE_H
+#define SFEDITOR_EXPANDABLE_H
+
 ////////////////////////////////////////////////////////////
 //
 // MIT License
@@ -31,7 +34,7 @@
 ////////////////////////////////////////////////////////////
 // Internal Headers
 ////////////////////////////////////////////////////////////
-#include <UI/Rendering/Renderers/FlatButtonRenderer.h>
+#include <UI/Widgets/GenericContainer.h>
 
 ////////////////////////////////////////////////////////////
 // Dependency Headers
@@ -40,3 +43,36 @@
 ////////////////////////////////////////////////////////////
 // Standard Library Headers
 ////////////////////////////////////////////////////////////
+
+namespace SFUI
+{
+
+  class Expandable : public GenericContainer
+  {
+  public:
+    Expandable();
+    Expandable(Widget::RPtr parent);
+    virtual ~Expandable() override;
+
+    virtual bool HandleEvent(const UserEvent &event) override;
+    virtual void Update() override;
+    virtual void Render(std::shared_ptr<RenderTarget> Target) override;
+    virtual void SetExpandableSize(Vec2i size);
+    virtual void SetUnexpandedSize(Vec2i size);
+    
+    virtual bool IsExpanded() const;
+    virtual void Expand();
+    virtual void Contract();
+
+  protected:
+    virtual void OnExpanded();
+    virtual void OnContracted();
+
+    Vec2i m_ExpandableSize;
+    Vec2i m_UnexpandedSize;
+    bool  m_IsExpanded;
+  };
+
+}
+
+#endif // SFEDITOR_EXPANDABLE_H

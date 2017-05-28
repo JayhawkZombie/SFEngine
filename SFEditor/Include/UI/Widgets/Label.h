@@ -1,5 +1,5 @@
-#ifndef SFEDITOR_TEXTNODE_H
-#define SFEDITOR_TEXTNODE_H
+#ifndef SFEDITOR_LABEL_H
+#define SFEDITOR_LABEL_H
 
 ////////////////////////////////////////////////////////////
 //
@@ -34,6 +34,7 @@
 ////////////////////////////////////////////////////////////
 // Internal Headers
 ////////////////////////////////////////////////////////////
+#include <UI/Widgets/Widget.h>
 
 ////////////////////////////////////////////////////////////
 // Dependency Headers
@@ -43,4 +44,51 @@
 // Standard Library Headers
 ////////////////////////////////////////////////////////////
 
-#endif // SFEDITOR_TEXTNODE_H
+namespace SFUI
+{
+
+
+
+  class Label : public Widget
+  {
+  public:
+    PTR_TYPEDEF(Label);
+    Label();
+    ~Label();
+    static Label::Ptr Create(const std::string &Text, Widget::RPtr parent);
+    virtual void Render(std::shared_ptr<RenderTarget> Target) override;
+    virtual void SetFont(std::shared_ptr<sf::Font> Font) override;
+    virtual void SetText(const std::string &Text);
+    virtual void SetTextSize(std::uint32_t size);
+    virtual void SetTextColor(sf::Color color);
+    virtual void AlignInBounds(sf::IntRect bounds, Alignment alignment) override;
+    std::string  GetText() const;
+
+  protected:
+    virtual void Resize();
+    virtual void OnKilled() override;
+    virtual void OnCreated() override;
+    virtual void OnHover() override;
+    virtual void OnEnter(Vec2i where) override;
+    virtual void OnExit(Vec2i where) override;
+    virtual void AddedTo(Screen *Scr) override;
+    virtual void Initialize() override;
+    virtual void Cleanup() override;
+
+    virtual bool HandleMousePress(const UserEvent &event) override;
+    virtual bool HandleMouseRelease(const UserEvent &event) override;
+    virtual bool HandleMouseMovement(const UserEvent &event) override;
+    virtual bool HandleKeyPressed(const UserEvent &event) override;
+    virtual bool HandleKeyReleased(const UserEvent &event) override;
+    virtual bool HandleTextEntered(const UserEvent &event) override;
+
+    std::string   m_Text;
+    sf::Text      m_RenderText;
+    std::uint32_t m_TextSize;
+    sf::Color m_TextColor;
+    
+  };
+
+}
+
+#endif // SFEDITOR_LABEL_H

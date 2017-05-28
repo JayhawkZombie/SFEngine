@@ -51,19 +51,34 @@ namespace SFUI
   class GenericContainer : public Widget
   {
   public:
-    GenericContainer() = default;
-    virtual ~GenericContainer() override = default;
+    GenericContainer();
+    virtual ~GenericContainer() override;
 
+    virtual void Update() override;
+    virtual Vec2i GetChildOffset() const override;
     virtual bool Add(Widget::Ptr widget, std::string ID = "");
     virtual bool Remove(Widget::Ptr widget);
     virtual bool Remove(std::string ID);
     virtual bool RemoveAll();
     virtual bool HideAll();
     virtual bool ShowAll();
+    virtual void SetSize(const Vec2i &v) override;
+    virtual void SetPosition(const Vec2i &v) override;
+    virtual void Move(const Vec2i &v) override;
+    virtual bool HandleEvent(const UserEvent &event) override;
 
   protected:
+    virtual bool HandleMousePress(const UserEvent &event) override;
+    virtual bool HandleMouseRelease(const UserEvent &event) override;
+    virtual bool HandleMouseMovement(const UserEvent &event) override;
+    virtual bool HandleKeyPressed(const UserEvent &event) override;
+    virtual bool HandleKeyReleased(const UserEvent &event) override;
+    virtual bool HandleTextEntered(const UserEvent &event) override;
+
     std::map<std::string, Widget::Ptr> m_Widgets;
     std::shared_ptr<sf::RenderTexture> m_Canvas;
+    sf::Sprite m_Sprite;
+    bool m_SizeSet;
     Vec2i m_GlobalOffset = Vec2i(0, 0);
   };
 

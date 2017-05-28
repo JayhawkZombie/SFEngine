@@ -151,37 +151,38 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Common.h" />
+    <ClInclude Include="Include\Events\UserEvent.h" />
     <ClInclude Include="Include\UI\Globals.h" />
-    <ClInclude Include="Include\UI\Rendering\Renderers\FlatButtonRenderer.h" />
-    <ClInclude Include="Include\UI\Rendering\Renderers\WidgetRenderer.h" />
-    <ClInclude Include="Include\UI\Rendering\ScreenGraph\ClippingNode.h" />
-    <ClInclude Include="Include\UI\Rendering\ScreenGraph\GraphNode.h" />
-    <ClInclude Include="Include\UI\Rendering\ScreenGraph\ScreenGraph.h" />
-    <ClInclude Include="Include\UI\Rendering\ScreenGraph\TextNode.h" />
-    <ClInclude Include="Include\UI\Rendering\ScreenGraph\TextureNode.h" />
-    <ClInclude Include="Include\UI\Rendering\View.h" />
-    <ClInclude Include="Include\UI\Screen.h" />
+    <ClInclude Include="Include\UI\Widgets\Screen.h" />
     <ClInclude Include="Include\UI\SFUI.h" />
+    <ClInclude Include="Include\UI\Spacing.h" />
     <ClInclude Include="Include\UI\Theming\Color.h" />
     <ClInclude Include="Include\UI\Theming\Theme.h" />
     <ClInclude Include="Include\UI\Widgets\Clickable.h" />
+    <ClInclude Include="Include\UI\Widgets\Expandable.h" />
+    <ClInclude Include="Include\UI\Widgets\ExpandableList.h" />
     <ClInclude Include="Include\UI\Widgets\FlatButton.h" />
     <ClInclude Include="Include\UI\Widgets\GenericContainer.h" />
+    <ClInclude Include="Include\UI\Widgets\Label.h" />
     <ClInclude Include="Include\UI\Widgets\Page.h" />
+    <ClInclude Include="Include\UI\Widgets\SolidButton.h" />
     <ClInclude Include="Include\UI\Widgets\Widget.h" />
     <ClInclude Include="Include\UI\Window.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Events\UserEvent.cpp" />
+    <ClCompile Include="Source\UI\Widgets\Expandable.cpp" />
+    <ClCompile Include="Source\UI\Widgets\ExpandableList.cpp" />
     <ClCompile Include="Source\UI\Widgets\FlatButton.cpp" />
     <ClCompile Include="SFEditor.cpp" />
     <ClCompile Include="Source\UI\Globals.cpp" />
-    <ClCompile Include="Source\UI\Rendering\Renderers\FlatButtonRenderer.cpp" />
-    <ClCompile Include="Source\UI\Rendering\Renderers\WidgetRenderer.cpp" />
     <ClCompile Include="Source\UI\Widgets\Clickable.cpp" />
     <ClCompile Include="Source\UI\Widgets\GenericContainer.cpp" />
+    <ClCompile Include="Source\UI\Widgets\Label.cpp" />
     <ClCompile Include="Source\UI\Widgets\Page.cpp" />
     <ClCompile Include="Source\UI\Widgets\Screen.cpp" />
+    <ClCompile Include="Source\UI\Widgets\SolidButton.cpp" />
     <ClCompile Include="Source\UI\Widgets\Widget.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>

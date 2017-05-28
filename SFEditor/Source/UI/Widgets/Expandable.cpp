@@ -1,6 +1,3 @@
-#ifndef SFEDITOR_FLATBUTTONRENDERER_H
-#define SFEDITOR_FLATBUTTONRENDERER_H
-
 ////////////////////////////////////////////////////////////
 //
 // MIT License
@@ -34,7 +31,7 @@
 ////////////////////////////////////////////////////////////
 // Internal Headers
 ////////////////////////////////////////////////////////////
-#include <UI/Rendering/Renderers/WidgetRenderer.h>
+#include <UI/Widgets/Expandable.h>
 
 ////////////////////////////////////////////////////////////
 // Dependency Headers
@@ -46,23 +43,85 @@
 
 namespace SFUI
 {
-  class FlatButton;
 
-  class FlatButtonRenderer : public WidgetRenderer
+
+
+  Expandable::Expandable()
+    : m_ExpandableSize(Vec2i(0, 0)), m_IsExpanded(false), m_UnexpandedSize(Vec2i(0, 0)), GenericContainer()
   {
-  public:
-    FlatButtonRenderer(FlatButton *button);
-    ~FlatButtonRenderer() override;
 
-    void Render(std::shared_ptr<RenderTarget> Target) override final;
+  }
 
-  private:
-    FlatButton *m_Button;
-    sf::Text m_RenderText;
-    std::shared_ptr<sf::Font> m_RenderFont;
-    int m_PrevButtonState = -1;
-  };
+  Expandable::Expandable(Widget::RPtr parent)
+    : m_ExpandableSize(Vec2i(0, 0)), m_IsExpanded(false), m_UnexpandedSize(Vec2i(0, 0)), GenericContainer()
+  {
+    m_Parent = parent;
+  }
+
+  Expandable::~Expandable()
+  {
+
+  }
+
+  bool Expandable::HandleEvent(const UserEvent &event)
+  {
+    return ( m_IsExpanded && GenericContainer::HandleEvent(event) );
+  }
+
+  void Expandable::Update()
+  {
+    if (m_IsExpanded)
+      GenericContainer::Update();
+  }
+
+  void Expandable::Render(std::shared_ptr<RenderTarget> Target)
+  {
+    if (m_IsExpanded) {
+      m_Canvas->clear(sf::Color::Transparent);
+      
+      for (auto & widget : m_Widgets)
+        widget.second->Render(m_Canvas);
+
+      m_Canvas->display();
+      Target->draw(m_Sprite);
+    }
+  }
+
+  void Expandable::SetExpandableSize(Vec2i size)
+  {
+    m_ExpandableSize = size;
+  }
+
+  void Expandable::SetUnexpandedSize(Vec2i size)
+  {
+    m_UnexpandedSize = size;
+  }
+
+  bool Expandable::IsExpanded() const
+  {
+    return m_IsExpanded;
+  }
+
+  void Expandable::Expand()
+  {
+    m_IsExpanded = true;
+    m_Size = m_ExpandableSize;
+  }
+
+  void Expandable::Contract()
+  {
+    m_IsExpanded = false;
+    m_Size = m_UnexpandedSize;
+  }
+
+  void Expandable::OnExpanded()
+  {
+
+  }
+
+  void Expandable::OnContracted()
+  {
+
+  }
 
 }
-
-#endif // SFEDITOR_FLATBUTTONRENDERER_H

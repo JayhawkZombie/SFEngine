@@ -31,7 +31,7 @@
 ////////////////////////////////////////////////////////////
 // Internal Headers
 ////////////////////////////////////////////////////////////
-#include <UI/Screen.h>
+#include <UI/Widgets/Screen.h>
 
 ////////////////////////////////////////////////////////////
 // Dependency Headers
@@ -40,33 +40,89 @@
 ////////////////////////////////////////////////////////////
 // Standard Library Headers
 ////////////////////////////////////////////////////////////
+#include <iostream>
 
 namespace SFUI
 {
 
   Screen::Screen()
   {
-
+    m_RespondingToMouseMove = true;
+    m_RespondingToMousePress = true;
+    m_RespondingToMouseRelease = true;
+    m_RespondingToKeyPress = true;
+    m_RespondingToKeyRelease = true;
+    m_RespondingToTextEnter = true;
   }
 
-  void Screen::OnKilled()
+  bool Screen::HandleMousePress(const UserEvent &event)
   {
+    UserEvent e(event);
+    e.OffsetFrom(m_Position);
+
+    auto bounds = Bounds();
+    if (!event.IsMouseOver(bounds))
+      return false;
+
+    GenericContainer::HandleMousePress(e);
+
+    return true;
   }
 
-  void Screen::OnCreated()
+  bool Screen::HandleMouseRelease(const UserEvent &event)
   {
+    UserEvent e(event);
+    e.OffsetFrom(m_Position);
+
+    auto bounds = Bounds();
+    if (!event.IsMouseOver(bounds))
+      return false;
+
+    GenericContainer::HandleMouseRelease(e);
+     
+
+    return true;
   }
 
-  void Screen::OnHover()
+  bool Screen::HandleMouseMovement(const UserEvent &event)
   {
+    UserEvent e(event);
+    e.OffsetFrom(m_Position);
+
+    auto bounds = Bounds();
+    if (!event.IsMouseOver(bounds))
+      return false;
+
+    GenericContainer::HandleMouseMovement(e);
+
+    return true;
   }
 
-  void Screen::OnEnter(Vec2i where)
+  bool Screen::HandleKeyPressed(const UserEvent &event)
   {
+    UserEvent e(event);
+    e.OffsetFrom(m_Position);
+
+    GenericContainer::HandleKeyPressed(e);
+    return true;
   }
 
-  void Screen::OnExit(Vec2i where)
+  bool Screen::HandleKeyReleased(const UserEvent &event)
   {
+    UserEvent e(event);
+    e.OffsetFrom(m_Position);
+
+    GenericContainer::HandleKeyReleased(e);
+    return true;
+  }
+
+  bool Screen::HandleTextEntered(const UserEvent &event)
+  {
+    UserEvent e(event);
+    e.OffsetFrom(m_Position);
+
+    GenericContainer::HandleTextEntered(e);
+    return true;
   }
 
   void Screen::AddedTo(Screen * Scr)
@@ -85,74 +141,152 @@ namespace SFUI
   {
   }
 
-  Screen::Ptr Screen::Create(std::shared_ptr<RenderTarget> Target)
+  Screen::Ptr Screen::Create(std::shared_ptr<RenderTarget> Target, Vec2i Size, Widget *parent)
   {
     Screen::Ptr screen(new Screen(Target));
+    screen->SetSize(Size);
+
+    screen->m_Parent = parent;
+    if (parent)
+      screen->SetPosition(parent->GetPosition());
     return screen;
   }
 
-  WidgetRenderer * Screen::Renderer()
+  void Screen::Render(std::shared_ptr<RenderTarget> Target)
   {
-    return nullptr;
+    if (!IsVisible())
+      return;
+
+    auto oldView = Target->getView();
+    auto newview = View();
+
+    m_Canvas->setView(newview);
+    m_Canvas->clear(sf::Color::Transparent);
+    
+    for (auto & widget : m_Widgets)
+      widget.second->Render(m_Canvas);
+
+    m_Canvas->draw(m_TestText);
+    m_Canvas->draw(m_EventText);
+
+    m_Canvas->display();
+    Target->draw(m_Sprite);
   }
 
-  sf::View Screen::View() const
+  void Screen::Update()
   {
-    return sf::View();
+    if (!IsEnabled())
+      return;
+
+    for (auto & widget : m_Widgets)
+      widget.second->Update();
   }
 
-  bool Screen::HandleEvent(sf::Event event)
-  {
-    return false;
-  }
-
-  void Screen::Hide()
-  {
-  }
-
-  void Screen::Show()
-  {
-  }
-
-  void Screen::Enable()
-  {
-  }
-
-  void Screen::Disable()
-  {
+  bool Screen::HandleEvent(const UserEvent &event)
+  {   
+    return BaseHandleEvent(this, event);
   }
 
   sf::IntRect Screen::Bounds() const
   {
-    return sf::IntRect();
+    return sf::IntRect(m_Position, m_Size);
   }
 
-  void Screen::SetPosition(const Vec2i & v)
+  Vec2i Screen::GetChildOffset() const
   {
-  }
-
-  void Screen::SetSize(const Vec2i & v)
-  {
+    // We use a framebuffer for storing our child objects,
+    //  so we can render them at their relative position and 
+    //  render our sprite using that framebuffer as a texture
+    //  wherever our position happens to be
+    return Vec2i(0, 0);
   }
 
   Screen::Screen(std::shared_ptr<RenderTarget> Target)
   {
+    m_Size = Vec2i(Target->getSize());
+    m_TestText.setPosition({ 0.f, 0.f });
+    m_TestText.setCharacterSize(32);
+    m_TestText.setFillColor(sf::Color::White);
+    m_TestText.setString("Widget Count: 0");
 
+    auto siz = m_TestText.getGlobalBounds();
+    m_EventText.setPosition({ siz.left, siz.top + siz.height + 30.f });
+    m_EventText.setCharacterSize(32);
+    m_EventText.setFillColor(sf::Color::White);
+    m_EventText.setString("Event: None");
   }
 
-  void Screen::Connect(std::string slot, bsig::signal<void(void)> ftn)
+  bool Screen::Add(Widget::Ptr widget, std::string ID)
   {
+    if (ID == "")
+      ID = std::to_string(SFUI::GenerateID());
 
+    if (m_Widgets.find(ID) != m_Widgets.end()) {
+      return false;
+    }
+
+    m_Widgets[ID] = widget;
+    widget->m_Screen = this;
+    widget->m_Parent = this;
+
+    //Screens use their own framebuffer, so we don't need to move our children
+    m_TestText.setString("Widget count: " + std::to_string(m_Widgets.size()));
+    return true;
   }
 
-  void Screen::Connect(std::string slot, bsig::signal<void(Vec2i)> ftn)
+  bool Screen::Remove(Widget::Ptr widget)
   {
-
+    return GenericContainer::Remove(widget);
   }
 
-  void Screen::Connect(std::string slot, bsig::signal<void(Vec2i, MouseButton)> ftn)
+  bool Screen::Remove(std::string ID)
   {
+    return GenericContainer::Remove(ID);
+  }
 
+  bool Screen::RemoveAll()
+  {
+    return GenericContainer::RemoveAll();
+  }
+
+  bool Screen::HideAll()
+  {
+    return GenericContainer::HideAll();
+  }
+
+  bool Screen::ShowAll()
+  {
+    return GenericContainer::ShowAll();
+  }
+
+  std::shared_ptr<sf::RenderWindow> Screen::GetWindow() const
+  {
+    if (!m_Window)
+      return m_Parent->GetWindow();
+
+    return m_Window;
+  }
+
+  void Screen::Destroy()
+  {
+    m_Widgets.clear();
+    m_Font.reset();
+    Widget::Disable();
+  }
+
+  void Screen::SetFont(std::shared_ptr<sf::Font> Font)
+  {
+    m_Font = Font;
+    for (auto & widget : m_Widgets)
+      widget.second->SetFont(Font);
+
+    m_TestText.setFont(*Font);
+    m_EventText.setFont(*Font);
+  }
+
+  void Screen::SetWindow(std::shared_ptr<sf::RenderWindow> Win)
+  {
+    m_Window = Win;
   }
 
 }

@@ -1,5 +1,5 @@
-#ifndef SFEDITOR_TEXTURENODE_H
-#define SFEDITOR_TEXTURENODE_H
+#ifndef SFEDITOR_SOLIDBUTTON_H
+#define SFEDITOR_SOLIDBUTTON_H
 
 ////////////////////////////////////////////////////////////
 //
@@ -34,6 +34,7 @@
 ////////////////////////////////////////////////////////////
 // Internal Headers
 ////////////////////////////////////////////////////////////
+#include <UI/Widgets/FlatButton.h>
 
 ////////////////////////////////////////////////////////////
 // Dependency Headers
@@ -43,4 +44,43 @@
 // Standard Library Headers
 ////////////////////////////////////////////////////////////
 
-#endif // SFEDITOR_TEXTURENODE_H
+namespace SFUI
+{
+
+  class SolidButton : public FlatButton
+  {
+  public:
+    PTR_TYPEDEF(SolidButton);
+
+    SolidButton(Widget *parent = nullptr, std::shared_ptr<Label> label = nullptr);
+    virtual ~SolidButton() override;
+    virtual void Update() override;
+    virtual void Render(std::shared_ptr<RenderTarget> Target) override;
+    static SolidButton::Ptr Create(Widget *parent = nullptr, std::shared_ptr<Label> label = nullptr);
+    virtual void SetSize(const Vec2i &v) override;
+    virtual void SetPosition(const Vec2i &v) override;
+    virtual void SetBackgroundColorNormal(const sf::Color &color);
+    virtual void SetBackgroundColorHighlighted(const sf::Color &color);
+    virtual void SetBackgroundColorPressed(const sf::Color &color);
+
+  protected:
+    virtual void OnHover() override;
+    virtual void OnEnter(Vec2i where) override;
+    virtual void OnExit(Vec2i where) override;
+
+    virtual bool HandleMousePress(const UserEvent &event) override;
+    virtual bool HandleMouseRelease(const UserEvent &event) override;
+    virtual bool HandleMouseMovement(const UserEvent &event) override;
+    virtual bool HandleKeyPressed(const UserEvent &event) override;
+    virtual bool HandleKeyReleased(const UserEvent &event) override;
+    virtual bool HandleTextEntered(const UserEvent &event) override;
+
+    sf::RectangleShape m_BGShape;
+    sf::Color m_BGColorNormal;
+    sf::Color m_BGColorHighlighted;
+    sf::Color m_BGColorPressed;
+  };
+
+}
+
+#endif // SFEDITOR_SOLIDBUTTON_H

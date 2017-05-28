@@ -1,5 +1,5 @@
-#ifndef SFEDITOR_VIEW_H
-#define SFEDITOR_VIEW_H
+#ifndef SFEDITOR_EXPANDABLELIST_H
+#define SFEDITOR_EXPANDABLELIST_H
 
 ////////////////////////////////////////////////////////////
 //
@@ -34,13 +34,11 @@
 ////////////////////////////////////////////////////////////
 // Internal Headers
 ////////////////////////////////////////////////////////////
-#include <UI/Vec.h>
-#include <UI/Rect.h>
+#include <UI/Widgets/Expandable.h>
 
 ////////////////////////////////////////////////////////////
 // Dependency Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/Graphics.hpp>
 
 ////////////////////////////////////////////////////////////
 // Standard Library Headers
@@ -49,15 +47,48 @@
 namespace SFUI
 {
 
-  class View
+  class ExpandableList : public Expandable
   {
   public:
-   
+    PTR_TYPEDEF(ExpandableList);
+    ExpandableList();
+    ExpandableList(Widget::RPtr Expander = nullptr, int MaxItems = 100);
+    virtual ~ExpandableList() override;
 
-  private:
+    static ExpandableList::Ptr Create(Widget::RPtr Parent = nullptr, int MaxItems = 100);
 
+    virtual Vec2i GetChildOffset() const override;
+    virtual bool Add(Widget::Ptr widget, std::string ID /* = "" */) override;
+    virtual bool HandleEvent(const UserEvent &event) override;
+    virtual void Render(std::shared_ptr<RenderTarget> Target) override;
+    virtual void SetExpandableSize(Vec2i size) override;
+    virtual void SetUnexpandedSize(Vec2i size) override;
+    virtual void SetSize(const Vec2i &v) override;
+    virtual void SetPosition(const Vec2i &v) override;
+    virtual bool IsExpanded() const override;
+    virtual void Expand() override;
+    virtual void Contract() override;
+
+    virtual void SetBackgroundColor(const sf::Color &color);
+    virtual void SetBackgroundOutlineColor(const sf::Color &color);
+    virtual void SetBackgroundOutlineThickness(int thickness);
+
+  protected:
+    virtual bool HandleMousePress(const UserEvent &event) override;
+    virtual bool HandleMouseRelease(const UserEvent &event) override;
+    virtual bool HandleMouseMovement(const UserEvent &event) override;
+    virtual bool HandleKeyPressed(const UserEvent &event) override;
+    virtual bool HandleKeyReleased(const UserEvent &event) override;
+    virtual bool HandleTextEntered(const UserEvent &event) override;
+
+    int m_MaxItems;
+    sf::RectangleShape m_BGRect;
+    sf::Color m_BackgroundColor;
+    Vec2i m_ListSize;
+    Vec2i m_ItemSpacing;
+    Vec2i m_NextItemPos;
   };
 
 }
 
-#endif // SFEDITOR_VIEW_H
+#endif // SFEDITOR_EXPANDABLELIST_H

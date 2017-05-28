@@ -35,6 +35,7 @@
 // Internal Headers
 ////////////////////////////////////////////////////////////
 #include <UI/Widgets/Clickable.h>
+#include <UI/Widgets/Label.h>
 
 ////////////////////////////////////////////////////////////
 // Dependency Headers
@@ -47,19 +48,55 @@
 namespace SFUI
 {
 
-  class FlatButtonRenderer;
-
   class FlatButton : public Clickable
   {
   public:
     PTR_TYPEDEF(FlatButton);
-    void SetText(const std::string &Text);
-    std::string GetText() const;
+    virtual ~FlatButton() override;
+    FlatButton();
+    FlatButton(Widget *parent, std::shared_ptr<Label> label = nullptr);
+    friend class FlatButtonRenderer;
 
+    static FlatButton::Ptr Create(Widget *parent, std::shared_ptr<Label> label = nullptr);
+
+    virtual void Render(std::shared_ptr<RenderTarget> Target) override;
+    virtual void Update() override;
+    virtual void SetFont(std::shared_ptr<sf::Font> Font) override;
+    virtual void SetText(const std::string &Text);
+    virtual void SetTextSize(std::uint32_t size);
+    virtual void SetTextColorNormal(sf::Color color);
+    virtual void SetTextColorHovered(sf::Color color);
+    virtual void SetTextColorPressed(sf::Color color);
+    std::string  GetText() const;
+    virtual void SetLabelAlignment(Alignment alignment);
+    virtual void SetLabelAlignment(VerticalAlignment vAlignment, HorizontalAlignment hAlignment);
+
+    virtual void Connect(std::string slot, std::function<void(Vec2i, MouseButton)> ftn) override;
   protected:
-    std::shared_ptr<FlatButtonRenderer> m_Renderer;
 
-    std::string m_Text;
+    virtual void OnKilled() override;
+    virtual void OnCreated() override;
+    virtual void OnHover() override;
+    virtual void OnEnter(Vec2i where) override;
+    virtual void OnExit(Vec2i where) override;
+    virtual void AddedTo(Screen *Scr) override;
+    virtual void Initialize() override;
+    virtual void Cleanup() override;
+
+    virtual bool HandleMousePress(const UserEvent &event) override;
+    virtual bool HandleMouseRelease(const UserEvent &event) override;
+    virtual bool HandleMouseMovement(const UserEvent &event) override;
+    virtual bool HandleKeyPressed(const UserEvent &event) override;
+    virtual bool HandleKeyReleased(const UserEvent &event) override;
+    virtual bool HandleTextEntered(const UserEvent &event) override;
+
+    std::uint32_t m_LabelAlignment;
+    Label::Ptr m_Label;
+    unsigned int m_LabelTextSize;
+    bool m_Hovered = false;
+    sf::Color m_TextColorNormal;
+    sf::Color m_TextColorHighlighted;
+    sf::Color m_TextColorPressed;
   };
 
 }

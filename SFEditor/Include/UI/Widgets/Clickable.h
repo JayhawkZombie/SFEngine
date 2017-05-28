@@ -51,21 +51,14 @@ namespace SFUI
   {
   public:
     PTR_TYPEDEF(Clickable);
-    virtual WidgetRenderer* Renderer() override = 0;
-    virtual sf::View View() const override;
 
-    virtual bool HandleEvent(sf::Event event) override = 0;
-    virtual sf::IntRect Bounds() const override;
-
-    virtual void Connect(std::string slot, bsig::signal<void(void)> ftn) override;
-    virtual void Connect(std::string slot, bsig::signal<void(Vec2i)> ftn) override;
-    virtual void Connect(std::string slot, bsig::signal<void(Vec2i, MouseButton)> ftn) override;
+    bool HandleEvent(const UserEvent &event) override final;
 
     enum
     {
-      Rest = 0b0001,
-      Hovered = 0b0010,
-      Pressed = 0b0100
+      Rest    = 0b00100000,
+      Hovered = 0b01000000,
+      Pressed = 0b10000000
     };
 
     int ClickState() const;
@@ -73,6 +66,8 @@ namespace SFUI
   protected:
     Clickable();
     virtual ~Clickable() override;
+
+    std::function<void(Vec2i, MouseButton)> OnClickedCallback;
 
     virtual void OnKilled() override = 0;
     virtual void OnCreated() override = 0;

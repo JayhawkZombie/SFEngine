@@ -36,37 +36,10 @@
     <ClInclude Include="Include\UI\Theming\Color.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Include\UI\Rendering\Renderers\WidgetRenderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\UI\Rendering\ScreenGraph\GraphNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\UI\Rendering\ScreenGraph\TextNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\UI\Rendering\ScreenGraph\TextureNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\UI\Rendering\ScreenGraph\ClippingNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\UI\Rendering\ScreenGraph\ScreenGraph.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\UI\Rendering\View.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\UI\Screen.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Include\UI\Widgets\Clickable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Include\UI\Widgets\FlatButton.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\UI\Rendering\Renderers\FlatButtonRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Include\UI\Widgets\GenericContainer.h">
@@ -81,6 +54,27 @@
     <ClInclude Include="Include\UI\Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Include\UI\Widgets\Label.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\UI\Widgets\SolidButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\UI\Widgets\Expandable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\UI\Spacing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\UI\Widgets\ExpandableList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Events\UserEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\UI\Widgets\Screen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SFEditor.cpp">
@@ -90,12 +84,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\UI\Widgets\Clickable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\UI\Rendering\Renderers\FlatButtonRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\UI\Rendering\Renderers\WidgetRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\UI\Widgets\Page.cpp">
@@ -114,6 +102,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\UI\Window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\UI\Widgets\Label.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\UI\Widgets\SolidButton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\UI\Widgets\Expandable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\UI\Widgets\ExpandableList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Events\UserEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

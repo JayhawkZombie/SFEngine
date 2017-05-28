@@ -45,6 +45,35 @@
 namespace SFUI
 {
 
+  GenericContainer::GenericContainer()
+    : m_Canvas(std::make_shared<sf::RenderTexture>()), m_SizeSet(false)
+  {
+  }
+
+  GenericContainer::~GenericContainer()
+  {
+    m_Canvas.reset();
+  }
+
+  void GenericContainer::Update()
+  {
+    for (auto & widget : m_Widgets)
+      widget.second->Update();
+  }
+
+  Vec2i GenericContainer::GetChildOffset() const
+  {
+    //The child should be offset by whatever our position is
+    //  but just in case we are also inside of an additional container
+    //  we should also add whatever our potential offset is ourself
+    //  (ie for multi-level offsets, like a listbox inside of a popup window)
+    
+    if (m_Parent)
+      return m_Position + m_Parent->GetChildOffset();
+
+    return m_Position;
+  }
+  
   bool GenericContainer::Add(Widget::Ptr widget, std::string ID)
   {
     if (!widget)
@@ -55,6 +84,7 @@ namespace SFUI
     }
 
     widget->m_Parent = this;
+
     m_Widgets[ID] = widget;
     return true;
   }
@@ -104,6 +134,97 @@ namespace SFUI
     }
 
     return true;
+  }
+
+  void GenericContainer::SetSize(const Vec2i & v)
+  {
+    Widget::SetSize(v);
+    m_Canvas->create(v.x, v.y);
+    m_Sprite.setTexture(m_Canvas->getTexture());
+  }
+
+  void GenericContainer::SetPosition(const Vec2i & v)
+  {
+    Widget::SetPosition(v);
+    m_Sprite.setPosition(static_cast<sf::Vector2f>( v ));
+  }
+
+  void GenericContainer::Move(const Vec2i & v)
+  {
+  }
+
+  bool GenericContainer::HandleEvent(const UserEvent &event)
+  {
+    UserEvent e(event);
+    e.OffsetFrom(m_Position);
+
+    bool handled = false;
+    for (auto & wid : m_Widgets) {
+      if (Widget::BaseHandleEvent(wid.second.get(), e))
+        return true;
+    }
+
+    return false;
+  }
+
+  bool GenericContainer::HandleMousePress(const UserEvent &event)
+  {
+    IntRect bounds;
+    for (auto & wid : m_Widgets) {
+      bounds = wid.second->Bounds();
+      if (wid.second->IsRespondingTo(EventType::MousePressed) && event.IsMouseOver(bounds)) {
+        wid.second->HandleMousePress(event);
+        return true;
+      }
+    }
+    
+    ChangeMousedOverWidget(event.GetCurrentMousePos());
+    return false;
+  }
+
+  bool GenericContainer::HandleMouseRelease(const UserEvent &event)
+  {
+    IntRect bounds;
+    for (auto & wid : m_Widgets) {
+      bounds = wid.second->Bounds();
+      if (wid.second->IsRespondingTo(EventType::MouseReleased) && event.IsMouseOver(bounds)) {
+        wid.second->HandleMouseRelease(event);
+        return true;
+      }
+    }
+
+    ChangeMousedOverWidget(event.GetCurrentMousePos());
+    return false;
+  }
+
+  bool GenericContainer::HandleMouseMovement(const UserEvent &event)
+  {
+    IntRect bounds;
+    for (auto & wid : m_Widgets) {
+      bounds = wid.second->Bounds();
+      if (wid.second->IsRespondingTo(EventType::MouseMoved) && event.IsMouseOver(bounds)) {
+        wid.second->HandleMouseMovement(event);
+        return true;
+      }
+    }
+
+    ChangeMousedOverWidget(event.GetCurrentMousePos());
+    return false;
+  }
+
+  bool GenericContainer::HandleKeyPressed(const UserEvent &event)
+  {
+    return false;
+  }
+
+  bool GenericContainer::HandleKeyReleased(const UserEvent &event)
+  {
+    return false;
+  }
+
+  bool GenericContainer::HandleTextEntered(const UserEvent &event)
+  {
+    return false;
   }
 
 }

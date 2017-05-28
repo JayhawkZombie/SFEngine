@@ -1,5 +1,5 @@
-#ifndef SFEDITOR_GRAPHNODE_H
-#define SFEDITOR_GRAPHNODE_H
+#ifndef SFEDITOR_SPACING_H
+#define SFEDITOR_SPACING_H
 
 ////////////////////////////////////////////////////////////
 //
@@ -38,9 +38,25 @@
 ////////////////////////////////////////////////////////////
 // Dependency Headers
 ////////////////////////////////////////////////////////////
+#include <boost/geometry.hpp>
+#include <boost/geometry/geometries/point.hpp>
+#include <boost/geometry/geometries/box.hpp>
+#include <boost/geometry/index/rtree.hpp>
 
 ////////////////////////////////////////////////////////////
 // Standard Library Headers
 ////////////////////////////////////////////////////////////
 
-#endif // SFEDITOR_GRAPHNODE_H
+namespace bg = boost::geometry;
+namespace bgi = boost::geometry::index;
+
+namespace SFUI
+{
+
+  using Point         = bg::model::point<float, 2, bg::cs::cartesian>;
+  using BoundingBox   = bg::model::box<Point>;
+  using value         = std::pair<BoundingBox, unsigned>;
+
+}
+
+#endif // SFEDITOR_SPACING_H
