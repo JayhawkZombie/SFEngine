@@ -13,6 +13,7 @@ int main()
 
   SFUI::Screen::Ptr Screen = SFUI::Screen::Create(Window, Vec2i(Window->getSize()), nullptr);
   Screen->SetWindow(Window);
+  Window->setVerticalSyncEnabled(true);
 
   std::shared_ptr<sf::Font> Font = std::make_shared<sf::Font>();
   system("dir");
@@ -55,13 +56,23 @@ int main()
 
   SFUI::ExpandableList::Ptr list = SFUI::ExpandableList::Create(nullptr, 20);
   list->SetExpandableSize(Vec2i(100, 500));
-  list->SetUnexpandedSize(Vec2i(100, 0));
+  list->SetUnexpandedSize(Vec2i(100, 100));
   list->SetSize(Vec2i(100, 500));
   list->SetBackgroundColor(sf::Color(48, 48, 48));
   list->SetBackgroundOutlineColor(sf::Color(109, 109, 109));
   list->SetBackgroundOutlineThickness(-2);
   list->SetPosition(Vec2i(200, 200));
   list->Expand();
+
+  sbutton->Connect("clicked",
+    [list](SFUI::Vec2i where, SFUI::MouseButton btn)
+    {
+      if (list->IsExpanded())
+        list->Contract();
+      else
+        list->Expand();
+    }
+  );
 
   SFUI::SolidButton::Ptr sbutton2 = SFUI::SolidButton::Create(nullptr, nullptr);
   sbutton2->SetFont(Font);

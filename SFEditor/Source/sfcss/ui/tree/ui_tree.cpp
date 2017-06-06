@@ -1,6 +1,3 @@
-#ifndef SFEDITOR_SPACING_H
-#define SFEDITOR_SPACING_H
-
 ////////////////////////////////////////////////////////////
 //
 // MIT License
@@ -34,29 +31,28 @@
 ////////////////////////////////////////////////////////////
 // Internal Headers
 ////////////////////////////////////////////////////////////
+#include <sfcss/ui/tree/ui_tree.h>
 
 ////////////////////////////////////////////////////////////
 // Dependency Headers
 ////////////////////////////////////////////////////////////
-#include <boost/geometry.hpp>
-#include <boost/geometry/geometries/point.hpp>
-#include <boost/geometry/geometries/box.hpp>
-#include <boost/geometry/index/rtree.hpp>
 
 ////////////////////////////////////////////////////////////
 // Standard Library Headers
 ////////////////////////////////////////////////////////////
 
-namespace bg = boost::geometry;
-namespace bgi = boost::geometry::index;
-
-namespace SFUI
+namespace css
 {
 
-  using Point         = bg::model::point<float, 2, bg::cs::cartesian>;
-  using BoundingBox   = bg::model::box<Point>;
-  using value         = std::pair<BoundingBox, unsigned>;
+  widget_tree::widget_tree(css_widget::rptr root_widget /*= nullptr*/)
+  {
+
+  }
+
+  css::widget_tree::sptr widget_tree::create(css_widget::rptr root /*= nullptr*/)
+  {
+    widget_tree::sptr tree = std::make_shared<widget_tree>(root);
+    return tree;
+  }
 
 }
-
-#endif // SFEDITOR_SPACING_H

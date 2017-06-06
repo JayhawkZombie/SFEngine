@@ -70,8 +70,7 @@ namespace SFUI
 
   void Expandable::Update()
   {
-    if (m_IsExpanded)
-      GenericContainer::Update();
+    GenericContainer::Update();
   }
 
   void Expandable::Render(std::shared_ptr<RenderTarget> Target)

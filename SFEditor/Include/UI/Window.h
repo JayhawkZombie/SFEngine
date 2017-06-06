@@ -77,7 +77,7 @@ namespace SFUI
 
     void OnKilled() override final;
     void OnCreated() override final;
-    void OnHover() override final;
+    void OnHover(Vec2i where) override final;
     void OnEnter(Vec2i where) override final;
     void OnExit(Vec2i where) override final;
     void AddedTo(Screen *Scr) override final;

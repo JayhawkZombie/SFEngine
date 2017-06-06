@@ -49,6 +49,35 @@ namespace SFUI
     FlatButton::Ptr button = std::make_shared<FlatButton>(parent, label);
     return button;
   }
+
+  SFUI::FlatButton::FlatButton::Ptr FlatButton::Create
+  (
+    Vec2i Pos, 
+    Vec2i Size, 
+    const std::string &Text, 
+    unsigned int TextSize, 
+    std::shared_ptr<sf::Font> Font, 
+    Alignment TextAlignment, 
+    sf::Color TextColorNormal, 
+    sf::Color TextColorHighlighted,  
+    sf::Color TextColorPressed, 
+    Widget::RPtr Parent
+  )
+  {
+    FlatButton::Ptr button = std::make_shared<FlatButton>(Parent, nullptr);
+
+    button->SetPosition(Pos);
+    button->SetSize(Size);
+    button->SetTextSize(TextSize);
+    button->SetText(Text);
+    button->SetLabelAlignment(TextAlignment);
+    button->SetTextColorNormal(TextColorNormal);
+    button->SetTextColorHovered(TextColorHighlighted);
+    button->SetTextColorPressed(TextColorPressed);
+
+    return button;
+  }
+
   void FlatButton::Render(std::shared_ptr<RenderTarget> Target)
   {
     auto oldview = Target->getView();
@@ -165,15 +194,25 @@ namespace SFUI
 
   }
 
-  void FlatButton::OnHover()
+  void FlatButton::OnHover(Vec2i where)
   {
-    
+    m_ClickState = Clickable::Hovered;
   }
 
   void FlatButton::OnEnter(Vec2i where)
   {
     m_ClickState = Clickable::Hovered;
     m_Label->SetTextColor(m_TextColorHighlighted);
+  }
+
+  void FlatButton::OnPressed(Vec2i where)
+  {
+    m_ClickState = Clickable::Pressed;
+  }
+
+  void FlatButton::OnReleased(Vec2i where)
+  {
+    m_ClickState = Clickable::Rest;
   }
 
   void FlatButton::OnExit(Vec2i where)
@@ -197,16 +236,16 @@ namespace SFUI
 
   }
 
-  bool FlatButton::HandleMousePress(const UserEvent &event)
+ /* bool FlatButton::HandleMousePress(const UserEvent &event)
   {
-    m_ClickState = Clickable::Pressed;
+    __super::HandleMousePress(event);
     MouseOverWidget = this;
     return true;
   }
 
   bool FlatButton::HandleMouseRelease(const UserEvent &event)
   {
-    m_ClickState = Clickable::Hovered;
+    __super::HandleMouseRelease(event);
     MouseOverWidget = this;
     if (OnClickedCallback)
       OnClickedCallback(event.GetCurrentMousePos(), event.GetMouseButton());
@@ -215,6 +254,7 @@ namespace SFUI
 
   bool FlatButton::HandleMouseMovement(const UserEvent &event)
   {
+    __super::HandleMouseMovement(event);
     MouseOverWidget = this;
     if (m_ClickState != Clickable::Pressed) {
       m_ClickState = Clickable::Hovered;
@@ -235,6 +275,6 @@ namespace SFUI
   bool FlatButton::HandleTextEntered(const UserEvent &event)
   {
     return false;
-  }
+  }*/
 
 }

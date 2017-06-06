@@ -87,7 +87,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\NuklearTemplates\Public;$(SolutionDir)\NuklearTemplates;$(SolutionDir)\Dependencies\glad\include;$(SolutionDir)\Dependencies\boost_1_64_0;$(SolutionDir)\Editor\Public;$(SolutionDir)\Dependencies\Kairos;$(SolutionDir)\Dependencies\Plinth;$(SolutionDir)\Dependencies\jsoncpp;$(SolutionDir)\Dependencies\Thor;$(SolutionDir)\Dependencies\TGUI;$(SolutionDir)\Dependencies\SFML;$(SolutionDir)\Dependencies\SelbaWard;$(SolutionDir)\Dependencies\rapidxml;$(SolutionDir)\Dependencies\Physics;$(SolutionDir)\Dependencies\imgui-sfml;$(SolutionDir)\Dependencies\IMGUI;$(SolutionDir)\Dependencies\ChaiScript;$(SolutionDir)\Dependencies\cereal;$(SolutionDir)\Dependencies\Aurora\include;$(SolutionDir)\Source\Public;$(SolutionDir)\Dependencies;$(ProjectDir);$(SolutionDir)/SFEditor/Include;$(SolutionDir)/Dependencies/boost_1_64_0;$(SolutionDir)/Dependencies;$(SolutionDir)/SFEditor</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\SFEditor\Include;$(SolutionDir);$(SolutionDir)\NuklearTemplates\Public;$(SolutionDir)\NuklearTemplates;$(SolutionDir)\Dependencies\glad\include;$(SolutionDir)\Dependencies\boost_1_64_0;$(SolutionDir)\Editor\Public;$(SolutionDir)\Dependencies\Kairos;$(SolutionDir)\Dependencies\Plinth;$(SolutionDir)\Dependencies\jsoncpp;$(SolutionDir)\Dependencies\Thor;$(SolutionDir)\Dependencies\TGUI;$(SolutionDir)\Dependencies\SFML;$(SolutionDir)\Dependencies\SelbaWard;$(SolutionDir)\Dependencies\rapidxml;$(SolutionDir)\Dependencies\Physics;$(SolutionDir)\Dependencies\imgui-sfml;$(SolutionDir)\Dependencies\IMGUI;$(SolutionDir)\Dependencies\ChaiScript;$(SolutionDir)\Dependencies\cereal;$(SolutionDir)\Dependencies\Aurora\include;$(SolutionDir)\Source\Public;$(SolutionDir)\Dependencies;$(ProjectDir);$(SolutionDir)/SFEditor/Include;$(SolutionDir)/Dependencies/boost_1_64_0;$(SolutionDir)/Dependencies;$(SolutionDir)/SFEditor</AdditionalIncludeDirectories>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS /std:c++14 /volatile:iso %(AdditionalOptions)</AdditionalOptions>
@@ -152,10 +152,56 @@
   <ItemGroup>
     <ClInclude Include="Include\Common.h" />
     <ClInclude Include="Include\Events\UserEvent.h" />
+    <ClInclude Include="Include\sfcss\callback\callback.h" />
+    <ClInclude Include="Include\sfcss\common.h" />
+    <ClInclude Include="Include\sfcss\css_element\css_element.h" />
+    <ClInclude Include="Include\sfcss\css_element\css_element_callbacks.h" />
+    <ClInclude Include="Include\sfcss\events\userevent.h" />
+    <ClInclude Include="Include\sfcss\parsing\parse.h" />
+    <ClInclude Include="Include\sfcss\parsing\tokens.h" />
+    <ClInclude Include="Include\sfcss\preproc.h" />
+    <ClInclude Include="Include\sfcss\property\animation.h" />
+    <ClInclude Include="Include\sfcss\property\background.h" />
+    <ClInclude Include="Include\sfcss\property\border.h" />
+    <ClInclude Include="Include\sfcss\property\color.h" />
+    <ClInclude Include="Include\sfcss\property\enabled.h" />
+    <ClInclude Include="Include\sfcss\property\font.h" />
+    <ClInclude Include="Include\sfcss\property\position.h" />
+    <ClInclude Include="Include\sfcss\property\properties.h" />
+    <ClInclude Include="Include\sfcss\property\sizing.h" />
+    <ClInclude Include="Include\sfcss\property\visibility.h" />
+    <ClInclude Include="Include\sfcss\renderering\renderers\screen_renderer.h" />
+    <ClInclude Include="Include\sfcss\renderering\renderers\widget_renderer.h" />
+    <ClInclude Include="Include\sfcss\renderering\tree\geometry_node.h" />
+    <ClInclude Include="Include\sfcss\renderering\tree\render_node.h" />
+    <ClInclude Include="Include\sfcss\renderering\tree\render_tree.h" />
+    <ClInclude Include="Include\sfcss\renderering\tree\text_node.h" />
+    <ClInclude Include="Include\sfcss\selector\selector.h" />
+    <ClInclude Include="Include\sfcss\sfcss\sfcss.h" />
+    <ClInclude Include="Include\sfcss\sfml_types.h" />
+    <ClInclude Include="Include\sfcss\specificity\specificity.h" />
+    <ClInclude Include="Include\sfcss\stylesheet\stylesheet.h" />
+    <ClInclude Include="Include\sfcss\types.h" />
+    <ClInclude Include="Include\sfcss\ui\event_handler.h" />
+    <ClInclude Include="Include\sfcss\ui\signals\signal.hpp" />
+    <ClInclude Include="Include\sfcss\ui\tree\clickable_node.h" />
+    <ClInclude Include="Include\sfcss\ui\tree\screen_node.h" />
+    <ClInclude Include="Include\sfcss\ui\tree\ui_node.h" />
+    <ClInclude Include="Include\sfcss\ui\tree\ui_tree.h" />
+    <ClInclude Include="Include\sfcss\ui\ui.h" />
+    <ClInclude Include="Include\sfcss\ui\widget.h" />
+    <ClInclude Include="Include\sfcss\ui\widgets\button_base.h" />
+    <ClInclude Include="Include\sfcss\ui\widgets\clickable.h" />
+    <ClInclude Include="Include\sfcss\ui\widgets\click_button.h" />
+    <ClInclude Include="Include\sfcss\ui\widgets\screen.h" />
+    <ClInclude Include="Include\sfcss\utils\box.h" />
+    <ClInclude Include="Include\sfcss\utils\cubic_bezier.h" />
+    <ClInclude Include="Include\sfcss\utils\quad_tree.h" />
+    <ClInclude Include="Include\sfcss\utils\util.h" />
+    <ClInclude Include="Include\sfcss\utils\vec.h" />
     <ClInclude Include="Include\UI\Globals.h" />
     <ClInclude Include="Include\UI\Widgets\Screen.h" />
     <ClInclude Include="Include\UI\SFUI.h" />
-    <ClInclude Include="Include\UI\Spacing.h" />
     <ClInclude Include="Include\UI\Theming\Color.h" />
     <ClInclude Include="Include\UI\Theming\Theme.h" />
     <ClInclude Include="Include\UI\Widgets\Clickable.h" />
@@ -165,13 +211,37 @@
     <ClInclude Include="Include\UI\Widgets\GenericContainer.h" />
     <ClInclude Include="Include\UI\Widgets\Label.h" />
     <ClInclude Include="Include\UI\Widgets\Page.h" />
+    <ClInclude Include="Include\UI\Widgets\Selectable.h" />
     <ClInclude Include="Include\UI\Widgets\SolidButton.h" />
     <ClInclude Include="Include\UI\Widgets\Widget.h" />
     <ClInclude Include="Include\UI\Window.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Include\sfcss\specificity\main.cpp" />
     <ClCompile Include="Source\Events\UserEvent.cpp" />
+    <ClCompile Include="Source\sfcss\callback\types.cpp" />
+    <ClCompile Include="Source\sfcss\common.cpp" />
+    <ClCompile Include="Source\sfcss\parsing\parse.cpp" />
+    <ClCompile Include="Source\sfcss\parsing\tokens.cpp" />
+    <ClCompile Include="Source\sfcss\property\color.cpp" />
+    <ClCompile Include="Source\sfcss\property\position.cpp" />
+    <ClCompile Include="Source\sfcss\rendering\renderers\screen_renderer.cpp" />
+    <ClCompile Include="Source\sfcss\rendering\renderers\widget_renderer.cpp" />
+    <ClCompile Include="Source\sfcss\rendering\tree\geometry_node.cpp" />
+    <ClCompile Include="Source\sfcss\rendering\tree\render_node.cpp" />
+    <ClCompile Include="Source\sfcss\rendering\tree\text_node.cpp" />
+    <ClCompile Include="Source\sfcss\ui\event_handler.cpp" />
+    <ClCompile Include="Source\sfcss\ui\tree\clickable_node.cpp" />
+    <ClCompile Include="Source\sfcss\ui\tree\screen_node.cpp" />
+    <ClCompile Include="Source\sfcss\ui\tree\ui_node.cpp" />
+    <ClCompile Include="Source\sfcss\ui\tree\ui_tree.cpp" />
+    <ClCompile Include="Source\sfcss\ui\css_widget.cpp" />
+    <ClCompile Include="Source\sfcss\ui\widgets\button_base.cpp" />
+    <ClCompile Include="Source\sfcss\ui\widgets\clickable_widget.cpp" />
+    <ClCompile Include="Source\sfcss\ui\widgets\screen_widget.cpp" />
+    <ClCompile Include="Source\sfcss\utils\cubic_bezier.cpp" />
+    <ClCompile Include="Source\sfcss\utils\quad_tree.cpp" />
     <ClCompile Include="Source\UI\Widgets\Expandable.cpp" />
     <ClCompile Include="Source\UI\Widgets\ExpandableList.cpp" />
     <ClCompile Include="Source\UI\Widgets\FlatButton.cpp" />
@@ -182,6 +252,7 @@
     <ClCompile Include="Source\UI\Widgets\Label.cpp" />
     <ClCompile Include="Source\UI\Widgets\Page.cpp" />
     <ClCompile Include="Source\UI\Widgets\Screen.cpp" />
+    <ClCompile Include="Source\UI\Widgets\Selectable.cpp" />
     <ClCompile Include="Source\UI\Widgets\SolidButton.cpp" />
     <ClCompile Include="Source\UI\Widgets\Widget.cpp">
       <DeploymentContent>false</DeploymentContent>

@@ -54,6 +54,8 @@ namespace SFUI
   class GenericContainer;
   class Expandable;
   class ExpandableList;
+  class Selectable;
+  class Label;
 
   namespace bsig = boost::signals2;
   using MouseButton = sf::Mouse::Button;
@@ -99,6 +101,8 @@ using RPtr = CLASS*;\
     friend class GenericContainer;
     friend class Expandable;
     friend class ExpandableList;
+    friend class Selectable;
+
     PTR_TYPEDEF(Widget);
     virtual void Render(std::shared_ptr<RenderTarget> Target) = 0;
     virtual void Update();
@@ -121,6 +125,8 @@ using RPtr = CLASS*;\
     virtual std::shared_ptr<sf::RenderWindow> GetWindow() const;
     virtual Vec2i ToLocalCoords(Vec2i v);
     virtual void AlignInBounds(sf::IntRect bounds, Alignment alignment);
+    virtual void SetLabel(std::shared_ptr<Label> label);
+    virtual void AlignLabel(Alignment alignment);
     virtual bool IsRespondingTo(EventType type) const;
 
     virtual void Connect(std::string slot, std::function<void(void)> ftn);
@@ -145,6 +151,7 @@ using RPtr = CLASS*;\
 
   protected:
     static bool BaseHandleEvent(Widget::RPtr widget, const UserEvent &event);
+    void SetParent(Widget::RPtr parent);
     
     std::function<void(void)> OnKilledCallback;
     std::function<void(void)> OnCreatedCallback;
@@ -164,9 +171,11 @@ using RPtr = CLASS*;\
 
     virtual void OnKilled();
     virtual void OnCreated();
-    virtual void OnHover();
+    virtual void OnHover(Vec2i where);
     virtual void OnEnter(Vec2i where);
     virtual void OnExit(Vec2i where);
+    virtual void OnPressed(Vec2i where);
+    virtual void OnReleased(Vec2i where);
     virtual void AddedTo(Screen *Scr);
     virtual void Initialize();
     virtual void Cleanup();
@@ -204,9 +213,8 @@ using RPtr = CLASS*;\
     Vec2i   m_Size;
     std::shared_ptr<sf::Font> m_Font;
     static Widget::RPtr MouseOverWidget;
-
-    BoundingBox m_BoundingBox;
-    Point m_PPosition;
+    std::shared_ptr<Label> m_Label;
+    Alignment m_LabelAlignment;
   };
 
 }

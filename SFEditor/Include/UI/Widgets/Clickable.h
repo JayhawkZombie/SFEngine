@@ -69,14 +69,25 @@ namespace SFUI
 
     std::function<void(Vec2i, MouseButton)> OnClickedCallback;
 
-    virtual void OnKilled() override = 0;
-    virtual void OnCreated() override = 0;
-    virtual void OnHover() override = 0;
+    virtual void OnClicked();
+
+    virtual void OnKilled() override;
+    virtual void OnCreated() override;
+    virtual void OnHover(Vec2i where) override = 0;
     virtual void OnEnter(Vec2i where) override = 0;
     virtual void OnExit(Vec2i where) override = 0;
-    virtual void AddedTo(Screen *Scr) override = 0;
-    virtual void Initialize() override = 0;
-    virtual void Cleanup() override = 0;
+    virtual void OnPressed(Vec2i where) override = 0;
+    virtual void OnReleased(Vec2i where) override = 0;
+    virtual void AddedTo(Screen *Scr) override;
+    virtual void Initialize() override;
+    virtual void Cleanup() override;
+
+    virtual bool HandleMouseMovement(const UserEvent &event) override;
+    virtual bool HandleMousePress(const UserEvent &event) override;
+    virtual bool HandleMouseRelease(const UserEvent &event) override;
+    virtual bool HandleKeyPressed(const UserEvent &event) override;
+    virtual bool HandleKeyReleased(const UserEvent &event) override;
+    virtual bool HandleTextEntered(const UserEvent &event) override;
 
     //Additions for clickable items
     bsig::signal<void(Vec2i, MouseButton)> Clicked;

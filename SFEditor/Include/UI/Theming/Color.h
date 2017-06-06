@@ -46,22 +46,11 @@
 
 namespace SFUI
 {
-  class Color
+  struct ColorAttributes
   {
-  public:
-    Color();
-    Color(const Color &C);
-    Color(const sf::Color &C);
-    ~Color() = default;
-
-    sf::Color ToSFColor() const;
-    void FromSFColor(const sf::Color &C);
-
-  private:
-    std::uint8_t m_red;
-    std::uint8_t m_green;
-    std::uint8_t m_blue;
-    std::uint8_t m_alpha;
+    sf::Color Color;
+    sf::Color OutlineColor;
+    float     OutlineThickness;
   };
 }
 

@@ -48,6 +48,7 @@ namespace SFUI
   GenericContainer::GenericContainer()
     : m_Canvas(std::make_shared<sf::RenderTexture>()), m_SizeSet(false)
   {
+    m_TexRect.setPosition(Vec2f(0.f, 0.f));
   }
 
   GenericContainer::~GenericContainer()
@@ -141,6 +142,8 @@ namespace SFUI
     Widget::SetSize(v);
     m_Canvas->create(v.x, v.y);
     m_Sprite.setTexture(m_Canvas->getTexture());
+    m_TexRect.setTexture(&m_Canvas->getTexture());
+    m_TexRect.setSize(static_cast<Vec2f>( v ));
   }
 
   void GenericContainer::SetPosition(const Vec2i & v)

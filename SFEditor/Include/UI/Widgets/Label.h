@@ -68,7 +68,7 @@ namespace SFUI
     virtual void Resize();
     virtual void OnKilled() override;
     virtual void OnCreated() override;
-    virtual void OnHover() override;
+    virtual void OnHover(Vec2i where) override;
     virtual void OnEnter(Vec2i where) override;
     virtual void OnExit(Vec2i where) override;
     virtual void AddedTo(Screen *Scr) override;

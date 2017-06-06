@@ -114,14 +114,28 @@ namespace SFUI
     m_BGColorPressed = color;
   }
 
-  void SolidButton::OnHover()
+  void SolidButton::OnHover(Vec2i where)
   {
+    __super::OnHover(where);
+    m_ClickState = Clickable::Hovered;
   }
 
   void SolidButton::OnEnter(Vec2i where)
   {
     __super::OnEnter(where);
     m_BGShape.setFillColor(m_BGColorHighlighted);
+  }
+
+  void SolidButton::OnPressed(Vec2i where)
+  {
+    __super::OnPressed(where);
+    m_ClickState = Clickable::Pressed;
+  }
+
+  void SolidButton::OnReleased(Vec2i where)
+  {
+    __super::OnReleased(where);
+    m_ClickState = Clickable::Rest;
   }
 
   void SolidButton::OnExit(Vec2i where)
@@ -131,7 +145,7 @@ namespace SFUI
     m_BGShape.setFillColor(m_BGColorNormal);
   }
 
-  bool SolidButton::HandleMousePress(const UserEvent &event)
+  /*bool SolidButton::HandleMousePress(const UserEvent &event)
   {
     m_BGShape.setFillColor(m_BGColorPressed);
     __super::HandleMousePress(event);
@@ -165,6 +179,6 @@ namespace SFUI
   bool SolidButton::HandleTextEntered(const UserEvent &event)
   {
     return false;
-  }
+  }*/
 
 }

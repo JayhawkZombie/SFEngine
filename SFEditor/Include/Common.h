@@ -35,8 +35,10 @@
 // Internal Headers
 ////////////////////////////////////////////////////////////
 #include <Include/UI/Globals.h>
-#include <Include/UI/Spacing.h>
+//#include <Include/UI/Spacing.h>
 #include <Include/Events/UserEvent.h>
+
+#include <UI/Theming/Color.h>
 
 ////////////////////////////////////////////////////////////
 // Dependency Headers
@@ -49,6 +51,8 @@
 #include <memory>
 #include <vector>
 #include <map>
+
+#define to_float(x) (static_cast<float>(x))
 
 using Vec2i = sf::Vector2i;
 using Vec2f = sf::Vector2f;

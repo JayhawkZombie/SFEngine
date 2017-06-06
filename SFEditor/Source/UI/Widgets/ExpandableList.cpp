@@ -88,19 +88,28 @@ namespace SFUI
   void ExpandableList::Render(std::shared_ptr<RenderTarget> Target)
   {
     auto oldview = Target->getView();
-    auto newview = View();
-
-    Target->setView(newview);
-
+    sf::View view;
+    auto psize = m_Parent->GetSize();
+    view.reset(FloatRect(m_Position.x, m_Position.y, m_Size.x, m_Size.y));
+    view.setViewport(FloatRect(to_float(m_Position.x) / psize.x, 
+                               to_float(m_Position.y) / psize.y,
+                               to_float(m_Size.x)     / psize.x, 
+                               to_float(m_Size.y)     / psize.y));
+   
     m_Canvas->clear(m_BackgroundColor);
+    
     m_Canvas->draw(m_BGRect);
     
     for (auto & wid : m_Widgets)
       wid.second->Render(m_Canvas);
     m_Canvas->display();
 
+    Target->setView(view);
+    m_Sprite.setScale(to_float(m_Size.x) / m_ExpandableSize.x, to_float(m_Size.y) / m_ExpandableSize.y);
+    m_Sprite.setPosition(static_cast<Vec2f>( m_Position ));
     Target->draw(m_Sprite);
     Target->setView(oldview);
+    
   }
 
   void ExpandableList::SetExpandableSize(Vec2i size)
@@ -122,6 +131,7 @@ namespace SFUI
   {
     __super::SetSize(v);
     m_BGRect.setSize(static_cast<sf::Vector2f>( v ));
+    m_TexRect.setSize(static_cast<sf::Vector2f>( v ));
   }
 
   void ExpandableList::SetPosition(const Vec2i &v)

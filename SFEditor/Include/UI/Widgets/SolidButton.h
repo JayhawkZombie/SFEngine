@@ -64,16 +64,18 @@ namespace SFUI
     virtual void SetBackgroundColorPressed(const sf::Color &color);
 
   protected:
-    virtual void OnHover() override;
+    virtual void OnHover(Vec2i where) override;
     virtual void OnEnter(Vec2i where) override;
+    virtual void OnPressed(Vec2i where) override;
+    virtual void OnReleased(Vec2i where) override;
     virtual void OnExit(Vec2i where) override;
 
-    virtual bool HandleMousePress(const UserEvent &event) override;
-    virtual bool HandleMouseRelease(const UserEvent &event) override;
-    virtual bool HandleMouseMovement(const UserEvent &event) override;
-    virtual bool HandleKeyPressed(const UserEvent &event) override;
-    virtual bool HandleKeyReleased(const UserEvent &event) override;
-    virtual bool HandleTextEntered(const UserEvent &event) override;
+    //virtual bool HandleMousePress(const UserEvent &event) override;
+    //virtual bool HandleMouseRelease(const UserEvent &event) override;
+    //virtual bool HandleMouseMovement(const UserEvent &event) override;
+    //virtual bool HandleKeyPressed(const UserEvent &event) override;
+    //virtual bool HandleKeyReleased(const UserEvent &event) override;
+    //virtual bool HandleTextEntered(const UserEvent &event) override;
 
     sf::RectangleShape m_BGShape;
     sf::Color m_BGColorNormal;

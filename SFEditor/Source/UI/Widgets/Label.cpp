@@ -53,7 +53,7 @@ namespace SFUI
 
   Label::~Label()
   {
-
+    
   }
 
   Label::Ptr Label::Create(const std::string & Text, Widget::RPtr parent)
@@ -126,7 +126,7 @@ namespace SFUI
 
   }
 
-  void Label::OnHover()
+  void Label::OnHover(Vec2i where)
   {
     
   }

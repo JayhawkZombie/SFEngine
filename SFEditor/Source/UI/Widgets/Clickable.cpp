@@ -81,6 +81,10 @@ namespace SFUI
   {
   }
 
+  void Clickable::OnClicked()
+  {
+  }
+
   void Clickable::OnKilled()
   {
   }
@@ -89,16 +93,28 @@ namespace SFUI
   {
   }
 
-  void Clickable::OnHover()
+  void Clickable::OnHover(Vec2i where)
   {
   }
 
   void Clickable::OnEnter(Vec2i where)
   {
+    m_ClickState = Clickable::Hovered;
   }
 
   void Clickable::OnExit(Vec2i where)
   {
+    m_ClickState = Clickable::Rest;
+  }
+
+  void Clickable::OnPressed(Vec2i where)
+  {
+
+  }
+
+  void Clickable::OnReleased(Vec2i where)
+  {
+
   }
 
   void Clickable::AddedTo(Screen * Scr)
@@ -111,6 +127,45 @@ namespace SFUI
 
   void Clickable::Cleanup()
   {
+  }
+
+  bool Clickable::HandleMouseMovement(const UserEvent &event)
+  {
+    m_ClickState = Clickable::Hovered;
+    OnHover(event.GetCurrentMousePos());
+    return true;
+  }
+
+  bool Clickable::HandleMousePress(const UserEvent &event)
+  {
+    m_ClickState = Clickable::Pressed;
+    OnPressed(event.GetCurrentMousePos());
+    return true;
+  }
+
+  bool Clickable::HandleMouseRelease(const UserEvent &event)
+  {
+    m_ClickState = Clickable::Hovered;
+    OnClicked();
+
+    if (OnClickedCallback)
+      OnClickedCallback(event.GetCurrentMousePos(), event.GetMouseButton());
+    return true;
+  }
+
+  bool Clickable::HandleKeyPressed(const UserEvent &event)
+  {
+    return false;
+  }
+
+  bool Clickable::HandleKeyReleased(const UserEvent &event)
+  {
+    return false;
+  }
+
+  bool Clickable::HandleTextEntered(const UserEvent &event)
+  {
+    return false;
   }
 
 }

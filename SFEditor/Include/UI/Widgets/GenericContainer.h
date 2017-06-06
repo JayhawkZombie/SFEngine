@@ -77,6 +77,7 @@ namespace SFUI
 
     std::map<std::string, Widget::Ptr> m_Widgets;
     std::shared_ptr<sf::RenderTexture> m_Canvas;
+    sf::RectangleShape m_TexRect;
     sf::Sprite m_Sprite;
     bool m_SizeSet;
     Vec2i m_GlobalOffset = Vec2i(0, 0);

@@ -158,9 +158,20 @@ namespace SFUI
       return;
 
     auto oldView = Target->getView();
-    auto newview = View();
+    sf::View newview;
 
-    m_Canvas->setView(newview);
+    auto psize = ( m_Parent ? m_Parent->GetSize() : m_Size );
+
+    newview.reset(FloatRect(Vec2f(m_Position), Vec2f(m_Size)));
+    newview.setViewport(FloatRect(
+        to_float(m_Position.x) / to_float(psize.x),
+        to_float(m_Position.y) / to_float(psize.y),
+        to_float(m_Size.x) / to_float(psize.x),
+        to_float(m_Size.y) / to_float(psize.y)
+      )
+    );
+
+    Target->setView(newview);
     m_Canvas->clear(sf::Color::Transparent);
     
     for (auto & widget : m_Widgets)
@@ -171,6 +182,7 @@ namespace SFUI
 
     m_Canvas->display();
     Target->draw(m_Sprite);
+    Target->setView(oldView);
   }
 
   void Screen::Update()

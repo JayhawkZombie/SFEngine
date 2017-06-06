@@ -32,6 +32,7 @@
 // Internal Headers
 ////////////////////////////////////////////////////////////
 #include <UI/Widgets/Widget.h>
+#include <UI/Widgets/Label.h>
 
 ////////////////////////////////////////////////////////////
 // Dependency Headers
@@ -66,7 +67,7 @@ namespace SFUI
 
   Widget::~Widget()
   {
-
+    m_Font.reset();
   }
 
   void Widget::Update()
@@ -79,8 +80,6 @@ namespace SFUI
       Bounds()
     );
 
-    
-    
     //Now get the bounds of our parent (if we have one)
     sf::FloatRect pBounds = static_cast<sf::FloatRect>(
       m_Parent ? m_Parent->Bounds() : Bounds()
@@ -88,7 +87,7 @@ namespace SFUI
 
     sf::View view;
     view.reset(bounds);
-    view.setViewport( 
+    view.setViewport(
     {
       bounds.left / pBounds.width,
       bounds.top / pBounds.height,
@@ -231,6 +230,18 @@ namespace SFUI
       case HorizontalAlignment::Right:
         m_Position.x = bounds.left + bounds.width - m_Size.x; break;
     }
+  }
+
+  
+
+  void Widget::SetLabel(std::shared_ptr<Label> label)
+  {
+    m_Label = label;
+  }
+
+  void Widget::AlignLabel(Alignment alignment)
+  {
+    m_LabelAlignment = alignment;
   }
 
   bool Widget::IsRespondingTo(EventType type) const
@@ -392,6 +403,11 @@ namespace SFUI
     return handled;
   }
 
+  void Widget::SetParent(Widget::RPtr parent)
+  {
+    m_Parent = parent;
+  }
+
 
   void Widget::OnKilled()
   {
@@ -401,7 +417,7 @@ namespace SFUI
   {
   }
 
-  void Widget::OnHover()
+  void Widget::OnHover(Vec2i where)
   {
   }
 
@@ -411,6 +427,16 @@ namespace SFUI
 
   void Widget::OnExit(Vec2i where)
   {
+  }
+
+  void Widget::OnPressed(Vec2i where)
+  {
+
+  }
+
+  void Widget::OnReleased(Vec2i where)
+  {
+
   }
 
   void Widget::AddedTo(Screen * Scr)

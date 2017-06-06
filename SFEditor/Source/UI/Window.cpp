@@ -170,7 +170,7 @@ namespace SFUI
   {
   }
 
-  void Window::OnHover()
+  void Window::OnHover(Vec2i where)
   {
   }
 
