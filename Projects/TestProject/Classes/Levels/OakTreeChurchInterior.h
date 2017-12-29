@@ -6,7 +6,7 @@
 #include "../../../../Engine/Source/Camera/2DCamera.h"
 
 
-class OakTreeChurchInterior : public Engine::BasicLevel
+class OakTreeChurchInterior : public BasicLevel
 {
 public:
 	OakTreeChurchInterior();
@@ -15,7 +15,7 @@ public:
 
 	void TickUpdate(const double &delta) override;
 	void RenderOnTexture(std::shared_ptr<sf::RenderTexture> Texture) override;
-	void HandleInputEvent(const Engine::UserEvent &evnt) override;
+	void HandleInputEvent(const UserEvent &evnt) override;
 	void OnBegin() override;
 	void OnEnd() override;
 	std::string GetClass() const override final;
@@ -23,8 +23,8 @@ public:
 	void nextSeg(int x, int y);
 
 protected:
-	std::shared_ptr<Engine::GenericActor> MainCharacter;
-	Engine::Camera2D myActor_camera;
+	std::shared_ptr<GenericActor> MainCharacter;
+	Camera2D myActor_camera;
 	sf::Vector2i lastPos;
 };
 

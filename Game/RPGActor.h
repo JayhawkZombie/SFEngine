@@ -12,7 +12,7 @@ enum class WalkingDirection
   Up, Down, Left, Right
 };
 
-class RPGActor : public Engine::GenericActor
+class RPGActor : public GenericActor
 {
 public:
   //constructor/destructor
@@ -27,7 +27,7 @@ public:
   void setName(std::string name);
   void setFilePath(std::string filePath);
 
-  void HandleInputEvent(const Engine::UserEvent &evnt) override;
+  void HandleInputEvent(const UserEvent &evnt) override;
   virtual void TickUpdate(const double &delta) override;
   virtual void Render(std::shared_ptr<sf::RenderTarget> Target) override;
 
@@ -38,8 +38,8 @@ private:
   sf::Texture myActor_texture;
   WalkingDirection m_Direction;
 
-  virtual void HandleCollisionWithObject(Engine::LevelObject *Object) override;
-  virtual void HandleCollisionWithObject(std::weak_ptr<Engine::Collider2D> Collided);
+  virtual void HandleCollisionWithObject(LevelObject *Object) override;
+  virtual void HandleCollisionWithObject(std::weak_ptr<Collider2D> Collided);
 };
 
 #endif

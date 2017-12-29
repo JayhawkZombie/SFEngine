@@ -7,7 +7,7 @@
   void NewShopCreator::CreateShopNode(Inventory pinv, Inventory sinv)
   {
     Theme = std::make_shared<tgui::Theme>("././SFEngine/Source/CoreFiles/UIThemes/UIDark.txt");
-    GUI = Engine::GUI;
+    GUI = GUI;
     OpenTheme();
 
     std::unique_ptr<ListReader> reader;

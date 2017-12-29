@@ -33,8 +33,3 @@
 #include "Lights\LightObject.h"
 #include "Lights\GlobalLightSource.h"
 #include "Utils\Vec.hpp"
-
-namespace Engine
-{
-	
-}

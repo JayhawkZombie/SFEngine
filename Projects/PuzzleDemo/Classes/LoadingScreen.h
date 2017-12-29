@@ -4,7 +4,7 @@
 #include "ProjectIncludes.h"
 #include "Weather/Lightning.h"
 
-class LoadingScreen : public Engine::BasicLevel
+class LoadingScreen : public BasicLevel
 {
 public:
   LoadingScreen();

@@ -37,9 +37,6 @@
 #pragma warning( disable : 4101 )
 #pragma warning( disable : 4100 ) //Unreferenced formal parameter
 
-#ifndef SFENGINE_GLOBAL_HOOKS_H
-#define SFENGINE_GLOBAL_HOOKS_H
-
 #ifdef MessageBoxW
 #undef MessageBoxW
 #endif
@@ -99,20 +96,16 @@ namespace chaiscript {
 }
 
 //forward declaration of BasicLevel class for the global Levels object
-namespace Engine {
-  class BasicLevel;
+class BasicLevel;
 
-  extern SPtrSharedMutex LevelsLock;
-  extern std::unordered_map<std::string, std::shared_ptr<BasicLevel>> Levels;
-  extern std::string EntryLevelName;
-  extern BasicLevel *CurrentLevel;
-}
+extern SPtrSharedMutex LevelsLock;
+extern std::unordered_map<std::string, std::shared_ptr<BasicLevel>> Levels;
+extern std::string EntryLevelName;
+extern BasicLevel *CurrentLevel;
 
 #ifdef WITH_EDITOR
-namespace Engine
-{
-  class Editor;
-}
+class Editor;
+
 #define EDITOR_FRIEND \
 friend class Editor; 
 
@@ -242,112 +235,112 @@ typedef ParentClass Super
 #endif
 
 //EXTERN DECLARATIONS
+extern sf::RenderWindow *currentRenderWindow;
+extern std::shared_ptr<sf::Texture> DefaultTexture;
+extern sf::Vector2f WindowSize;
+extern std::string WindowTitle;
+extern sf::Uint32 WindowStyle;
+extern std::unordered_set<std::uint32_t> UsedIDs; //IDs that have been used. Can search this to verify an ID has not been used already
+extern bool IsIDUsed(const std::uint32_t &ID);
+extern void FreeID(const std::uint32_t &ID); //Make an ID available for use again
+extern std::uint32_t GenerateID(); //Use to try to generate a unique ID. This will throw an IDException if it cannot generate one after a set number of attempts
+extern volatile double TimeScaleFactor;
+extern volatile unsigned int FramerateLimit;
+extern std::uint32_t MaxIDGenerationAttempts; //max # of times we will try to generate an ID for an item before giving up - defined in Widget.cpp
 
-namespace Engine
-{
-  extern sf::RenderWindow *currentRenderWindow;
-  extern std::shared_ptr<sf::Texture> DefaultTexture;
-  extern sf::Vector2f WindowSize;
-  extern std::string WindowTitle;
-  extern sf::Uint32 WindowStyle;
-  extern std::unordered_set<std::uint32_t> UsedIDs; //IDs that have been used. Can search this to verify an ID has not been used already
-  extern bool IsIDUsed(const std::uint32_t &ID);
-  extern void FreeID(const std::uint32_t &ID); //Make an ID available for use again
-  extern std::uint32_t GenerateID(); //Use to try to generate a unique ID. This will throw an IDException if it cannot generate one after a set number of attempts
-  extern volatile double TimeScaleFactor;
-  extern volatile unsigned int FramerateLimit;
-  extern std::uint32_t MaxIDGenerationAttempts; //max # of times we will try to generate an ID for an item before giving up - defined in Widget.cpp
-
-  //ENGINE GLOBAL API EXTERNS
-  extern sf::Vector2u GetCurrentWindowSize();
+//ENGINE GLOBAL API EXTERNS
+extern sf::Vector2u GetCurrentWindowSize();
   
-  extern decltype(auto) GetCurrentOpenGLVersionMajor();
-  extern decltype(auto) GetCurrentOpenGLVersionMinor();
-  extern decltype(auto) GetCurrentAASetting();
-  extern decltype(auto) GetCurrentContextSettings();
-  extern decltype(auto) GetCurrentContext();
-  extern decltype(auto) GetCurrentTexturePoolSize();
-  extern decltype(auto) GetCurrentShaderPoolSize();
-  extern decltype(auto) GetCurrentFramerateSetting();
+extern decltype(auto) GetCurrentOpenGLVersionMajor();
+extern decltype(auto) GetCurrentOpenGLVersionMinor();
+extern decltype(auto) GetCurrentAASetting();
+extern decltype(auto) GetCurrentContextSettings();
+extern decltype(auto) GetCurrentContext();
+extern decltype(auto) GetCurrentTexturePoolSize();
+extern decltype(auto) GetCurrentShaderPoolSize();
+extern decltype(auto) GetCurrentFramerateSetting();
 
-  extern void SetFramerateLimit(unsigned int Limit);
-  extern void SetVSyncEnabled(bool Enabled);
-  extern void SetAALevel(unsigned int Level);
+extern void SetFramerateLimit(unsigned int Limit);
+extern void SetVSyncEnabled(bool Enabled);
+extern void SetAALevel(unsigned int Level);
 
-  extern decltype(auto) GetIsGlobalShadingEnabled();
-  extern decltype(auto) GetIsStaticShadingEnabled();
-  extern decltype(auto) GetIsDynamicShadingEnabled();
-  extern decltype(auto) GetIsStaticShadowingEnabled();
-  extern decltype(auto) GetIsDynamicShadowingEnabled();
-  extern decltype(auto) GetIsMultiThreadedLightingEnabled();
-  extern decltype(auto) GetIsUsingPreComputedLightMaps();
-  extern decltype(auto) GetCanPhysicsApproxCollision();
+extern decltype(auto) GetIsGlobalShadingEnabled();
+extern decltype(auto) GetIsStaticShadingEnabled();
+extern decltype(auto) GetIsDynamicShadingEnabled();
+extern decltype(auto) GetIsStaticShadowingEnabled();
+extern decltype(auto) GetIsDynamicShadowingEnabled();
+extern decltype(auto) GetIsMultiThreadedLightingEnabled();
+extern decltype(auto) GetIsUsingPreComputedLightMaps();
+extern decltype(auto) GetCanPhysicsApproxCollision();
 
-  extern void AddKeyboardShortcut(const std::vector<sf::Keyboard::Key> &keys, std::function<void(void)> callback);
+extern void AddKeyboardShortcut(const std::vector<sf::Keyboard::Key> &keys, std::function<void(void)> callback);
 
-  extern void AddScriptGlobal();
-  extern Render::RenderSettings EngineRenderSettings;
+extern void AddScriptGlobal();
 
-  //For interacting with the scripting engine
+struct RenderSettings;
+extern RenderSettings EngineRenderSettings;
+
+//For interacting with the scripting engine
  
-  /*
-  Serialization function template:
-  template <class Archive>
-  void SerializeWhatever(Archive & archive, Whatever);
-  */
+/*
+Serialization function template:
+template <class Archive>
+void SerializeWhatever(Archive & archive, Whatever);
+*/
 
 /* Not using these anymore 
-  //Some methods to use to serialize assets - put here so they can be globally accessible to anything that needs that
-  void SerializeString(const std::string &string, std::ofstream &out);
-  void SerializeInt32(const std::int32_t &value, std::ofstream &out);
-  void SerializeFloat(const float &value, std::ofstream &out);
-  void SerializeUint32(const std::uint32_t &value, std::ofstream &out);
-  void SerializeSizet(const std::size_t &value, std::ofstream &out);
-  void SerializeInt64(const std::int64_t &value, std::ofstream &out);
-  void SerializeUint64(const std::uint64_t &value, std::ofstream &out);
-  void SerializeChar(const char &c, std::ofstream &out);
+//Some methods to use to serialize assets - put here so they can be globally accessible to anything that needs that
+void SerializeString(const std::string &string, std::ofstream &out);
+void SerializeInt32(const std::int32_t &value, std::ofstream &out);
+void SerializeFloat(const float &value, std::ofstream &out);
+void SerializeUint32(const std::uint32_t &value, std::ofstream &out);
+void SerializeSizet(const std::size_t &value, std::ofstream &out);
+void SerializeInt64(const std::int64_t &value, std::ofstream &out);
+void SerializeUint64(const std::uint64_t &value, std::ofstream &out);
+void SerializeChar(const char &c, std::ofstream &out);
 
-  //Corresponding methods to deserialize
-  void DeserializeString(std::string &string, std::ifstream &out);
-  void DeserializeInt32(std::int32_t &value, std::ifstream &out);
-  void DeserializeFloat(float &value, std::ifstream &out);
-  void DeserializeUint32(std::uint32_t &value, std::ifstream &out);
-  void DeserializeSizet(std::size_t &value, std::ifstream &out);
-  void DeserializeInt64(std::int64_t &value, std::ifstream &out);
-  void DeserializeUint64(std::uint64_t &value, std::ifstream &out);
-  void DeserializeChar(char &c, std::ifstream &out);
+//Corresponding methods to deserialize
+void DeserializeString(std::string &string, std::ifstream &out);
+void DeserializeInt32(std::int32_t &value, std::ifstream &out);
+void DeserializeFloat(float &value, std::ifstream &out);
+void DeserializeUint32(std::uint32_t &value, std::ifstream &out);
+void DeserializeSizet(std::size_t &value, std::ifstream &out);
+void DeserializeInt64(std::int64_t &value, std::ifstream &out);
+void DeserializeUint64(std::uint64_t &value, std::ifstream &out);
+void DeserializeChar(char &c, std::ifstream &out);
 */
-  void MessageAlert(const std::string &message);
-  void ConfirmAlert(const std::string &message, std::string OKText = "OK", std::string CancelText = "Cancel", std::function<void(void)> OKcb = []() {}, std::function<void(void)> Cancelcb = []() {});
-  void Confirm(const std::string &message);
-  extern void Shutdown();
-  extern void LoadLevel(const std::string &jsonPath);
-  extern void SwitchLevel(std::shared_ptr<BasicLevel> Level);
-  extern void SwitchLevel_RawPtr(BasicLevel *Level);
-  extern void LoadMainLevel();
-  extern void LoadLevelByName(const std::string &Name);
-  extern void ScaleTimeUpdate(const double &factor);
+void MessageAlert(const std::string &message);
+void ConfirmAlert(const std::string &message, std::string OKText = "OK", std::string CancelText = "Cancel", std::function<void(void)> OKcb = []() {}, std::function<void(void)> Cancelcb = []() {});
+void Confirm(const std::string &message);
+extern void Shutdown();
+extern void LoadLevel(const std::string &jsonPath);
+extern void SwitchLevel(std::shared_ptr<BasicLevel> Level);
+extern void SwitchLevel_RawPtr(BasicLevel *Level);
+extern void LoadMainLevel();
+extern void LoadLevelByName(const std::string &Name);
+extern void ScaleTimeUpdate(const double &factor);
 
-  class UserEvent;
-  extern DataStream<UserEvent> EngineEventStream;
-  extern chaiscript::ChaiScript *ScriptEngine;
-  extern InputDeviceState InputState;
+class UserEvent;
+class InputDeviceState;
+
+extern DataStream<UserEvent> EngineEventStream;
+extern chaiscript::ChaiScript *ScriptEngine;
+extern InputDeviceState InputState;
 
 #ifdef WITH_EDITOR
-  class SFEngine;
-  extern SFEngine *CurrentEngine;
-  extern volatile bool FlagForClose;
-  namespace UI {
-    class BaseUIElement;
-  };
+class SFEngine;
+extern SFEngine *CurrentEngine;
+extern volatile bool FlagForClose;
+namespace UI {
+  class BaseUIElement;
+};
 
-  extern void AddUI(std::shared_ptr<Engine::UI::BaseUIElement> element);
+extern void AddUI(std::shared_ptr<UI::BaseUIElement> element);
 #endif
 
-  extern void SetKeyRepeatEnabled(bool);
+extern void SetKeyRepeatEnabled(bool);
 
-  extern std::shared_ptr<tgui::Gui> GUI;
-}
+extern std::shared_ptr<tgui::Gui> GUI;
 
 //This is pretty hacky, and will be changed later
 // Just used to flag that we need to close down (since we can't use a close button when in fullscreen mode)
@@ -361,7 +354,3 @@ static_cast<int>(VAR)
 static_cast<int>(std::round(VAR))
 #define __UINT_FROM_FLOAT__(VAR)\
 static_cast<std::uint32_t>(std::round(VAR))
-
-
-
-#endif

@@ -129,7 +129,7 @@ int main(int argc, char **argv)
   //Your tests are blocking. Please don't leave them in
   //GameMain::run();
 
-  Engine::SFEngine GameEngine;
+  SFEngine GameEngine;
   return (GameEngine.Go(argc, argv));
 }
 #endif

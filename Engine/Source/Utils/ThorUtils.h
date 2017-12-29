@@ -33,16 +33,11 @@
 #include <SFML\Graphics.hpp>
 #include <Thor\Animations.hpp>
 
-namespace Engine
-{
+void CreateFrameAnimation(thor::AnimationMap<sf::Sprite, std::string> &AnimMap, std::string AnimName, sf::Time AnimDuration) {
+  thor::FrameAnimation fAnim;
+  AnimMap.addAnimation(AnimName, fAnim, AnimDuration);
+}
 
-  void CreateFrameAnimation(thor::AnimationMap<sf::Sprite, std::string> &AnimMap, std::string AnimName, sf::Time AnimDuration) {
-    thor::FrameAnimation fAnim;
-    AnimMap.addAnimation(AnimName, fAnim, AnimDuration);
-  }
-
-  void AddFramesToFrameAnimation(thor::FrameAnimation &fAnim, const std::vector<sf::IntRect> &Frames) {
+void AddFramesToFrameAnimation(thor::FrameAnimation &fAnim, const std::vector<sf::IntRect> &Frames) {
     
-  }
-
 }

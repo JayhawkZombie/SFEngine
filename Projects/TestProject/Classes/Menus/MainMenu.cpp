@@ -5,14 +5,14 @@
 MainMenu::MainMenu(const sf::Vector2u & LevelSize, const sf::FloatRect & DefaultView, bool showlines, const sf::Vector2f & GridSpacing)
   : fader(0.1f, 0.1f), BasicLevel(LevelSize, DefaultView, showlines, GridSpacing)
 {
-  MainGUI = std::make_shared<tgui::Gui>(*Engine::currentRenderWindow);
+  MainGUI = std::make_shared<tgui::Gui>(*currentRenderWindow);
   MenuTheme = std::make_shared<tgui::Theme>("./Projects/TestProject/UIThemes/TransparentGray.theme");
   font.loadFromFile("./Projects/TestProject/Fonts/Marvel-Regular.ttf");
   MainGUI->setFont(font);
 
   OakTreeLevelptr = std::make_shared<OakTreeLevel>();
 
-  NewGameLevel = std::make_shared<Engine::Level>(LevelSize, DefaultView, showlines, GridSpacing);
+  NewGameLevel = std::make_shared<Level>(LevelSize, DefaultView, showlines, GridSpacing);
 
   //Create some buttons
   NewGameButton = MenuTheme->load("button");
@@ -66,7 +66,7 @@ MainMenu::MainMenu(const sf::Vector2u & LevelSize, const sf::FloatRect & Default
   CloseButton->setText("quit");
   CloseButton->setTextSize(20);
   CloseButton->hide();
-  CloseButton->connect("clicked", Engine::Shutdown);
+  CloseButton->connect("clicked", Shutdown);
  // MainGUI->add(CloseButton);
 
   tgui::Button::Ptr OptionsBack = MenuTheme->load("button");
@@ -124,7 +124,7 @@ MainMenu::MainMenu(const sf::Vector2u & LevelSize, const sf::FloatRect & Default
 
 
 
-  Engine::CurrentLevel = this;
+  CurrentLevel = this;
   std::cerr << "Assigned current level" << std::endl;
 }
 
@@ -180,7 +180,7 @@ void MainMenu::HandleWindowResized()
 {
 }
 
-void MainMenu::HandleInputEvent(const Engine::UserEvent & evnt)
+void MainMenu::HandleInputEvent(const UserEvent & evnt)
 {
 }
 
@@ -197,7 +197,7 @@ void MainMenu::OnBegin()
 void MainMenu::CreateNewGame()
 {
  // Engine::SwitchLevel(NewGameLevel);
-  Engine::SwitchLevel(OakTreeLevelptr);
+  SwitchLevel(OakTreeLevelptr);
 }
 
 void MainMenu::LoadSaveGame()

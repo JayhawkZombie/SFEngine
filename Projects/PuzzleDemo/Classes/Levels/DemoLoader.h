@@ -18,7 +18,7 @@
 #include <Thor/Vectors/PolarVector2.hpp>
 #include <Thor/Math/Distributions.hpp>
 
-class DemoLoadLevel : public Engine::BasicLevel
+class DemoLoadLevel : public BasicLevel
 {
 public:
   DemoLoadLevel();
@@ -30,10 +30,10 @@ public:
   void OnShutDown() override final;
   void EventUpdate(sf::Event event) override final;
   void TickUpdate(const double &delta) override final;
-  void HandleInputEvent(const Engine::UserEvent &evnt) override final;
+  void HandleInputEvent(const UserEvent &evnt) override final;
   void Render(std::shared_ptr<sf::RenderTarget> Target) override final;
   void RenderOnTexture(std::shared_ptr<sf::RenderTexture> Texture) override final;
-  void SetNextLevel(std::shared_ptr<Engine::BasicLevel> NextLevel);
+  void SetNextLevel(std::shared_ptr<BasicLevel> NextLevel);
   std::string GetClass() const override final;
 
 protected:
@@ -65,7 +65,7 @@ protected:
   SVector2F m_PSystem1Position;
   SVector2F m_PSystem2Position;
 
-  std::shared_ptr<Engine::BasicLevel> m_NextLevel;
+  std::shared_ptr<BasicLevel> m_NextLevel;
   SPtrSharedMutex m_LevelMutex;
   std::shared_ptr<sf::Texture> m_TestRingTexture;
   bool   m_LoadingNextLevel = true;

@@ -9,12 +9,12 @@ AITestLevel::AITestLevel()
   m_AICircle.setRadius(20.f);
   m_AICircle.setFillColor(sf::Color::Red);
 
-  auto AIRoot = std::make_shared<Engine::BehaviorNode>();
+  auto AIRoot = std::make_shared<BehaviorNode>();
 
   AIRoot->m_ConditionCheck = [this]()->bool 
   {   
     auto v = this->m_AICircle.getPosition(); 
-    auto m = sf::Mouse::getPosition(*Engine::currentRenderWindow);  
+    auto m = sf::Mouse::getPosition(*currentRenderWindow);  
     return (abs(v.x - m.x) < 500 && abs(m.y - v.y) < 500);   
   };
 
@@ -50,9 +50,9 @@ void AITestLevel::OnShutDown()
 {
 }
 
-void AITestLevel::HandleInputEvent(const Engine::UserEvent & evnt)
+void AITestLevel::HandleInputEvent(const UserEvent & evnt)
 {
-  if (evnt.EventType == Engine::UserEventType::KeyboardPress) {
+  if (evnt.EventType == UserEventType::KeyboardPress) {
     if (evnt.Key == sf::Keyboard::P)
       m_printTree = !m_printTree;
     else if (evnt.Key == sf::Keyboard::W)

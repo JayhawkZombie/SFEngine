@@ -5,7 +5,7 @@
 
 #include "ThirdParty\SelbaWard\ProgressBar.hpp"
 
-class LoadingBar : public Engine::LevelObject
+class LoadingBar : public LevelObject
 {
 public:
   LoadingBar();

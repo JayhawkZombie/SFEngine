@@ -35,7 +35,7 @@ Level1::Level1()
   m_PGravityAffector1(sf::Vector2f(0.f, 5.f)),
   BasicLevel(sf::Vector2u( 1700, 900 ), sf::FloatRect(0, 0, 1700, 900 )),
   fader(0.1f, 0.1f),
-  m_StarField(Engine::WindowSize, 1200u, sf::Color(0, 255, 255)),
+  m_StarField(WindowSize, 1200u, sf::Color(0, 255, 255)),
   m_PColorAnimation2(m_PColorGradient2),
   m_PFadeAnimation2(0.3f, 0.3f),
   m_PTorqueAffector2(100.f),
@@ -51,7 +51,7 @@ Level1::Level1()
 
   OakTreeLevelPtr    = std::make_shared<OakTreeLevel>();
   OakTreeLevelPtr->SetID("oaktree");
-  Engine::Levels["oaktree"] = OakTreeLevelPtr;
+  Levels["oaktree"] = OakTreeLevelPtr;
   OakTreeChurchInteriorLevelPtr = std::make_shared<OakTreeChurchInterior>();
   BallPuzzleLevelPtr = std::make_shared<BallStackLevel>();
   AITestLevelPtr     = std::make_shared<AITestLevel>();
@@ -107,7 +107,7 @@ Level1::Level1()
   m_CloseButton->setText("quit");
   m_CloseButton->setTextSize(12);
   m_CloseButton->hide();
-  m_CloseButton->connect("clicked", Engine::Shutdown);
+  m_CloseButton->connect("clicked", Shutdown);
   // MainGUI->add(CloseButton);
 
   tgui::Button::Ptr OptionsBack = m_MenuTheme->load("button");
@@ -136,7 +136,7 @@ Level1::Level1()
   OakTreeLevel->setSize({ 200, 55 });
   OakTreeLevel->setText("Oak Tree");
   OakTreeLevel->setTextSize(12);
-  OakTreeLevel->connect("clicked", [this]() { Engine::SwitchLevel(this->OakTreeLevelPtr); });
+  OakTreeLevel->connect("clicked", [this]() { SwitchLevel(this->OakTreeLevelPtr); });
   m_LevelSelectPanel->add(OakTreeLevel);
 
   tgui::Button::Ptr BallLevel = m_MenuTheme->load("button");
@@ -144,7 +144,7 @@ Level1::Level1()
   BallLevel->setSize({ 200, 25 });
   BallLevel->setText("Ball Puzzle");
   BallLevel->setTextSize(12);
-  BallLevel->connect("clicked", [this]() {Engine::SwitchLevel(this->BallPuzzleLevelPtr); });
+  BallLevel->connect("clicked", [this]() {SwitchLevel(this->BallPuzzleLevelPtr); });
   m_LevelSelectPanel->add(BallLevel);
 
   LevelSelectBack = m_MenuTheme->load("button");
@@ -155,7 +155,7 @@ Level1::Level1()
   PhysisDemoLevelButton->setSize({ 200,55 });
   PhysisDemoLevelButton->setText("PhysicsDemo");
   PhysisDemoLevelButton->setTextSize(10);
-  PhysisDemoLevelButton->connect("clicked", [this]() {Engine::SwitchLevel(this->PhysicsDemoLevelPtr); });
+  PhysisDemoLevelButton->connect("clicked", [this]() {SwitchLevel(this->PhysicsDemoLevelPtr); });
   m_LevelSelectPanel->add(PhysisDemoLevelButton);
 
   tgui::Button::Ptr OakTreeChurchInteriorLevel = m_MenuTheme->load("button");
@@ -163,7 +163,7 @@ Level1::Level1()
   OakTreeChurchInteriorLevel->setSize({ 200,55 });
   OakTreeChurchInteriorLevel->setText("OakTree Church");
   OakTreeChurchInteriorLevel->setTextSize(10);
-  OakTreeChurchInteriorLevel->connect("clicked", [this]() {Engine::SwitchLevel(this->OakTreeChurchInteriorLevelPtr); });
+  OakTreeChurchInteriorLevel->connect("clicked", [this]() {SwitchLevel(this->OakTreeChurchInteriorLevelPtr); });
   m_LevelSelectPanel->add(OakTreeChurchInteriorLevel);
 
   LevelSelectBack = m_MenuTheme->load("button");
@@ -246,7 +246,7 @@ Level1::Level1()
   m_EnableVSync->connect("unchecked",
                          [this]()
   {
-    this->fRateLabel->setText("Framerate Limit: " + std::to_string(Engine::FramerateLimit));
+    this->fRateLabel->setText("Framerate Limit: " + std::to_string(FramerateLimit));
     this->m_FrameRateSpinButton->enable();
   });
 
@@ -255,7 +255,7 @@ Level1::Level1()
   m_FrameRateSpinButton->setVerticalScroll(true);
   
   fRateLabel = m_MenuTheme->load("label");
-  fRateLabel->setText("Framerate Limit: " + std::to_string(Engine::FramerateLimit));
+  fRateLabel->setText("Framerate Limit: " + std::to_string(FramerateLimit));
   fRateLabel->setPosition({ 40.f, 150.f });
   fRateLabel->setSize({ 100.f, 35.f });
   fRateLabel->setTextSize(16);
@@ -264,8 +264,8 @@ Level1::Level1()
     if (val <= 30)
       val = 30;
     this->fRateLabel->setText("Framerate Limit: " + std::to_string(val));
-    Engine::FramerateLimit = val;
-    Engine::currentRenderWindow->setFramerateLimit(val);
+    FramerateLimit = val;
+    currentRenderWindow->setFramerateLimit(val);
   });
 
   m_ParticlePath.AddVertices({ 
@@ -424,9 +424,9 @@ void Level1::OnShutDown()
 {
 }
 
-void Level1::HandleInputEvent(const Engine::UserEvent & evnt)
+void Level1::HandleInputEvent(const UserEvent & evnt)
 {
-  if (evnt.EventType == Engine::UserEventType::KeyboardPress) {
+  if (evnt.EventType == UserEventType::KeyboardPress) {
     if (evnt.Key == sf::Keyboard::Key::Escape)
       m_Paused = !m_Paused;
   }
@@ -442,8 +442,8 @@ void Level1::EventUpdate(sf::Event event)
 
 void Level1::OnBegin()
 {
-  Engine::Messager::PostToActivityLog(
-    Engine::SystemMessage(Engine::SystemMessageType::ActivityLog, InternalID, 0, "Level1 - OnBegin()")
+  Messager::PostToActivityLog(
+    SystemMessage(SystemMessageType::ActivityLog, InternalID, 0, "Level1 - OnBegin()")
   );
 
   m_BGMusic.setLoop(true);
@@ -453,32 +453,32 @@ void Level1::OnBegin()
 
 void Level1::OnEnd()
 {
-  Engine::Messager::PostToActivityLog(
-    Engine::SystemMessage(Engine::SystemMessageType::ActivityLog, InternalID, 0, "Level1 - OnEnd()")
+  Messager::PostToActivityLog(
+    SystemMessage(SystemMessageType::ActivityLog, InternalID, 0, "Level1 - OnEnd()")
   );
 
   m_BGMusic.stop();
 
-  Engine::GUI->remove(m_MainPanel);
-  Engine::GUI->remove(m_OptionsPanel);
-  Engine::GUI->remove(m_CreditsPanel);
-  Engine::GUI->remove(m_LevelSelectPanel);
+  GUI->remove(m_MainPanel);
+  GUI->remove(m_OptionsPanel);
+  GUI->remove(m_CreditsPanel);
+  GUI->remove(m_LevelSelectPanel);
 }
 
 void Level1::HideUI()
 {
-  Engine::GUI->remove(m_MainPanel);
-  Engine::GUI->remove(m_OptionsPanel);
-  Engine::GUI->remove(m_CreditsPanel);
-  Engine::GUI->remove(m_LevelSelectPanel);
+  GUI->remove(m_MainPanel);
+  GUI->remove(m_OptionsPanel);
+  GUI->remove(m_CreditsPanel);
+  GUI->remove(m_LevelSelectPanel);
 }
 
 void Level1::ShowUI()
 {
-  Engine::GUI->add(m_MainPanel);
-  Engine::GUI->add(m_OptionsPanel);
-  Engine::GUI->add(m_CreditsPanel);
-  Engine::GUI->add(m_LevelSelectPanel);
+  GUI->add(m_MainPanel);
+  GUI->add(m_OptionsPanel);
+  GUI->add(m_CreditsPanel);
+  GUI->add(m_LevelSelectPanel);
 
   m_OptionsPanel->hide();
   m_OptionsPanel->disable();
@@ -519,7 +519,7 @@ void Level1::MakeCreditsPanel()
     ELEMENT_THEME      m_MenuTheme,
     ELEMENT_SIZE       sf::Vector2f(1700, 900),
     ELEMENT_POSITION   sf::Vector2f(0, 0),
-    ELEMENT_PARENT_GUI Engine::GUI
+    ELEMENT_PARENT_GUI GUI
   );
   m_CreditsPanel->hide();
   m_CreditsPanel->disable();

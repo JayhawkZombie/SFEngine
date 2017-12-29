@@ -9,7 +9,7 @@
 #include "Engine/Source/Physics/Occluder.h"
 #include "Engine/Source/Lights/LightingSystem.h"
 
-class OakTreeLevel : public Engine::BasicLevel
+class OakTreeLevel : public BasicLevel
 {
 public:
   OakTreeLevel();
@@ -17,7 +17,7 @@ public:
 
   void TickUpdate(const double &delta) override;
   void RenderOnTexture(std::shared_ptr<sf::RenderTexture> Texture) override;
-  void HandleInputEvent(const Engine::UserEvent &evnt) override;
+  void HandleInputEvent(const UserEvent &evnt) override;
   void OnBegin() override;
   void OnEnd() override;
   void makeSegment(sf::Vector2i endPoint1, sf::Vector2i endPoint2);
@@ -29,11 +29,11 @@ public:
 
 
 protected:
-  Engine::LightSystem m_LightSystem;
+  LightSystem m_LightSystem;
 
   std::shared_ptr<OakTreeChurchInterior> OakTreeChurchInteriorLevelPtr;
-	std::shared_ptr<Engine::GenericActor> MainCharacter;
-	Engine::Camera2D myActor_camera;
+	std::shared_ptr<GenericActor> MainCharacter;
+	Camera2D myActor_camera;
   /*If using this tool, first change,
   *       "Window = new sf::RenderWindow(sf::VideoMode(1700, 900), "SFEngine", sf::Style::Resize | sf::Style::Close | sf::Style::Titlebar, csettings);"
   * to

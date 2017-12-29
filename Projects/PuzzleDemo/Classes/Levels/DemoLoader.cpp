@@ -80,23 +80,23 @@ DemoLoadLevel::DemoLoadLevel()
 
   auto __siz = m_BitmapText.getGlobalBounds();
 
-  m_BitmapText.setPosition({ (Engine::WindowSize.x - __siz.width) / 2.f, (Engine::WindowSize.y - __siz.height) / 2.f - 50.f });
+  m_BitmapText.setPosition({ (WindowSize.x - __siz.width) / 2.f, (WindowSize.y - __siz.height) / 2.f - 50.f });
   m_ProgressBar.SetSize({ 500, 35 });
   m_ProgressBar.SetBackgroundColor(sf::Color(0, 71, 5));
   m_ProgressBar.SetFillColor(sf::Color(0, 255, 21));
   m_ProgressBar.SetFrameColor(sf::Color(99, 99, 99));
   m_ProgressBar.SetFrameThickness(2.f);
   m_ProgressBar.SetProgress(0.f);
-  m_ProgressBar.SetPosition({ (Engine::WindowSize.x - 500.f) / 2.f, (Engine::WindowSize.y - __siz.height) / 2.f + __siz.height + 50.f });
+  m_ProgressBar.SetPosition({ (WindowSize.x - 500.f) / 2.f, (WindowSize.y - __siz.height) / 2.f + __siz.height + 50.f });
   m_ProgressBar.SetFillRate(0.023f);
 
-  Engine::ASyncLevelStreamThread::Load(
-    [this]() -> SPtrShared<Engine::BasicLevel>
+  ASyncLevelStreamThread::Load(
+    [this]() -> SPtrShared<BasicLevel>
   {
     try
     {
       std::cerr << "Loading level" << std::endl;
-      SPtrShared<Engine::BasicLevel> Loading = std::make_shared<Level1>();
+      SPtrShared<BasicLevel> Loading = std::make_shared<Level1>();
 
       this->m_LevelMutex->lock();
       this->m_NextLevel = Loading;
@@ -189,7 +189,7 @@ void DemoLoadLevel::TickUpdate(const double & delta)
   if (!m_LoadingNextLevel && m_ProgressBar.GetProgress() >= 99.f && !changed_text) {
     m_BitmapText.setString("Press mouse button to continue...");
     auto __siz = m_BitmapText.getGlobalBounds();
-    m_BitmapText.setPosition({ (Engine::WindowSize.x - __siz.width) / 2.f, (Engine::WindowSize.y - __siz.height) / 2.f - 50.f });
+    m_BitmapText.setPosition({ (WindowSize.x - __siz.width) / 2.f, (WindowSize.y - __siz.height) / 2.f - 50.f });
     changed_text = true;
     m_CanSwitchLevel = true;
   }
@@ -199,12 +199,12 @@ void DemoLoadLevel::TickUpdate(const double & delta)
   m_LevelMutex->unlock();
 }
 
-void DemoLoadLevel::HandleInputEvent(const Engine::UserEvent & evnt)
+void DemoLoadLevel::HandleInputEvent(const UserEvent & evnt)
 {
-  if (evnt.EventType == Engine::UserEventType::MousePress && m_CanSwitchLevel) {
-    Engine::SwitchLevel(m_NextLevel);
+  if (evnt.EventType == UserEventType::MousePress && m_CanSwitchLevel) {
+    SwitchLevel(m_NextLevel);
   }
-  else if (evnt.EventType == Engine::UserEventType::KeyboardPress) {
+  else if (evnt.EventType == UserEventType::KeyboardPress) {
     if (evnt.Key == sf::Keyboard::W)
       m_TestRing.FillTo(1.f, 1500.f);
     else if (evnt.Key == sf::Keyboard::S)
@@ -232,7 +232,7 @@ void DemoLoadLevel::RenderOnTexture(std::shared_ptr<sf::RenderTexture> Texture)
   m_LevelMutex->unlock();
 }
 
-void DemoLoadLevel::SetNextLevel(std::shared_ptr<Engine::BasicLevel> NextLevel)
+void DemoLoadLevel::SetNextLevel(std::shared_ptr<BasicLevel> NextLevel)
 {
   m_NextLevel = NextLevel;
 }

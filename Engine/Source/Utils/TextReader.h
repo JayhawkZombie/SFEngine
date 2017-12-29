@@ -35,14 +35,9 @@
 #include <iterator>
 #include <sstream>
 
-namespace Engine
+namespace Text
 {
 
-  namespace Text
-  {
-
-    int ReadInteger(std::string RawString, bool Unsigned = false);
-    float ReadDecimal(std::string RawString);
-  }
-
+  int ReadInteger(std::string RawString, bool Unsigned = false);
+  float ReadDecimal(std::string RawString);
 }

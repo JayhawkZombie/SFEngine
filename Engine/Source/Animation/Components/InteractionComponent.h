@@ -1,21 +1,13 @@
-#ifndef SFENGINE_INTERACTION_COMPONENT_H
-#define SFENGINE_INTERACTION_COMPONENT_H
+#pragma once
 
 #include "CollisionComponent.h"
 
-namespace Engine
+class LevelObject;
+
+class InteractionComponent : protected ComponentBase
 {
+public:
+  InteractionComponent();
+  ~InteractionComponent();
 
-  class LevelObject;
-
-  class InteractionComponent : protected ComponentBase
-  {
-  public:
-    InteractionComponent();
-    ~InteractionComponent();
-
-  };
-
-}
-
-#endif
+};

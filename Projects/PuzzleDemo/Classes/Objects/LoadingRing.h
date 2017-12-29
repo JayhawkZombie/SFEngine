@@ -4,7 +4,7 @@
 #include "ProjectIncludes.h"
 #include "ThirdParty/SelbaWard.hpp"
 
-class LoadingRing : public Engine::LevelObject
+class LoadingRing : public LevelObject
 {
 public:
   LoadingRing();

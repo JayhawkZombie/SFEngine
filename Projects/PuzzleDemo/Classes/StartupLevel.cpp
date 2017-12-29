@@ -46,7 +46,7 @@ StartupLevel::StartupLevel()
   m_SFMLBeforeShatter.setPosition({ 349.5, 298 });
   m_LoadingNextLevel = true;
 
-  Engine::ASyncLevelStreamThread::Load(
+  ASyncLevelStreamThread::Load(
   
     [this]() -> SPtrShared<BasicLevel>
     {
@@ -78,7 +78,7 @@ void StartupLevel::TickUpdate(const double & delta)
 {
   static sf::Clock thorClock;
   if (m_SequenceDone && !m_LoadingNextLevel) {
-    Engine::SwitchLevel(m_NextLevel);
+    SwitchLevel(m_NextLevel);
     return;
   }
 
@@ -141,7 +141,7 @@ void StartupLevel::OnShutDown()
 {
 }
 
-void StartupLevel::HandleInputEvent(const Engine::UserEvent & evnt)
+void StartupLevel::HandleInputEvent(const UserEvent & evnt)
 {
 
 }
@@ -149,20 +149,20 @@ void StartupLevel::HandleInputEvent(const Engine::UserEvent & evnt)
 void StartupLevel::EventUpdate(sf::Event event)
 {
   if (event.type == sf::Event::MouseButtonPressed) {
-    Engine::Messager::PostToActivityLog(
-      Engine::SystemMessage(Engine::SystemMessageType::ActivityLog, InternalID, 0, 
+    Messager::PostToActivityLog(
+      SystemMessage(SystemMessageType::ActivityLog, InternalID, 0, 
                             "StartupLevel - EventUpdate() - User Skipped Animation")
     );
     m_SequenceDone = true;
     m_LightningSequence.Clear();
-    Engine::SwitchLevel(m_NextLevel);
+    SwitchLevel(m_NextLevel);
   }
 }
 
 void StartupLevel::OnBegin()
 {
-  Engine::Messager::PostToActivityLog(
-    Engine::SystemMessage(Engine::SystemMessageType::ActivityLog, InternalID, 0, "StartupLevel - OnBegin()")
+  Messager::PostToActivityLog(
+    SystemMessage(SystemMessageType::ActivityLog, InternalID, 0, "StartupLevel - OnBegin()")
   );
 
   TriggerCrawlingLightning();
@@ -173,8 +173,8 @@ void StartupLevel::OnBegin()
 
 void StartupLevel::OnEnd()
 {
-  Engine::Messager::PostToActivityLog(
-    Engine::SystemMessage(Engine::SystemMessageType::ActivityLog, InternalID, 0, "StartupLevel - OnEnd()")
+  Messager::PostToActivityLog(
+    SystemMessage(SystemMessageType::ActivityLog, InternalID, 0, "StartupLevel - OnEnd()")
   );
 
   CleanUp();
@@ -193,7 +193,7 @@ void StartupLevel::CleanUp()
   }
 }
 
-void StartupLevel::SetNextLevel(std::shared_ptr<Engine::BasicLevel> NextLevel)
+void StartupLevel::SetNextLevel(std::shared_ptr<BasicLevel> NextLevel)
 {
   m_NextLevel = NextLevel;
 }

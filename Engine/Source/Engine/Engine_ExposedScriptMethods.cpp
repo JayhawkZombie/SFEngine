@@ -35,39 +35,32 @@
  *
  */
 
-namespace Engine
+void SFEngine::SetAALevel(unsigned int level)
+{
+  ContextSettings.antialiasingLevel = level;
+}
+
+void SFEngine::SetFramerateLimit(unsigned int level)
+{
+    
+}
+
+void SFEngine::SetBrightness(unsigned int level)
+{
+  RSettings.Brightness = static_cast<float>(level);
+}
+
+void SFEngine::SetGamma(unsigned int level)
+{
+  RSettings.Gamma = static_cast<float>(level);
+}
+
+void SFEngine::SetTimeScale(float amount)
 {
 
+}
 
-  void SFEngine::SetAALevel(unsigned int level)
-  {
-    ContextSettings.antialiasingLevel = level;
-  }
-
-  void SFEngine::SetFramerateLimit(unsigned int level)
-  {
-    
-  }
-
-  void SFEngine::SetBrightness(unsigned int level)
-  {
-    RenderSettings.Brightness = static_cast<float>(level);
-  }
-
-  void SFEngine::SetGamma(unsigned int level)
-  {
-    RenderSettings.Gamma = static_cast<float>(level);
-  }
-
-  void SFEngine::SetTimeScale(float amount)
-  {
-
-  }
-
-  void SFEngine::SetContrast(unsigned int level)
-  {
-    RenderSettings.Contrast = static_cast<float>(level);
-  }
-
-
+void SFEngine::SetContrast(unsigned int level)
+{
+  RSettings.Contrast = static_cast<float>(level);
 }

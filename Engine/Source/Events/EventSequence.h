@@ -33,10 +33,3 @@
 #include "Engine\BaseEngineInterface.h"
 #include "Events\EventHandler.h"
 #include "Utils\ListTemplates.h"
-
-namespace Engine
-{
-
-  
-
-}

@@ -8,7 +8,7 @@
 #include "Time\TimedSequence.h"
 #include "Utils\UntimedSequence.h"
 
-class StartupLevel : public Engine::BasicLevel
+class StartupLevel : public BasicLevel
 {
 public:
   StartupLevel();
@@ -18,13 +18,13 @@ public:
   void Render(std::shared_ptr<sf::RenderTarget> Target) override final;
   void RenderOnTexture(std::shared_ptr<sf::RenderTexture> Texture) override final;
   void OnShutDown() override final;
-  void HandleInputEvent(const Engine::UserEvent &evnt) override final;
+  void HandleInputEvent(const UserEvent &evnt) override final;
   void EventUpdate(sf::Event event) override final;
   void OnBegin() override final;
   void OnEnd() override final;
 
   void CleanUp() override final;
-  void SetNextLevel(std::shared_ptr<Engine::BasicLevel> NextLevel);
+  void SetNextLevel(std::shared_ptr<BasicLevel> NextLevel);
   std::string GetClass() const override final;
 
 protected:
@@ -33,7 +33,7 @@ protected:
   bool m_SequenceDone = false;
   bool m_Paused       = false;
 
-  Engine::TimedSequence m_LightningSequence;
+  TimedSequence m_LightningSequence;
   void LightningSequenceStarted();
   void LightningSequenceEnded();
 
@@ -66,15 +66,15 @@ protected:
   int ShatterDivisionX = 20;
   int ShatterDivisionY = 20;
 
-  Engine::LightningBolt m_BoltTopLeft;
-  Engine::LightningBolt m_BoltTopRight;
-  Engine::LightningBolt m_BoltBottomLeft;
-  Engine::LightningBolt m_BoltBottomRight;
+  LightningBolt m_BoltTopLeft;
+  LightningBolt m_BoltTopRight;
+  LightningBolt m_BoltBottomLeft;
+  LightningBolt m_BoltBottomRight;
 
-  std::shared_ptr<Engine::LightningStorm> m_LightningStorm;
-  Engine::CrawlingLightningBolt m_CrawlBolts[32];
+  std::shared_ptr<LightningStorm> m_LightningStorm;
+  CrawlingLightningBolt m_CrawlBolts[32];
 
-  std::shared_ptr<Engine::BasicLevel> m_NextLevel;
+  std::shared_ptr<BasicLevel> m_NextLevel;
 };
 
 #endif

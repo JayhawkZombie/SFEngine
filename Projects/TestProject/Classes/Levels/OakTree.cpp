@@ -9,7 +9,7 @@ OakTreeLevel::OakTreeLevel()
 {
   OakTreeChurchInteriorLevelPtr = std::make_shared<OakTreeChurchInterior>();
   OakTreeChurchInteriorLevelPtr->SetID("oaktree_church");
-  Engine::Levels["oaktree_church"] = OakTreeChurchInteriorLevelPtr;
+  Levels["oaktree_church"] = OakTreeChurchInteriorLevelPtr;
   LoadFromFile("./Projects/TestProject/testproject.json");
   lastPos = { 0,0 };
   std::vector<unsigned char> levelData(100000);
@@ -98,25 +98,25 @@ OakTreeLevel::OakTreeLevel()
   top.update(levelData2, 50);
 
   //Declaration of the Buildings
-  std::shared_ptr <Engine::LevelObject> Barracks = std::make_shared<Engine::LevelObject>(); //Barracks Declaration
-  std::shared_ptr <Engine::LevelObject> TownHall = std::make_shared<Engine::LevelObject>(); //TownHall Declaration
-  std::shared_ptr <Engine::LevelObject> Church = std::make_shared<Engine::LevelObject>();  //Church Declaration
-  std::shared_ptr <Engine::LevelObject> Church_Door = std::make_shared<Engine::LevelObject>(); // Church Door collider
+  std::shared_ptr <LevelObject> Barracks = std::make_shared<LevelObject>(); //Barracks Declaration
+  std::shared_ptr <LevelObject> TownHall = std::make_shared<LevelObject>(); //TownHall Declaration
+  std::shared_ptr <LevelObject> Church = std::make_shared<LevelObject>();  //Church Declaration
+  std::shared_ptr <LevelObject> Church_Door = std::make_shared<LevelObject>(); // Church Door collider
   Church_Door->SetID("oaktree_churchdoor");
-  std::shared_ptr <Engine::LevelObject> ItemShop = std::make_shared<Engine::LevelObject>(); //ItemShop Declaration
-  std::shared_ptr <Engine::LevelObject> ArmorShop = std::make_shared<Engine::LevelObject>();//ArmorShop Declaration
-  std::shared_ptr <Engine::LevelObject> WeaponShop = std::make_shared<Engine::LevelObject>();//WeaponShop Declaration
-  std::shared_ptr <Engine::LevelObject> BrahmHouse = std::make_shared<Engine::LevelObject>();//BrahmHouse Declaration - looks like an inn for now
-  std::shared_ptr <Engine::LevelObject> Inn = std::make_shared<Engine::LevelObject>();//Inn declaration
-  std::shared_ptr <Engine::LevelObject> BigHouse1 = std::make_shared<Engine::LevelObject>(); //Main Characters house
-  std::shared_ptr <Engine::LevelObject> BigHouse2 = std::make_shared<Engine::LevelObject>(); //Another big house
-  std::shared_ptr <Engine::LevelObject> SmallHouse1 = std::make_shared<Engine::LevelObject>();//A small house
-  std::shared_ptr <Engine::LevelObject> SmallHouse2 = std::make_shared<Engine::LevelObject>();//another small house
-  std::shared_ptr <Engine::LevelObject> SmallHouse3 = std::make_shared<Engine::LevelObject>();//yet another small house
+  std::shared_ptr <LevelObject> ItemShop = std::make_shared<LevelObject>(); //ItemShop Declaration
+  std::shared_ptr <LevelObject> ArmorShop = std::make_shared<LevelObject>();//ArmorShop Declaration
+  std::shared_ptr <LevelObject> WeaponShop = std::make_shared<LevelObject>();//WeaponShop Declaration
+  std::shared_ptr <LevelObject> BrahmHouse = std::make_shared<LevelObject>();//BrahmHouse Declaration - looks like an inn for now
+  std::shared_ptr <LevelObject> Inn = std::make_shared<LevelObject>();//Inn declaration
+  std::shared_ptr <LevelObject> BigHouse1 = std::make_shared<LevelObject>(); //Main Characters house
+  std::shared_ptr <LevelObject> BigHouse2 = std::make_shared<LevelObject>(); //Another big house
+  std::shared_ptr <LevelObject> SmallHouse1 = std::make_shared<LevelObject>();//A small house
+  std::shared_ptr <LevelObject> SmallHouse2 = std::make_shared<LevelObject>();//another small house
+  std::shared_ptr <LevelObject> SmallHouse3 = std::make_shared<LevelObject>();//yet another small house
 
   //Declaration of The Trees-Texture Set of the Trees
-  std::map<int, std::shared_ptr <Engine::LevelObject>> Trees;//Declares an array of trees -these will be the 5x5 tree blocks for filler
-  std::shared_ptr <Engine::LevelObject> BigOakTreeTree = std::make_shared<Engine::LevelObject>(); //Declares The big tree in the middle of town
+  std::map<int, std::shared_ptr <LevelObject>> Trees;//Declares an array of trees -these will be the 5x5 tree blocks for filler
+  std::shared_ptr <LevelObject> BigOakTreeTree = std::make_shared<LevelObject>(); //Declares The big tree in the middle of town
 
   BigOakTreeTree->SetTexture(Textures["Bigoaktree"]);//sets the texture for the big oak tree in the middle of town
   BigOakTreeTree->SetTextureRect({ 0,0,144,144 });
@@ -136,7 +136,7 @@ OakTreeLevel::OakTreeLevel()
 
   Church_Door->SetPosition({ 368.f, 224.f });
   Church_Door->SetSize({ 32, 32 });
-  Church_Door->AddCollider(Engine::Collider2D::CreatePolygonMesh(4, 22.6274f, (3.14159 / 4), { 400.f, 224.f }, { 0, 0 }, 1000000000.f, 0.f, sf::Color::Red));
+  Church_Door->AddCollider(Collider2D::CreatePolygonMesh(4, 22.6274f, (3.14159 / 4), { 400.f, 224.f }, { 0, 0 }, 1000000000.f, 0.f, sf::Color::Red));
 
   ItemShop->SetTexture(Textures["5by5Shops"]);
   ItemShop->SetTextureRect({ 0 , 80, 80 ,80 });
@@ -219,24 +219,24 @@ OakTreeLevel::OakTreeLevel()
   {
     if (!(obj.second == myActor))
     {
-      Segments.push_back(Engine::BuildSegmentMesh('b', obj.second->getTopLeft(), obj.second->getTopRight()));
-      Segments.push_back(Engine::BuildSegmentMesh('b', obj.second->getTopRight(), obj.second->getBottomRight()));
-      Segments.push_back(Engine::BuildSegmentMesh('b', obj.second->getBottomLeft(), obj.second->getBottomRight()));
-      Segments.push_back(Engine::BuildSegmentMesh('b', obj.second->getTopLeft(), obj.second->getBottomLeft()));
+      Segments.push_back(BuildSegmentMesh('b', obj.second->getTopLeft(), obj.second->getTopRight()));
+      Segments.push_back(BuildSegmentMesh('b', obj.second->getTopRight(), obj.second->getBottomRight()));
+      Segments.push_back(BuildSegmentMesh('b', obj.second->getBottomLeft(), obj.second->getBottomRight()));
+      Segments.push_back(BuildSegmentMesh('b', obj.second->getTopLeft(), obj.second->getBottomLeft()));
     }
   }
 
 
   //Four Corners of level
-  Segments.push_back(Engine::BuildSegmentMesh('b', { 0,0 }, { 0,800 }));
-  Segments.push_back(Engine::BuildSegmentMesh('b', { 0,800 }, { 800,800 }));
-  Segments.push_back(Engine::BuildSegmentMesh('b', { 800,800 }, { 800,0 }));
-  Segments.push_back(Engine::BuildSegmentMesh('b', { 800,0 }, { 0,0 }));
+  Segments.push_back(BuildSegmentMesh('b', { 0,0 }, { 0,800 }));
+  Segments.push_back(BuildSegmentMesh('b', { 0,800 }, { 800,800 }));
+  Segments.push_back(BuildSegmentMesh('b', { 800,800 }, { 800,0 }));
+  Segments.push_back(BuildSegmentMesh('b', { 800,0 }, { 0,0 }));
 
 
-  Segments.push_back(Engine::BuildSegmentMesh('b', { (4 * 16) - 1,14 * 16 }, { (4 * 16) - 1,17*16 }));
-  Segments.push_back(Engine::BuildSegmentMesh('b', { (4 * 16) - 1, 14 * 16 - 1 }, { (5 * 16) - 1,14 * 16 - 1 }));
-  Segments.push_back(Engine::BuildSegmentMesh('b', { (5 * 16), 14 * 16 }, { 5 * 16,13 * 16 }));
+  Segments.push_back(BuildSegmentMesh('b', { (4 * 16) - 1,14 * 16 }, { (4 * 16) - 1,17*16 }));
+  Segments.push_back(BuildSegmentMesh('b', { (4 * 16) - 1, 14 * 16 - 1 }, { (5 * 16) - 1,14 * 16 - 1 }));
+  Segments.push_back(BuildSegmentMesh('b', { (5 * 16), 14 * 16 }, { 5 * 16,13 * 16 }));
   makeSegment({ 5,13 }, { 6,13 });
   makeSegment({ 6,13 }, { 6,12 });
   makeSegment(6, 12, 7, 12);
@@ -428,7 +428,7 @@ OakTreeLevel::OakTreeLevel()
 
   Gravity->x = 0;
   Gravity->y = 0;
-  Engine::SetGravity(Gravity);
+  SetGravity(Gravity);
 
   m_LightSystem.AddLight({ 24 * 16,33 * 16 }, 50.f, sf::Color::Red, "RedLight");
 }
@@ -449,12 +449,12 @@ void OakTreeLevel::TickUpdate(const double & delta)
 
 void OakTreeLevel::makeSegment(sf::Vector2i endPoint1, sf::Vector2i endPoint2)
 {
-	Segments.push_back(Engine::BuildSegmentMesh('b', { endPoint1.x * 16,endPoint1.y * 16}, { endPoint2.x * 16,endPoint2.y * 16}));
+	Segments.push_back(BuildSegmentMesh('b', { endPoint1.x * 16,endPoint1.y * 16}, { endPoint2.x * 16,endPoint2.y * 16}));
 }
 
 void OakTreeLevel::makeSegment(int pt1x, int pt1y, int pt2x, int pt2y)
 {
-	Segments.push_back(Engine::BuildSegmentMesh('b', {pt1x*16,pt1y*16}, { pt2x*16,pt2y*16 }));
+	Segments.push_back(BuildSegmentMesh('b', {pt1x*16,pt1y*16}, { pt2x*16,pt2y*16 }));
 }
 
 std::string OakTreeLevel::GetClass() const
@@ -473,22 +473,22 @@ void OakTreeLevel::nextSeg(int x, int y)
 	{
 		if (lastPos.x < x)
 		{
-			Segments.push_back(Engine::BuildSegmentMesh('b', { lastPos.x * 16 - 1, lastPos.y * 16 }, { x * 16 + 1,y * 16 }));
+			Segments.push_back(BuildSegmentMesh('b', { lastPos.x * 16 - 1, lastPos.y * 16 }, { x * 16 + 1,y * 16 }));
 		}
 		else
 		{
-			Segments.push_back(Engine::BuildSegmentMesh('b', { lastPos.x * 16 + 1, lastPos.y * 16 }, { x * 16 - 1,y*16 }));
+			Segments.push_back(BuildSegmentMesh('b', { lastPos.x * 16 + 1, lastPos.y * 16 }, { x * 16 - 1,y*16 }));
 		}
 	}
 	else
 	{
 		if (lastPos.y < y)
 		{
-			Segments.push_back(Engine::BuildSegmentMesh('b', { lastPos.x * 16,lastPos.y * 16 - 1 }, { x * 16,y * 16 + 1 }));
+			Segments.push_back(BuildSegmentMesh('b', { lastPos.x * 16,lastPos.y * 16 - 1 }, { x * 16,y * 16 + 1 }));
 		}
 		else
 		{
-			Segments.push_back(Engine::BuildSegmentMesh('b', { lastPos.x * 16, lastPos.y * 16 + 1 }, { x * 16,y * 16 - 1 }));
+			Segments.push_back(BuildSegmentMesh('b', { lastPos.x * 16, lastPos.y * 16 + 1 }, { x * 16,y * 16 - 1 }));
 		}
 	}
 	//Segments.push_back(Engine::BuildSegmentMesh('b', { lastPos.x*16,lastPos.y * 16 }, {x*16,y*16 }));
@@ -515,7 +515,7 @@ void OakTreeLevel::RenderOnTexture(std::shared_ptr<sf::RenderTexture> Texture)
   m_LightSystem.RenderOnTexture(Texture, view);
 }
 
-void OakTreeLevel::HandleInputEvent(const Engine::UserEvent & evnt)
+void OakTreeLevel::HandleInputEvent(const UserEvent & evnt)
 {
   MainCharacter->HandleInputEvent(evnt);
 
@@ -579,7 +579,7 @@ void OakTreeLevel::HandleInputEvent(const Engine::UserEvent & evnt)
         }
       }
 
-      Segments.push_back(Engine::BuildSegmentMesh('b', { start_position.x, start_position.y }, { end_position.x,end_position.y }));
+      Segments.push_back(BuildSegmentMesh('b', { start_position.x, start_position.y }, { end_position.x,end_position.y }));
       //std::cout << "Segments.push_back(Engine::BuildSegmentMesh('b', {" << start_position.x << ", " << start_position.y << " }, { " << end_position.x << "," << end_position.y << " }));\n";
     }
   } 
@@ -587,7 +587,7 @@ void OakTreeLevel::HandleInputEvent(const Engine::UserEvent & evnt)
 
 void OakTreeLevel::OnBegin()
 {
-  Engine::SetGravity(Gravity);
+  SetGravity(Gravity);
   if (MainCharacter->GetActorPosition().x != 384 && MainCharacter->GetActorPosition().y != 528) {
     MainCharacter->SetActorPosition({ 398, 250 });
   }

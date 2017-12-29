@@ -33,17 +33,13 @@
 #include "BasicIncludes.h"
 #include "Level\Level.h"
 
-namespace Engine
-{
+Level *Api_CurrentLevel = nullptr;
 
-  Level *Api_CurrentLevel = nullptr;
+void SetCurrentLevel(Level *lvl);
+void BindLevelMethods(chaiscript::ChaiScript *Engine);
 
-  void SetCurrentLevel(Level *lvl);
-  void BindLevelMethods(chaiscript::ChaiScript *Engine);
+void AddActor(std::string Name, float x, float y);
+void KillActor(std::string Name);
+std::string GetTileName(float x, float y);
 
-  void AddActor(std::string Name, float x, float y);
-  void KillActor(std::string Name);
-  std::string GetTileName(float x, float y);
-
-  void LoadLevelInformation(std::string filename);
-}
+void LoadLevelInformation(std::string filename);

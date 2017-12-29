@@ -3,7 +3,7 @@
 
 #include "ProjectIncludes.h"
 
-class LightningObject : public Engine::LevelObject
+class LightningObject : public LevelObject
 {
 public:
   LightningObject();

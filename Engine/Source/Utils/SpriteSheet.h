@@ -32,37 +32,32 @@
 
 #include "BasicIncludes.h"
 
-namespace Engine
+class SpriteSheet
 {
+public:
+  SpriteSheet();
+  SpriteSheet(const SpriteSheet &sheet);
 
-  class SpriteSheet
-  {
-  public:
-    SpriteSheet();
-    SpriteSheet(const SpriteSheet &sheet);
+  ~SpriteSheet();
 
-    ~SpriteSheet();
+  void SetTexture(SharedTexture tex);
+  SharedTexture GetTexture() const;
 
-    void SetTexture(SharedTexture tex);
-    SharedTexture GetTexture() const;
+  virtual void SerializeIn(std::ifstream &in);
+  virtual void SerializeOut(std::ofstream &out);
 
-    virtual void SerializeIn(std::ifstream &in);
-    virtual void SerializeOut(std::ofstream &out);
+  void AddFrame(const sf::IntRect &frame);
+  void EvenlyDivideFrames(std::uint32_t frameWidth, std::uint32_t frameHeight);
 
-    void AddFrame(const sf::IntRect &frame);
-    void EvenlyDivideFrames(std::uint32_t frameWidth, std::uint32_t frameHeight);
+  std::shared_ptr<sf::Sprite> GetSprite(std::size_t index);
 
-    std::shared_ptr<sf::Sprite> GetSprite(std::size_t index);
+private:
+  SharedTexture Texture;
+  std::vector<sf::IntRect> Frames;
 
-  private:
-    SharedTexture Texture;
-    std::vector<sf::IntRect> Frames;
+  std::vector<std::shared_ptr<sf::Sprite>> Sprites;
 
-    std::vector<std::shared_ptr<sf::Sprite>> Sprites;
+  std::uint32_t TextureWidth;
+  std::uint32_t TextureHeight;
 
-    std::uint32_t TextureWidth;
-    std::uint32_t TextureHeight;
-
-  };
-
-}
+};

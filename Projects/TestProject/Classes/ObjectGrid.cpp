@@ -8,9 +8,9 @@ Grid::Grid(int dimX, int dimY)
 
 }
 
-std::vector<std::shared_ptr<Engine::LevelObject>> Grid::GetObjectsInCell(int X, int Y)
+std::vector<std::shared_ptr<LevelObject>> Grid::GetObjectsInCell(int X, int Y)
 {
-  static std::vector<std::shared_ptr<Engine::LevelObject>> Objects;
+  static std::vector<std::shared_ptr<LevelObject>> Objects;
 
   Objects.clear();
 
@@ -22,7 +22,7 @@ std::vector<std::shared_ptr<Engine::LevelObject>> Grid::GetObjectsInCell(int X, 
   return Objects;
 }
 
-void Grid::InsertObjectInCell(int X, int Y, std::shared_ptr<Engine::LevelObject> Object)
+void Grid::InsertObjectInCell(int X, int Y, std::shared_ptr<LevelObject> Object)
 {
   if (X < m_Cells.size() && Y < m_Cells[X].size()) {
     m_Cells[X][Y].m_Objects.push_back(Object);

@@ -30,87 +30,82 @@
 
 #include "Lights\GenericLightSource.h"
 
-namespace Engine
+GenericLightSource::GenericLightSource()
+{
+  LightID = "";
+}
+
+GenericLightSource::GenericLightSource(const GenericLightSource &src)
+{
+  LightID = "";
+  Position = src.Position;
+  Attenutation = src.Attenutation;
+  Intensity = src.Intensity;
+  Color = src.Color;
+  bDoesCastShadows = src.bDoesCastShadows;
+}
+
+GenericLightSource::~GenericLightSource()
 {
 
-  GenericLightSource::GenericLightSource()
-  {
-    LightID = "";
-  }
+}
 
-  GenericLightSource::GenericLightSource(const GenericLightSource &src)
-  {
-    LightID = "";
-    Position = src.Position;
-    Attenutation = src.Attenutation;
-    Intensity = src.Intensity;
-    Color = src.Color;
-    bDoesCastShadows = src.bDoesCastShadows;
-  }
+void GenericLightSource::SetPosition(const sf::Vector2f &pos)
+{
+  Position = pos;
+}
 
-  GenericLightSource::~GenericLightSource()
-  {
+const sf::Vector2f& GenericLightSource::GetPosition() const
+{
+  return Position;
+}
 
-  }
+void GenericLightSource::SetAttenuation(const sf::Vector2f &atten)
+{
+  Attenutation = atten;
+}
 
-  void GenericLightSource::SetPosition(const sf::Vector2f &pos)
-  {
-    Position = pos;
-  }
+const sf::Vector2f& GenericLightSource::GetAttenuation() const
+{
+  return Attenutation;
+}
 
-  const sf::Vector2f& GenericLightSource::GetPosition() const
-  {
-    return Position;
-  }
+void GenericLightSource::SetIntensity(const float in)
+{
+  Intensity = in;
+}
 
-  void GenericLightSource::SetAttenuation(const sf::Vector2f &atten)
-  {
-    Attenutation = atten;
-  }
+const float& GenericLightSource::GetIntensity() const
+{
+  return Intensity;
+}
 
-  const sf::Vector2f& GenericLightSource::GetAttenuation() const
-  {
-    return Attenutation;
-  }
+void GenericLightSource::SetColor(const sf::Color &color)
+{
+  Color = color;
+}
 
-  void GenericLightSource::SetIntensity(const float in)
-  {
-    Intensity = in;
-  }
+const sf::Color& GenericLightSource::GetColor() const
+{
+  return Color;
+}
 
-  const float& GenericLightSource::GetIntensity() const
-  {
-    return Intensity;
-  }
+void GenericLightSource::SetDoesCastShadows(const bool &b)
+{
+  bDoesCastShadows = b;
+}
 
-  void GenericLightSource::SetColor(const sf::Color &color)
-  {
-    Color = color;
-  }
+const bool& GenericLightSource::GetDoesCastShadows() const
+{
+  return bDoesCastShadows;
+}
 
-  const sf::Color& GenericLightSource::GetColor() const
-  {
-    return Color;
-  }
+void GenericLightSource::SetID(const std::string &ID)
+{
+  LightID = ID;
+}
 
-  void GenericLightSource::SetDoesCastShadows(const bool &b)
-  {
-    bDoesCastShadows = b;
-  }
-
-  const bool& GenericLightSource::GetDoesCastShadows() const
-  {
-    return bDoesCastShadows;
-  }
-
-  void GenericLightSource::SetID(const std::string &ID)
-  {
-    LightID = ID;
-  }
-
-  const std::string& GenericLightSource::GetID() const
-  {
-    return LightID;
-  }
-
+const std::string& GenericLightSource::GetID() const
+{
+  return LightID;
 }

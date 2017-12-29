@@ -14,7 +14,7 @@
 *.init
 
 # Ignore dependencies
-Dependencies/**
+Dependencies/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

@@ -6,7 +6,7 @@
 #include <Thor\Animations.hpp>
 #include <SFML\Audio.hpp>
 
-class PuzzleBall : public Engine::LevelObject
+class PuzzleBall : public LevelObject
 {
 public:
   PuzzleBall();

@@ -13,15 +13,15 @@ PhysicsDemoLevel::PhysicsDemoLevel()
   m_PGravityAffector1(sf::Vector2f(0.f, 5.f)),
   BasicLevel(sf::Vector2u(1700, 900), sf::FloatRect(0, 0, 1700, 900)),
   m_TorchAnimator(m_TorchAnimationMap),
-  m_StarField(Engine::WindowSize, 350u, sf::Color(0, 255, 255)),
-  m_ParticlePath(Engine::SplinePath::Connected | Engine::SplinePath::Smooth | Engine::SplinePath::Cubic),
+  m_StarField(WindowSize, 350u, sf::Color(0, 255, 255)),
+  m_ParticlePath(SplinePath::Connected | SplinePath::Smooth | SplinePath::Cubic),
   m_PColorAnimation2(m_PColorGradient2),
   m_PFadeAnimation2(0.3f, 0.3f),
   m_PGravityAffector2(sf::Vector2f(0.f, 5.f))
 {
   m_TorchTexture = std::make_shared<sf::Texture>();
   m_TorchTexture->loadFromFile("./Projects/PuzzleDemo/Assets/Textures/torchsheet.png");
-  m_TorchObject = std::make_shared<Engine::LevelObject>();
+  m_TorchObject = std::make_shared<LevelObject>();
   m_TorchObject->SetTexture(m_TorchTexture);
   m_TorchSprite.setTexture(*m_TorchTexture);
 
@@ -105,10 +105,10 @@ PhysicsDemoLevel::PhysicsDemoLevel()
     sf::Vector2f(200, 35), 
     sf::Vector2f(10, 10), 
     "back", 12, 
-    Engine::GUI
+    GUI
   );
 
-  m_BackButton->connect("clicked", []() { Engine::LoadLevelByName("MainMenu"); });
+  m_BackButton->connect("clicked", []() { LoadLevelByName("MainMenu"); });
 
 
 
@@ -229,7 +229,7 @@ PhysicsDemoLevel::PhysicsDemoLevel()
 
 
   auto bounds = m_BMPText.getGlobalBounds();
-  m_BMPText.setPosition(sf::Vector2f((Engine::WindowSize.x - bounds.width) / 2.f, 150.f));
+  m_BMPText.setPosition(sf::Vector2f((WindowSize.x - bounds.width) / 2.f, 150.f));
 
   m_PEmitter2.setEmissionRate(450.f);
   m_PEmitter2.setParticleLifetime(sf::seconds(8.f));
@@ -257,11 +257,11 @@ PhysicsDemoLevel::PhysicsDemoLevel()
   m_TorchParticleVelocity = thor::PolarVector2f(200.f, -90.f);
 
 
-  m_RenderedScene.create((unsigned int)(Engine::WindowSize.x), (unsigned int)(700));
+  m_RenderedScene.create((unsigned int)(WindowSize.x), (unsigned int)(700));
 
-  SPtrShared<Engine::Collider2D> phy_1_collider = std::make_shared<Engine::Collider2D>();
+  SPtrShared<Collider2D> phy_1_collider = std::make_shared<Collider2D>();
   
-  auto exp_m1 = Engine::BuildExpandPolygonMesh(4, 175.f, 0.f, sf::Vector2f(700.f, 650.f), sf::Vector2f(0.f, 0.f), 1.f, 0.f, 9.f, sf::Color::Green);
+  auto exp_m1 = BuildExpandPolygonMesh(4, 175.f, 0.f, sf::Vector2f(700.f, 650.f), sf::Vector2f(0.f, 0.f), 1.f, 0.f, 9.f, sf::Color::Green);
  // auto exp_m2 = Engine::BuildExpandPolygonMesh(4, 95.f, 0.f, sf::Vector2f(300.f, 650.f), sf::Vector2f(0.f, 0.f), 1.f, 0.f, 3.f, sf::Color::Green);
 
   m_ExpandingPolygons.emplace_back(exp_m1);
@@ -270,14 +270,14 @@ PhysicsDemoLevel::PhysicsDemoLevel()
   phy_1_collider->SetMesh(exp_m1);
 //  phy_2_collider->SetMesh(exp_m2);
 
-  m_ExpandObjects.emplace_back(std::make_shared<Engine::LevelObject>());
+  m_ExpandObjects.emplace_back(std::make_shared<LevelObject>());
   m_ExpandObjects.back()->AddCollider(phy_1_collider);
   LevelObjects["phy_1"] = m_ExpandObjects.back();
 
 
-  segwall1 = Engine::BuildSegmentMesh('b', { 325, 0 }, { 475, 325 }); segwall1->is_bulletProof = true;
-  segwall2 = Engine::BuildSegmentMesh('b', { 1675, 0 }, { 1675 - 450, 75 + 250 }); segwall2->is_bulletProof = true;
-  segFlip = Engine::BuildSegmentMesh('b', { 470, 325 }, { 1230, 325 }); segFlip->is_bulletProof = true;
+  segwall1 = BuildSegmentMesh('b', { 325, 0 }, { 475, 325 }); segwall1->is_bulletProof = true;
+  segwall2 = BuildSegmentMesh('b', { 1675, 0 }, { 1675 - 450, 75 + 250 }); segwall2->is_bulletProof = true;
+  segFlip = BuildSegmentMesh('b', { 470, 325 }, { 1230, 325 }); segFlip->is_bulletProof = true;
 
   for (int i = 0; i < 50; ++i) {
     SpawnNPoly(5, 15, 0.f, { 350.f + 25.f * i, 10.f }, { 0, 0 }, 7.f, 0.9f, sf::Color::Red);
@@ -313,7 +313,7 @@ void PhysicsDemoLevel::OnBegin()
  // m_Faller->SetPosition({ Engine::WindowSize.x / 2.f, 10.f });
   LevelObjects["phy_1"]->GetColliders()[0]->GetMesh().lock()->setPosition(::vec2d(700.f, 450.f));
   LevelObjects["phy_1"]->GetColliders()[0]->GetMesh().lock()->v = ::vec2d(0, 0);
-  Engine::SetGravity(Gravity);
+  SetGravity(Gravity);
 
   Segments.clear();
   Segments.push_back(segwall1);
@@ -340,11 +340,11 @@ void PhysicsDemoLevel::OnBegin()
 
   m_BMPText.setString("Dynamic Physics and Time Dilation");
   
-  Engine::SetGravity(Gravity);
+  SetGravity(Gravity);
   m_CountdownSeqNumber = 5;
   m_CountdownSequence.Start();
   auto bounds = m_BMPText.getGlobalBounds();
-  m_BMPText.setPosition(sf::Vector2f((Engine::WindowSize.x - bounds.width) / 2.f, 150.f));
+  m_BMPText.setPosition(sf::Vector2f((WindowSize.x - bounds.width) / 2.f, 150.f));
   //m_Faller->Freeze();
   m_ExplosionActive = false;
   m_IsSlowingTime = false;
@@ -353,7 +353,7 @@ void PhysicsDemoLevel::OnBegin()
   TotalTimeSpentDialating = 0.0;
   m_FlipOpenSeq.Stop();
 
-  Engine::AssignBoundaries(Engine::WindowSize.y, Engine::WindowSize.x);
+  AssignBoundaries(WindowSize.y, WindowSize.x);
 }
 
 void PhysicsDemoLevel::HideUI()
@@ -444,7 +444,7 @@ void PhysicsDemoLevel::TickUpdate(const double &delta)
   m_TimeDialationSequence.TickUpdate(d);
 }
 
-void PhysicsDemoLevel::HandleInputEvent(const Engine::UserEvent &evnt)
+void PhysicsDemoLevel::HandleInputEvent(const UserEvent &evnt)
 {
 
 }
@@ -479,7 +479,7 @@ void PhysicsDemoLevel::RenderOnTexture(std::shared_ptr<sf::RenderTexture> Textur
   //m_ParticlePath.Render(Texture);
 }
 
-void PhysicsDemoLevel::SetNextLevel(std::shared_ptr<Engine::BasicLevel> NextLevel)
+void PhysicsDemoLevel::SetNextLevel(std::shared_ptr<BasicLevel> NextLevel)
 {
 
 }
@@ -539,7 +539,7 @@ void PhysicsDemoLevel::StartCountdown()
  // m_BMPText.setString("Countdown:    5  ...");
  // auto bounds = m_BMPText.getGlobalBounds();
   
-  Engine::SetGravity(Gravity);
+  SetGravity(Gravity);
  // m_BMPText.setPosition(sf::Vector2f(   (Engine::WindowSize.x - bounds.width) / 2.f, 150.f ));
 }
 
@@ -548,9 +548,9 @@ void PhysicsDemoLevel::EndCountdown()
  // m_BMPText.setString("GO");
   //m_Faller->Unfreeze();
   
-  Engine::SetGravity(Gravity);
+  SetGravity(Gravity);
   auto bounds = m_BMPText.getGlobalBounds();
-  m_BMPText.setPosition(sf::Vector2f((Engine::WindowSize.x - bounds.width) / 2.f, 150.f));
+  m_BMPText.setPosition(sf::Vector2f((WindowSize.x - bounds.width) / 2.f, 150.f));
 
   m_FlipOpenSeq.AddSequences(
     []() {}, []() {}, [this]() { this->OpenFlipper(); },

@@ -5,7 +5,7 @@
 #include "Time\TimedSequence.h"
 #include "ThirdParty\SelbaWard.hpp"
 
-class Flippable : public Engine::LevelObject
+class Flippable : public LevelObject
 {
 public:
   Flippable();
@@ -53,7 +53,7 @@ protected:
 
   bool m_IsFlipping = false;
   sw::Sprite3d m_FlipSprite;
-  Engine::TimedSequence m_FlippingSequence;
+  TimedSequence m_FlippingSequence;
   std::shared_ptr<sf::Texture> m_Texture;
 };
 

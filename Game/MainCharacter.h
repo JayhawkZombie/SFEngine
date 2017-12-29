@@ -15,7 +15,7 @@ public:
   MainCharacter& operator=(const MainCharacter &) = delete;
 	~MainCharacter();
 
-  virtual std::shared_ptr<Engine::BaseEngineInterface> Clone() const override;
+  virtual std::shared_ptr<BaseEngineInterface> Clone() const override;
 	void IncrementAffinity(int index, int value);
 	int getAffinity(int index);
 	void printAffinities();

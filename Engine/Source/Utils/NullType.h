@@ -30,9 +30,6 @@
 //
 ////////////////////////////////////////////////////////////
 
-namespace Engine
-{
-
   namespace Util
   {
 
@@ -41,14 +38,8 @@ namespace Engine
     public:
       NullType();
 
-
-
     private:
 
     };
-
-
   }
-
-}
 

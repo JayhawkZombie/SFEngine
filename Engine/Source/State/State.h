@@ -33,7 +33,6 @@
 #include "cereal\cereal.hpp"
 #include "cereal\archives\json.hpp"
 
-namespace Engine {
 	class State {
 	public:
     template <class Archive>
@@ -42,4 +41,3 @@ namespace Engine {
 		virtual void Restore(Archive & archive) = 0;
 
 	};
-}

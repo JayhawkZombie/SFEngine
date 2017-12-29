@@ -20,33 +20,33 @@ BallStackLevel::BallStackLevel()
   m_MenuFont.loadFromFile("./Projects/TestProject/Fonts/Marvel-Regular.ttf");
   //m_GameMenu->setFont(m_MenuFont);
 
-  m_PipeLeftWall = Engine::BuildSegmentMesh('n', sf::Vector2i(450 + 325, 0), sf::Vector2i(450 + 325, 400));
-  m_PipeWallRight = Engine::BuildSegmentMesh('n', sf::Vector2i(1250 - 325, 0),   sf::Vector2i(1250 - 325,        400));
-  m_PipeDropBlock = Engine::BuildSegmentMesh('n', sf::Vector2i(450  + 325, 400), sf::Vector2i(450  + 325 + 150,  400));
+  m_PipeLeftWall = BuildSegmentMesh('n', sf::Vector2i(450 + 325, 0), sf::Vector2i(450 + 325, 400));
+  m_PipeWallRight = BuildSegmentMesh('n', sf::Vector2i(1250 - 325, 0),   sf::Vector2i(1250 - 325,        400));
+  m_PipeDropBlock = BuildSegmentMesh('n', sf::Vector2i(450  + 325, 400), sf::Vector2i(450  + 325 + 150,  400));
   Segments.push_back(m_PipeLeftWall);
   Segments.push_back(m_PipeWallRight);
   Segments.push_back(m_PipeDropBlock);
 
-  m_BallKillerBolt = std::make_shared<Engine::LightningBolt>();
+  m_BallKillerBolt = std::make_shared<LightningBolt>();
 
-  Engine::AssignBoundaries(900, 1700);
+  AssignBoundaries(900, 1700);
   Gravity->x = 0;
   Gravity->y = 0.0f;
 
-  Engine::SetGravity(Gravity);
+  SetGravity(Gravity);
 
-  Segments.push_back(Engine::BuildSegmentMesh('n', sf::Vector2i(450,  0),   sf::Vector2i(450,       300))); //Left wall of resiv.
-  Segments.push_back(Engine::BuildSegmentMesh('n', sf::Vector2i(1250, 0),   sf::Vector2i(1250,      300))); //Right wall of resiv.
-  Segments.push_back(Engine::BuildSegmentMesh('n', sf::Vector2i(450,  300), sf::Vector2i(450 + 325, 400))); //Left sloped wall of resiv.
-  Segments.push_back(Engine::BuildSegmentMesh('n', sf::Vector2i(1250, 300), sf::Vector2i(925,       400))); //Right sloped wall of resiv.
-  Segments.push_back(Engine::BuildSegmentMesh('n', sf::Vector2i(450 + 300, 600), sf::Vector2i(450 + 300, 900)));
-  Segments.push_back(Engine::BuildSegmentMesh('n', sf::Vector2i(450 + 500, 600), sf::Vector2i(450 + 500, 900)));
+  Segments.push_back(BuildSegmentMesh('n', sf::Vector2i(450,  0),   sf::Vector2i(450,       300))); //Left wall of resiv.
+  Segments.push_back(BuildSegmentMesh('n', sf::Vector2i(1250, 0),   sf::Vector2i(1250,      300))); //Right wall of resiv.
+  Segments.push_back(BuildSegmentMesh('n', sf::Vector2i(450,  300), sf::Vector2i(450 + 325, 400))); //Left sloped wall of resiv.
+  Segments.push_back(BuildSegmentMesh('n', sf::Vector2i(1250, 300), sf::Vector2i(925,       400))); //Right sloped wall of resiv.
+  Segments.push_back(BuildSegmentMesh('n', sf::Vector2i(450 + 300, 600), sf::Vector2i(450 + 300, 900)));
+  Segments.push_back(BuildSegmentMesh('n', sf::Vector2i(450 + 500, 600), sf::Vector2i(450 + 500, 900)));
 
   m_BallKillerBolt->Spark({ 750, 600 }, { 950, 600 });
   m_BallKillerBolt->SetPosition({ 750, 600 });
   m_BallKillerBolt->SetSize({ 200, 50 });
 
-  auto m_BoltCollider = Engine::Collider2D::CreatePolygonMesh(4, 300, 0, sf::Vector2f(950, 600), sf::Vector2f(0, 0), 0.01f, 0.0f, sf::Color::Transparent);
+  auto m_BoltCollider = Collider2D::CreatePolygonMesh(4, 300, 0, sf::Vector2f(950, 600), sf::Vector2f(0, 0), 0.01f, 0.0f, sf::Color::Transparent);
   //m_BoltCollider->SetCollisionCallback([this](std::weak_ptr<Engine::Collider2D> Collider) {this->CheckBallAndBolt(Collider); });
   m_BoltCollider->SetObjectPtr(m_BallKillerBolt.get());
   m_BallKillerBolt->AddCollider(m_BoltCollider);
@@ -58,7 +58,7 @@ BallStackLevel::BallStackLevel()
   m_QuitButton->setSize({ 150, 35 });
   m_QuitButton->setPosition({ 775, 432.5 });
   m_QuitButton->setText("quit");
-  m_QuitButton->connect("clicked", []() { Engine::LoadLevelByName("MainMenu"); });
+  m_QuitButton->connect("clicked", []() { LoadLevelByName("MainMenu"); });
 
   Gravity->x = 0.f;
   Gravity->y = 0.5f;
@@ -111,9 +111,9 @@ void BallStackLevel::OnShutDown()
 {
 }
 
-void BallStackLevel::HandleInputEvent(const Engine::UserEvent & evnt)
+void BallStackLevel::HandleInputEvent(const UserEvent & evnt)
 {
-  if (evnt.EventType == Engine::UserEventType::KeyboardPress) {
+  if (evnt.EventType == UserEventType::KeyboardPress) {
     std::cerr << "User pressed key! " << std::endl;
     if (evnt.IsButtonPressed(sf::Keyboard::Escape))
       if (m_Paused)
@@ -122,7 +122,7 @@ void BallStackLevel::HandleInputEvent(const Engine::UserEvent & evnt)
         ShowMenu();
   }
   else if (!m_Paused) {
-    if (evnt.EventType == Engine::UserEventType::MousePress)
+    if (evnt.EventType == UserEventType::MousePress)
       HandleUserClick(evnt.CurrentMousePosition);
   }
 }
@@ -135,11 +135,11 @@ void BallStackLevel::EventUpdate(sf::Event event)
 void BallStackLevel::OnBegin()
 {
   BasicLevel::OnBegin();
-  Engine::Messager::PostToActivityLog(
-    Engine::SystemMessage(Engine::SystemMessageType::ActivityLog, InternalID, 0, "StackLevel - OnBegin()")
+  Messager::PostToActivityLog(
+    SystemMessage(SystemMessageType::ActivityLog, InternalID, 0, "StackLevel - OnBegin()")
   );
 
-  Engine::SetGravity(Gravity);
+  SetGravity(Gravity);
   //m_GameMenu->add(m_PausePanel);
   m_BGMusic.play();
   m_GameSequencer.Start();
@@ -167,8 +167,8 @@ void BallStackLevel::OnBegin()
 
 void BallStackLevel::OnEnd()
 {
-  Engine::Messager::PostToActivityLog(
-    Engine::SystemMessage(Engine::SystemMessageType::ActivityLog, InternalID, 0, "StackLevel - OnEnd()")
+  Messager::PostToActivityLog(
+    SystemMessage(SystemMessageType::ActivityLog, InternalID, 0, "StackLevel - OnEnd()")
   );
 
   m_BGMusic.stop();
@@ -180,12 +180,12 @@ void BallStackLevel::OnEnd()
 
 void BallStackLevel::ShowUI()
 {
-  Engine::GUI->add(m_QuitButton);
+  GUI->add(m_QuitButton);
 }
 
 void BallStackLevel::HideUI()
 {
-  Engine::GUI->remove(m_QuitButton);
+  GUI->remove(m_QuitButton);
 }
 
 void BallStackLevel::Reset()
@@ -209,7 +209,7 @@ void BallStackLevel::HandleUserClick(sf::Vector2i Pos)
 
 }
 
-void BallStackLevel::CheckBallAndBolt(std::weak_ptr<Engine::Collider2D> Collider)
+void BallStackLevel::CheckBallAndBolt(std::weak_ptr<Collider2D> Collider)
 {
 }
 
@@ -220,8 +220,8 @@ void BallStackLevel::LaunchBall()
 void BallStackLevel::SpawnBall()
 {
   std::shared_ptr<PuzzleBall> Ball = std::make_shared<PuzzleBall>();
-  Ball->AddCollider(Engine::Collider2D::CreateCircularMesh(
-    Engine::MeshType::Ball, sf::Vector2f(835, 40), sf::Vector2f(0, 0), 30, 3.f, 0.4f, sf::Color::Blue));
+  Ball->AddCollider(Collider2D::CreateCircularMesh(
+    MeshType::Ball, sf::Vector2f(835, 40), sf::Vector2f(0, 0), 30, 3.f, 0.4f, sf::Color::Blue));
   SpawnAutoGeneratedObject(Ball, "PuzzleBall");
   m_CurrentBall = Ball;
 }

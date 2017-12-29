@@ -10,7 +10,7 @@ void NewConvoCreator::CreateConvo(std::string filename)//, MainCharacter mc)
     //This will cause a compiler failure, please use a cloning method
     //my_filename = "Game/ContentFiles/Conversation/ConvoJohnWakeUp.txt";
     my_filename = filename;
-    GUI = Engine::GUI;
+    GUI = GUI;
     MainCharacter mc;
     convo_arr = reader->readConversation(my_filename, mc);
     totalNodes = reader->getNumConversations();

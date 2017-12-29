@@ -44,24 +44,13 @@
 
 #include <SFML/Graphics.hpp>
 
-namespace Engine
+namespace Convert
 {
+  void Level(const std::string &SourceIni);
 
+  void Animation(const std::string &SourceIni);
 
-  namespace Convert
-  {
-
-
-    void Level(const std::string &SourceIni);
-
-    void Animation(const std::string &SourceIni);
-
-    void Tile(const std::string &SourceIni);
-
-
-  }
-
-
+  void Tile(const std::string &SourceIni);
 }
 
 #endif

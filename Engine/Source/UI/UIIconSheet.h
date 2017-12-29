@@ -34,14 +34,9 @@
 #include <string>
 #include <SFML\Graphics.hpp>
 
-namespace Engine
+namespace UI
 {
 
-  namespace UI
-  {
-
-    extern std::map<std::string, sf::IntRect> IconSheetRects;
-    void LoadIconSheet(const std::string &SheetMapPath);
-  }
-
+  extern std::map<std::string, sf::IntRect> IconSheetRects;
+  void LoadIconSheet(const std::string &SheetMapPath);
 }

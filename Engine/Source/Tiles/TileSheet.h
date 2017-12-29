@@ -32,50 +32,45 @@
 
 #include "Tiles\LevelTile.h"
 
-namespace Engine
+const std::uint32_t MaxTilesPerSheet = 1000;
+
+class TileSheet : public BaseEngineInterface
 {
+public:
+  TileSheet();
+  TileSheet(const TileSheet &Copy);
+  virtual ~TileSheet();
 
-  const std::uint32_t MaxTilesPerSheet = 1000;
+  std::shared_ptr<BaseEngineInterface> Clone() const override final;
 
-  class TileSheet : public BaseEngineInterface
-  {
-  public:
-    TileSheet();
-    TileSheet(const TileSheet &Copy);
-    virtual ~TileSheet();
+  void SerializeIn(std::ifstream &in) override final;
+  void SerializeOut(std::ofstream &out) override final;
 
-    std::shared_ptr<BaseEngineInterface> Clone() const override final;
+  void TickUpdate(const double &delta) override final;
+  void Render(std::shared_ptr<sf::RenderTarget> Target) override final;
+  virtual void OnShutDown() override final;
 
-    void SerializeIn(std::ifstream &in) override final;
-    void SerializeOut(std::ofstream &out) override final;
+  void RenderTiles(const sf::VertexArray &Vertices);
+  void ReadFromMap(const std::string &filename);
 
-    void TickUpdate(const double &delta) override final;
-    void Render(std::shared_ptr<sf::RenderTarget> Target) override final;
-    virtual void OnShutDown() override final;
+  sf::VertexArray GetTileVertices(const std::string &Name) const;
+  void SetTileVertices(const std::string &Name);
 
-    void RenderTiles(const sf::VertexArray &Vertices);
-    void ReadFromMap(const std::string &filename);
+  std::map<std::string, sf::VertexArray> GetTiles();
+  std::shared_ptr<LevelTile> GenerateTile(const std::string &Name);
 
-    sf::VertexArray GetTileVertices(const std::string &Name) const;
-    void SetTileVertices(const std::string &Name);
+  std::map<std::string, std::shared_ptr<LevelTile>> GetLevelTiles();
 
-    std::map<std::string, sf::VertexArray> GetTiles();
-    std::shared_ptr<LevelTile> GenerateTile(const std::string &Name);
+  std::shared_ptr<sf::Texture> GetTexture() const;
+  void SetTexture(std::shared_ptr<sf::Texture> Tex);
 
-    std::map<std::string, std::shared_ptr<LevelTile>> GetLevelTiles();
+  void AddTile(const std::string &str, const sf::IntRect &Rect);
+  void RemoveTile(const std::string &str);
+  std::string GetClass() const override;
 
-    std::shared_ptr<sf::Texture> GetTexture() const;
-    void SetTexture(std::shared_ptr<sf::Texture> Tex);
-
-    void AddTile(const std::string &str, const sf::IntRect &Rect);
-    void RemoveTile(const std::string &str);
-    std::string GetClass() const override;
-
-  protected:
-    std::shared_ptr<sf::Texture> Texture;
-    std::map<std::string, sf::VertexArray> GenericTiles;
-    std::map<std::string, std::shared_ptr<LevelTile>> Tiles;
-    sf::RenderStates SheetState;
-  };
-
-}
+protected:
+  std::shared_ptr<sf::Texture> Texture;
+  std::map<std::string, sf::VertexArray> GenericTiles;
+  std::map<std::string, std::shared_ptr<LevelTile>> Tiles;
+  sf::RenderStates SheetState;
+};

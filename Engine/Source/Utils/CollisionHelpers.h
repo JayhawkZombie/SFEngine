@@ -32,9 +32,6 @@
 
 #include <SFML\Graphics.hpp>
 
-namespace Engine
-{
-
   template<typename T, typename U>
   inline bool IsPointInsideRect(const sf::Rect<T> &Rect, const sf::Vector2<U> &Point) {
     return (
@@ -42,8 +39,3 @@ namespace Engine
       Point.y >= Rect.top && Point.y <= Rect.top + Rect.height
       );
   }
-
-
-
-
-}

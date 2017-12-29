@@ -31,19 +31,3 @@
 ////////////////////////////////////////////////////////////
 
 #include "Level\Level.h"
-
-namespace Engine
-{
-
-
-  namespace Levels
-  {
-
-
-
-
-
-  }
-
-
-}

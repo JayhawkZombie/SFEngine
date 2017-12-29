@@ -33,55 +33,51 @@
 #include "BasicIncludes.h"
 #include "PhysicsEngine.h"
 
-namespace Engine
+class LightSystem;
+
+struct Point {
+  ::vec2d pt;
+  float angle;
+};
+
+class Occluder2D
 {
-  class LightSystem;
+public:
+  friend class LightSystem;
 
-  struct Point {
-    ::vec2d pt;
-    float angle;
-  };
+  Occluder2D() = default;
+  ~Occluder2D() = default;
 
-  class Occluder2D
-  {
-  public:
-    friend class LightSystem;
+  void SetOccluder(SPtrShared<PhysicsEngineBaseMeshType> Mesh) {
+    m_OccluderMesh = Mesh;
+  }
 
-    Occluder2D() = default;
-    ~Occluder2D() = default;
+  std::vector<::vec2d> GetVertices() {
+    return m_OccluderMesh->get_verts();
+  }
 
-    void SetOccluder(SPtrShared<PhysicsEngineBaseMeshType> Mesh) {
-      m_OccluderMesh = Mesh;
-    }
+  void Move(const sf::Vector2f &delta) {
+    if (m_OccluderMesh)
+      m_OccluderMesh->pos += ::vec2d(delta.x, delta.y);
+  }
 
-    std::vector<::vec2d> GetVertices() {
-      return m_OccluderMesh->get_verts();
-    }
+  void SetPosition(const sf::Vector2f &Position) {
+    if (m_OccluderMesh)
+      m_OccluderMesh->pos = ::vec2d(Position.x, Position.y);
+  }
 
-    void Move(const sf::Vector2f &delta) {
-      if (m_OccluderMesh)
-        m_OccluderMesh->pos += ::vec2d(delta.x, delta.y);
-    }
+  std::weak_ptr<PhysicsEngineBaseMeshType> GetMesh() {
+    return m_OccluderMesh;
+  }
 
-    void SetPosition(const sf::Vector2f &Position) {
-      if (m_OccluderMesh)
-        m_OccluderMesh->pos = ::vec2d(Position.x, Position.y);
-    }
+  bool HandleCollision(std::weak_ptr<Collider2D> Collider) {
+    return false;
+  }
 
-    std::weak_ptr<PhysicsEngineBaseMeshType> GetMesh() {
-      return m_OccluderMesh;
-    }
+protected:
+  bool m_CastSoftShadow = false;
+  SPtrShared<PhysicsEngineBaseMeshType> m_OccluderMesh;
 
-    bool HandleCollision(std::weak_ptr<Collider2D> Collider) {
-      return false;
-    }
+  std::vector<::vec2d> m_SortingPoints;
 
-  protected:
-    bool m_CastSoftShadow = false;
-    SPtrShared<PhysicsEngineBaseMeshType> m_OccluderMesh;
-
-    std::vector<::vec2d> m_SortingPoints;
-
-  };
-
-}
+};

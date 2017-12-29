@@ -9,7 +9,7 @@
 #include "Time/TimedSequence.h"
 #include "Utils/SplinePath.h"
 
-class Level1 : public Engine::BasicLevel
+class Level1 : public BasicLevel
 {
 public:
   Level1();
@@ -22,7 +22,7 @@ public:
 
   void OnShutDown() override final;
 
-  void HandleInputEvent(const Engine::UserEvent &evnt) override final;
+  void HandleInputEvent(const UserEvent &evnt) override final;
 
   void EventUpdate(sf::Event event) override final;
 
@@ -40,8 +40,8 @@ protected:
 
   bool m_DrawSplines = false;
 
-  Engine::SplinePath m_ParticlePath;
-  Engine::SplinePath m_ParticlePath2;
+  SplinePath m_ParticlePath;
+  SplinePath m_ParticlePath2;
   sw::Starfield m_StarField;
 
   sf::Shader BlurShader;
@@ -118,7 +118,7 @@ protected:
   std::shared_ptr<BasicLevel> BallPuzzleLevelPtr;
   std::shared_ptr<BasicLevel> AITestLevelPtr;
   std::shared_ptr<BasicLevel> OakTreeChurchInteriorLevelPtr;
-  SPtrShared<Engine::BasicLevel> PhysicsDemoLevelPtr;
+  SPtrShared<BasicLevel> PhysicsDemoLevelPtr;
   tgui::Button::Ptr LevelSelectBack;
 
   bool m_Paused = false;

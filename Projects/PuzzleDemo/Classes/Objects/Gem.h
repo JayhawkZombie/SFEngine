@@ -5,7 +5,7 @@
 #include "Time/TimedSequence.h"
 #include "Weather/Lightning.h"
 
-class ShatterGem : public Engine::LevelObject
+class ShatterGem : public LevelObject
 {
 public:
   ShatterGem(const sf::Vector2f &InitPos);
@@ -27,10 +27,10 @@ public:
 
   bool IsDead() const;
 protected:
-  Engine::TimedSequence m_Sequencer;
+  TimedSequence m_Sequencer;
   float m_ShatterFade = 0.f;
 
-  Engine::LightningBolt m_Bolts[4];
+  LightningBolt m_Bolts[4];
   
   void RenderShatteredFragments();
   void UpdateShatteredFragments(const double &delta);

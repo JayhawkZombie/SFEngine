@@ -8,7 +8,7 @@
 #include "../Objects/PuzzleBall.h"
 #include "../Objects/Gem.h"
 
-class BallStackLevel : public Engine::BasicLevel
+class BallStackLevel : public BasicLevel
 {
 public:
   BallStackLevel();
@@ -19,7 +19,7 @@ public:
   void RenderOnTexture(std::shared_ptr<sf::RenderTexture> Texture) override final;
 
   void OnShutDown() override;
-  void HandleInputEvent(const Engine::UserEvent &evnt) override;
+  void HandleInputEvent(const UserEvent &evnt) override;
   void EventUpdate(sf::Event event) override;
   void OnBegin() override;
   void OnEnd() override;
@@ -31,7 +31,7 @@ public:
 
 protected:
   void HandleUserClick(sf::Vector2i Pos);
-  void CheckBallAndBolt(std::weak_ptr<Engine::Collider2D> Collider);
+  void CheckBallAndBolt(std::weak_ptr<Collider2D> Collider);
   void LaunchBall();
   void SpawnBall();
   void KillBall();
@@ -54,14 +54,14 @@ protected:
   tgui::Theme::Ptr  m_LevelTheme;
   sf::Font          m_MenuFont;
 
-  Engine::TimedSequence   m_GameSequencer;
-  Engine::UntimedSequence m_UntimedSequencer;
+  TimedSequence   m_GameSequencer;
+  UntimedSequence m_UntimedSequencer;
 
-  std::shared_ptr<Engine::PhysicsEngineSegmentType> m_PipeLeftWall;
-  std::shared_ptr<Engine::PhysicsEngineSegmentType> m_PipeWallRight;
-  std::shared_ptr<Engine::PhysicsEngineSegmentType> m_PipeDropBlock;
+  std::shared_ptr<PhysicsEngineSegmentType> m_PipeLeftWall;
+  std::shared_ptr<PhysicsEngineSegmentType> m_PipeWallRight;
+  std::shared_ptr<PhysicsEngineSegmentType> m_PipeDropBlock;
 
-  std::shared_ptr<Engine::LightningBolt> m_BallKillerBolt;
+  std::shared_ptr<LightningBolt> m_BallKillerBolt;
 
   bool      m_Paused = false;
   void ShowMenu();

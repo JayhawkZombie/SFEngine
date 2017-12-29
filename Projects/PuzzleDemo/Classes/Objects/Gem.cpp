@@ -67,7 +67,7 @@ ShatterGem::ShatterGem(const sf::Vector2f &InitPos)
   Sprite.setScale({ 41.f / 408.f, 41.f / 408.f });
 
   Position = InitPos;
-  AddCollider(Engine::Collider2D::CreatePolygonMesh(4, 30.f, 3.141592653f / 2.f, Position + sf::Vector2f(41.f / 2.f, 41.f / 2.f), { 0, 0 }, 0.2f, 0.1f, sf::Color::Transparent));
+  AddCollider(Collider2D::CreatePolygonMesh(4, 30.f, 3.141592653f / 2.f, Position + sf::Vector2f(41.f / 2.f, 41.f / 2.f), { 0, 0 }, 0.2f, 0.1f, sf::Color::Transparent));
 }
 
 ShatterGem::~ShatterGem()
@@ -129,8 +129,8 @@ void ShatterGem::OnKilled()
 
 void ShatterGem::OnSpawn()
 {
-  Engine::Messager::PostToActivityLog(
-    Engine::SystemMessage(Engine::SystemMessageType::ActivityLog, InternalID, 0, "PuzzleDemo/Gem - OnSpawn()")
+  Messager::PostToActivityLog(
+    SystemMessage(SystemMessageType::ActivityLog, InternalID, 0, "PuzzleDemo/Gem - OnSpawn()")
   );
 
   m_Sequencer.AddSequence(5000, []() {}, []() {}, [this]() {this->Shatter(); });

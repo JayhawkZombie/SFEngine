@@ -12,7 +12,7 @@
 
 #include "../Levels/OakTree.h"
 
-class MainMenu : public Engine::BasicLevel
+class MainMenu : public BasicLevel
 {
 public:
   MainMenu() = delete;
@@ -28,7 +28,7 @@ public:
   void HandleKeyPress(const sf::Keyboard::Key &key) override;
   void HandleKeyRelease(const sf::Keyboard::Key &key) override;
   void HandleWindowResized() override;
-  void HandleInputEvent(const Engine::UserEvent &evnt) override;
+  void HandleInputEvent(const UserEvent &evnt) override;
 
   void EventUpdate(sf::Event event) override;
 

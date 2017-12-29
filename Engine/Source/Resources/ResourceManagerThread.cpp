@@ -30,9 +30,6 @@
 
 #include "Resources\ResourceManager.h"
 
-namespace Engine
-{
-
   //namespace Resource
   //{
 
@@ -302,5 +299,3 @@ namespace Engine
   //  }
 
   //}
-
-}

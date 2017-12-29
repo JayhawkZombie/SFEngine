@@ -45,7 +45,7 @@ void MainCharacter::gainExp(int gain)
 	HumanActor::gainExp(gain);
 }
 */
-std::shared_ptr<Engine::BaseEngineInterface> MainCharacter::Clone() const
+std::shared_ptr<BaseEngineInterface> MainCharacter::Clone() const
 {
   auto Character = std::make_shared<MainCharacter>(*this);
 

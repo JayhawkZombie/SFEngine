@@ -6,7 +6,7 @@
 #include "AI\BehaviorTree.h"
 #include "Camera\2DCamera.h"
 
-class AITestLevel : public Engine::BasicLevel
+class AITestLevel : public BasicLevel
 {
 public:
   AITestLevel();
@@ -16,7 +16,7 @@ public:
   void Render(std::shared_ptr<sf::RenderTarget> Target)            override final;
   void RenderOnTexture(std::shared_ptr<sf::RenderTexture> Texture) override final;
 
-  void HandleInputEvent(const Engine::UserEvent &evnt) override final;
+  void HandleInputEvent(const UserEvent &evnt) override final;
   void EventUpdate(sf::Event event) override final;
   void OnShutDown() override final;
   void OnBegin()    override final;
@@ -28,7 +28,7 @@ public:
   std::string GetClass() const override final;
 
 protected:
-  Engine::BehaviorTree m_TestAITree;
+  BehaviorTree m_TestAITree;
   sf::CircleShape      m_AICircle;
   sf::Vector2f         m_AICicleVelocity;
   bool m_printTree = true;

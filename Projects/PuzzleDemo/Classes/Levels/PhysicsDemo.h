@@ -17,7 +17,7 @@
 #include <Thor/Vectors/PolarVector2.hpp>
 #include <Thor/Math/Distributions.hpp>
 
-class PhysicsDemoLevel : public Engine::BasicLevel
+class PhysicsDemoLevel : public BasicLevel
 {
 public:
 
@@ -32,30 +32,30 @@ public:
   void OnShutDown() override final;
   void EventUpdate(sf::Event event) override final;
   void TickUpdate(const double &delta) override final;
-  void HandleInputEvent(const Engine::UserEvent &evnt) override final;
+  void HandleInputEvent(const UserEvent &evnt) override final;
   void Render(std::shared_ptr<sf::RenderTarget> Target) override final;
   void RenderOnTexture(std::shared_ptr<sf::RenderTexture> Texture) override final;
-  void SetNextLevel(std::shared_ptr<Engine::BasicLevel> NextLevel);
+  void SetNextLevel(std::shared_ptr<BasicLevel> NextLevel);
   std::string GetClass() const override final;
 
 
 protected:
-  Engine::SplinePath m_ParticlePath;
+  SplinePath m_ParticlePath;
   sw::Spline m_SPLINE;
   double TimeScale = 1.f;
   double TotalTimeSpentDialating = 0.0;
   bool m_IsSlowingTime = false;
   
   std::vector<SPtrShared<expandPolygon>> m_ExpandingPolygons;
-  std::vector<SPtrShared<Engine::LevelObject>> m_ExpandObjects;
+  std::vector<SPtrShared<LevelObject>> m_ExpandObjects;
 
-  Engine::TimedSequence m_FlipOpenSeq;
+  TimedSequence m_FlipOpenSeq;
   void OpenFlipper();
   bool m_FlipperOpen = false;
 
-  SPtrShared<Engine::PhysicsEngineSegmentType> segwall1;// = Engine::BuildSegmentMesh('b', { 25, 75 }, { 275, 225 });
-  SPtrShared<Engine::PhysicsEngineSegmentType> segwall2;// = Engine::BuildSegmentMesh('b', { 1675 - 250, 75 + 150 }, { 1675, 75 });
-  SPtrShared<Engine::PhysicsEngineSegmentType> segFlip;
+  SPtrShared<PhysicsEngineSegmentType> segwall1;// = Engine::BuildSegmentMesh('b', { 25, 75 }, { 275, 225 });
+  SPtrShared<PhysicsEngineSegmentType> segwall2;// = Engine::BuildSegmentMesh('b', { 1675 - 250, 75 + 150 }, { 1675, 75 });
+  SPtrShared<PhysicsEngineSegmentType> segFlip;
   void ShatterCollider();
   sf::RenderTexture m_RenderedScene;
 
@@ -67,8 +67,8 @@ protected:
   thor::FadeAnimation m_PFadeAnimation2;
   thor::ForceAffector m_PGravityAffector2;
 
-  Engine::TimedSequence m_CountdownSequence;
-  Engine::TimedSequence m_TimeDialationSequence;
+  TimedSequence m_CountdownSequence;
+  TimedSequence m_TimeDialationSequence;
   bool m_TimeDialationBegan = false;
   void BeginTimeDialation();
   void UpdateTimeDialation();
@@ -80,29 +80,29 @@ protected:
   void StartCountdown();
   void EndCountdown();
 
-  SPtrShared<Engine::Collider2D> m_FallingCollider;
-  SPtrShared<Engine::LevelObject> m_Faller;
+  SPtrShared<Collider2D> m_FallingCollider;
+  SPtrShared<LevelObject> m_Faller;
 
-  SPtrShared<Engine::PhysicsEngineSegmentType> m_ShatterRegionSegment;
+  SPtrShared<PhysicsEngineSegmentType> m_ShatterRegionSegment;
 
   sw::BitmapFont m_BMPFont;
   sw::BitmapText m_BMPText;
 
-  SPtrShared<Engine::Collider2D> m_TimeSlowRegion;
+  SPtrShared<Collider2D> m_TimeSlowRegion;
 
   sw::Starfield m_StarField;
 
-  Engine::LightSystem m_LightSystem;
+  LightSystem m_LightSystem;
 
   SPtrShared<sf::Texture> m_TorchTexture;
-  Engine::Light m_TorchLight;
+  LightSource m_TorchLight;
   thor::AnimationMap<sf::Sprite, std::string> m_TorchAnimationMap;
   thor::Animator<sf::Sprite, std::string> m_TorchAnimator;
-  SPtrShared<Engine::LevelObject> m_TorchObject;
+  SPtrShared<LevelObject> m_TorchObject;
   sf::Sprite m_TorchSprite;
   thor::FrameAnimation TFrame;
 
-  SPtrShared<Engine::PhysicsEngineWaveSegment> m_Wave;
+  SPtrShared<PhysicsEngineWaveSegment> m_Wave;
 
   thor::ParticleSystem m_PSystem1;
   

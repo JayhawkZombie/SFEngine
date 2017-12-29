@@ -32,80 +32,75 @@
 #include "Tiles\TileGrid.h"
 #include "Tiles\TileSheet.h"
 
-namespace Engine
+LevelTile::LevelTile()
+  : LevelObject()
 {
+}
 
-  LevelTile::LevelTile()
-    : LevelObject()
-  {
-  }
+LevelTile::LevelTile(const LevelTile & copy)
+  : LevelTile()
+{
+  Grid = copy.Grid;
+  Sheet = copy.Sheet;
+  Frames = copy.Frames;
+  MyCellX = copy.MyCellX;
+  MyCellY = copy.MyCellY;
+  Name = copy.Name;
+}
 
-  LevelTile::LevelTile(const LevelTile & copy)
-    : LevelTile()
-  {
-    Grid = copy.Grid;
-    Sheet = copy.Sheet;
-    Frames = copy.Frames;
-    MyCellX = copy.MyCellX;
-    MyCellY = copy.MyCellY;
-    Name = copy.Name;
-  }
+LevelTile::~LevelTile()
+{
+}
 
-  LevelTile::~LevelTile()
-  {
-  }
+void LevelTile::TickUpdate(const double & delta)
+{
+}
 
-  void LevelTile::TickUpdate(const double & delta)
-  {
-  }
+void LevelTile::Render(std::shared_ptr<sf::RenderTarget> Target)
+{
+  Target->draw(TileRect);
+}
 
-  void LevelTile::Render(std::shared_ptr<sf::RenderTarget> Target)
-  {
-    Target->draw(TileRect);
-  }
+void LevelTile::OnShutDown()
+{
+}
 
-  void LevelTile::OnShutDown()
-  {
-  }
+void LevelTile::SerializeOut(std::ofstream & out)
+{
+}
 
-  void LevelTile::SerializeOut(std::ofstream & out)
-  {
-  }
+void LevelTile::SerializeIn(std::ifstream & in)
+{
+}
 
-  void LevelTile::SerializeIn(std::ifstream & in)
-  {
-  }
+void LevelTile::SetPosition(const sf::Vector2f & pos)
+{
+  TileRect.setPosition(pos);
+}
 
-  void LevelTile::SetPosition(const sf::Vector2f & pos)
-  {
-    TileRect.setPosition(pos);
-  }
+void LevelTile::SetFrames(const sf::VertexArray & vArr, std::uint32_t NumFrames)
+{
+}
 
-  void LevelTile::SetFrames(const sf::VertexArray & vArr, std::uint32_t NumFrames)
-  {
-  }
+void LevelTile::UpdateMesh()
+{
+}
 
-  void LevelTile::UpdateMesh()
-  {
-  }
+void LevelTile::UpdateSegments()
+{
+}
 
-  void LevelTile::UpdateSegments()
-  {
-  }
+TileSheet* LevelTile::GetSheet() const
+{
+  return Sheet;
+}
 
-  TileSheet* LevelTile::GetSheet() const
-  {
-    return Sheet;
-  }
+std::weak_ptr<TileGrid> LevelTile::GetGrid() const
+{
+  return Grid;
+}
 
-  std::weak_ptr<TileGrid> LevelTile::GetGrid() const
-  {
-    return Grid;
-  }
-
-  void LevelTile::SetSize(const sf::Vector2f & _Size)
-  {
-    TileRect.setSize(_Size);
-  }
-
+void LevelTile::SetSize(const sf::Vector2f & _Size)
+{
+  TileRect.setSize(_Size);
 }

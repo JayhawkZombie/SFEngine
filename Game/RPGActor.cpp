@@ -7,7 +7,7 @@ RPGActor::RPGActor()
 {
   m_name = "";
   m_filePath = "";
-  this->AddCollider(Engine::Collider2D::CreatePolygonMesh(4, 10.f, (3.14159 / 4), Sprite.getPosition(), { 0, 0 }, 1.f, 0.f, sf::Color::Blue, true));
+  this->AddCollider(Collider2D::CreatePolygonMesh(4, 10.f, (3.14159 / 4), Sprite.getPosition(), { 0, 0 }, 1.f, 0.f, sf::Color::Blue, true));
   //this->AddOccluder(Engine::Collider2D::CreatePolygonMesh(4, 10.f, (3.14159 / 4), Sprite.getPosition(), { 0, 0 }, 1.f, 0.f, sf::Color::White));
   //m_Colliders[0]->SetCollisionCallback(
   //  [this](LevelObject* ptr) { 
@@ -46,11 +46,11 @@ void RPGActor::setFilePath(std::string filePath)
   m_filePath = filePath;
 }
 
-void RPGActor::HandleInputEvent(const Engine::UserEvent & evnt)
+void RPGActor::HandleInputEvent(const UserEvent & evnt)
 {
   auto c_v = m_Colliders[0]->GetMesh().lock();
 
-  if (evnt.EventType == Engine::UserEventType::KeyboardPress)
+  if (evnt.EventType == UserEventType::KeyboardPress)
   {
     if (evnt.Key == sf::Keyboard::A || evnt.Key == sf::Keyboard::Left) {
       //m_Animator.play() << "myActor_walkLeft" << thor::Playback::loop("myActor_walkLeft");
@@ -94,7 +94,7 @@ void RPGActor::HandleInputEvent(const Engine::UserEvent & evnt)
     }
   }
 
-  if (evnt.EventType == Engine::UserEventType::KeyboardRelease)
+  if (evnt.EventType == UserEventType::KeyboardRelease)
   {
     if ((evnt.Key == sf::Keyboard::A || evnt.Key == sf::Keyboard::Left) && m_Direction == WalkingDirection::Left) {
       c_v->v = { 0.f, c_v->v.y };
@@ -182,7 +182,7 @@ void RPGActor::AddAnimations()
 
 void RPGActor::TickUpdate(const double & delta)
 {
-  Engine::LevelObject::TickUpdate(delta);
+  LevelObject::TickUpdate(delta);
   this->MoveObject({ Velocity.x*(float)delta*(float).1, Velocity.y*(float)delta*(float).1 });
   static sf::Clock c;
   m_Animator.update(c.restart());
@@ -192,20 +192,20 @@ void RPGActor::TickUpdate(const double & delta)
 
 void RPGActor::Render(std::shared_ptr<sf::RenderTarget> Target)
 {
-  Engine::LevelObject::Render(Target);
+  LevelObject::Render(Target);
 }
 
-void RPGActor::HandleCollisionWithObject(Engine::LevelObject * Object)
+void RPGActor::HandleCollisionWithObject(LevelObject * Object)
 {
   if (Object->GetID() == "oaktree_churchdoor") {
-    Engine::LoadLevelByName("oaktree_church");
+    LoadLevelByName("oaktree_church");
   }
   else if (Object->GetID() == "church_exit") {
-    Engine::LoadLevelByName("oaktree");
+    LoadLevelByName("oaktree");
   }
 }
 
-void RPGActor::HandleCollisionWithObject(std::weak_ptr<Engine::Collider2D> Collided)
+void RPGActor::HandleCollisionWithObject(std::weak_ptr<Collider2D> Collided)
 {
   
 }

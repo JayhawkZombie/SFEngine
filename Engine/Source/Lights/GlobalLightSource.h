@@ -32,25 +32,20 @@
 
 #include "Lights\GenericLightSource.h"
 
-namespace Engine
+/**
+  * Global light source is just a light that illuminates everything equally
+  *
+  */
+class GlobalLightSource : public GenericLightSource
 {
+public:
+  static std::shared_ptr<GlobalLightSource> Create();
 
-  /**
-   * Global light source is just a light that illuminates everything equally
-   *
-   */
-  class GlobalLightSource : public GenericLightSource
-  {
-  public:
-    static std::shared_ptr<GlobalLightSource> Create();
-
-    GlobalLightSource();
-    GlobalLightSource(const GlobalLightSource &src);
-    ~GlobalLightSource();
+  GlobalLightSource();
+  GlobalLightSource(const GlobalLightSource &src);
+  ~GlobalLightSource();
 
 
-  protected:
+protected:
 
-  };
-
-}
+};

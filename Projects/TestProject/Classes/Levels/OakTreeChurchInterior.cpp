@@ -50,11 +50,11 @@ OakTreeChurchInterior::OakTreeChurchInterior(): BasicLevel({352,208},{0,0,352,20
 	//nextSeg(0, 22);
 	//nextSeg(0, 0);
 
-  Segments.push_back(Engine::BuildSegmentMesh('b', { 0,0 }, { 208,0 }));
-  Segments.push_back(Engine::BuildSegmentMesh('b', { 208,0 }, { 208,352 }));
-  Segments.push_back(Engine::BuildSegmentMesh('b', { 208,352 }, { 112,352 }));
-  Segments.push_back(Engine::BuildSegmentMesh('b', { 0,352 }, { 96,352 }));
-  Segments.push_back(Engine::BuildSegmentMesh('b', { 0,0 }, { 0,352 }));
+  Segments.push_back(BuildSegmentMesh('b', { 0,0 }, { 208,0 }));
+  Segments.push_back(BuildSegmentMesh('b', { 208,0 }, { 208,352 }));
+  Segments.push_back(BuildSegmentMesh('b', { 208,352 }, { 112,352 }));
+  Segments.push_back(BuildSegmentMesh('b', { 0,352 }, { 96,352 }));
+  Segments.push_back(BuildSegmentMesh('b', { 0,0 }, { 0,352 }));
 
 	//Wall protection
 	setJoint(0, 5);
@@ -154,13 +154,13 @@ OakTreeChurchInterior::OakTreeChurchInterior(): BasicLevel({352,208},{0,0,352,20
 	myActor_camera.SetView({ 325.f,176.f,325.f,176.f });
 	Gravity->x = 0;
 	Gravity->y = 0;
-	Engine::SetGravity(Gravity);
+	SetGravity(Gravity);
 
-  std::shared_ptr <Engine::LevelObject> Church_Exit = std::make_shared<Engine::LevelObject>();
+  std::shared_ptr <LevelObject> Church_Exit = std::make_shared<LevelObject>();
   Church_Exit->SetID("church_exit");
   Church_Exit->SetPosition({ 6*16,22*16 });
   Church_Exit->SetSize({ 32, 32 });
-  Church_Exit->AddCollider(Engine::Collider2D::CreatePolygonMesh(4, 11.31f, (3.14159 / 4), { 6.5 * 16,22.5 * 16 }, { 0, 0 }, 1000000000000.f, 0.f, sf::Color::Red));
+  Church_Exit->AddCollider(Collider2D::CreatePolygonMesh(4, 11.31f, (3.14159 / 4), { 6.5 * 16,22.5 * 16 }, { 0, 0 }, 1000000000000.f, 0.f, sf::Color::Red));
   LevelObjects["Church_Exit"] = Church_Exit;
 }
 
@@ -187,14 +187,14 @@ void OakTreeChurchInterior::RenderOnTexture(std::shared_ptr<sf::RenderTexture> T
 	BasicLevel::RenderOnTexture(Texture);
 }
 
-void OakTreeChurchInterior::HandleInputEvent(const Engine::UserEvent & evnt)
+void OakTreeChurchInterior::HandleInputEvent(const UserEvent & evnt)
 {
 	MainCharacter->HandleInputEvent(evnt);
 }
 
 void OakTreeChurchInterior::OnBegin()
 {
-	Engine::SetGravity(Gravity);
+	SetGravity(Gravity);
   MainCharacter->SetActorPosition({ 6 * 16,20.5 * 16 });
 
 }
@@ -210,7 +210,7 @@ void OakTreeChurchInterior::setJoint(int x, int y)
 
 void OakTreeChurchInterior::nextSeg(int x, int y)
 {
-	Segments.push_back(Engine::BuildSegmentMesh('b', { lastPos.x * 16,lastPos.y * 16 }, { x * 16,y * 16 }));
+	Segments.push_back(BuildSegmentMesh('b', { lastPos.x * 16,lastPos.y * 16 }, { x * 16,y * 16 }));
 	lastPos = { x,y };
 }
 std::string OakTreeChurchInterior::GetClass() const

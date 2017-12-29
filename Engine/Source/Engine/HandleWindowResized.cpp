@@ -30,15 +30,12 @@
 
 #include "Engine\Engine.h"
 
-namespace Engine
+void SFEngine::HandleWindowResized()
 {
-  void SFEngine::HandleWindowResized()
-  {
-    sf::Vector2u wsize = currentRenderWindow->getSize();
+  sf::Vector2u wsize = currentRenderWindow->getSize();
 
-    WindowSize = sf::Vector2f(static_cast<float>(wsize.x), static_cast<float>(wsize.y));
+  WindowSize = sf::Vector2f(static_cast<float>(wsize.x), static_cast<float>(wsize.y));
 
-    if (CurrentLevel)
-      CurrentLevel->HandleWindowResized();
-  }
+  if (CurrentLevel)
+    CurrentLevel->HandleWindowResized();
 }
