@@ -1,0 +1,3 @@
+ButtonHighlightedOverlay = 0 0 400 160
+ButtonNormalOverlay = 0 161 400 160
+ButtonPressedOverlay = 0 322 400 160

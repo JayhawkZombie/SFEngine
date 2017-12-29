@@ -1,0 +1,14 @@
+def Update( double delta )
+{
+  
+}
+
+def KeyPressed()
+{
+  
+}
+
+def SpacePressed()
+{
+  
+}

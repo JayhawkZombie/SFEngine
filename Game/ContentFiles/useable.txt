@@ -1,0 +1,53 @@
+5 
+MollyBerry Paste
+/../SFEngine/Samples/Textures/ItemTextures/UseableTextures/MollyBerryPasteTexture.png
+10
+A Paste made from MollyBerries, which heals the user and cleanses some poison damage when applied
+8
+-25
+12
+-5
+Niphrdeilith Tea
+/../SFEngine/Samples/Textures/ItemTextures/UseableTextures/NiphrdeilithTeaTexture.png
+13
+Water steamed with the Niphrdeilith flower, that blooms white and glows in the moonlight, known to cure common ailments and headaches
+8
+-30
+10
+-10 
+BloodFlower
+/../SFEngine/Samples/Textures/ItemTextures/UseableTextures/BloodFlowerTexture.png
+20
+BloodFlower's grow in the undergrowth of large forests, their five petals when squeezed give the juice the flowers are named for. It is magical and poisonous, inflicting toxic, best used for foes, not friends
+8
+15
+13
+10
+Mugwort
+/../SFEngine/Samples/Textures/ItemTextures/UseableTextures/MugwortTexture.png
+4
+Unrefined mugwort does heal the person who eats it, but slowly, found on Mugwort plants in the forest
+23
+5
+FlameFlower
+/../SFEngine/Samples/Textures/ItemTextures/UseableTextures/FlameFlowerTexture.png
+37
+FlameFlower is named for the way it disperses its pollen, it ignites a flame that disperses it into the air. It is a holy herb for berserkers, who use it for its angering toxins, even at the cost of the burn it causes
+0
+15
+9
+5
+16
+10
+17
+-7
+18
+-5
+PoetsPain
+/../SFEngine/Samples/Textures/ItemTextures/UseableTextures/PoetsPainTexture.png
+5
+PoetsPain is a name for poorly- distilled Mugwort mixed with mint in a tea. It harms the user, but gives them Regen, for a net beneficial effect. Named for a famous poet that drank copious amounts of it, muttering 'pain is weakness leaving body'
+2
+25
+23
+10

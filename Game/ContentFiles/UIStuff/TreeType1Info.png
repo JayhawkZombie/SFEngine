@@ -1,0 +1,102 @@
+Explaination File for MenuTreeType1
+
+
+Sub Elements Associated with this view
+
+Steam  Primary: 1 Secondary: 0
+
+This means that when accessing the master 4d array the first two indexes used to
+access the monsters are [1][0]
+
+also associated with this view are
+
+[2][5]
+and 
+[5][3]
+[5][4]
+
+x  y
+1  0
+2  5
+5  3
+5  4
+
+
+BUTTON 1
+
+
+The infant is rendered to 
+x    y    w    h
+75   118  16   16
+
+this means the textures you are looking for are avaliable in 
+MonsterArray[x][y][1][0]->getTexture();
+x could be :  0   2   5
+y could be :  1   5   4
+
+It bears mentioning that the filePath returned is associated with the
+entire animation, you only want to render from 0,0 to 15,15 of the texture file
+
+
+but the button should encapsulate the area
+x    y    w    h
+73   116  20   20
+
+so that you can render this on mouseover
+Game/ContentFiles/UIStuff/SquareFrameSelector.png
+
+BUTTON 2
+
+texture box
+x    y    w    h
+75   93   16   16
+render this:
+MonsterArray[x][y][2][0]->getTexture();
+
+
+button box
+x    y    w    h
+73   91   20   20
+
+render this on mouseover:
+Game/ContentFiles/UIStuff/SquareFrameSelector.png
+
+Its going to be the same for every one from here on out so 
+Im going to stop mentioning it
+
+BUTTON 3
+
+texture box
+x    y    w    h
+75   68   16   16
+render this:
+MonsterArray[x][y][3][0]->getTexture();
+
+button box
+x   y   w    h
+73  66  20   20
+render same thing as above on mouseOver/Selection
+
+BUTTON 4
+
+texture box
+x   y    w    h
+75  42   16   16
+render this texture:
+MonsterArray[x][y][4][0]->getTexture();
+
+button box
+x   y   w    h
+73  40  20   20
+render same as above
+
+EXIT BUTTON
+
+Note: base texture is already in TreeType1.png
+
+button box
+x   y   w    h
+111 129 27   11
+
+Render over on selection:
+Game/UIStuff/BackButtonSelector.png

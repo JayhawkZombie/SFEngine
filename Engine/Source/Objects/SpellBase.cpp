@@ -1,0 +1,3 @@
+#include "Objects\SpellBase.h"
+
+

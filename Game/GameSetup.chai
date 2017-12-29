@@ -1,0 +1,7 @@
+def InitialGameLevel() {
+  return "./SFEngine/Samples/Maps/testforest.ini";
+}
+
+def SetupFile() {
+  return "./SFEngine/Samples/Maps/testforestsetup.ini";
+}

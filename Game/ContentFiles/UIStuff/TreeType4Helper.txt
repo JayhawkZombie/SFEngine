@@ -1,0 +1,87 @@
+NOTE:: The Width and Height of button bounds is always 20 so Im just going to give x and y
+NOTE:: the Width and Height of Texture bounds is always 16, so im just going to give an x and y
+NOTE:: the x and y position of the texture is always ButtonBoundsx+2 and ButtonBoundsy+2
+and will be omitted. Thats right, now you only get two cooridnates for each button.
+SubElements Associated
+x y
+0 0
+1 1 
+1 4
+1 5
+3 3
+4 4
+5 5
+
+
+BUTTON 1
+Bounds:
+x  y
+79 116
+
+TextureSource MonsterArray[x][y][1][0]
+
+BUTTON 2
+x  y
+38 91
+MonsterArray[2][0]
+
+BUTTON 3
+x  y
+73 91
+MonsterArray[2][1]
+
+BUTTON 4
+x   y
+108 91
+MonsterArray[2][2]
+
+BUTTON 5
+x    y
+38  66
+[3][0]
+
+BUTTON 6
+x    y
+65   66
+[3][1]
+
+BUTTON 7
+x   y
+93  66
+[3][2]
+
+Button 8
+x   y
+119 66
+[3][3]
+
+BUTTON 9
+x   y
+38  40
+[4][0]
+
+BUTTON 10
+x   y
+65  40
+[4][1]
+
+BUTTON 11
+x   y
+93  40
+[4][2]
+
+BUTTON 12
+x   y
+119 40
+[4][3]
+
+EXIT BUTTON
+
+Note: base texture is already in TreeType2.png
+
+button box
+x   y   w    h
+111 129 27   11
+
+Render over on selection:
+Game/UIStuff/BackButtonSelector.png

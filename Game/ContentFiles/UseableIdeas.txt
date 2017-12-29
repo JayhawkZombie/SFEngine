@@ -1,0 +1,23 @@
+Burn: 
+HeadAche: Mindbreak Dust
+Wet:
+Poison:
+Toxic: Distilled Stinger Dart
+Stun: Blackjack
+Inspired:
+Furious:
+Chilled: 
+Frozen:
+Dispelled:
+Haste:
+Numb: 
+Silence:
+Regen: Thyme-Lord Paste
+phyShield: 
+MagShield:
+FirShield:
+WtrShield:
+ErtShield:
+AirShield:
+LgtShield:
+DrkShield:

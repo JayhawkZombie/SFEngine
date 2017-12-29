@@ -1,0 +1,859 @@
+78
+Rusted Dagger
+1
+Game/ContentFiles/ItemTextures/Daggers.png
+24
+0
+This rusty blunted dagger couldn't slice an orange if it was sharpened first
+6
+5
+7
+0
+
+Rusted Shortsword
+1
+Game/ContentFiles/ItemTextures/ShortSwords.png
+27
+1
+The edge of this shortsword is so dull that you can drag it across your bare hand without cutting it
+6
+6
+7
+0
+
+Rusted Hatchet
+1
+Game/ContentFiles/ItemTextures/Hatchets.png
+30
+2
+This hatchet has felled many trees, and it shows. Its blade is chipped and now it is nearly useless
+6
+8
+7
+0
+
+Rusted Longsword
+1
+Game/ContentFiles/ItemTextures/LongSwords.png
+36
+3
+This longsword has not aged well. It has enough rust spots that one can't help but wonder if it was stored in water or something
+6
+8
+7
+0
+
+Rusted Maul
+2
+Game/ContentFiles/ItemTextures/Maul.png
+30
+1
+The Head of this maul has fallen off many times, and it may again soon. The iron work is cracked, and it seems that the metal may shatter
+6
+8
+7
+0
+
+Rusted BattleAxe
+2
+Game/ContentFiles/ItemTextures/BattleAxes.png
+34
+2
+This Battleaxe has seen better days. The crusty blade hangs loosely on the shaft as if it may fall off at any time
+6
+9
+7
+0
+
+Rusted Claymore
+2
+Game/ContentFiles/ItemTextures/Claymores.png
+37
+3
+This Claymore is rusted and pitted. Its cumbersome and heavy frame is brittle and will break soon
+6
+9
+7
+0
+
+Decaying Tome
+1
+Game/ContentFiles/ItemTextures/Tomes.png
+28
+0
+A worm has eaten through this tome, and some pages are missing. It also seems to have been vomited on, by the look of page 63
+6
+0
+7
+8
+
+ScrapWood Wand
+1
+Game/ContentFiles/ItemTextures/Wands.png
+32
+1
+This wand has no head, and as such is not a great channel for magic. But it sure is cheap though. Probably because you could just go outside and pick up a twig that would serve just as well.
+6
+0
+7
+7
+
+Cracked Orb
+1
+Game/ContentFiles/ItemTextures/Orbs.png
+38
+3
+How anyone could see the future with cracked orb i have no idea.
+6
+0
+7
+8
+
+ScrapWood Staff
+2
+Game/ContentFiles/ItemTextures/Staffs.png
+40
+4
+This feeble staff has no head, which makes me wonder how anyone could channel magic though it
+6
+2
+7
+9
+
+ScrapWood Longbow
+2
+Game/ContentFiles/ItemTextures/Bow.png
+33
+1
+The wood used to make this longbow is weak and may crack at any moment
+6
+8
+7
+0
+
+ScrapWood Crossbow
+2
+Game/ContentFiles/ItemTextures/Crossbow.png
+36
+2
+The clinch to this crossbow is missing. It seems so broken, it may be better just to throw the bolts at your opponent
+6
+9
+7
+0
+
+Bronze Dagger
+1
+Game/ContentFiles/ItemTextures/Daggers.png
+64
+5
+Due to Developer Laziness, this content hasn't been added yet
+6
+11
+7
+0
+
+Bronze Shortsword
+1
+Game/ContentFiles/ItemTextures/ShortSwords.png
+72
+8
+Due to Developer Laziness, this content hasn't been added yet
+6
+13
+7
+0
+
+Bronze Hatchet
+1
+Game/ContentFiles/ItemTextures/Hatchets.png
+80
+10
+Due to Developer Laziness, this content hasn't been added yet
+6
+16
+7
+0
+
+Bronze Longsword
+1
+Game/ContentFiles/ItemTextures/LongSwords.png
+96
+12
+Due to Developer Laziness, this content hasn't been added yet
+6
+16
+7
+0
+
+Bronze Maul
+2
+Game/ContentFiles/ItemTextures/Maul.png
+80
+7
+Due to Developer Laziness, this content hasn't been added yet
+6
+17
+7
+0
+
+Bronze BattleAxe
+2
+Game/ContentFiles/ItemTextures/BattleAxes.png
+92
+9
+Due to Developer Laziness, this content hasn't been added yet
+6
+18
+7
+0
+
+Bronze Claymore
+2
+Game/ContentFiles/ItemTextures/Claymores.png
+100
+11
+Due to Developer Laziness, this content hasn't been added yet
+6
+19
+7
+0
+
+Dusty Tome
+1
+Game/ContentFiles/ItemTextures/Tomes.png
+76
+5
+Due to Developer Laziness, this content hasn't been added yet
+6
+0
+7
+16
+
+Pine Wand
+1
+Game/ContentFiles/ItemTextures/Wands.png
+85
+8
+Due to Developer Laziness, this content hasn't been added yet
+6
+1
+7
+15
+
+Opaque Orb
+1
+Game/ContentFiles/ItemTextures/Orbs.png
+101
+11
+Due to Developer Laziness, this content hasn't been added yet
+6
+1
+7
+16
+
+Pine Staff
+2
+Game/ContentFiles/ItemTextures/Staffs.png
+107
+13
+Due to Developer Laziness, this content hasn't been added yet
+6
+4
+7
+19
+
+Pine Longbow
+2
+Game/ContentFiles/ItemTextures/Bow.png
+90
+7
+Due to Developer Laziness, this content hasn't been added yet
+6
+16
+7
+1
+
+Pine Crossbow
+2
+Game/ContentFiles/ItemTextures/Crossbow.png
+98
+10
+Due to Developer Laziness, this content hasn't been added yet
+6
+19
+7
+0
+
+Iron Dagger
+1
+Game/ContentFiles/ItemTextures/Daggers.png
+160
+10
+Due to Developer Laziness, this content hasn't been added yet
+6
+23
+7
+0
+
+Iron Shortsword
+1
+Game/ContentFiles/ItemTextures/ShortSwords.png
+180
+13
+Due to Developer Laziness, this content hasn't been added yet
+6
+28
+7
+0
+
+Iron Hatchet
+1
+Game/ContentFiles/ItemTextures/Hatchets.png
+200
+15
+Due to Developer Laziness, this content hasn't been added yet
+6
+34
+7
+0
+
+Iron Longsword
+1
+Game/ContentFiles/ItemTextures/LongSwords.png
+240
+17
+Due to Developer Laziness, this content hasn't been added yet
+6
+35
+7
+0
+
+Iron Maul
+2
+Game/ContentFiles/ItemTextures/Maul.png
+200
+12
+Due to Developer Laziness, this content hasn't been added yet
+6
+37
+7
+0
+
+Iron BattleAxe
+2
+Game/ContentFiles/ItemTextures/BattleAxes.png
+230
+14
+Due to Developer Laziness, this content hasn't been added yet
+6
+39
+7
+0
+
+Iron Claymore
+2
+Game/ContentFiles/ItemTextures/Claymores.png
+250
+16
+Due to Developer Laziness, this content hasn't been added yet
+6
+40
+7
+0
+
+Magic Tome
+1
+Game/ContentFiles/ItemTextures/Tomes.png
+190
+10
+Due to Developer Laziness, this content hasn't been added yet
+6
+0
+7
+34
+
+Oak Wand
+1
+Game/ContentFiles/ItemTextures/Wands.png
+214
+13
+Due to Developer Laziness, this content hasn't been added yet
+6
+3
+7
+32
+
+Cloudy Orb
+1
+Game/ContentFiles/ItemTextures/Orbs.png
+254
+16
+Due to Developer Laziness, this content hasn't been added yet
+6
+3
+7
+35
+
+Oak Staff
+2
+Game/ContentFiles/ItemTextures/Staffs.png
+268
+18
+Due to Developer Laziness, this content hasn't been added yet
+6
+8
+7
+40
+
+Oak Longbow
+2
+Game/ContentFiles/ItemTextures/Bow.png
+226
+12
+Due to Developer Laziness, this content hasn't been added yet
+6
+34
+7
+3
+
+Oak Crossbow
+2
+Game/ContentFiles/ItemTextures/Crossbow.png
+246
+15
+Due to Developer Laziness, this content hasn't been added yet
+6
+40
+7
+1
+
+Steel Dagger
+1
+Game/ContentFiles/ItemTextures/Daggers.png
+400
+20
+Due to Developer Laziness, this content hasn't been added yet
+6
+38
+7
+0
+
+Steel Shortsword
+1
+Game/ContentFiles/ItemTextures/ShortSwords.png
+450
+23
+Due to Developer Laziness, this content hasn't been added yet
+6
+46
+7
+0
+
+Steel Hatchet
+1
+Game/ContentFiles/ItemTextures/Hatchets.png
+500
+25
+Due to Developer Laziness, this content hasn't been added yet
+6
+55
+7
+0
+
+Steel Longsword
+1
+Game/ContentFiles/ItemTextures/LongSwords.png
+600
+27
+Due to Developer Laziness, this content hasn't been added yet
+6
+57
+7
+0
+
+Steel Maul
+2
+Game/ContentFiles/ItemTextures/Maul.png
+500
+22
+Due to Developer Laziness, this content hasn't been added yet
+6
+60
+7
+0
+
+Steel BattleAxe
+2
+Game/ContentFiles/ItemTextures/BattleAxes.png
+575
+24
+Due to Developer Laziness, this content hasn't been added yet
+6
+63
+7
+0
+
+Steel Claymore
+2
+Game/ContentFiles/ItemTextures/Claymores.png
+625
+26
+Due to Developer Laziness, this content hasn't been added yet
+6
+66
+7
+0
+
+Sage Tome
+1
+Game/ContentFiles/ItemTextures/Tomes.png
+475
+20
+Due to Developer Laziness, this content hasn't been added yet
+6
+0
+7
+55
+
+Elm Wand
+1
+Game/ContentFiles/ItemTextures/Wands.png
+535
+23
+Due to Developer Laziness, this content hasn't been added yet
+6
+5
+7
+52
+
+Translucent Orb
+1
+Game/ContentFiles/ItemTextures/Orbs.png
+635
+26
+Due to Developer Laziness, this content hasn't been added yet
+6
+5
+7
+57
+
+Elm Staff
+2
+Game/ContentFiles/ItemTextures/Staffs.png
+670
+28
+Due to Developer Laziness, this content hasn't been added yet
+6
+13
+7
+66
+
+Elm Longbow
+2
+Game/ContentFiles/ItemTextures/Bow.png
+565
+22
+Due to Developer Laziness, this content hasn't been added yet
+6
+55
+7
+5
+
+Elm Crossbow
+2
+Game/ContentFiles/ItemTextures/Crossbow.png
+615
+25
+Due to Developer Laziness, this content hasn't been added yet
+6
+66
+7
+2
+
+Mithril Dagger
+1
+Game/ContentFiles/ItemTextures/Daggers.png
+4000
+30
+Due to Developer Laziness, this content hasn't been added yet
+6
+52
+7
+0
+
+Mithril Shortsword
+1
+Game/ContentFiles/ItemTextures/ShortSwords.png
+4500
+33
+Due to Developer Laziness, this content hasn't been added yet
+6
+63
+7
+0
+
+Mithril Hatchet
+1
+Game/ContentFiles/ItemTextures/Hatchets.png
+5000
+35
+Due to Developer Laziness, this content hasn't been added yet
+6
+75
+7
+0
+
+Mithril Longsword
+1
+Game/ContentFiles/ItemTextures/LongSwords.png
+6000
+37
+Due to Developer Laziness, this content hasn't been added yet
+6
+78
+7
+0
+
+Mithril Maul
+2
+Game/ContentFiles/ItemTextures/Maul.png
+5000
+32
+Due to Developer Laziness, this content hasn't been added yet
+6
+82
+7
+0
+
+Mithril BattleAxe
+2
+Game/ContentFiles/ItemTextures/BattleAxes.png
+5750
+34
+Due to Developer Laziness, this content hasn't been added yet
+6
+86
+7
+0
+
+Mithril Claymore
+2
+Game/ContentFiles/ItemTextures/Claymores.png
+6250
+36
+Due to Developer Laziness, this content hasn't been added yet
+6
+90
+7
+0
+
+Aware Tome
+1
+Game/ContentFiles/ItemTextures/Tomes.png
+4750
+30
+Due to Developer Laziness, this content hasn't been added yet
+6
+0
+7
+75
+
+Yew Wand
+1
+Game/ContentFiles/ItemTextures/Wands.png
+5350
+33
+Due to Developer Laziness, this content hasn't been added yet
+6
+7
+7
+71
+
+Crystal Orb
+1
+Game/ContentFiles/ItemTextures/Orbs.png
+6350
+36
+Due to Developer Laziness, this content hasn't been added yet
+6
+7
+7
+78
+
+Yew Staff
+2
+Game/ContentFiles/ItemTextures/Staffs.png
+6700
+38
+Due to Developer Laziness, this content hasn't been added yet
+6
+18
+7
+90
+
+Yew Longbow
+2
+Game/ContentFiles/ItemTextures/Bow.png
+5650
+32
+Due to Developer Laziness, this content hasn't been added yet
+6
+75
+7
+7
+
+Yew Crossbow
+2
+Game/ContentFiles/ItemTextures/Crossbow.png
+6150
+35
+Due to Developer Laziness, this content hasn't been added yet
+6
+90
+7
+3
+
+DragonBone Dagger
+1
+Game/ContentFiles/ItemTextures/Daggers.png
+32000
+40
+Due to Developer Laziness, this content hasn't been added yet
+6
+73
+7
+0
+
+DragonBone Shortsword
+1
+Game/ContentFiles/ItemTextures/ShortSwords.png
+36000
+43
+Due to Developer Laziness, this content hasn't been added yet
+6
+89
+7
+0
+
+DragonBone Hatchet
+1
+Game/ContentFiles/ItemTextures/Hatchets.png
+40000
+45
+Due to Developer Laziness, this content hasn't been added yet
+6
+105
+7
+0
+
+DragonBone Longsword
+1
+Game/ContentFiles/ItemTextures/LongSwords.png
+48000
+47
+Due to Developer Laziness, this content hasn't been added yet
+6
+110
+7
+0
+
+DragonBone Maul
+2
+Game/ContentFiles/ItemTextures/Maul.png
+40000
+42
+Due to Developer Laziness, this content hasn't been added yet
+6
+115
+7
+0
+
+DragonBone BattleAxe
+2
+Game/ContentFiles/ItemTextures/BattleAxes.png
+46000
+44
+Due to Developer Laziness, this content hasn't been added yet
+6
+120
+7
+0
+
+DragonBone Claymore
+2
+Game/ContentFiles/ItemTextures/Claymores.png
+50000
+46
+Due to Developer Laziness, this content hasn't been added yet
+6
+126
+7
+0
+
+DragonMind Tome
+1
+Game/ContentFiles/ItemTextures/Tomes.png
+38000
+40
+Due to Developer Laziness, this content hasn't been added yet
+6
+0
+7
+105
+
+DragonHorn Wand
+1
+Game/ContentFiles/ItemTextures/Wands.png
+42800
+43
+Due to Developer Laziness, this content hasn't been added yet
+6
+10
+7
+99
+
+DragonEye Orb
+1
+Game/ContentFiles/ItemTextures/Orbs.png
+50800
+46
+Due to Developer Laziness, this content hasn't been added yet
+6
+10
+7
+110
+
+DragonHorn Staff
+2
+Game/ContentFiles/ItemTextures/Staffs.png
+53600
+48
+Due to Developer Laziness, this content hasn't been added yet
+6
+26
+7
+126
+
+DragonHorn Longbow
+2
+Game/ContentFiles/ItemTextures/Bow.png
+45200
+42
+Due to Developer Laziness, this content hasn't been added yet
+6
+105
+7
+10
+
+DragonHorn Crossbow
+2
+Game/ContentFiles/ItemTextures/Crossbow.png
+49200
+45
+Due to Developer Laziness, this content hasn't been added yet
+6
+126
+7
+5
+

@@ -1,0 +1,20 @@
+  ID:   T
+  Path: ../pixels/BgTile/Tree1.png
+  ID:   G
+  Path: ../pixels/Bgtile/Grass1.png
+  ID:   g
+  Path: ../pixels/Bgtile/Grass2.png
+  ID:   p
+  Path: ../pixels/Bgtile/HorizontalPathSandOnGrass.png
+  
+  Layout:
+  
+  T T T T T T T T T
+  T g g g g g g g T
+  T g G G G G G g T  
+  T g G G G G G g T
+  p p p p p p p p p
+  T g G G G G G g T
+  T g G G G G G g T
+  T g g g g g g g T
+  T T T T T T T T T

@@ -1,0 +1,74 @@
+
+class Player
+{
+  var Name
+  var health
+  var stamina
+  var Actor
+  var ID
+  
+  def Player(id)
+  {
+    this.ID = id
+    this.Actor = GetObjectByID(this.ID)
+    print("Player created!")
+    print("Player ID : " + this.ID)
+  }
+
+  def GameStart()
+  {
+    print("Player " + this.Name + " starting")
+  }
+
+  def Update()
+  {
+    if (IsKeyDown(Key_Left))
+    {
+      this.Actor.MoveObject(Vector2f(-2, 0))
+    }
+    if (IsKeyDown(Key_Right))
+    {
+      this.Actor.MoveObject(Vector2f(2, 0))
+    }
+    if (IsKeyDown(Key_Up))
+    {
+      this.Actor.MoveObject(Vector2f(0, -2))
+    }
+    if (IsKeyDown(Key_Down))
+    {
+      this.Actor.MoveObject(Vector2f(0, 2))
+    }
+  }
+
+}
+
+def Player::Killed()
+{
+
+}
+
+def Player::Spawned()
+{
+  
+}
+
+def Player::Respawned()
+{
+  
+}
+
+def Player::Interact()
+{
+  
+}
+
+def Player::GameEnd()
+{
+  
+}
+
+//sample to test adding custom behavior in script
+def Player::Attack()
+{
+  
+}

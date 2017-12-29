@@ -1,0 +1,89 @@
+6//number of skills
+flare//name of skill1
+/../SFEngine/Samples/Animations/SkillAnimations/FlareAnimation.png//This is the name of the animation file, save as a string
+The Flarial's skill is usually used in the wild to signal its parents that its in troubl
+When a Philammon feels threatened it spits lava from its guts to warn off attackers//dee, however it can still burn if it his an enemy.//Description for skill1
+false//isPhysical for skill1
+true//isMagical for skill1
+false//castOnSelf for skill1
+true//castOnSingle for skill1
+true//castOnEnemy for skill1
+10//mp_cost for skill 1
+0//index for damage of skill1
+15//Value to go in damage index 0 for skill 1
+9//index for damage of skill1
+1//value to go in that index
+lava Spit//name of skill2
+/../SFEngine/Samples/Animations/SkillAnimations/LavaSpitAnimation.png//filepath to animation
+When a Philammon feels threatened it spits lava from its guts to warn off attackers//description for skill2
+false//isPhysical for skill2
+true//isMagical for skill 2
+false//castOnSelf for skill 2
+true//cast on single for skill2
+true//cast on enemy for skill2
+7//mp_cost for skill2
+0//index for damage
+5//value to go in index
+1//index for damage
+5//value to go in index
+6//index for damage
+5//value to go in index
+DinoBite//name of skill 3
+/../SFEngine/Samples/Animations/SkillAnimations/DinoBiteAnimation.png//filepath to animation
+A young salamander, when backed in a corner, tends to bite if it feels threatened. The bite is very hot
+true//isPhysical
+false//isMagical
+false//castOnSelf
+true//castOnSingle
+true//castOnEnemy
+5//m_p cost
+0//index for damage
+4//value of damage[0]
+2//index for damage
+5//value of damage[2]
+6//index for damage
+5//value to go in that index
+Thermal//name of skill 4
+/../SFEngine/Samples/Animations/SkillAnimations/ThermalAnimation.png//filepath to animation
+When a young phoenix can't get enough lift, it will heat the air beneath it, causing it to rise. Though primarily used for aerodynamics, it is also a good defense mechanism//description
+false//isPhysical
+true//isMagical
+false//castOnSelf
+true//castOnSingle
+true//castOnEnemy
+12//mpCost
+0//index for damage - fire
+10//value of damage[0]
+3//index for damage - Air
+5//value of damage[3]
+9//index for damage - burn
+1//value for damage-burn
+FireBrace//name of skill 5
+/../SFEngine/Samples/Animations/SkillAnimations/FireBraceAnimation.png//filepath to animation
+Angiers instinctively protect others if they sense danger, but because of their youth, the effect is often unimpressive
+false//isPhysical
+true//isMagical
+false//castOnSelf
+true//castOnSingle
+true//castOnEnemy
+10//mp_cost
+26//index for damage-firShield
+1//value for damage[26]
+Spite//name of skill 
+/../SFEngine/Samples/Animations/SkillAnimations/SpiteAnimation.png//filepath to animation
+Spitens try to curse their prey by branding them with their horns, however their powers have not fully developed, so only a small impression is left
+true//isPhysical
+false//castOnSelf
+true//castOnSingle
+true//castOnEnemy
+13//mp_cost
+0//index of damage
+7//value of damage[0]
+5//index of damage
+7/value of damage[5]
+6//index of damage
+3//value of damage[6]
+7//index of damage
+3//value of damage[7]
+8//index of damage
+2//value of damage[8]

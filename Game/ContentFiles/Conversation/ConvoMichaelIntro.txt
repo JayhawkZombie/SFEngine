@@ -1,0 +1,55 @@
+Michael
+
+
+intro
+Good to see you again, have you come to learn about the Gods?
+3
+I don't, but my father does. He needs you to say a prayer over my mother's grave, its the anniversary of her death
+5
+1
+dutyResponse
+Of course pastor, thank you for the offer.
+4
+1
+godsExplaination1
+The Gods killed my mother, I don't care to know them
+0
+1
+5
+1
+MysteriousWaysResponse
+
+dutyResponse
+It is wrong that he is still so fixated on the loss of one long departed. As his friend, I must refuse, I do not wish to enable such sinful sorrow.
+
+<quotes scriputre at him>
+<Guilt response>
+Are you telling me that after all the years we have come to church and supported you, you would still refuse such a simple request?
+
+After all of the things my mother did for this church you're really not going to say a prayer over her?
+
+
+There is a place for sorrow yes, but there is a place for life as well. We should dwell in sorrow only as long as we need, it is pleasing to the gods for us to live a joyful life.
+
+godsExplaination1
+What would you like to know?
+5
+How many are there?
+5
+1
+godsExplaination2
+What happened at the beggining?
+5
+1
+godsExplaination3
+What happens when you die?
+5
+1
+godsExplaination4
+Actually I just need you to preform a rite at my mothers grave for her anniversary
+dutyResponseExit
+
+godsExplaination2
+There are six, and One. The god above who showed Prophet Erebius his light showed us six faces: Anu, the father of light, Ahros the Judge, Velhu the merciful, Sid the compassionate, and Pythion, the Redeemer who was redeemed.
+
+How can there be both six and one?

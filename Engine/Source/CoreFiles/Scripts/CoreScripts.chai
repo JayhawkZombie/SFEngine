@@ -1,0 +1,3 @@
+def method_missing(int i, string name, Vector v) {
+  print("method_missing(${i}, ${name}), ${v.size()} params");
+}

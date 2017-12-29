@@ -1,0 +1,71 @@
+5
+Ring Of Mist and Wind
+/../SFEngine/Samples/Textures/ItemTextures/ArmorTextures/RingOfMistAndWindTexture.png
+10000
+Created for Lady Lackless, this ring was created by a magician who mastered the sea- and put its essence inside the glass of this ring
+1 
+3 
+3 
+5 
+false 
+false 
+false 
+false 
+true  
+Bear Fur Bracers
+/../SFEngine/Samples/Textures/ItemTextures/ArmorTextures/BearFurBracersTexture.png
+35
+Cut from the hide of a great grizzly, these bracers serve as a layer of protection from the elements
+1 
+1 
+3 
+1 
+6 
+1 
+false 
+false 
+true 
+false 
+false 
+Silver Plate 
+/../SFEngine/Samples/Textures/ItemTextures/ArmorTextures/SilverPlateTexture.png
+850
+This plate was crafted from pure silver for the use of the Light Lord's Justicars, protectors of the peace
+4 
+10
+5 
+10 
+6 
+7 
+7 
+5 
+true 
+true 
+true 
+false
+false
+FallFlower circlet
+/../SFEngine/Samples/Textures/ItemTextures/ArmorTextures/FallFlowerCircletTexture.png
+3
+This cirlcet was crafted by a foolish young boy for a girl he loved. It is a simple twist of barkless branches woven together and tied with fallflowers
+1 
+2 
+2 
+2 
+false 
+false 
+false 
+true  
+false 
+Simple Boots
+/../SFEngine/Samples/Textures/ItemTextures/ArmorTextures/SimpleBootsTexture.png
+13
+These boots were quickly crafted by a journeyman cobbler, shortly before moving on to the next pair that looks exactly the same
+6
+2
+true 
+false
+false
+false
+false
+

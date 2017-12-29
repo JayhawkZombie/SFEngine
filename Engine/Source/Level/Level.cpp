@@ -1,0 +1,415 @@
+////////////////////////////////////////////////////////////
+//
+// MIT License
+//
+// Copyright(c) 2017 Kurt Slagle - kurt_slagle@yahoo.com
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files(the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and / or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions :
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+// The origin of this software must not be misrepresented; you must not claim
+// that you wrote the original software.If you use this software in a product,
+// an acknowledgment of the software used is required.
+//
+////////////////////////////////////////////////////////////
+
+#include "Level\Level.h"
+#include "Physics\vec2d.h"
+#include "Physics\Collider.h"
+
+#include "json\json.h"
+#include "chaiscript\chaiscript.hpp"
+
+namespace
+{
+  std::string PROJECT_PATH = "";
+}
+
+namespace Engine
+{
+  Level::Level(const sf::Vector2u &LevelSize, const sf::FloatRect &DefaultView, bool showlines, const sf::Vector2f &GridSpacing)
+    : 
+    BasicLevel(LevelSize, DefaultView, showlines, GridSpacing)
+  {
+    auto seg = BuildSegmentMesh('L', { 100, 300 }, { 550, 500 });
+    Segments.push_back(seg);
+
+    if (ShowGridLines) {
+      GenerateGrid();
+    }
+    CurrentLevel = this;
+    Handler.BindCallback(Events::KeyPressed, [this](const sf::Keyboard::Key &k) -> void { this->HandleKeyPress(k); });
+    Handler.BindCallback(Events::KeyReleased, [this](const sf::Keyboard::Key &k) ->void { this->HandleKeyRelease(k); });
+  }
+
+  Level::~Level()
+  {
+    for (auto & tex : Textures)
+      tex.second.reset();
+
+    Textures.clear();
+    for (auto & sheet : TileSheets)
+      sheet.second.reset();
+    TileSheets.clear();
+    for (auto & anim : Animations)
+      anim.second.reset();
+    Animations.clear();
+    for (auto & buff : SoundBuffers)
+      buff.second.reset();
+    SoundBuffers.clear();
+
+    //LightTexture.reset();
+  }
+
+  void Level::BindMethods(chaiscript::ModulePtr mptr)
+  {
+    mptr->add(chaiscript::fun(&GetObjectByName), "GetObjectByID");
+  }
+
+  void Level::HandleInputEvent(const UserEvent & evnt)
+  {
+  }
+
+  void Level::HandleKeyPress(const sf::Keyboard::Key &key)
+  {
+
+  }
+
+  void Level::HandleKeyRelease(const sf::Keyboard::Key &key)
+  {
+
+  }
+
+  void Level::GenerateGrid()
+  {
+    float xpos = 0, ypos = 0;
+    sf::VertexArray hline = sf::VertexArray(sf::Lines, 2);
+    sf::VertexArray vline = sf::VertexArray(sf::Lines, 2);
+
+    while (ypos < Size.y) {
+      hline[0].position = { 0, ypos }; hline[0].color = sf::Color(0, 123, 137);
+      hline[1].position = { static_cast<float>(Size.x), ypos }; hline[1].color = sf::Color(0, 123, 137);
+
+      GridLines.push_back(hline);
+      ypos += GridBlockSize.y;
+    }
+
+    while (xpos < Size.x) {
+      vline[0].position = { xpos, 0 }; vline[0].color = sf::Color(0, 123, 137);
+      vline[1].position = { xpos, static_cast<float>(Size.y) }; vline[1].color = sf::Color(0, 123, 137);
+
+      GridLines.push_back(vline);
+      xpos += GridBlockSize.y;
+    }
+  }
+
+  void Level::LoadLevel(const std::string &lvlfile)
+  {
+    LoadFromFile(lvlfile);
+    
+  }
+
+  void Level::OnBegin()
+  {
+  }
+
+  void Level::OnEnd()
+  {
+  }
+
+  void Level::OnShutDown()
+  {
+
+  }
+
+  void Level::HandleWindowResized()
+  {
+
+  }
+
+  std::shared_ptr<LevelObject> Level::GetObjectByName(const std::string & ID)
+  {
+    if (!CurrentLevel) {
+      std::cerr << "CurrentLevel is NULL" << std::endl;
+      return nullptr;
+    }
+
+    for (auto & obj : CurrentLevel->LevelObjects) {
+      if (obj.second->ItemID == ID)
+        return obj.second;
+    }
+
+    return nullptr;
+  }
+
+  void Level::LoadFromFile(const std::string &file)
+  {
+    Json::Value ProjectFile;
+
+    std::ifstream in(file);
+    if (!in) {
+      std::cerr << "Unable to open project file" << std::endl;
+      return;
+    }
+
+    in >> ProjectFile;
+
+    try
+    {
+      PROJECT_PATH = ProjectFile["Project"]["Info"]["PROJECT_PATH"].asString();
+      LoadAssets(ProjectFile["Project"]["Data"]);
+    }
+    catch (EngineRuntimeError &err)
+    {
+      err.AddCause(ExceptionCause::ConstructionError);
+      err.AddMessage(EXCEPTION_MESSAGE("Failed to load assets"));
+      throw;
+    }
+
+  }
+
+  bool Level::SpawnAutoGeneratedObject(std::shared_ptr<LevelObject> Object, std::string IDPrePend)
+  {
+    try
+    {
+      auto _id = GenerateID();
+      std::string objid = IDPrePend + std::to_string(_id);
+      Object->InternalID = _id;
+      Object->ItemID = objid;
+      LevelObjects[objid] = Object;
+      return true;
+    }
+    //When we implement logging, we will log the errors here
+    catch (IDException &exc)
+    {
+      exc.AddCause({ ExceptionCause::SpawnFailure });
+      exc.AddMessage(EXCEPTION_MESSAGE("Failed to spawn object"));
+      
+      return false;
+    }
+    catch (EngineRuntimeError &err)
+    {
+      err.AddCause(ExceptionCause::Unknown);
+      err.AddMessage(EXCEPTION_MESSAGE("Failed to spawn object - unknown reason"));
+      
+      return false;
+    }
+    catch (std::exception *)
+    {
+      throw StdException({ ExceptionCause::StdException, ExceptionCause::Unknown }, EXCEPTION_MESSAGE("Exception occurred in standard library - unknown cause"));
+      throw;
+    }
+  }
+
+  void Level::SpawnBall(char BallType, const sf::Vector2f & InitialPosition, const sf::Vector2f & InitialVelocity, unsigned int Radius, float Mass, float CoeffecientOfRest, const sf::Color & Color)
+  {
+    //auto ball = BuildBallMesh(BallType, InitialPosition, InitialVelocity, Radius, Mass, CoeffecientOfRest, Color);
+    auto Object = std::make_shared<Engine::LevelObject>();
+    Object->Size = { __TO_FLOAT__(Radius), __TO_FLOAT__(Radius) };
+    Object->Position = InitialPosition;
+    MeshType type = (BallType == 'G' ? MeshType::BallGo : MeshType::Ball);
+    Object->AddCollider(Collider2D::CreateCircularMesh(type, InitialPosition, InitialVelocity, Radius, Mass, CoeffecientOfRest, Color));
+    //Object->ObjectMesh = BuildBallMesh(BallType, InitialPosition, InitialVelocity, Radius, Mass, CoeffecientOfRest, Color);
+    if (!SpawnAutoGeneratedObject(Object, "BallMesh")) {
+      //Awh, sad
+      //for now, print the error, but don't throw an exception
+      ERR_STREAM << "Failed to spawn Ball" << std::endl;
+    }
+  }
+
+  void Level::SpawnSquare(float radius, float init_rotation, const sf::Vector2f & InitialPosition, const sf::Vector2f & InitialVelocity, float mass, float CoeffOfRest, const sf::Color & Color)
+  {
+    //auto sq = BuildPolygonMesh(4, radius, 0, InitialPosition, InitialVelocity, mass, CoeffOfRest, Color);
+    auto Object = std::make_shared<Engine::LevelObject>();
+    Object->Size = { radius, radius };
+    Object->Position = InitialPosition;
+    MeshType type = MeshType::Polygon;
+    Object->AddCollider(Collider2D::CreatePolygonMesh(4, radius, 0, InitialPosition, InitialVelocity, mass, CoeffOfRest, Color));
+    //Object->ObjectMesh = BuildPolygonMesh(4, radius, 0, InitialPosition, InitialVelocity, mass, CoeffOfRest, Color);
+
+    if (!SpawnAutoGeneratedObject(Object, "Square")) {
+      ERR_STREAM << "Failed to spawn Square" << std::endl;
+    }
+  }
+
+  void Level::SpawnRect(float radius, float init_rotation, const sf::Vector2f & InitialPosition, const sf::Vector2f & InitialVelocity, float mass, float CoeffOfRest, const sf::Color & Color)
+  {
+    //auto sq = BuildPolygonMesh(4, radius, init_rotation, InitialPosition, InitialVelocity, mass, CoeffOfRest, Color);
+    std::shared_ptr<Engine::LevelObject> Object = std::make_shared<Engine::LevelObject>();
+    Object->Size = { radius, radius };
+    Object->Position = InitialPosition;
+    Object->AddCollider(Collider2D::CreatePolygonMesh(4, radius, init_rotation, InitialPosition, InitialVelocity, mass, CoeffOfRest, Color));
+    //Object->ObjectMesh = BuildPolygonMesh(4, radius, init_rotation, InitialPosition, InitialVelocity, mass, CoeffOfRest, Color);
+    if (!SpawnAutoGeneratedObject(Object, "RectMesh")) {
+      ERR_STREAM << "Failed to spawn Rect" << std::endl;
+    }
+  }
+
+  void Level::SpawnTriangle(float radius, float init_rotation, const sf::Vector2f & InitialPosition, const sf::Vector2f & InitialVelocity, float mass, float CoeffOfRest, const sf::Color & Color)
+  {
+    std::shared_ptr<Engine::LevelObject> Object = std::make_shared<Engine::LevelObject>();
+    Object->Size = { radius, radius };
+    Object->Position = InitialPosition;
+    Object->AddCollider(Collider2D::CreatePolygonMesh(3, radius, init_rotation, InitialPosition, InitialVelocity, mass, CoeffOfRest, Color));
+    //Object->ObjectMesh = BuildPolygonMesh(3, radius, init_rotation, InitialPosition, InitialVelocity, mass, CoeffOfRest, Color);
+    if (!SpawnAutoGeneratedObject(Object, "TriMesh")) {
+      ERR_STREAM << "Failed to spawn TriMesh" << std::endl;
+    }
+  }
+
+  void Level::SpawnNPoly(unsigned int num_sides, float radius, float init_rotation, const sf::Vector2f & InitialPosition, const sf::Vector2f & InitialVelocity, float mass, float CoeffOfRest, const sf::Color & Color)
+  {
+    //auto poly = BuildPolygonMesh(num_sides, radius, init_rotation, InitialPosition, InitialVelocity, mass, CoeffOfRest, Color);
+    std::shared_ptr<Engine::LevelObject> Object = std::make_shared<Engine::LevelObject>();
+    Object->Size = { radius, radius };
+    Object->Position = InitialPosition;
+    Object->AddCollider(Collider2D::CreatePolygonMesh(num_sides, radius, init_rotation, InitialPosition, InitialVelocity, mass, CoeffOfRest, Color));
+    //Object->ObjectMesh = BuildPolygonMesh(num_sides, radius, init_rotation, InitialPosition, InitialVelocity, mass, CoeffOfRest, Color);
+    if (!SpawnAutoGeneratedObject(Object, "NPolyMesh")) {
+      ERR_STREAM << "Failed to spawn NPolyMesh" << std::endl;
+    }
+  }
+
+  void Level::SpawnWave(char type, const sf::Vector2i & TopLeftCorner, const sf::Vector2i & BottomRightCorner, float radius, bool IsHard, unsigned int NumWavePts, float ampRight, float waveLenRight, float rFreqRight, float ampLeft, float waveLenLeft, float rFreqLeft, float elev, float airDen, float depth, float fluidDen)
+  {
+
+    auto ptr = BuildWaveSegment(type, TopLeftCorner, BottomRightCorner, radius, IsHard, NumWavePts, ampRight, waveLenRight, rFreqRight, ampLeft, waveLenLeft, rFreqLeft, elev, airDen, depth, fluidDen);
+    Segments.push_back(ptr);
+  }
+
+  void Level::LoadAssets(const Json::Value & value)
+  {
+    //textures
+    LoadTextures(value["Textures"]);
+    LoadAudio(value["Audio"]);
+    LoadTileSheets(value["Sheets"]);
+    LoadAnimations(value["Animations"]);
+  }
+  void Level::LoadAudio(const Json::Value & value)
+  {
+    std::string name{ "" };
+    std::string path{ "" };
+
+    for (auto & file : value) {
+      name = file["Name"].asString();
+      path = PROJECT_PATH + file["Path"].asString();
+
+      SoundBuffers[name] = LoadSoundBuffer(path, name);// std::make_shared<sf::SoundBuffer>();
+      if (!SoundBuffers[name]) {
+        std::cerr << "Failed to load audio file: " << path << std::endl;
+      }
+
+
+    }
+  }
+  void Level::LoadTextures(const Json::Value & value)
+  {
+    std::string texname{ "" };
+    std::string path{ "" };
+
+    for (auto & tex : value) {
+      texname = tex["Name"].asString();
+      path = PROJECT_PATH + tex["Path"].asString();
+      Textures[texname] = LoadTexture(path, texname);// std::make_shared<sf::Texture>();
+      if (!Textures[texname]) {
+        std::cerr << "Unable to load texture: " << path << std::endl;
+      }
+    }
+
+  }
+  void Level::LoadTileSheets(const Json::Value & value)
+  {
+    for (auto & sheet : value)
+      LoadSheet(sheet);
+  }
+  void Level::LoadSheet(const Json::Value & value)
+  {
+    try
+    {
+      auto texname = value["Name"].asString();
+      auto sheet_data = value["Sheet"];
+      auto frames = sheet_data["Frames"];
+
+      TileSheets[texname] = std::make_shared<TileSheet>();
+
+      Json::Value rect;
+      std::string tilename{ "" };
+      sf::IntRect IRect{ 0, 0, 0, 0 };
+
+      for (auto & frame : frames) {
+        tilename = frame["Name"].asString();
+        rect = frame["Rect"];
+
+        IRect.left = rect[0].asInt();
+        IRect.top = rect[1].asInt();
+        IRect.width = rect[2].asInt();
+        IRect.height = rect[3].asInt();
+
+        TileSheets[texname]->AddTile(texname, IRect);
+        TileSheets[texname]->SetTexture(Textures[sheet_data["Texture"].asString()]);
+      }
+    }
+    catch (Json::Exception &err)
+    {
+      throw EngineRuntimeError({ ExceptionCause::DataParseError }, EXCEPTION_MESSAGE("JSON error"));
+    }
+  }
+  void Level::LoadAnimations(const Json::Value & value)
+  {
+    for (auto & anim : value) {
+
+      std::string name = anim["Name"].asString();
+      std::string texture = anim["Texture"].asString();
+      float time = anim["FrameTime"].asFloat();
+      bool bPingPong = anim["PingPong"].asBool();
+      bool looping = anim["Looping"].asBool();
+
+      auto it = Textures.find(texture);
+      if (it == Textures.end())
+        return;
+
+      auto tex = it->second;
+      Animations[name] = std::make_shared<Engine::Animation>();
+      EditorGraphAnimations[name] = std::make_shared<Engine::Animation>();
+
+      Animations[name]->SetSpriteSheet(tex, "Anim" + name + "sheet");
+      EditorGraphAnimations[name]->SetSpriteSheet(tex, "AssetGraph" + name + "sheet");
+      Animations[name]->SetFrameTime(time);
+      EditorGraphAnimations[name]->SetFrameTime(time);
+
+      std::vector<sf::IntRect> Frames = {};
+      auto frames = anim["Frames"];
+      sf::IntRect framerect = {};
+
+      for (auto & frame : frames) {
+        framerect.left = frame[0].asInt();
+        framerect.top = frame[1].asInt();
+        framerect.width = frame[2].asInt();
+        framerect.height = frame[3].asInt();
+
+        Animations[name]->AddFrame(framerect);
+        EditorGraphAnimations[name]->AddFrame(framerect);
+      }
+
+      Animations[name]->MakePingPong(bPingPong);
+      EditorGraphAnimations[name]->MakePingPong(bPingPong);
+      Animations[name]->MakeLooped(looping);
+      EditorGraphAnimations[name]->MakeLooped(looping);
+    }
+  }
+}

@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // TGUI - Texus's Graphical User Interface
-// Copyright (C) 2012-2017 Bruno Van de Velde (vdv_b@tgui.eu)
+// Copyright (C) 2012-2015 Bruno Van de Velde (vdv_b@tgui.eu)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -79,11 +79,11 @@ namespace tgui
         ///                       Is the click caught by the picture, or does the event pass to the widgets behind it?
         ///
         /// @code
-        /// auto picture1 = tgui::Picture::create({"image.png", {10, 10, 80, 80}});
+        /// auto picture1 = std::make_shared<tgui::Picture>(tgui::Texture{"image.png", {10, 10, 80, 80}});
         ///
         /// sf::Texture texture;
         /// texture.loadFromFile("image.png", {10, 10, 80, 80});
-        /// auto picture2 = tgui::Picture::create(texture);
+        /// auto picture2 = std::make_shared<tgui::Picture>(texture);
         /// @endcode
         ///
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -120,52 +120,6 @@ namespace tgui
         ///
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         void setTexture(const Texture& texture, bool fullyClickable = true);
-
-
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// @brief Creates a new picture widget
-        ///
-        /// @param filename  The filename of the texture to load the picture from
-        /// @param fullyClickable This affects what happens when clicking on a transparent pixel in the image.
-        ///                       Is the click caught by the picture, or does the event pass to the widgets behind it?
-        ///
-        /// @return The new picture
-        ///
-        /// @code
-        /// auto picture1 = Picture::create("image.png");
-        ///
-        /// auto picture2 = Picture::create({"image.png", {20, 15, 60, 40}}); // Load part of the image from (20,15) to (80,55)
-        ///
-        /// sf::Texture texture;
-        /// texture.loadFromFile("image.png", {20, 15, 60, 40});
-        /// auto picture3 = Picture::create(texture);
-        /// @endcode
-        ///
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        static Picture::Ptr create(const char* filename, bool fullyClickable = true);
-
-
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// @brief Creates a new picture widget
-        ///
-        /// @param texture  The texture to load the picture from
-        /// @param fullyClickable This affects what happens when clicking on a transparent pixel in the image.
-        ///                       Is the click caught by the picture, or does the event pass to the widgets behind it?
-        ///
-        /// @return The new picture
-        ///
-        /// @code
-        /// auto picture1 = Picture::create("image.png");
-        ///
-        /// auto picture2 = Picture::create({"image.png", {20, 15, 60, 40}}); // Load part of the image from (20,15) to (80,55)
-        ///
-        /// sf::Texture texture;
-        /// texture.loadFromFile("image.png", {20, 15, 60, 40});
-        /// auto picture3 = Picture::create(texture);
-        /// @endcode
-        ///
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        static Picture::Ptr create(const Texture& texture = {}, bool fullyClickable = true);
 
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

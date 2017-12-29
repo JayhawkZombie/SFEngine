@@ -1,0 +1,26 @@
+def Create(this.Actor,FilePath)
+{
+  CreateAnimation(this.Actor, WalkFront, FilePath, .7)//last value is animation duration in seconds
+  AddFrame(this.Actor,WalkFront,FilePath,0,0,16,16)
+  AddFrame(this.Actor,WalkFront,FilePath,0,16,16,16)
+  AddFrame(this.Actor,WalkFront,FilePath,0,0,16,16)//duplicate is intentional
+  AddFrame(this.Actor,WalkFront,FilePath,0,32,16,16)
+ 
+  CreateAnimation(this.Actor, WalkBack, FilePath, .7)
+  AddFrame(this.Actor,WalkBack,FilePath,16,0,16,16)
+  AddFrame(this.Actor,WalkBack,FilePath,16,16,16,16)
+  AddFrame(this.Actor,WalkBack,FilePath,16,0,16,16)
+  AddFrame(this.Actor,WalkBack,FilePath,16,32,16,16)
+  
+  CreateAnimation(this.Actor, WalkLeft, FilePath, .7)
+  AddFrame(this.Actor,WalkLeft,FilePath,32,0,16,16)
+  AddFrame(this.Actor,WalkLeft,FilePath,32,16,16,16)
+  AddFrame(this.Actor,WalkLeft,FilePath,32,0,16,16)
+  AddFrame(this.Actor,WalkLeft,FilePath,32,32,16,16)
+  
+  CreateAnimation(this.Actor, WalkRight, FilePath, .7)
+  AddFrame(this.Actor,WalkRight,FilePath,48,0,16,16)
+  AddFrame(this.Actor,WalkRight,FilePath,48,16,16,16)
+  AddFrame(this.Actor,WalkRight,FilePath,48,0,16,16)
+  AddFrame(this.Actor,WalkRight,FilePath,48,32,16,16)
+}

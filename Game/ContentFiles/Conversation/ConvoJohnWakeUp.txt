@@ -1,0 +1,131 @@
+John
+11
+
+intro
+Wake up sleepy head, Dad's got stuff for you to do
+4
+No, tell him I'm still sleeping
+2
+1
+5
+1
+sleepingResponse
+Tell him I'll be right there
+3
+1
+4
+1
+MorningBirdResponse
+God, not more yardwork
+1
+1
+5
+1
+LazyResponse
+I hope he didn't start without me
+0
+1
+4
+1
+MorningBirdResponse
+
+sleepingResponse
+Im not telling him that, with the mood hes been in lately
+3
+Why has he been in a bad mood?
+3
+1
+FatherAngryExplaination
+Dont Tell me What to do
+0
+1
+5
+1
+AttitudeCriticismResponse
+Remain Silent
+2
+1
+ExitReplyQuiet
+
+MorningBirdResponse
+Im surprised you could get up this early, usually you sleep so soundly I'd think you were dead, if I didn't hear you snore
+3
+Hey You're the one who snores
+0
+1
+3
+1
+ExitReplySnore
+I do not!
+1
+1
+2
+1
+ExitReplySnore
+Remain Silent
+2
+1
+ExitReplyQuiet
+
+LazyResponse
+Yard Work is what keeps food in your belly, be grateful it's there!
+2
+Yeah, Yeah, I know
+0
+0
+ExitReplyWork
+Remain silent
+2
+1
+ExitReplyQuiet
+
+FatherAngryExplaination
+He's mad because I want to leave for the city, and the anniversary of mom's death is coming up
+2
+I miss her
+0
+0
+ExitReplyMom
+remain silent
+2
+1
+ExitReplyQuiet
+
+AttitudeCriticismResponse
+You better watch that attitude, or your life's gonna suck
+2
+What do you know about life?
+0
+1
+3
+1
+ExitReplyLife
+Remain Quiet
+2
+1
+ExitReplyQuiet
+
+ExitReplyQuiet
+You've been quiet lately, that's unlike you. Now go help dad before you get in trouble
+0
+1
+
+ExitReplySnore
+Pretty sure thats you little bro, best get up before dad gets mad
+0
+2
+
+ExitReplyWork
+You better, now go help dad, he's got our mouths to feed
+0
+3
+
+ExitReplyMom
+yeah, me too, but its worse for dad, so try to help him out, huh? He's waiting for you
+0
+4
+
+ExitReplyLife
+More than you evidently. Now go help dad before you get in trouble
+0
+5
