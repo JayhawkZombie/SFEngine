@@ -1,3 +1,5 @@
+#pragma once
+
 ////////////////////////////////////////////////////////////
 //
 // MIT License
@@ -28,4 +30,52 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Level\BasicLevel.h"
+struct TimerHandle
+{
+
+  std::uint32_t TimerID;
+
+  bool operator == (const TimerHandle &Handle)
+  {
+    return (TimerID == Handle.TimerID);
+  }
+
+  bool operator != (const TimerHandle & Handle)
+  {
+    return (TimerID != Handle.TimerID);
+  }
+};
+
+struct Timer
+{
+  double ExpirationTime = 0.0;
+  double Duration = 0.0;
+  double TimeScale = 1.0;
+  bool IsPaused = false;
+  bool IsPeriodic = false;
+  std::function<void()> Callback = []() {};
+  TimerHandle Handle;
+
+  friend bool operator< (const Timer &t1, const Timer &t2);
+
+  bool operator < (const Timer &timer)
+  {
+    return (ExpirationTime < timer.ExpirationTime);
+  }
+
+  bool operator > (const Timer &timer)
+  {
+    return (ExpirationTime > timer.ExpirationTime);
+  }
+
+  bool operator == (const Timer &timer)
+  {
+    return (Handle == timer.Handle);
+  }
+
+  bool operator != (const Timer &timer)
+  {
+    return (Handle != timer.Handle);
+  }
+
+};

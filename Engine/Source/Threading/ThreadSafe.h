@@ -1,3 +1,5 @@
+#pragma once
+
 ////////////////////////////////////////////////////////////
 //
 // MIT License
@@ -28,4 +30,19 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Level\BasicLevel.h"
+class ThreadSafe
+{
+public:
+  ThreadSafe();
+  ~ThreadSafe();
+
+  bool TryLock();
+  bool Lock();
+  void Unlock();
+
+protected:
+
+  
+  std::shared_ptr<std::mutex> m_MutexPtr;
+
+};

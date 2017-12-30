@@ -483,12 +483,9 @@ void BasicLevel::LoadAnimations(const Json::Value & value)
 
     auto tex = it->second;
     Animations[name] = std::make_shared<Animation>();
-    EditorGraphAnimations[name] = std::make_shared<Animation>();
 
     Animations[name]->SetSpriteSheet(tex, "Anim" + name + "sheet");
-    EditorGraphAnimations[name]->SetSpriteSheet(tex, "AssetGraph" + name + "sheet");
     Animations[name]->SetFrameTime(time);
-    EditorGraphAnimations[name]->SetFrameTime(time);
 
     std::vector<sf::IntRect> Frames = {};
     auto frames = anim["Frames"];
@@ -501,13 +498,10 @@ void BasicLevel::LoadAnimations(const Json::Value & value)
       framerect.height = frame[3].asInt();
 
       Animations[name]->AddFrame(framerect);
-      EditorGraphAnimations[name]->AddFrame(framerect);
     }
 
     Animations[name]->MakePingPong(bPingPong);
-    EditorGraphAnimations[name]->MakePingPong(bPingPong);
     Animations[name]->MakeLooped(looping);
-    EditorGraphAnimations[name]->MakeLooped(looping);
   }
 }
 

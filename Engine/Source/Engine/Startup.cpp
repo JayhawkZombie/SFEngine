@@ -32,10 +32,8 @@
 #include "chaiscript\chaiscript_defines.hpp"
 #include "chaiscript\chaiscript.hpp"
 #include "chaiscript\chaiscript_stdlib.hpp"
-#include "Projects\TestProject\Classes\Levels\OakTree.h"
-#include "Projects\PuzzleDemo\Classes\Level1.h"
-#include "Projects\PuzzleDemo\Classes\StartupLevel.h"
-#include "Projects\PuzzleDemo\Classes\Levels\DemoLoader.h"
+
+#include "Level\Level.h"
 
 void SFEngine::InitRenderWindow()
 {
@@ -207,11 +205,14 @@ UINT32 SFEngine::Startup()
   Window->display();
   Window->clear();
 
-  std::shared_ptr<::DemoLoadLevel> EngineStartupLevel = std::make_shared<::DemoLoadLevel>();
-  EngineStartupLevel->OnBegin();
-  Levels["Main"] = EngineStartupLevel; 
-    
-  ScriptEngine->add(chaiscript::fun(&MessageAlert), "Alert");
-  ScriptEngine->add(chaiscript::fun(&Confirm), "Confirm");    
-  return GameLoop();
+  Levels["Main"] = Level::DefaultEmptyLevel();
+  auto ret = GameLoop();
+
+  if (ret)
+  {
+    delete ScriptEngine;
+    ret = Shutdown();
+  }
+
+  return ret;
 }

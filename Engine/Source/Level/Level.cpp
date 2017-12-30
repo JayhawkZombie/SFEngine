@@ -40,6 +40,14 @@ namespace
   std::string PROJECT_PATH = "";
 }
 
+
+SPtrShared<Level> Level::DefaultEmptyLevel()
+{
+  SPtrShared<Level> lvl = std::make_shared<Level>();
+  
+  return lvl;
+}
+
 Level::Level(const sf::Vector2u &LevelSize, const sf::FloatRect &DefaultView, bool showlines, const sf::Vector2f &GridSpacing)
   : 
   BasicLevel(LevelSize, DefaultView, showlines, GridSpacing)
@@ -53,6 +61,14 @@ Level::Level(const sf::Vector2u &LevelSize, const sf::FloatRect &DefaultView, bo
   CurrentLevel = this;
   Handler.BindCallback(Events::KeyPressed, [this](const sf::Keyboard::Key &k) -> void { this->HandleKeyPress(k); });
   Handler.BindCallback(Events::KeyReleased, [this](const sf::Keyboard::Key &k) ->void { this->HandleKeyRelease(k); });
+}
+
+
+Level::Level()
+{
+  /*
+   *  Default
+   **/
 }
 
 Level::~Level()
@@ -383,12 +399,9 @@ void Level::LoadAnimations(const Json::Value & value)
 
     auto tex = it->second;
     Animations[name] = std::make_shared<Animation>();
-    EditorGraphAnimations[name] = std::make_shared<Animation>();
 
     Animations[name]->SetSpriteSheet(tex, "Anim" + name + "sheet");
-    EditorGraphAnimations[name]->SetSpriteSheet(tex, "AssetGraph" + name + "sheet");
     Animations[name]->SetFrameTime(time);
-    EditorGraphAnimations[name]->SetFrameTime(time);
 
     std::vector<sf::IntRect> Frames = {};
     auto frames = anim["Frames"];
@@ -401,12 +414,9 @@ void Level::LoadAnimations(const Json::Value & value)
       framerect.height = frame[3].asInt();
 
       Animations[name]->AddFrame(framerect);
-      EditorGraphAnimations[name]->AddFrame(framerect);
     }
 
     Animations[name]->MakePingPong(bPingPong);
-    EditorGraphAnimations[name]->MakePingPong(bPingPong);
     Animations[name]->MakeLooped(looping);
-    EditorGraphAnimations[name]->MakeLooped(looping);
   }
 }

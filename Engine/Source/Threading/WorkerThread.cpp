@@ -28,4 +28,68 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Level\BasicLevel.h"
+#include "WorkerThread.h"
+
+
+WorkerThread::WorkerThread()
+  : m_CondVar(std::make_shared<std::condition_variable>())
+{
+
+}
+
+WorkerThread::~WorkerThread()
+{
+
+}
+
+std::future<int> WorkerThread::Run()
+{
+  auto fut = m_RetVal.get_future();
+
+  m_Thread = std::thread(
+    [this]()
+  {
+    RunPriv();
+  }
+  );
+
+  return fut;
+}
+
+void WorkerThread::RequestStop()
+{
+  m_ShouldStop = true;
+}
+
+void WorkerThread::Stop()
+{
+  if (m_Thread.joinable())
+  {
+    m_Thread.join();
+  }
+
+  m_RetVal.get_future().wait();
+}
+
+void WorkerThread::RequestThrottle()
+{
+  m_WaitThrottleTime *= 1.5;
+}
+
+int WorkerThread::DoWork()
+{
+  return -1;
+}
+
+void WorkerThread::RunPriv()
+{
+  try
+  {
+    int ret = DoWork();
+    m_RetVal.set_value(ret);
+  }
+  catch (const std::exception &)
+  {
+    m_RetVal.set_value(-1);
+  }
+}

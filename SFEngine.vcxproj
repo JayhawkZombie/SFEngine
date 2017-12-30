@@ -101,11 +101,17 @@
     <ClCompile Include="Engine\Source\Streams\DataStream.cpp" />
     <ClCompile Include="Engine\Source\Threading\ASyncLoader.cpp" />
     <ClCompile Include="Engine\Source\Threading\ASyncLoadThread.cpp" />
+    <ClCompile Include="Engine\Source\Threading\ThreadSafe.cpp" />
+    <ClCompile Include="Engine\Source\Threading\WorkerThread.cpp" />
     <ClCompile Include="Engine\Source\Tiles\LevelTile.cpp" />
     <ClCompile Include="Engine\Source\Tiles\TileGrid.cpp" />
     <ClCompile Include="Engine\Source\Tiles\TileSheet.cpp" />
     <ClCompile Include="Engine\Source\Tiles\TMXMap.cpp" />
+    <ClCompile Include="Engine\Source\Time\RealTimeClock.cpp" />
     <ClCompile Include="Engine\Source\Time\TimedSequence.cpp" />
+    <ClCompile Include="Engine\Source\Time\Timer.cpp" />
+    <ClCompile Include="Engine\Source\Time\TimerManager.cpp" />
+    <ClCompile Include="Engine\Source\Time\TimeStep.cpp" />
     <ClCompile Include="Engine\Source\UI\UIIconSheet.cpp" />
     <ClCompile Include="Engine\Source\Utils\AssetConverters.cpp" />
     <ClCompile Include="Engine\Source\Utils\CacheIni.cpp" />
@@ -198,23 +204,6 @@
     <ClCompile Include="Game\Tile.cpp" />
     <ClCompile Include="Game\Useable.cpp" />
     <ClCompile Include="Game\Weapon.cpp" />
-    <ClCompile Include="Projects\PuzzleDemo\Classes\Level1.cpp" />
-    <ClCompile Include="Projects\PuzzleDemo\Classes\Levels\AITest.cpp" />
-    <ClCompile Include="Projects\PuzzleDemo\Classes\Levels\DemoLoader.cpp" />
-    <ClCompile Include="Projects\PuzzleDemo\Classes\Levels\PhysicsDemo.cpp" />
-    <ClCompile Include="Projects\PuzzleDemo\Classes\Levels\Stack.cpp" />
-    <ClCompile Include="Projects\PuzzleDemo\Classes\LoadingScreen.cpp" />
-    <ClCompile Include="Projects\PuzzleDemo\Classes\Objects\Flippable.cpp" />
-    <ClCompile Include="Projects\PuzzleDemo\Classes\Objects\Gem.cpp" />
-    <ClCompile Include="Projects\PuzzleDemo\Classes\Objects\Lightning_C.cpp" />
-    <ClCompile Include="Projects\PuzzleDemo\Classes\Objects\LoadingBar.cpp" />
-    <ClCompile Include="Projects\PuzzleDemo\Classes\Objects\LoadingRing.cpp" />
-    <ClCompile Include="Projects\PuzzleDemo\Classes\Objects\PuzzleBall.cpp" />
-    <ClCompile Include="Projects\PuzzleDemo\Classes\StartupLevel.cpp" />
-    <ClCompile Include="Projects\TestProject\Classes\Levels\OakTree.cpp" />
-    <ClCompile Include="Projects\TestProject\Classes\Levels\OakTreeChurchInterior.cpp" />
-    <ClCompile Include="Projects\TestProject\Classes\Menus\MainMenu.cpp" />
-    <ClCompile Include="Projects\TestProject\Classes\ObjectGrid.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\EngineRequirements.h" />
@@ -295,11 +284,17 @@
     <ClInclude Include="Engine\Source\State\State.h" />
     <ClInclude Include="Engine\Source\Streams\DataStream.h" />
     <ClInclude Include="Engine\Source\Threading\ASyncLoader.h" />
+    <ClInclude Include="Engine\Source\Threading\ThreadSafe.h" />
+    <ClInclude Include="Engine\Source\Threading\WorkerThread.h" />
     <ClInclude Include="Engine\Source\Tiles\LevelTile.h" />
     <ClInclude Include="Engine\Source\Tiles\TileGrid.h" />
     <ClInclude Include="Engine\Source\Tiles\TileSheet.h" />
     <ClInclude Include="Engine\Source\Tiles\TMXMap.h" />
+    <ClInclude Include="Engine\Source\Time\RealTimeClock.h" />
     <ClInclude Include="Engine\Source\Time\TimedSequence.h" />
+    <ClInclude Include="Engine\Source\Time\Timer.h" />
+    <ClInclude Include="Engine\Source\Time\TimerManager.h" />
+    <ClInclude Include="Engine\Source\Time\TimeStep.h" />
     <ClInclude Include="Engine\Source\UI\UIIconSheet.h" />
     <ClInclude Include="Engine\Source\UI\UIMacros.h" />
     <ClInclude Include="Engine\Source\Utils\AssetConverters.h" />
@@ -540,24 +535,6 @@
     <ClInclude Include="Game\Tile.h" />
     <ClInclude Include="Game\Useable.h" />
     <ClInclude Include="Game\Weapon.h" />
-    <ClInclude Include="Projects\PuzzleDemo\Classes\Level1.h" />
-    <ClInclude Include="Projects\PuzzleDemo\Classes\Levels\AITest.h" />
-    <ClInclude Include="Projects\PuzzleDemo\Classes\Levels\DemoLoader.h" />
-    <ClInclude Include="Projects\PuzzleDemo\Classes\Levels\PhysicsDemo.h" />
-    <ClInclude Include="Projects\PuzzleDemo\Classes\Levels\Stack.h" />
-    <ClInclude Include="Projects\PuzzleDemo\Classes\LoadingScreen.h" />
-    <ClInclude Include="Projects\PuzzleDemo\Classes\Objects\Flippable.h" />
-    <ClInclude Include="Projects\PuzzleDemo\Classes\Objects\Gem.h" />
-    <ClInclude Include="Projects\PuzzleDemo\Classes\Objects\Lightning_C.h" />
-    <ClInclude Include="Projects\PuzzleDemo\Classes\Objects\LoadingBar.h" />
-    <ClInclude Include="Projects\PuzzleDemo\Classes\Objects\LoadingRing.h" />
-    <ClInclude Include="Projects\PuzzleDemo\Classes\Objects\PuzzleBall.h" />
-    <ClInclude Include="Projects\PuzzleDemo\Classes\StartupLevel.h" />
-    <ClInclude Include="Projects\TestProject\Classes\Levels\OakTree.h" />
-    <ClInclude Include="Projects\TestProject\Classes\Levels\OakTreeChurchInterior.h" />
-    <ClInclude Include="Projects\TestProject\Classes\Menus\MainMenu.h" />
-    <ClInclude Include="Projects\TestProject\Classes\Menus\TopDownLevel.h" />
-    <ClInclude Include="Projects\TestProject\Classes\ObjectGrid.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\Source\Streams\DataStream.inl" />
@@ -639,13 +616,14 @@
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <AdditionalOptions>/std:c++14 /volatile:iso /bigobj %(AdditionalOptions)</AdditionalOptions>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
-      <DisableSpecificWarnings>4305; 4800;4100;4055;4054;4189;</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4305; 4800;4100;4055;4054;4189;4984;</DisableSpecificWarnings>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
       <OpenMPSupport>true</OpenMPSupport>
       <PrecompiledHeaderFile>Engine/stdafx.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>Engine/stdafx.h</ForcedIncludeFiles>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

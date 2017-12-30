@@ -49,7 +49,7 @@ void Level::RenderOnTexture(std::shared_ptr<sf::RenderTexture> Texture)
   //If we are using the editor, draw the meshes too
   //Make this configurable later
 #ifdef WITH_EDITOR
-  BasicLevel::RenderEditorUI(Texture);
+  
 #endif
 }
 

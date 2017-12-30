@@ -38,9 +38,7 @@ void Level::TickUpdate(const double &delta)
   cumulative += delta;
 
 #ifdef WITH_EDITOR
-  //Update editor related objects
-  for (auto & anim : EditorGraphAnimations)
-    anim.second->TickUpdate(delta);
+
 #endif
   TileMap->update(lvlData, 20);
   //Only want to update the physics 60 times per second, since it does not time itself ((((UGH))))
@@ -62,8 +60,6 @@ void Level::TickUpdate(const double &delta)
   }
 
 #ifdef WITH_EDITOR
-
-  BasicLevel::UpdateEditorUI(delta);
 
 #endif
 

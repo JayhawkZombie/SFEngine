@@ -28,4 +28,52 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Level\BasicLevel.h"
+#include "RealTimeClock.h"
+
+
+RealTimeClock::RealTimeClock()
+  : m_StartTime(std::chrono::steady_clock::now())
+{
+
+}
+
+void RealTimeClock::Pause()
+{
+  m_IsPaused = true;
+  m_PauseTime = std::chrono::steady_clock::now();
+}
+
+void RealTimeClock::Resume()
+{
+  m_IsPaused = false;
+  m_StartTime += (std::chrono::steady_clock::now() - m_PauseTime);
+}
+
+void RealTimeClock::Restart()
+{
+  m_IsPaused = false;
+  m_StartTime = std::chrono::steady_clock::now();
+}
+
+TimePoint RealTimeClock::GetTime()
+{
+  return std::chrono::steady_clock::now();
+}
+
+double RealTimeClock::GetTimeSinceStart()
+{
+  std::chrono::duration<double, std::chrono::seconds::period> elapsed =
+    std::chrono::duration_cast< std::chrono::duration<double, std::chrono::seconds::period > >
+    (std::chrono::steady_clock::now() - m_StartTime);
+
+  return elapsed.count();
+}
+
+double RealTimeClock::GetTimeSince(const TimePoint &tp)
+{
+  std::chrono::duration<double, std::chrono::seconds::period> elapsed =
+    std::chrono::duration_cast< std::chrono::duration<double, std::chrono::seconds::period > >
+    (std::chrono::steady_clock::now() - tp);
+
+  return elapsed.count();
+}

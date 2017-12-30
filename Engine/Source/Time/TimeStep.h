@@ -1,3 +1,5 @@
+#pragma once
+
 ////////////////////////////////////////////////////////////
 //
 // MIT License
@@ -28,4 +30,36 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Level\BasicLevel.h"
+#include "RealTimeClock.h"
+
+class TimeStep
+{
+public:
+  TimeStep() = default;
+  TimeStep(const TimeStep &) = default;
+  TimeStep(TimeStep &&) = default;
+  ~TimeStep() = default;
+
+  void Update();
+  void Start();
+  void Pause();
+  void Resume();
+  void Clear();
+  void SetStep(double step);
+  void SetMaxAccumulation(double maxAccum);
+
+  double GetStep() const;
+  double GetAlpha() const;
+
+  bool ShouldStep();
+
+private:
+
+  double m_Accumulation;
+  double m_MaxAccumulation;
+  double m_StepDuration;
+  
+  TimePoint m_LastTickTime;
+
+  RealTimeClock m_Clock;
+};

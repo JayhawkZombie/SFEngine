@@ -28,4 +28,40 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Level\BasicLevel.h"
+#include "ThreadSafe.h"
+
+
+ThreadSafe::ThreadSafe()
+  : m_MutexPtr(std::make_shared<std::mutex>())
+{
+
+}
+
+ThreadSafe::~ThreadSafe()
+{
+  /*
+   *  Release mutex if still locked
+   **/
+  if (m_MutexPtr)
+    m_MutexPtr->unlock();
+
+  m_MutexPtr.reset();
+}
+
+bool ThreadSafe::TryLock()
+{
+  return (m_MutexPtr && m_MutexPtr->try_lock());
+}
+
+bool ThreadSafe::Lock()
+{
+  return (m_MutexPtr && m_MutexPtr->try_lock());
+}
+
+void ThreadSafe::Unlock()
+{
+  if (m_MutexPtr)
+  {
+    m_MutexPtr->unlock();
+  }
+}

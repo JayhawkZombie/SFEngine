@@ -73,7 +73,9 @@ public:
   friend class GameMain;
   TYPEDEF_PARENT_CLASS(BasicLevel);
 
-  Level() = delete;
+  static SPtrShared<Level> DefaultEmptyLevel();
+
+  Level();
   Level(const sf::Vector2u &LevelSize, const sf::FloatRect &DefaultView, bool showlines = false, const sf::Vector2f &GridSpacing = { 0,0 });
   Level(const Level &) = delete;
   Level(const BaseEngineInterface &Copy) = delete;

@@ -540,61 +540,28 @@
     <ClCompile Include="Game\Weapon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Projects\PuzzleDemo\Classes\Levels\AITest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Projects\PuzzleDemo\Classes\Levels\DemoLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Projects\PuzzleDemo\Classes\Levels\PhysicsDemo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Projects\PuzzleDemo\Classes\Levels\Stack.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Projects\PuzzleDemo\Classes\Objects\Flippable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Projects\PuzzleDemo\Classes\Objects\Gem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Projects\PuzzleDemo\Classes\Objects\Lightning_C.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Projects\PuzzleDemo\Classes\Objects\LoadingBar.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Projects\PuzzleDemo\Classes\Objects\LoadingRing.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Projects\PuzzleDemo\Classes\Objects\PuzzleBall.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Projects\PuzzleDemo\Classes\Level1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Projects\PuzzleDemo\Classes\LoadingScreen.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Projects\PuzzleDemo\Classes\StartupLevel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Projects\TestProject\Classes\Levels\OakTree.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Projects\TestProject\Classes\Levels\OakTreeChurchInterior.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Projects\TestProject\Classes\Menus\MainMenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Projects\TestProject\Classes\ObjectGrid.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Source\Parsing\IniParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\Utils\Filereader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Time\TimeStep.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Time\TimerManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Time\RealTimeClock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Time\Timer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Threading\ThreadSafe.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Threading\WorkerThread.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1565,61 +1532,25 @@
     <ClInclude Include="Game\Weapon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Projects\PuzzleDemo\Classes\Levels\AITest.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Projects\PuzzleDemo\Classes\Levels\DemoLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Projects\PuzzleDemo\Classes\Levels\PhysicsDemo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Projects\PuzzleDemo\Classes\Levels\Stack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Projects\PuzzleDemo\Classes\Objects\Flippable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Projects\PuzzleDemo\Classes\Objects\Gem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Projects\PuzzleDemo\Classes\Objects\Lightning_C.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Projects\PuzzleDemo\Classes\Objects\LoadingBar.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Projects\PuzzleDemo\Classes\Objects\LoadingRing.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Projects\PuzzleDemo\Classes\Objects\PuzzleBall.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Projects\PuzzleDemo\Classes\Level1.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Projects\PuzzleDemo\Classes\LoadingScreen.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Projects\PuzzleDemo\Classes\StartupLevel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Projects\TestProject\Classes\Levels\OakTree.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Projects\TestProject\Classes\Levels\OakTreeChurchInterior.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Projects\TestProject\Classes\Menus\MainMenu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Projects\TestProject\Classes\Menus\TopDownLevel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Projects\TestProject\Classes\ObjectGrid.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Source\Utils\Filereader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Time\Timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Time\TimeStep.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Time\TimerManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Time\RealTimeClock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Threading\ThreadSafe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Threading\WorkerThread.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

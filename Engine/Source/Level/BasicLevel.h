@@ -49,7 +49,7 @@ class WeatherEvent;
 class BasicLevel : public BaseEngineInterface
 {
 public:
-  BasicLevel() = delete;
+  BasicLevel() = default;
 
   //Oh gawd no please don't every try this
   BasicLevel(const BasicLevel &) = delete;
@@ -125,23 +125,7 @@ public:
 
   virtual std::string GetClass() const override;
 #ifdef WITH_EDITOR
-  static void UpdateEditorUI(const double &delta);
-  static void RenderEditorUI(std::shared_ptr<sf::RenderTexture> Target);
-    
-  void ShowObjectProperties(std::shared_ptr<LevelObject> Object);
-  void ShowSceneGraph();
-  void ShowAssetGraph();
-  void ShowGraphicalSettings();
-  void ShowAnimationEditor(const std::string &name);
-  void ShowSpawner();
-  void ShowPhysicsSpawner();
-  void ShowScene(std::shared_ptr<sf::RenderTexture> Texture);
-  void ShowAssetEditor();
-  void ShowNewAssetMaker(); void ShowExistingAssetEditor();
-  std::map<std::string, sf::RectangleShape> TextureRectsForAssetGraph;
-  std::map<std::string, std::shared_ptr<Animation>> EditorGraphAnimations;
 
-  bool m_HideEditor = false;
 #endif
 
   virtual void SpawnBall

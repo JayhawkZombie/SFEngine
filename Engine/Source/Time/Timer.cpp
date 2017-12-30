@@ -28,4 +28,10 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Level\BasicLevel.h"
+#include "Engine/stdafx.h"
+#include "Timer.h"
+
+bool operator<(const Timer & t1, const Timer & t2)
+{
+  return (t1.ExpirationTime < t2.ExpirationTime);
+}

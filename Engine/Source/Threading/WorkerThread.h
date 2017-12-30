@@ -1,3 +1,5 @@
+#pragma once
+
 ////////////////////////////////////////////////////////////
 //
 // MIT License
@@ -28,4 +30,36 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Level\BasicLevel.h"
+enum class EThreadStatus
+{
+  AwaitingLaunch,
+  Running,
+  Stopped
+};
+
+class WorkerThread
+{
+public:
+  WorkerThread();
+  virtual ~WorkerThread();
+
+  std::future<int> Run();
+  void RequestStop();
+  void Stop();
+  void RequestThrottle();
+
+protected:
+
+  virtual int DoWork();
+
+private:
+
+  void RunPriv();
+
+  std::promise<int> m_RetVal;
+  std::thread m_Thread;
+  std::shared_ptr<std::condition_variable> m_CondVar;
+  std::chrono::milliseconds m_WaitThrottleTime = std::chrono::milliseconds(0);
+  std::atomic<EThreadStatus> m_Status = EThreadStatus::AwaitingLaunch;
+  std::atomic_bool m_ShouldStop;
+};

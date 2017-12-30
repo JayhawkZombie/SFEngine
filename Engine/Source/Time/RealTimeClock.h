@@ -1,3 +1,5 @@
+#pragma once
+
 ////////////////////////////////////////////////////////////
 //
 // MIT License
@@ -28,4 +30,27 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Level\BasicLevel.h"
+using TimePoint = std::chrono::steady_clock::time_point;
+
+#include <boost/accumulators/accumulators.hpp>
+
+class RealTimeClock
+{
+public:
+  RealTimeClock();
+
+  void Pause();
+  void Resume();
+  void Restart();
+  TimePoint GetTime();
+  double GetTimeSinceStart();
+  double GetTimeSince(const TimePoint &tp);
+
+private:
+
+  bool m_IsPaused = false;
+
+  TimePoint m_StartTime;
+  TimePoint m_PauseTime;
+
+};

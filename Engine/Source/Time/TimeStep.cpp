@@ -28,4 +28,79 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Level\BasicLevel.h"
+#include "TimeStep.h"
+
+
+void TimeStep::Update()
+{
+  TimePoint thisTick = m_Clock.GetTime();
+
+  double delta = std::chrono::duration_cast< std::chrono::duration<double, std::chrono::seconds::period > >
+    (thisTick - m_LastTickTime).count();
+
+  if (delta > m_StepDuration)
+  {
+    m_Accumulation += m_StepDuration;
+  }
+  else
+  {
+    m_Accumulation += delta;
+  }
+
+  m_LastTickTime = thisTick;
+}
+
+void TimeStep::Start()
+{
+  m_Clock.Restart();
+  m_LastTickTime = m_Clock.GetTime();
+}
+
+void TimeStep::Pause()
+{
+  m_Clock.Pause();
+}
+
+void TimeStep::Resume()
+{
+  m_Clock.Resume();
+}
+
+void TimeStep::Clear()
+{
+  m_Accumulation = 0.0;
+}
+
+void TimeStep::SetStep(double step)
+{
+  m_StepDuration = step;
+}
+
+void TimeStep::SetMaxAccumulation(double maxAccum)
+{
+  m_MaxAccumulation = maxAccum;
+}
+
+double TimeStep::GetStep() const
+{
+  return m_StepDuration;
+}
+
+double TimeStep::GetAlpha() const
+{
+  if (m_Accumulation >= m_StepDuration)
+    return 1.0;
+
+  return (m_Accumulation / m_StepDuration);
+}
+
+bool TimeStep::ShouldStep()
+{
+  if (m_Accumulation >= m_StepDuration)
+  {
+    m_Accumulation -= m_StepDuration;
+    return true;
+  }
+
+  return false;
+}
