@@ -1,3 +1,5 @@
+#pragma once
+
 ////////////////////////////////////////////////////////////
 //
 // MIT License
@@ -28,33 +30,6 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "EncodingTests.h"
+#include "Jinx/Jinx.h"
 
-void TestEncoding()
-{
-  std::string source(R"(
-    import core
-
-    set player health to 100
-    set player stamina to 100
-  )");
-
-
-  {
-    std::cout << "** Encoding Tests\n\n";
-    
-    std::string encoded;
-    std::string decoded;
-
-    std::cout << "Original: \"" << source << "\"\n\n";
-
-    bn::encode_b64(source.begin(), source.end(), std::back_inserter(encoded));
-
-    std::cout << "Encoded: \"" << encoded << "\"\n\n";
-
-    bn::decode_b64(encoded.begin(), encoded.end(), std::back_inserter(decoded));
-
-    std::cout << "Decoded: \"" << decoded << "\"\n\n";
-  }
-
-}
+extern void RunScriptingTests();

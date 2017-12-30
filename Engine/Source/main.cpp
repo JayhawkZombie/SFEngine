@@ -122,10 +122,14 @@
 #endif
 
 #include "Tests\Encoding\EncodingTests.h"
+#include "Tests\Scripting\ScriptingTests.h"
+#include "Tests\Serialization\ScriptSerializationTests.h"
 
 int main(int argc, char **argv)
 {
-  TestEncoding();
+  //TestEncoding();
+  //RunScriptingTests();
+  RunScriptSerializationTests();
 
   SFEngine GameEngine;
   return (GameEngine.Go(argc, argv));

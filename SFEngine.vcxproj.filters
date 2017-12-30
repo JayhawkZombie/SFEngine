@@ -498,6 +498,12 @@
     <ClCompile Include="Engine\Tests\Encoding\EncodingTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Tests\Scripting\ScriptingTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Tests\Serialization\ScriptSerializationTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Source\Actor\Actor.h">
@@ -1290,6 +1296,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Tests\Encoding\EncodingTests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Tests\Scripting\ScriptingTests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Tests\Serialization\ScriptSerializationTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

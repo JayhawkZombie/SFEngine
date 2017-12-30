@@ -119,6 +119,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Engine\Tests\Encoding\EncodingTests.cpp" />
+    <ClCompile Include="Engine\Tests\Scripting\ScriptingTests.cpp" />
+    <ClCompile Include="Engine\Tests\Serialization\ScriptSerializationTests.cpp" />
     <ClCompile Include="Engine\ThirdParty\IMGUI\imgui-SFML.cpp" />
     <ClCompile Include="Engine\ThirdParty\IMGUI\imgui.cpp" />
     <ClCompile Include="Engine\ThirdParty\IMGUI\imgui_demo.cpp" />
@@ -285,6 +287,8 @@
     <ClInclude Include="Engine\Source\WindowsDefs.h" />
     <ClInclude Include="Engine\stdafx.h" />
     <ClInclude Include="Engine\Tests\Encoding\EncodingTests.h" />
+    <ClInclude Include="Engine\Tests\Scripting\ScriptingTests.h" />
+    <ClInclude Include="Engine\Tests\Serialization\ScriptSerializationTests.h" />
     <ClInclude Include="Engine\ThirdParty\basen\basen.hpp" />
     <ClInclude Include="Engine\ThirdParty\cereal\access.hpp" />
     <ClInclude Include="Engine\ThirdParty\cereal\archives\adapters.hpp" />
