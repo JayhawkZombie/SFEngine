@@ -32,8 +32,6 @@
 #include "Resources\ResourceManager.h"
 #include "Messaging\CoreMessager.h"
 
-#include "chaiscript\chaiscript.hpp"
-
 UINT32 SFEngine::Shutdown()
 {
   ImGui::SFML::Shutdown();
@@ -54,11 +52,6 @@ UINT32 SFEngine::Shutdown()
 
   delete FragmentShader;
   delete VertexShader;
-
-  //Destroy the scripting engine
-  if (ScriptEngine) {
-    delete ScriptEngine;
-  }
 
   ASyncLevelStreamThread::Shutdown();
   LevelsLock.reset();

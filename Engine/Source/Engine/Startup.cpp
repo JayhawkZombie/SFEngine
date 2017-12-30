@@ -29,9 +29,6 @@
 ////////////////////////////////////////////////////////////
 
 #include "Engine\Engine.h"
-#include "chaiscript\chaiscript_defines.hpp"
-#include "chaiscript\chaiscript.hpp"
-#include "chaiscript\chaiscript_stdlib.hpp"
 
 #include "Level\Level.h"
 
@@ -181,14 +178,14 @@ UINT32 SFEngine::Startup()
   Window->draw(EngineLoadingText);
   Window->display();
 
-  ScriptEngine = new chaiscript::ChaiScript({}, { "./Projects/TestProject/Scripts/",
-                                                  "./Projects/PuzzleDemo/Assets/Scripts/" }, 
-                                                  { chaiscript::Options::External_Scripts, chaiscript::Options::Load_Modules }
-                                            );
-
-  //Add the engine class to the script engine
-  chaiscript::ModulePtr __mptr(new chaiscript::Module);
-  GenericActor::BindScriptMethods(__mptr);
+  //ScriptEngine = new chaiscript::ChaiScript({}, { "./Projects/TestProject/Scripts/",
+  //                                                "./Projects/PuzzleDemo/Assets/Scripts/" }, 
+  //                                                { }
+  //                                          );
+  //
+  ////Add the engine class to the script engine
+  //chaiscript::ModulePtr __mptr(new chaiscript::Module);
+  //GenericActor::BindScriptMethods(__mptr);
 
   //Bind the exposed engine apis to chaiscript
   EngineLoadingText.setString("Binding APIs to Chaiscript...");
@@ -210,7 +207,6 @@ UINT32 SFEngine::Startup()
 
   if (ret)
   {
-    delete ScriptEngine;
     ret = Shutdown();
   }
 

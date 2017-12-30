@@ -59,7 +59,6 @@
 #include "UI\UIMacros.h"
 #include "Messaging\CoreMessager.h"
 
-#include "chaiscript\chaiscript.hpp"
 #include "ThirdParty/IMGUI\imgui.h"
 #include "ThirdParty/IMGUI\imgui-SFML.h"
 #include "ThirdParty/cereal\cereal.hpp"
@@ -324,7 +323,6 @@ class UserEvent;
 class InputDeviceState;
 
 extern DataStream<UserEvent> EngineEventStream;
-extern chaiscript::ChaiScript *ScriptEngine;
 extern InputDeviceState InputState;
 
 #ifdef WITH_EDITOR

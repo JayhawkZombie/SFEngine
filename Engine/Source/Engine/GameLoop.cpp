@@ -31,10 +31,6 @@
 #include "Engine\Engine.h"
 #include "Lights\LightingSystem.h"
 
-#include "chaiscript\chaiscript.hpp"
-#include "chaiscript\chaiscript_defines.hpp"
-#include "chaiscript\chaiscript_stdlib.hpp"
-
 #ifdef WITH_EDITOR
 #include "IMGUI\imgui_internal.h"
 #endif
@@ -85,7 +81,7 @@ UINT32 SFEngine::GameLoop()
   Window->setKeyRepeatEnabled(false);
   bool Closed = false;
 
-  ScriptEngine->add(chaiscript::fun(func), "func");
+  //ScriptEngine->add(chaiscript::fun(func), "func");
 
 #ifdef WITH_EDITOR
   sf::Clock dClock;
@@ -170,7 +166,7 @@ UINT32 SFEngine::GameLoop()
   LevelRect.setTexture(&(EditorTexture->getTexture()));
   LevelRect.setTextureRect({ 0, 0, 1700, 900 });
 
-  ScriptEngine->eval_file("./Projects/TestProject/Scripts/main.chai");
+  //ScriptEngine->eval_file("./Projects/TestProject/Scripts/main.chai");
 
   //There should already have been a Main level loaded in Startup
   auto it = Levels.find("Main");
@@ -230,9 +226,9 @@ UINT32 SFEngine::GameLoop()
       RenderEnd = std::chrono::high_resolution_clock::now();
       LastFrameStart = CurrentFrameStart;
     }
-    catch (chaiscript::exception::eval_error &e)
+    catch (/*chaiscript::exception::eval_error &e*/ std::runtime_error &err )
     {
-      std::cerr << "Script execution error in runtime: " << e.what() << std::endl;
+      std::cerr << "Error during runtime: " << err.what() << std::endl;
     }
 
   }

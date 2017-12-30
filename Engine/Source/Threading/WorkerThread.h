@@ -30,6 +30,11 @@
 //
 ////////////////////////////////////////////////////////////
 
+#include <atomic>
+#include <future>
+#include <thread>
+#include <condition_variable>
+
 enum class EThreadStatus
 {
   AwaitingLaunch,

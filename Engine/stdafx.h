@@ -44,7 +44,6 @@
 
 #include <TGUI/TGUI.hpp>
 #include <SFML/Graphics.hpp>
-#include <chaiscript/chaiscript.hpp>
 
 #include <cereal/access.hpp>
 #include <cereal/cereal.hpp>
@@ -68,3 +67,6 @@
 #include <cereal/types/valarray.hpp>
 #include <cereal/types/vector.hpp>
 #include <cereal/archives/binary.hpp>
+
+#include <codecvt>
+#include <locale>

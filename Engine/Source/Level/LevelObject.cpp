@@ -33,8 +33,6 @@
 #include "Physics\Collider.h"
 #include "Physics\Occluder.h"
 
-#include "chaiscript\chaiscript.hpp"
-
 LevelObject::LevelObject()
   :
   m_Animator(m_AnimationMap)
@@ -82,16 +80,7 @@ std::shared_ptr<BaseEngineInterface> LevelObject::Clone() const
 //Starting the chaiscript bindings, need to figure out which functions need scripted
 void LevelObject::BindScriptMethods(chaiscript::ModulePtr mptr)
 {
-	chaiscript::utility::add_class<LevelObject>(
-		*mptr,
-		"LevelObject",
-		{ 
-			chaiscript::constructor<LevelObject()>() },
-			{ 
-        { chaiscript::fun(static_cast<void(LevelObject::*)(void)>(&LevelObject::OnKilled)), "OnKilled" },
-        { chaiscript::fun(static_cast<void(LevelObject::*)(const sf::Vector2f &)>(&LevelObject::MoveObject)), "MoveObject" }
-      }
-	);
+	
 }
 
 void LevelObject::ScriptInit()

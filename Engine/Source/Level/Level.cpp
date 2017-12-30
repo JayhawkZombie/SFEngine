@@ -33,7 +33,6 @@
 #include "Physics\Collider.h"
 
 #include "json\json.h"
-#include "chaiscript\chaiscript.hpp"
 
 namespace
 {
@@ -92,7 +91,7 @@ Level::~Level()
 
 void Level::BindMethods(chaiscript::ModulePtr mptr)
 {
-  mptr->add(chaiscript::fun(&GetObjectByName), "GetObjectByID");
+  
 }
 
 void Level::HandleInputEvent(const UserEvent & evnt)

@@ -33,9 +33,7 @@
 #include <unordered_set>
 #include <unordered_map>
 #include "ComponentBase.h"
-#include "chaiscript/chaiscript.hpp"
 
-typedef std::function<void(chaiscript::Boxed_Value&)> ScriptFunc;
 class LevelObject;
 
 class ScriptComponent : protected ComponentBase
@@ -48,10 +46,6 @@ public:
   void Create();
   void CreateScriptFunction(const std::string &funcName, const std::string &signature);
 protected:
-  chaiscript::Boxed_Value ComponentInstance;
+  
   std::string ComponentClassName;
-
-  //Map the method name to a set containing the types of the arguments to be provided
-  //  Empty set -> no arguments
-  std::unordered_map<std::string, ScriptFunc> ComponentFunctions;
 };

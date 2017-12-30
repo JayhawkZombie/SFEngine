@@ -30,7 +30,6 @@
 
 #include "Components/ScriptComponent.h"
 #include "Globals/GlobalHooks.h"
-#include "chaiscript/chaiscript.hpp"
 #include "Level/LevelObject.h"
 
 inline std::string arglist(const std::vector<std::string> &args) {
@@ -63,28 +62,15 @@ ScriptComponent::~ScriptComponent()
 
 void ScriptComponent::Execute(const std::string &command, const std::vector<std::string> &args)
 {
-  try
-  {
-    auto it = ComponentFunctions.find(command);
-    if (it != ComponentFunctions.end()) {
-      auto func = (*it).second;
-
-      func(ComponentInstance);
-    }
-  }
-  catch (chaiscript::exception::eval_error & err)
-  {
-    std::cerr << "Script evaluation error: " << err.what() << std::endl;
-  }
+  
 }
 
 void ScriptComponent::Create()
 {
-  ComponentInstance = ScriptEngine->eval<chaiscript::Boxed_Value&>(ComponentClassName + "()");
+  
 }
 
 void ScriptComponent::CreateScriptFunction(const std::string &funcName, const std::string &signature)
 {
-  auto func = ScriptEngine->eval<std::function<void(chaiscript::Boxed_Value&)>>(signature);
-  ComponentFunctions[funcName] = func;
+  
 }

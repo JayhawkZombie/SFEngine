@@ -29,15 +29,10 @@
 ////////////////////////////////////////////////////////////
 
 #include "Engine\InputInterface.h"
-#include "chaiscript\chaiscript.hpp"
 
 void InputInterface::BindMethods(chaiscript::ModulePtr mptr)
 {
-  mptr->add(chaiscript::fun(&IsKeyDown), "IsKeyDown");
-  mptr->add(chaiscript::fun(&IsKeyUp), "IsKeyUp");
-  mptr->add(chaiscript::fun(&IsMouseDown), "IsMouseDown");
-  mptr->add(chaiscript::fun(&IsMouseUp), "IsMouseUp");
-  mptr->add(chaiscript::fun(&GetMousePosition), "GetMousePosition");
+
 }
 
 bool InputInterface::IsKeyDown(const sf::Keyboard::Key & key)

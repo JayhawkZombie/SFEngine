@@ -84,6 +84,7 @@
     <ClCompile Include="Engine\Source\Messaging\CoreMessager.cpp" />
     <ClCompile Include="Engine\Source\Objects\Equippable.cpp" />
     <ClCompile Include="Engine\Source\Objects\ProjectileBase.cpp" />
+    <ClCompile Include="Engine\Source\Objects\Property.cpp" />
     <ClCompile Include="Engine\Source\Objects\ShotBase.cpp" />
     <ClCompile Include="Engine\Source\Objects\SpellBase.cpp" />
     <ClCompile Include="Engine\Source\Objects\Static.cpp" />
@@ -138,6 +139,27 @@
     <ClCompile Include="Engine\ThirdParty\IMGUI\imgui.cpp" />
     <ClCompile Include="Engine\ThirdParty\IMGUI\imgui_demo.cpp" />
     <ClCompile Include="Engine\ThirdParty\IMGUI\imgui_draw.cpp" />
+    <ClCompile Include="Engine\ThirdParty\Jinx\JxBuffer.cpp" />
+    <ClCompile Include="Engine\ThirdParty\Jinx\JxCollection.cpp" />
+    <ClCompile Include="Engine\ThirdParty\Jinx\JxCommon.cpp" />
+    <ClCompile Include="Engine\ThirdParty\Jinx\JxConversion.cpp" />
+    <ClCompile Include="Engine\ThirdParty\Jinx\JxFunctionSignature.cpp" />
+    <ClCompile Include="Engine\ThirdParty\Jinx\JxHash.cpp" />
+    <ClCompile Include="Engine\ThirdParty\Jinx\JxLexer.cpp" />
+    <ClCompile Include="Engine\ThirdParty\Jinx\JxLibCore.cpp" />
+    <ClCompile Include="Engine\ThirdParty\Jinx\JxLibrary.cpp" />
+    <ClCompile Include="Engine\ThirdParty\Jinx\JxLogging.cpp" />
+    <ClCompile Include="Engine\ThirdParty\Jinx\JxMemory.cpp" />
+    <ClCompile Include="Engine\ThirdParty\Jinx\JxMutex.cpp" />
+    <ClCompile Include="Engine\ThirdParty\Jinx\JxParser.cpp" />
+    <ClCompile Include="Engine\ThirdParty\Jinx\JxPropertyName.cpp" />
+    <ClCompile Include="Engine\ThirdParty\Jinx\JxRuntime.cpp" />
+    <ClCompile Include="Engine\ThirdParty\Jinx\JxScript.cpp" />
+    <ClCompile Include="Engine\ThirdParty\Jinx\JxSerialize.cpp" />
+    <ClCompile Include="Engine\ThirdParty\Jinx\JxUnicode.cpp" />
+    <ClCompile Include="Engine\ThirdParty\Jinx\JxUnicodeCaseFolding.cpp" />
+    <ClCompile Include="Engine\ThirdParty\Jinx\JxVariableStackFrame.cpp" />
+    <ClCompile Include="Engine\ThirdParty\Jinx\JxVariant.cpp" />
     <ClCompile Include="Engine\ThirdParty\jsoncpp.cpp" />
     <ClCompile Include="Engine\ThirdParty\Physics\arcSeg.cpp" />
     <ClCompile Include="Engine\ThirdParty\Physics\ball.cpp" />
@@ -176,34 +198,6 @@
     <ClCompile Include="Engine\ThirdParty\SelbaWard\Sprite3d.cpp" />
     <ClCompile Include="Engine\ThirdParty\SelbaWard\Starfield.cpp" />
     <ClCompile Include="Engine\ThirdParty\SelbaWard\TileMap.cpp" />
-    <ClCompile Include="Game\Armor.cpp" />
-    <ClCompile Include="Game\Battle.cpp" />
-    <ClCompile Include="Game\BattleActor.cpp" />
-    <ClCompile Include="Game\BestiaryConsole.cpp" />
-    <ClCompile Include="Game\Companion.cpp" />
-    <ClCompile Include="Game\Conversation.cpp" />
-    <ClCompile Include="Game\Damage.cpp" />
-    <ClCompile Include="Game\GameEvents.cpp" />
-    <ClCompile Include="Game\GameMain.cpp" />
-    <ClCompile Include="Game\gametgui\CreateNewConvo.cpp" />
-    <ClCompile Include="Game\gametgui\CreateNewShop.cpp" />
-    <ClCompile Include="Game\HumanActor.cpp" />
-    <ClCompile Include="Game\Inventory.cpp" />
-    <ClCompile Include="Game\ListReader.cpp" />
-    <ClCompile Include="Game\MainCharacter.cpp" />
-    <ClCompile Include="Game\Monster.cpp" />
-    <ClCompile Include="Game\MonsterType.cpp" />
-    <ClCompile Include="Game\Party.cpp" />
-    <ClCompile Include="Game\Reliquary.cpp" />
-    <ClCompile Include="Game\RPGActor.cpp" />
-    <ClCompile Include="Game\RPGItem.cpp" />
-    <ClCompile Include="Game\RPGTest.cpp" />
-    <ClCompile Include="Game\Shop.cpp" />
-    <ClCompile Include="Game\Skill.cpp" />
-    <ClCompile Include="Game\SkillSet.cpp" />
-    <ClCompile Include="Game\Tile.cpp" />
-    <ClCompile Include="Game\Useable.cpp" />
-    <ClCompile Include="Game\Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\EngineRequirements.h" />
@@ -256,6 +250,7 @@
     <ClInclude Include="Engine\Source\Lights\LightObject.h" />
     <ClInclude Include="Engine\Source\Logging\Logger.h" />
     <ClInclude Include="Engine\Source\Messaging\CoreMessager.h" />
+    <ClInclude Include="Engine\Source\Objects\Property.h" />
     <ClInclude Include="Engine\Source\Objects\EffectBase.h" />
     <ClInclude Include="Engine\Source\Objects\Equippable.h" />
     <ClInclude Include="Engine\Source\Objects\FastShot.h" />
@@ -401,53 +396,6 @@
     <ClInclude Include="Engine\ThirdParty\cereal\types\utility.hpp" />
     <ClInclude Include="Engine\ThirdParty\cereal\types\valarray.hpp" />
     <ClInclude Include="Engine\ThirdParty\cereal\types\vector.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\chaiscript.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\chaiscript_basic.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\chaiscript_defines.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\chaiscript_stdlib.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\chaiscript_threading.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\any.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\bad_boxed_cast.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\bind_first.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\bootstrap.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\bootstrap_stl.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\boxed_cast.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\boxed_cast_helper.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\boxed_number.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\boxed_value.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\callable_traits.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\dispatchkit.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\dynamic_object.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\dynamic_object_detail.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\exception_specification.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\function_call.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\function_call_detail.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\handle_return.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\operators.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\proxy_constructors.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\proxy_functions.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\proxy_functions_detail.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\register_function.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\short_alloc.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\type_conversions.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\type_info.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\language\chaiscript_algebraic.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\language\chaiscript_common.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\language\chaiscript_engine.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\language\chaiscript_eval.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\language\chaiscript_optimizer.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\language\chaiscript_parser.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\language\chaiscript_posix.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\language\chaiscript_prelude.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\language\chaiscript_prelude_docs.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\language\chaiscript_tracer.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\language\chaiscript_unknown.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\language\chaiscript_windows.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\utility\fnv1a.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\utility\json.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\utility\json_wrap.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\utility\static_string.hpp" />
-    <ClInclude Include="Engine\ThirdParty\chaiscript\utility\utility.hpp" />
     <ClInclude Include="Engine\ThirdParty\IMGUI\imconfig-SFML.h" />
     <ClInclude Include="Engine\ThirdParty\IMGUI\imconfig.h" />
     <ClInclude Include="Engine\ThirdParty\IMGUI\imgui-SFML.h" />
@@ -456,6 +404,31 @@
     <ClInclude Include="Engine\ThirdParty\IMGUI\stb_rect_pack.h" />
     <ClInclude Include="Engine\ThirdParty\IMGUI\stb_textedit.h" />
     <ClInclude Include="Engine\ThirdParty\IMGUI\stb_truetype.h" />
+    <ClInclude Include="Engine\ThirdParty\Jinx\Jinx.h" />
+    <ClInclude Include="Engine\ThirdParty\Jinx\JxBuffer.h" />
+    <ClInclude Include="Engine\ThirdParty\Jinx\JxCollection.h" />
+    <ClInclude Include="Engine\ThirdParty\Jinx\JxCommon.h" />
+    <ClInclude Include="Engine\ThirdParty\Jinx\JxConversion.h" />
+    <ClInclude Include="Engine\ThirdParty\Jinx\JxFunctionDefinition.h" />
+    <ClInclude Include="Engine\ThirdParty\Jinx\JxFunctionSignature.h" />
+    <ClInclude Include="Engine\ThirdParty\Jinx\JxGuid.h" />
+    <ClInclude Include="Engine\ThirdParty\Jinx\JxHash.h" />
+    <ClInclude Include="Engine\ThirdParty\Jinx\JxInternal.h" />
+    <ClInclude Include="Engine\ThirdParty\Jinx\JxLexer.h" />
+    <ClInclude Include="Engine\ThirdParty\Jinx\JxLibCore.h" />
+    <ClInclude Include="Engine\ThirdParty\Jinx\JxLibrary.h" />
+    <ClInclude Include="Engine\ThirdParty\Jinx\JxLogging.h" />
+    <ClInclude Include="Engine\ThirdParty\Jinx\JxMemory.h" />
+    <ClInclude Include="Engine\ThirdParty\Jinx\JxMutex.h" />
+    <ClInclude Include="Engine\ThirdParty\Jinx\JxParser.h" />
+    <ClInclude Include="Engine\ThirdParty\Jinx\JxPropertyName.h" />
+    <ClInclude Include="Engine\ThirdParty\Jinx\JxRuntime.h" />
+    <ClInclude Include="Engine\ThirdParty\Jinx\JxScript.h" />
+    <ClInclude Include="Engine\ThirdParty\Jinx\JxSerialize.h" />
+    <ClInclude Include="Engine\ThirdParty\Jinx\JxUnicode.h" />
+    <ClInclude Include="Engine\ThirdParty\Jinx\JxUnicodeCaseFolding.h" />
+    <ClInclude Include="Engine\ThirdParty\Jinx\JxVariableStackFrame.h" />
+    <ClInclude Include="Engine\ThirdParty\Jinx\JxVariant.h" />
     <ClInclude Include="Engine\ThirdParty\json\json-forwards.h" />
     <ClInclude Include="Engine\ThirdParty\json\json.h" />
     <ClInclude Include="Engine\ThirdParty\PhysicsEngine.h" />
@@ -506,35 +479,6 @@
     <ClInclude Include="Engine\ThirdParty\SelbaWard\Starfield.hpp" />
     <ClInclude Include="Engine\ThirdParty\SelbaWard\TileMap.hpp" />
     <ClInclude Include="Engine\ThirdParty\UnitTesting\Catch.hpp" />
-    <ClInclude Include="Game\Armor.h" />
-    <ClInclude Include="Game\Battle.h" />
-    <ClInclude Include="Game\BattleActor.h" />
-    <ClInclude Include="Game\BestiaryConsole.h" />
-    <ClInclude Include="Game\Companion.h" />
-    <ClInclude Include="Game\Conversation.h" />
-    <ClInclude Include="Game\Damage.h" />
-    <ClInclude Include="Game\ElementsEnum.h" />
-    <ClInclude Include="Game\GameEvents.h" />
-    <ClInclude Include="Game\GameMain.h" />
-    <ClInclude Include="Game\gametgui\CreateNewConvo.h" />
-    <ClInclude Include="Game\gametgui\CreateNewShop.h" />
-    <ClInclude Include="Game\HumanActor.h" />
-    <ClInclude Include="Game\Inventory.h" />
-    <ClInclude Include="Game\ListReader.h" />
-    <ClInclude Include="Game\MainCharacter.h" />
-    <ClInclude Include="Game\Monster.h" />
-    <ClInclude Include="Game\MonsterType.h" />
-    <ClInclude Include="Game\Party.h" />
-    <ClInclude Include="Game\Reliquary.h" />
-    <ClInclude Include="Game\RPGActor.h" />
-    <ClInclude Include="Game\RPGItem.h" />
-    <ClInclude Include="Game\RPGTest.h" />
-    <ClInclude Include="Game\Shop.h" />
-    <ClInclude Include="Game\Skill.h" />
-    <ClInclude Include="Game\SkillSet.h" />
-    <ClInclude Include="Game\Tile.h" />
-    <ClInclude Include="Game\Useable.h" />
-    <ClInclude Include="Game\Weapon.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\Source\Streams\DataStream.inl" />
@@ -611,10 +555,10 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;SFML_STATIC;TGUI_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;SFML_STATIC;TGUI_STATIC;_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)/Dependencies;$(ProjectDir)/Engine/ThirdParty;$(ProjectDir)/Engine/Source;$(ProjectDir)/Engine;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalOptions>/std:c++14 /volatile:iso /bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/volatile:iso /bigobj %(AdditionalOptions)</AdditionalOptions>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <DisableSpecificWarnings>4305; 4800;4100;4055;4054;4189;4984;</DisableSpecificWarnings>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -623,7 +567,7 @@
       <OpenMPSupport>true</OpenMPSupport>
       <PrecompiledHeaderFile>Engine/stdafx.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>Engine/stdafx.h</ForcedIncludeFiles>
-      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

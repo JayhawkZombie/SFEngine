@@ -29,7 +29,6 @@
 ////////////////////////////////////////////////////////////
 
 #include "Level\BasicLevel.h"
-#include "chaiscript\chaiscript.hpp"
 
 #ifdef WITH_EDITOR
 
