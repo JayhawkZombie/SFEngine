@@ -69,27 +69,6 @@ void GenericActor::BuildAnimations(const std::string & filename, const std::stri
   in.close();
 }
 
-void GenericActor::BindScriptMethods(chaiscript::ModulePtr mptr)
-{
-  ////UGHSDJLGHSD LJHFSDLFHS DLFH SDF
-  ////It's SO UGLY!
-  //chaiscript::utility::add_class<GenericActor>(*mptr, "GenericActor",
-  //{ chaiscript::constructor<GenericActor()>() },
-  //{
-  //  { chaiscript::fun(static_cast<void(GenericActor::*)(const std::string &)>(&GenericActor::SetID)), "SetID" },
-  //  { chaiscript::fun(static_cast<std::string(GenericActor::*)(void) const>(&GenericActor::GetID)), "GetID" },
-  //  { chaiscript::fun(static_cast<const sf::Vector2f &(GenericActor::*)(void) const>(&GenericActor::GetActorPosition)), "GetPosition" },
-  //  { chaiscript::fun(static_cast<void(GenericActor::*)(const sf::Vector2f &)>(&GenericActor::SetActorPosition)), "SetPosition" },
-  //  { chaiscript::fun(static_cast<void(GenericActor::*)(float, float)>(&GenericActor::SetActorPosition)), "SetPosition" },
-  //  { chaiscript::fun(static_cast<void(GenericActor::*)(const std::string &)>(&GenericActor::SetAnimation)), "SetAnimation" },
-  //  { chaiscript::fun(static_cast<void(GenericActor::*)(const sf::Vector2f &)>(&GenericActor::SetActorAcceleration)), "SetAcceleration" },
-  //  { chaiscript::fun(static_cast<void(GenericActor::*)(const sf::Vector2f &)>(&GenericActor::SetActorVelocity)), "SetVelocity" },
-  //  { chaiscript::fun(static_cast<void(GenericActor::*)(const double &)>(&GenericActor::TickUpdate)), "TickUpdate" },
-  //  { chaiscript::fun(static_cast<void(GenericActor::*)(const sf::Vector2f &)>(&GenericActor::MoveObject)), "MoveObject" }
-  //}
-  //);
-}
-
 GenericActor::GenericActor()
 {
   try

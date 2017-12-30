@@ -100,9 +100,9 @@ namespace TMX
     unsigned int tiles_across = (unsigned int)(m_ImageWidth / m_TileWidth);
     unsigned int tiles_high = (unsigned int)(m_ImageHeight / m_TileHeight);
 
-    int left = 0, top = 0;
+    unsigned int left = 0, top = 0;
       
-    int tile_idx = m_FirstGid;
+    unsigned int tile_idx = m_FirstGid;
 
     for (unsigned int i = 0; i < m_TileCount; ++i, ++tile_idx) {
       m_Tiles[tile_idx] = {};
@@ -134,7 +134,7 @@ namespace TMX
       /*
         Then for each tile listen in this array, parse the custom properties
       */
-      for (int i = 0; i < size; ++i) {
+      for (unsigned int i = 0; i < size; ++i) {
         if (JsonDoc["tiles"][i].isMember("animation"))
           ParseAnimatedTile(JsonDoc["tiles"][i], this);
       }
@@ -154,7 +154,7 @@ namespace TMX
     unsigned int duration = 0;
     unsigned int anim_tile_id = 0;
 
-    for (int i = 0; i < frame_count; ++i) {
+    for (unsigned int i = 0; i < frame_count; ++i) {
       duration     = JsonDoc["animation"][i]["duration"].asUInt();
       anim_tile_id = JsonDoc["animation"][i]["tileid"].asUInt();
     }

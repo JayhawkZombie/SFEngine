@@ -40,7 +40,7 @@ public:
   SplinePath(UINT32 PathStyle = SplinePath::Default);
   ~SplinePath() = default;
 
-  static enum Style : UINT32
+  enum Style : UINT32
   {
     Default      = 1,
     Connected    = 2,
@@ -69,7 +69,7 @@ public:
   sf::Vector2f GetNextPathPoint();
 
 protected:
-  int m_CurrentPathPoint = 0;
+  std::size_t m_CurrentPathPoint = 0;
   ::sw::Spline m_Spline;
   sf::PrimitiveType m_SplinePrimitiveType;
   UINT32 m_Style;

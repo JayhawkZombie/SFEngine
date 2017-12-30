@@ -66,7 +66,7 @@ RepeatedStaticObject::RepeatedStaticObject(std::shared_ptr<LevelObject> ToRepeat
   int CollidersPerRepeat = __Colliders.size();
 
   sf::Vector2f _delta = { 0, 0 };
-  for (int i = 0; i < NumRepetitions; ++i) {
+  for (unsigned int i = 0; i < NumRepetitions; ++i) {
     for (int j = 0; j < CollidersPerRepeat; ++j) {
       //Get the position of the collider to be copied, copy it, and move the copy
       _delta = Positions[i] - __Colliders[j]->GetPosition();

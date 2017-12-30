@@ -44,7 +44,6 @@
 sf::RenderWindow *currentRenderWindow = nullptr;
 sf::Vector2f WindowSize;
 std::shared_ptr<sf::Texture> DefaultTexture;
-//chaiscript::ChaiScript *ScriptEngine;
 std::unordered_set<std::uint32_t> UsedIDs;
 RenderSettings EngineRenderSettings;
 std::shared_ptr<tgui::Gui> GUI;

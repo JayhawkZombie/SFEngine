@@ -138,7 +138,7 @@ void LightningBolt::CreateBolt(const sf::Vector2f &StartPosition, const sf::Vect
 
   std::vector<float> Positions;
   Positions.push_back(0);
-  for (std::size_t i = 0; i < (int)(Distance / 8); ++i) {
+  for (std::size_t i = 0; i < (std::size_t)(std::round((Distance / 8))); ++i) {
     Positions.push_back(__TO_FLOAT__(dis(gen)));
   }
 
@@ -209,7 +209,7 @@ void CrawlingLightningBolt::GenerateBoltPoints(const sf::Vector2f & Start, const
 
   std::vector<float> Positions;
   Positions.push_back(0);
-  for (std::size_t i = 0; i < (int)(Distance / 8); ++i) {
+  for (std::size_t i = 0; i < (std::size_t)(std::round((Distance / 8))); ++i) {
     Positions.push_back(__TO_FLOAT__(dis(gen)));
   }
 

@@ -32,7 +32,7 @@
 #include "Lights\LightingSystem.h"
 
 #ifdef WITH_EDITOR
-#include "IMGUI\imgui_internal.h"
+
 #endif
 
 void func()
@@ -81,78 +81,13 @@ UINT32 SFEngine::GameLoop()
   Window->setKeyRepeatEnabled(false);
   bool Closed = false;
 
-  //ScriptEngine->add(chaiscript::fun(func), "func");
-
 #ifdef WITH_EDITOR
   sf::Clock dClock;
   ImGui::SFML::Init(*currentRenderWindow);
 #endif
 
 #ifdef WITH_EDITOR
-  //For ImGui
-  ImGuiStyle * style = &ImGui::GetStyle();
-
-  style->WindowPadding = ImVec2(5, 5);
-  style->WindowRounding = 3.0f;
-  style->FramePadding = ImVec2(3, 3);
-  style->FrameRounding = 3.0f;
-  style->ItemSpacing = ImVec2(6, 4);
-  style->ItemInnerSpacing = ImVec2(4, 3);
-  style->IndentSpacing = 25.0f;
-  style->ScrollbarSize = 10.0f;
-  style->ScrollbarRounding = 4.0f;
-  style->GrabMinSize = 5.0f;
-  style->GrabRounding = 3.0f;
-
-  style->Colors[ImGuiCol_Text] = ImVec4(0.80f, 0.80f, 0.83f, 1.00f);
-  style->Colors[ImGuiCol_TextDisabled] = ImVec4(0.24f, 0.23f, 0.29f, 1.00f);
-  style->Colors[ImGuiCol_WindowBg] = ImVec4(0.06f, 0.05f, 0.07f, 1.0f);
-  style->Colors[ImGuiCol_ChildWindowBg] = ImVec4(0.07f, 0.07f, 0.09f, 1.00f);
-  style->Colors[ImGuiCol_PopupBg] = ImVec4(0.07f, 0.07f, 0.09f, 1.00f);
-  style->Colors[ImGuiCol_Border] = ImVec4(0.40f, 0.40f, 0.4f, 0.48f);
-  style->Colors[ImGuiCol_BorderShadow] = ImVec4(0.92f, 0.91f, 0.88f, 0.00f);
-  style->Colors[ImGuiCol_FrameBg] = ImVec4(0.10f, 0.09f, 0.12f, 1.00f);
-  style->Colors[ImGuiCol_FrameBgHovered] = ImVec4(0.24f, 0.23f, 0.29f, 1.00f);
-  style->Colors[ImGuiCol_FrameBgActive] = ImVec4(0.56f, 0.56f, 0.58f, 1.00f);
-  style->Colors[ImGuiCol_TitleBg] = ImVec4(0.10f, 0.09f, 0.12f, 1.00f);
-  style->Colors[ImGuiCol_TitleBgCollapsed] = ImVec4(0.10f, 0.09f, 0.12f, 0.75f);
-  style->Colors[ImGuiCol_TitleBgActive] = ImVec4(0.07f, 0.07f, 0.09f, 1.00f);
-  style->Colors[ImGuiCol_MenuBarBg] = ImVec4(0.10f, 0.09f, 0.12f, 1.00f);
-  style->Colors[ImGuiCol_ScrollbarBg] = ImVec4(0.10f, 0.09f, 0.12f, 1.00f);
-  style->Colors[ImGuiCol_ScrollbarGrab] = ImVec4(0.80f, 0.80f, 0.83f, 0.31f);
-  style->Colors[ImGuiCol_ScrollbarGrabHovered] = ImVec4(0.56f, 0.56f, 0.58f, 1.00f);
-  style->Colors[ImGuiCol_ScrollbarGrabActive] = ImVec4(0.06f, 0.05f, 0.07f, 1.00f);
-  style->Colors[ImGuiCol_ComboBg] = ImVec4(0.19f, 0.18f, 0.21f, 1.00f);
-  style->Colors[ImGuiCol_CheckMark] = ImVec4(0.80f, 0.80f, 0.83f, 0.31f);
-  style->Colors[ImGuiCol_SliderGrab] = ImVec4(0.80f, 0.80f, 0.83f, 0.31f);
-  style->Colors[ImGuiCol_SliderGrabActive] = ImVec4(0.06f, 0.05f, 0.07f, 1.00f);
-  style->Colors[ImGuiCol_Button] = ImVec4(0.10f, 0.09f, 0.12f, 1.00f);
-  style->Colors[ImGuiCol_ButtonHovered] = ImVec4(0.24f, 0.23f, 0.29f, 1.00f);
-  style->Colors[ImGuiCol_ButtonActive] = ImVec4(0.56f, 0.56f, 0.58f, 1.00f);
-  style->Colors[ImGuiCol_Header] = ImVec4(0.10f, 0.09f, 0.12f, 1.00f);
-  style->Colors[ImGuiCol_HeaderHovered] = ImVec4(0.56f, 0.56f, 0.58f, 1.00f);
-  style->Colors[ImGuiCol_HeaderActive] = ImVec4(0.06f, 0.05f, 0.07f, 1.00f);
-  style->Colors[ImGuiCol_Column] = ImVec4(0.56f, 0.56f, 0.58f, 1.00f);
-  style->Colors[ImGuiCol_ColumnHovered] = ImVec4(0.24f, 0.23f, 0.29f, 1.00f);
-  style->Colors[ImGuiCol_ColumnActive] = ImVec4(0.56f, 0.56f, 0.58f, 1.00f);
-  style->Colors[ImGuiCol_ResizeGrip] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
-  style->Colors[ImGuiCol_ResizeGripHovered] = ImVec4(0.56f, 0.56f, 0.58f, 1.00f);
-  style->Colors[ImGuiCol_ResizeGripActive] = ImVec4(0.06f, 0.05f, 0.07f, 1.00f);
-  style->Colors[ImGuiCol_CloseButton] = ImVec4(0.40f, 0.39f, 0.38f, 0.16f);
-  style->Colors[ImGuiCol_CloseButtonHovered] = ImVec4(0.40f, 0.39f, 0.38f, 0.39f);
-  style->Colors[ImGuiCol_CloseButtonActive] = ImVec4(0.40f, 0.39f, 0.38f, 1.00f);
-  style->Colors[ImGuiCol_PlotLines] = ImVec4(0.40f, 0.39f, 0.38f, 0.63f);
-  style->Colors[ImGuiCol_PlotLinesHovered] = ImVec4(0.25f, 1.00f, 0.00f, 1.00f);
-  style->Colors[ImGuiCol_PlotHistogram] = ImVec4(0.40f, 0.39f, 0.38f, 0.63f);
-  style->Colors[ImGuiCol_PlotHistogramHovered] = ImVec4(0.25f, 1.00f, 0.00f, 1.00f);
-  style->Colors[ImGuiCol_TextSelectedBg] = ImVec4(0.25f, 1.00f, 0.00f, 0.43f);
-  style->Colors[ImGuiCol_ModalWindowDarkening] = ImVec4(1.00f, 0.98f, 0.95f, 0.73f);
-
-  ImGuiIO *io = &ImGui::GetIO();
-  io->Fonts->AddFontFromFileTTF("./SFEngine/Source/CoreFiles/Fonts/open-sans/OpenSans-Light.ttf", 10);
-  io->Fonts->AddFontFromFileTTF("./SFEngine/Source/CoreFiles/Fonts/open-sans/OpenSans-Light.ttf", 12);
-  io->Fonts->AddFontFromFileTTF("./SFEngine/Source/CoreFiles/Fonts/open-sans/OpenSans-Light.ttf", 14);
-  io->Fonts->AddFontFromFileTTF("./SFEngine/Source/CoreFiles/Fonts/open-sans/OpenSans-Light.ttf", 16);
+  
 #endif
   vec2d Gravity;
 
@@ -165,8 +100,6 @@ UINT32 SFEngine::GameLoop()
   LevelRect.setSize({ 1700, 900 });
   LevelRect.setTexture(&(EditorTexture->getTexture()));
   LevelRect.setTextureRect({ 0, 0, 1700, 900 });
-
-  //ScriptEngine->eval_file("./Projects/TestProject/Scripts/main.chai");
 
   //There should already have been a Main level loaded in Startup
   auto it = Levels.find("Main");
@@ -199,8 +132,6 @@ UINT32 SFEngine::GameLoop()
       UpdateStart = std::chrono::high_resolution_clock::now();
 
       fTime = dClock.restart();
-
-      ImGui::SFML::Update(*currentRenderWindow, fTime);
         
       if (CurrentLevel) {
         CurrentLevel->TickUpdate(TickDelta);
@@ -220,13 +151,12 @@ UINT32 SFEngine::GameLoop()
       Window->draw(LevelRect); 
 
       GUI->draw();
-      ImGui::Render();
       Window->display();
 
       RenderEnd = std::chrono::high_resolution_clock::now();
       LastFrameStart = CurrentFrameStart;
     }
-    catch (/*chaiscript::exception::eval_error &e*/ std::runtime_error &err )
+    catch (std::runtime_error &err )
     {
       std::cerr << "Error during runtime: " << err.what() << std::endl;
     }

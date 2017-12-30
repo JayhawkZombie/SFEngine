@@ -53,6 +53,12 @@ BasicLevel::BasicLevel(const sf::Vector2u &LevelSize, const sf::FloatRect &Defau
     
 }
 
+BasicLevel::BasicLevel()
+  : Gravity(new ::vec2d), TileMap(std::make_shared<sw::TileMap>())
+{
+
+}
+
 BasicLevel::~BasicLevel()
 {
   if (Gravity)
@@ -91,6 +97,11 @@ void BasicLevel::TickUpdate(const double & delta)
     cumulative = 0.f;
   }
 
+}
+
+std::string BasicLevel::GetClass() const
+{
+  return std::string("BasicLevel");
 }
 
 void BasicLevel::Render(std::shared_ptr<sf::RenderTarget> Target)

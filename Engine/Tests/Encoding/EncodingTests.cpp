@@ -28,45 +28,31 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Level\Level.h"
-#include "Engine\Console.h"
-#include "Physics\Collider.h"
+#include "EncodingTests.h"
 
-void Level::RenderOnTexture(std::shared_ptr<sf::RenderTexture> Texture)
+void TestEncoding()
 {
-  //SceneBlendTexture->clear(sf::Color::Transparent);
+  std::string source(R"(
+    import core
 
-  if (ShowGridLines) {
-    for (auto & arr : GridLines)
-      Texture->draw(arr);
+    set player health to 100
+    set player stamina to 100
+  )");
+
+
+  {
+    std::string encoded;
+    std::string decoded;
+
+    std::cout << "Original: \"" << source << "\"\n\n";
+
+    bn::encode_b64(source.begin(), source.end(), std::back_inserter(encoded));
+
+    std::cout << "Encoded: \"" << encoded << "\"\n\n";
+
+    bn::decode_b64(encoded.begin(), encoded.end(), std::back_inserter(decoded));
+
+    std::cout << "Decoded: \"" << decoded << "\"\n\n";
   }
-
-  for (auto & obj : LevelObjects)
-    Texture->draw(obj.second->Sprite);
-
-  //If we are using the editor, draw the meshes too
-  //Make this configurable later
-#ifdef WITH_EDITOR
-  
-#endif
-}
-
-void Level::Render(std::shared_ptr<sf::RenderTarget> Target)
-{
-
-}
-
-std::string Level::GetClass() const
-{
-  return std::string("Level");
-}
-
-void Level::RenderRegular()
-{
-
-}
-
-void Level::RenderLoadingScreen()
-{
 
 }

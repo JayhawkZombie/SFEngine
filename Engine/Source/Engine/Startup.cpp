@@ -172,29 +172,6 @@ UINT32 SFEngine::Startup()
   }
   Window->display();
 
-  //Instantiate the scripting engine
-  EngineLoadingText.setString("Initializing Chaiscipt Engine...");
-  Window->draw(EngineLogoSprite);
-  Window->draw(EngineLoadingText);
-  Window->display();
-
-  //ScriptEngine = new chaiscript::ChaiScript({}, { "./Projects/TestProject/Scripts/",
-  //                                                "./Projects/PuzzleDemo/Assets/Scripts/" }, 
-  //                                                { }
-  //                                          );
-  //
-  ////Add the engine class to the script engine
-  //chaiscript::ModulePtr __mptr(new chaiscript::Module);
-  //GenericActor::BindScriptMethods(__mptr);
-
-  //Bind the exposed engine apis to chaiscript
-  EngineLoadingText.setString("Binding APIs to Chaiscript...");
-  Window->draw(EngineLogoSprite);
-  Window->draw(EngineLoadingText);
-  Window->display();
-
-  BindScripts();
-
   Window->clear();
   EngineLoadingText.setString("Loading...");
   Window->draw(EngineLogoSprite);

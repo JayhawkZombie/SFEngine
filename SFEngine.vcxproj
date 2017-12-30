@@ -23,7 +23,6 @@
     <ClCompile Include="Engine\Source\Actor\Player.cpp" />
     <ClCompile Include="Engine\Source\AI\BehaviorTree.cpp" />
     <ClCompile Include="Engine\Source\Animation\Animation.cpp" />
-    <ClCompile Include="Engine\Source\Animation\ThorAnimatorWrapper.cpp" />
     <ClCompile Include="Engine\Source\Camera\2DCamera.cpp" />
     <ClCompile Include="Engine\Source\Components\CollisionComponent.cpp" />
     <ClCompile Include="Engine\Source\Components\ComponentBase.cpp" />
@@ -33,8 +32,6 @@
     <ClCompile Include="Engine\Source\CoreTests\ResourceManagerTests.cpp" />
     <ClCompile Include="Engine\Source\Engine\BaseEngineInterface.cpp" />
     <ClCompile Include="Engine\Source\Engine\Engine.cpp" />
-    <ClCompile Include="Engine\Source\Engine\EngineBindScripts.cpp" />
-    <ClCompile Include="Engine\Source\Engine\EngineCommandProcessor.cpp" />
     <ClCompile Include="Engine\Source\Engine\EngineCrashRecovery.cpp" />
     <ClCompile Include="Engine\Source\Engine\EngineRender.cpp" />
     <ClCompile Include="Engine\Source\Engine\Engine_ExposedScriptMethods.cpp" />
@@ -49,32 +46,20 @@
     <ClCompile Include="Engine\Source\Engine\HandleWindowResized.cpp" />
     <ClCompile Include="Engine\Source\Engine\Init.cpp" />
     <ClCompile Include="Engine\Source\Engine\InputInterface.cpp" />
-    <ClCompile Include="Engine\Source\Engine\ScriptConsole.cpp" />
     <ClCompile Include="Engine\Source\Engine\Shutdown.cpp" />
     <ClCompile Include="Engine\Source\Engine\Startup.cpp" />
     <ClCompile Include="Engine\Source\Events\EventHandler.cpp" />
     <ClCompile Include="Engine\Source\Events\EventSequence.cpp" />
     <ClCompile Include="Engine\Source\Factory\Factory.cpp" />
-    <ClCompile Include="Engine\Source\Level\AssetEditor.cpp" />
-    <ClCompile Include="Engine\Source\Level\AssetGraph.cpp" />
     <ClCompile Include="Engine\Source\Level\BasicLevel.cpp" />
-    <ClCompile Include="Engine\Source\Level\ExposedLevelApi.cpp" />
     <ClCompile Include="Engine\Source\Level\Layer.cpp" />
     <ClCompile Include="Engine\Source\Level\Level.cpp" />
-    <ClCompile Include="Engine\Source\Level\LevelEditorMethods.cpp" />
-    <ClCompile Include="Engine\Source\Level\LevelEditorObjectProperties.cpp" />
     <ClCompile Include="Engine\Source\Level\LevelObject.cpp" />
     <ClCompile Include="Engine\Source\Level\Loader.cpp" />
     <ClCompile Include="Engine\Source\Level\Render.cpp" />
-    <ClCompile Include="Engine\Source\Level\RenderEditorUI.cpp" />
-    <ClCompile Include="Engine\Source\Level\SceneGraph.cpp" />
-    <ClCompile Include="Engine\Source\Level\SceneViewer.cpp" />
     <ClCompile Include="Engine\Source\Level\SerializeIn.cpp" />
     <ClCompile Include="Engine\Source\Level\SerializeOut.cpp" />
-    <ClCompile Include="Engine\Source\Level\Settings.cpp" />
-    <ClCompile Include="Engine\Source\Level\Spawner.cpp" />
     <ClCompile Include="Engine\Source\Level\Update.cpp" />
-    <ClCompile Include="Engine\Source\Level\UpdateEditorUI.cpp" />
     <ClCompile Include="Engine\Source\Lights\GenericLightSource.cpp" />
     <ClCompile Include="Engine\Source\Lights\GlobalLightSource.cpp" />
     <ClCompile Include="Engine\Source\Lights\LightingSystem.cpp" />
@@ -86,7 +71,6 @@
     <ClCompile Include="Engine\Source\Objects\ProjectileBase.cpp" />
     <ClCompile Include="Engine\Source\Objects\Property.cpp" />
     <ClCompile Include="Engine\Source\Objects\ShotBase.cpp" />
-    <ClCompile Include="Engine\Source\Objects\SpellBase.cpp" />
     <ClCompile Include="Engine\Source\Objects\Static.cpp" />
     <ClCompile Include="Engine\Source\Objects\TriggerObject.cpp" />
     <ClCompile Include="Engine\Source\Objects\TriggerVolume.cpp" />
@@ -126,7 +110,6 @@
     <ClCompile Include="Engine\Source\Utils\SpriteSheet.cpp" />
     <ClCompile Include="Engine\Source\Utils\String.cpp" />
     <ClCompile Include="Engine\Source\Utils\TextReader.cpp" />
-    <ClCompile Include="Engine\Source\Utils\ThorUtils.cpp" />
     <ClCompile Include="Engine\Source\Utils\UntimedSequence.cpp" />
     <ClCompile Include="Engine\Source\Utils\Various.cpp" />
     <ClCompile Include="Engine\Source\Weather\Lightning.cpp" />
@@ -135,6 +118,7 @@
     <ClCompile Include="Engine\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Engine\Tests\Encoding\EncodingTests.cpp" />
     <ClCompile Include="Engine\ThirdParty\IMGUI\imgui-SFML.cpp" />
     <ClCompile Include="Engine\ThirdParty\IMGUI\imgui.cpp" />
     <ClCompile Include="Engine\ThirdParty\IMGUI\imgui_demo.cpp" />
@@ -206,11 +190,6 @@
     <ClInclude Include="Engine\Source\Actor\Player.h" />
     <ClInclude Include="Engine\Source\AI\BehaviorTree.h" />
     <ClInclude Include="Engine\Source\Animation\Animation.h" />
-    <ClInclude Include="Engine\Source\Animation\Components\CollisionComponent.h" />
-    <ClInclude Include="Engine\Source\Animation\Components\ComponentBase.h" />
-    <ClInclude Include="Engine\Source\Animation\Components\InteractionComponent.h" />
-    <ClInclude Include="Engine\Source\Animation\Components\ScriptComponent.h" />
-    <ClInclude Include="Engine\Source\Animation\ThorAnimationWrapper.h" />
     <ClInclude Include="Engine\Source\BasicIncludes.h" />
     <ClInclude Include="Engine\Source\Camera\2DCamera.h" />
     <ClInclude Include="Engine\Source\Components\CollisionComponent.h" />
@@ -219,19 +198,15 @@
     <ClInclude Include="Engine\Source\Components\ScriptComponent.h" />
     <ClInclude Include="Engine\Source\CoreTests\CoreTests.h" />
     <ClInclude Include="Engine\Source\CoreTests\TestDefs.h" />
-    <ClInclude Include="Engine\Source\CustomLevels.h" />
     <ClInclude Include="Engine\Source\DefsX64.h" />
     <ClInclude Include="Engine\Source\DefsX86.h" />
-    <ClInclude Include="Engine\Source\Editor\AssetEditor.hpp" />
     <ClInclude Include="Engine\Source\EngineTypes.h" />
     <ClInclude Include="Engine\Source\Engine\BaseEngineInterface.h" />
     <ClInclude Include="Engine\Source\Engine\Console.h" />
     <ClInclude Include="Engine\Source\Engine\Engine.h" />
     <ClInclude Include="Engine\Source\Engine\EngineConfiguration.h" />
-    <ClInclude Include="Engine\Source\Engine\EngineEventHandler.h" />
     <ClInclude Include="Engine\Source\Engine\InputInterface.h" />
     <ClInclude Include="Engine\Source\Engine\ReturnValues.h" />
-    <ClInclude Include="Engine\Source\Engine\ScriptConsole.h" />
     <ClInclude Include="Engine\Source\Events\EventHandler.h" />
     <ClInclude Include="Engine\Source\Events\EventSequence.h" />
     <ClInclude Include="Engine\Source\Events\UserEvent.h" />
@@ -239,9 +214,7 @@
     <ClInclude Include="Engine\Source\Factory\Factory.h" />
     <ClInclude Include="Engine\Source\Globals\GlobalHooks.h" />
     <ClInclude Include="Engine\Source\Level\BasicLevel.h" />
-    <ClInclude Include="Engine\Source\Level\ExposedLevelApi.h" />
     <ClInclude Include="Engine\Source\Level\Level.h" />
-    <ClInclude Include="Engine\Source\Level\LevelEventSequences.h" />
     <ClInclude Include="Engine\Source\Level\LevelLoader.h" />
     <ClInclude Include="Engine\Source\Level\LevelObject.h" />
     <ClInclude Include="Engine\Source\Lights\GenericLightSource.h" />
@@ -251,13 +224,9 @@
     <ClInclude Include="Engine\Source\Logging\Logger.h" />
     <ClInclude Include="Engine\Source\Messaging\CoreMessager.h" />
     <ClInclude Include="Engine\Source\Objects\Property.h" />
-    <ClInclude Include="Engine\Source\Objects\EffectBase.h" />
     <ClInclude Include="Engine\Source\Objects\Equippable.h" />
-    <ClInclude Include="Engine\Source\Objects\FastShot.h" />
     <ClInclude Include="Engine\Source\Objects\ProjectileBase.h" />
     <ClInclude Include="Engine\Source\Objects\ShotBase.h" />
-    <ClInclude Include="Engine\Source\Objects\SlowShot.h" />
-    <ClInclude Include="Engine\Source\Objects\SpellBase.h" />
     <ClInclude Include="Engine\Source\Objects\Static.h" />
     <ClInclude Include="Engine\Source\Objects\TriggerObject.h" />
     <ClInclude Include="Engine\Source\Objects\TriggerVolume.h" />
@@ -268,7 +237,6 @@
     <ClInclude Include="Engine\Source\Physics\Physics.h" />
     <ClInclude Include="Engine\Source\Physics\QuadTree.h" />
     <ClInclude Include="Engine\Source\Render\Render.h" />
-    <ClInclude Include="Engine\Source\Resources\CerealAsset.h" />
     <ClInclude Include="Engine\Source\Resources\ResourceManager.h" />
     <ClInclude Include="Engine\Source\Serialization\Serialization.h" />
     <ClInclude Include="Engine\Source\Serialization\SFMLEvent.h" />
@@ -309,7 +277,6 @@
     <ClInclude Include="Engine\Source\Utils\String.h" />
     <ClInclude Include="Engine\Source\Utils\StringMap.h" />
     <ClInclude Include="Engine\Source\Utils\TextReader.h" />
-    <ClInclude Include="Engine\Source\Utils\ThorUtils.h" />
     <ClInclude Include="Engine\Source\Utils\UntimedSequence.h" />
     <ClInclude Include="Engine\Source\Utils\Various.h" />
     <ClInclude Include="Engine\Source\Utils\Vec.hpp" />
@@ -317,6 +284,8 @@
     <ClInclude Include="Engine\Source\Weather\WeatherSystem.h" />
     <ClInclude Include="Engine\Source\WindowsDefs.h" />
     <ClInclude Include="Engine\stdafx.h" />
+    <ClInclude Include="Engine\Tests\Encoding\EncodingTests.h" />
+    <ClInclude Include="Engine\ThirdParty\basen\basen.hpp" />
     <ClInclude Include="Engine\ThirdParty\cereal\access.hpp" />
     <ClInclude Include="Engine\ThirdParty\cereal\archives\adapters.hpp" />
     <ClInclude Include="Engine\ThirdParty\cereal\archives\binary.hpp" />
@@ -486,6 +455,9 @@
     <None Include="Engine\ThirdParty\cereal\external\rapidxml\manual.html" />
     <None Include="Engine\ThirdParty\rapidxml-1.13\manual.html" />
     <None Include="Engine\ThirdParty\SelbaWard\TileMap.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Engine\ThirdParty\Jinx\LICENSE" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{667EFDE7-8AF3-446E-A68C-393D3B86BC2F}</ProjectGuid>

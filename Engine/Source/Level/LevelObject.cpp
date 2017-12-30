@@ -211,30 +211,6 @@ void LevelObject::HandleCollisionWithSegment(PhysicsEngineSegmentType *Segment)
 {
   if (m_HandleSegmentWithSegment)
     m_HandleSegmentWithSegment(Segment);
-
-  //auto pos = Segment->pos;
-  //auto diff = Position - sf::Vector2f(pos.x, pos.y);
-
-  //sf::Vector2f move = { 0, 0 };
-  //
-  //auto right = Position.x + Size.x;
-  //auto top = Position.y + Size.y;
-  //
-  ////If the distance from our right to the segment is less than our size
-  //// we need to be pushed back a bit
-  //// 
-  ////Case for when we aproach from the left
-  //if (Position.x <= pos.x && right > pos.x)
-  //  move.x = 1.2f * (pos.x - Position.x);
-  //else if (pos.x <= right && Position.x < pos.x)
-  //  move.x = 1.2f * (right - pos.x);
-
-  //if (pos.y >= Position.y && top > pos.y)
-  //  move.y = 1.2f * (pos.y - Position.y);
-  //else if (top >= pos.y && Position.y <= pos.y)
-  //  move.y = 1.2f * (top - pos.y);
-
-  //MoveObject(move);
 }
 
 void LevelObject::SetSegmentCollisionCallback(std::function<void(PhysicsEngineSegmentType*)> Callback)

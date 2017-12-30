@@ -279,35 +279,6 @@ extern void AddScriptGlobal();
 struct RenderSettings;
 extern RenderSettings EngineRenderSettings;
 
-//For interacting with the scripting engine
- 
-/*
-Serialization function template:
-template <class Archive>
-void SerializeWhatever(Archive & archive, Whatever);
-*/
-
-/* Not using these anymore 
-//Some methods to use to serialize assets - put here so they can be globally accessible to anything that needs that
-void SerializeString(const std::string &string, std::ofstream &out);
-void SerializeInt32(const std::int32_t &value, std::ofstream &out);
-void SerializeFloat(const float &value, std::ofstream &out);
-void SerializeUint32(const std::uint32_t &value, std::ofstream &out);
-void SerializeSizet(const std::size_t &value, std::ofstream &out);
-void SerializeInt64(const std::int64_t &value, std::ofstream &out);
-void SerializeUint64(const std::uint64_t &value, std::ofstream &out);
-void SerializeChar(const char &c, std::ofstream &out);
-
-//Corresponding methods to deserialize
-void DeserializeString(std::string &string, std::ifstream &out);
-void DeserializeInt32(std::int32_t &value, std::ifstream &out);
-void DeserializeFloat(float &value, std::ifstream &out);
-void DeserializeUint32(std::uint32_t &value, std::ifstream &out);
-void DeserializeSizet(std::size_t &value, std::ifstream &out);
-void DeserializeInt64(std::int64_t &value, std::ifstream &out);
-void DeserializeUint64(std::uint64_t &value, std::ifstream &out);
-void DeserializeChar(char &c, std::ifstream &out);
-*/
 void MessageAlert(const std::string &message);
 void ConfirmAlert(const std::string &message, std::string OKText = "OK", std::string CancelText = "Cancel", std::function<void(void)> OKcb = []() {}, std::function<void(void)> Cancelcb = []() {});
 void Confirm(const std::string &message);
@@ -339,10 +310,6 @@ extern void AddUI(std::shared_ptr<UI::BaseUIElement> element);
 extern void SetKeyRepeatEnabled(bool);
 
 extern std::shared_ptr<tgui::Gui> GUI;
-
-//This is pretty hacky, and will be changed later
-// Just used to flag that we need to close down (since we can't use a close button when in fullscreen mode)
-
 
 #define __TO_FLOAT__(VAR)\
 static_cast<float>(VAR)

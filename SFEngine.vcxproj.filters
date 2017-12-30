@@ -27,9 +27,6 @@
     <ClCompile Include="Engine\Source\Animation\Animation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Source\Animation\ThorAnimatorWrapper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Source\Camera\2DCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -58,12 +55,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\Engine\Engine_ExposedScriptMethods.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\Engine\EngineBindScripts.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\Engine\EngineCommandProcessor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\Engine\EngineCrashRecovery.cpp">
@@ -105,9 +96,6 @@
     <ClCompile Include="Engine\Source\Engine\InputInterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Source\Engine\ScriptConsole.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Source\Engine\Shutdown.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -123,28 +111,13 @@
     <ClCompile Include="Engine\Source\Factory\Factory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Source\Level\AssetEditor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\Level\AssetGraph.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Source\Level\BasicLevel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\Level\ExposedLevelApi.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\Level\Layer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\Level\Level.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\Level\LevelEditorMethods.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\Level\LevelEditorObjectProperties.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\Level\LevelObject.cpp">
@@ -156,31 +129,13 @@
     <ClCompile Include="Engine\Source\Level\Render.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Source\Level\RenderEditorUI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\Level\SceneGraph.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\Level\SceneViewer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Source\Level\SerializeIn.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\Level\SerializeOut.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Source\Level\Settings.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\Level\Spawner.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Source\Level\Update.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\Level\UpdateEditorUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\Lights\GenericLightSource.cpp">
@@ -208,9 +163,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\Objects\ShotBase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\Objects\SpellBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\Objects\Static.cpp">
@@ -304,9 +256,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\Utils\TextReader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\Utils\ThorUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\Utils\UntimedSequence.cpp">
@@ -546,6 +495,9 @@
     <ClCompile Include="Engine\ThirdParty\Jinx\JxVariant.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Tests\Encoding\EncodingTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Source\Actor\Actor.h">
@@ -557,22 +509,7 @@
     <ClInclude Include="Engine\Source\AI\BehaviorTree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\Animation\Components\CollisionComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\Animation\Components\ComponentBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\Animation\Components\InteractionComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\Animation\Components\ScriptComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Source\Animation\Animation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\Animation\ThorAnimationWrapper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\Camera\2DCamera.h">
@@ -596,9 +533,6 @@
     <ClInclude Include="Engine\Source\CoreTests\TestDefs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\Editor\AssetEditor.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Source\Engine\BaseEngineInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -611,16 +545,10 @@
     <ClInclude Include="Engine\Source\Engine\EngineConfiguration.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\Engine\EngineEventHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Source\Engine\InputInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\Engine\ReturnValues.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\Engine\ScriptConsole.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\Events\EventHandler.h">
@@ -644,13 +572,7 @@
     <ClInclude Include="Engine\Source\Level\BasicLevel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\Level\ExposedLevelApi.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Source\Level\Level.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\Level\LevelEventSequences.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\Level\LevelLoader.h">
@@ -677,25 +599,13 @@
     <ClInclude Include="Engine\Source\Messaging\CoreMessager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\Objects\EffectBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Source\Objects\Equippable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\Objects\FastShot.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\Objects\ProjectileBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\Objects\ShotBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\Objects\SlowShot.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\Objects\SpellBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\Objects\Static.h">
@@ -723,9 +633,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\Render\Render.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\Resources\CerealAsset.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\Resources\ResourceManager.h">
@@ -827,9 +734,6 @@
     <ClInclude Include="Engine\Source\Utils\TextReader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\Utils\ThorUtils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Source\Utils\UntimedSequence.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -846,9 +750,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\BasicIncludes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\CustomLevels.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\DefsX64.h">
@@ -1385,6 +1286,12 @@
     <ClInclude Include="Engine\ThirdParty\Jinx\JxVariant.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\basen\basen.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Tests\Encoding\EncodingTests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\Source\Streams\DataStream.inl">
@@ -1398,5 +1305,8 @@
     <None Include="Engine\ThirdParty\SelbaWard\TileMap.inl">
       <Filter>Header Files</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Engine\ThirdParty\Jinx\LICENSE" />
   </ItemGroup>
 </Project>

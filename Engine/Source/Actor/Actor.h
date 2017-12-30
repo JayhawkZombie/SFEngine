@@ -40,8 +40,6 @@ public:
 
   static void BuildAnimations(const std::string &filename, const std::string &texturefile, GenericActor *Actor);
 
-  static void BindScriptMethods(chaiscript::ModulePtr module);
-
   GenericActor();
   GenericActor(const GenericActor &Copy);
   GenericActor(const std::string &texfile, const std::string &texID);

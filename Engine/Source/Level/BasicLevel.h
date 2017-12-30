@@ -49,7 +49,7 @@ class WeatherEvent;
 class BasicLevel : public BaseEngineInterface
 {
 public:
-  BasicLevel() = default;
+  BasicLevel();
 
   //Oh gawd no please don't every try this
   BasicLevel(const BasicLevel &) = delete;

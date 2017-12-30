@@ -77,8 +77,6 @@ private:
   bool IsFramerateLimited = false;
   unsigned int FrameRate;
 
-  void BindScripts();
-
   Logger EngineLogger;
 
   UINT32 Shutdown();
@@ -86,9 +84,6 @@ private:
 
   static bool IsKeyLeftDown();
 
-  //chaiscript::ChaiScript *ScriptEngine;
-  //chaiscript::ModulePtr EngineModule;
-  //chaiscript::ModulePtr LevelModule;
   //Methods that we will expose to the scripting engine to change engine settings
   void SetAALevel(unsigned int level);
   void SetFramerateLimit(unsigned int level);
