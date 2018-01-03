@@ -28,6 +28,8 @@
 //
 ////////////////////////////////////////////////////////////
 
+#include "Engine/stdafx.h"
+
 #include "Level\Level.h"
 
 void Level::SerializeOut(std::ofstream &out)

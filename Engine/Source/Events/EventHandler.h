@@ -30,7 +30,7 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "BasicIncludes.h"
+#include "Minimal.h"
 
 /**
   * A class to which event handling can be delegated

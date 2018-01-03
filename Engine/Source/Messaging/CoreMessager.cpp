@@ -28,6 +28,7 @@
 //
 ////////////////////////////////////////////////////////////
 
+#include "Engine/stdafx.h"
 #include "Messaging/CoreMessager.h"
 #include "Globals/GlobalHooks.h"
 #include "Exceptions/Exceptions.h"

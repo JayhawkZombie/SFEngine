@@ -31,6 +31,7 @@
 ////////////////////////////////////////////////////////////
 
 #include <boost/tokenizer.hpp>
+#include <optional>
 
 using TTokenizer = boost::tokenizer<boost::char_separator<char>>;
 
@@ -43,7 +44,19 @@ public:
   void Parse(const std::string &Filename);
   void Parse(std::stringstream &stream);
 
+  bool HasSection(const std::string &Name);
+  bool HasKey(const std::string &Section, const std::string &KeyString);
+
+  std::optional<std::string> TryGetValue(const std::string &Section, const std::string &KeyString);
+
 private:
+
+  bool TryParseHeader();
+  bool TryParseValues();
+
+  void ErrorSectionHeaderInvalid();
+  void ErrorKeyInvalid(const std::string &KeyStr);
+  void ErrorValueInvalid(const std::string &KeyStr);
 
   std::unordered_map<std::string, std::unordered_map<std::string, std::string>> m_ValueMap;
 

@@ -28,6 +28,8 @@
 //
 ////////////////////////////////////////////////////////////
 
+#include "Engine/stdafx.h"
+
 #include "Level\LevelObject.h"
 #include "Actor\Actor.h"
 #include "Physics\Collider.h"
@@ -203,7 +205,7 @@ void LevelObject::SetCollisionHandleCallback(std::function<void(LevelObject*)> C
   m_HandleCollisionWithObject = Callback;
 }
 
-void LevelObject::HandleCollisionWithCollider(SPtrShared<Collider2D> Collider)
+void LevelObject::HandleCollisionWithCollider(std::shared_ptr<Collider2D> Collider)
 {
 }
 

@@ -31,10 +31,10 @@
 #include "Threading\ASyncLoader.h"
 #include "Level\BasicLevel.h"
 
-SPtrShared<ASyncThreadStatus> ASyncLevelStreamThread::Launch()
+std::shared_ptr<ASyncThreadStatus> ASyncLevelStreamThread::Launch()
 {
   auto Streamer = Get();
-  Streamer->m_LoadingQueue = std::make_shared<std::queue<std::pair<std::string, std::function<SPtrShared<BasicLevel>(void)>>>>();
+  Streamer->m_LoadingQueue = std::make_shared<std::queue<std::pair<std::string, std::function<std::shared_ptr<BasicLevel>(void)>>>>();
   Streamer->m_QueueLock = std::make_shared<std::mutex>();
   Streamer->m_StreamerStatus = std::make_shared<ASyncThreadStatus>();
 
@@ -71,14 +71,14 @@ void ASyncLevelStreamThread::Shutdown()
   delete Streamer;
 }
 
-bool ASyncLevelStreamThread::Load(std::function<SPtrShared<BasicLevel>(void)> LoadFtn, std::string LevelName)
+bool ASyncLevelStreamThread::Load(std::function<std::shared_ptr<BasicLevel>(void)> LoadFtn, std::string LevelName)
 {
   auto Streamer = Get();
   if (!Streamer)
     return false;
 
   Streamer->m_QueueLock->lock();
-  Streamer->m_LoadingQueue->push(std::pair<std::string, std::function<SPtrShared<BasicLevel>(void)>>(LevelName, LoadFtn));
+  Streamer->m_LoadingQueue->push(std::pair<std::string, std::function<std::shared_ptr<BasicLevel>(void)>>(LevelName, LoadFtn));
   Streamer->m_QueueLock->unlock();
 
   Streamer->m_StreamerStatus->StatusLock.lock();
@@ -100,7 +100,7 @@ std::thread::id ASyncLevelStreamThread::GetThreadID()
   return id;
 }
 
-SPtrShared<ASyncThreadStatus> ASyncLevelStreamThread::GetThreadStatus()
+std::shared_ptr<ASyncThreadStatus> ASyncLevelStreamThread::GetThreadStatus()
 {
   auto Streamer = Get();
   if (!Streamer) {
@@ -143,7 +143,7 @@ void ASyncLevelStreamThread::ThreadLoop()
     m_StreamerStatus->StatusLock.unlock();
 
     //If the queue is not empty, pop of the queue and attempt to load the level
-    std::function<SPtrShared<BasicLevel>(void)> LoadFunction;
+    std::function<std::shared_ptr<BasicLevel>(void)> LoadFunction;
     std::string LevelName{ "" };
 
     if (!m_LoadingQueue->empty()) {
@@ -161,7 +161,7 @@ void ASyncLevelStreamThread::ThreadLoop()
         m_StreamerStatus->bIsLoading = true;
         m_StreamerStatus->StatusLock.unlock();
 
-        SPtrShared<BasicLevel> LoadedLevel;
+        std::shared_ptr<BasicLevel> LoadedLevel;
         try
         {
           LoadedLevel = LoadFunction();

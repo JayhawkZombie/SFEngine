@@ -30,8 +30,7 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "BasicIncludes.h"
-#include <cinttypes>
+#include "Minimal.h"
 
 enum class SystemMessageType : std::uint32_t
 {

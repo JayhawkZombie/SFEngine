@@ -28,6 +28,7 @@
 //
 ////////////////////////////////////////////////////////////
 
+#include "Engine/stdafx.h"
 #include "Threading/ASyncLoader.h"
 
 void ASyncLoadManager::Init()

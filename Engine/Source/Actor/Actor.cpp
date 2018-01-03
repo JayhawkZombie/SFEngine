@@ -152,7 +152,7 @@ void GenericActor::SetCollisionHandleCallback(std::function<void(LevelObject*)> 
   m_HandleCollisionWithObject = Callback;
 }
 
-void GenericActor::HandleCollisionWithCollider(SPtrShared<Collider2D> Collider)
+void GenericActor::HandleCollisionWithCollider(std::shared_ptr<Collider2D> Collider)
 {
   auto Object = Collider->GetObjectPtr();
 }

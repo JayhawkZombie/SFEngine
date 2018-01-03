@@ -32,7 +32,9 @@
 
 #include "Engine\BaseEngineInterface.h"
 #include "Engine\EngineConfiguration.h"
-#include "Engine\ReturnValues.h"
+
+#include "Minimal.h"
+
 #include "Events\EventHandler.h"
 #include "Level\BasicLevel.h"
 #include "Logging\Logger.h"
@@ -49,9 +51,9 @@ public:
   SFEngine(const SFEngine &&) = delete;
   ~SFEngine();
 
-  UINT32 Go(int argc, char **argv);
-  UINT32 Init(int argc, char **argv);
-  UINT32 Startup();
+  uint32_t Go(int argc, char **argv);
+  uint32_t Init(int argc, char **argv);
+  uint32_t Startup();
   void HandleEngineCrash();
 
   unsigned int GetCurrentFrameRate() {
@@ -79,8 +81,8 @@ private:
 
   Logger EngineLogger;
 
-  UINT32 Shutdown();
-  UINT32 GameLoop();
+  uint32_t Shutdown();
+  uint32_t GameLoop();
 
   static bool IsKeyLeftDown();
 

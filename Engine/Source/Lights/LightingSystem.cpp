@@ -28,9 +28,10 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Lights\LightingSystem.h"
-#include "Physics\QuadTree.h"
-#include "Physics\Collider.h"
+#include "Engine/stdafx.h"
+#include "Lights/LightingSystem.h"
+#include "Physics/QuadTree.h"
+#include "Physics/Collider.h"
 
 #include <math.h>
 
@@ -105,7 +106,7 @@ LightSystem::~LightSystem()
 {
 }
 
-void LightSystem::Update(std::map<std::string, SPtrShared<LevelObject>>& Objects)
+void LightSystem::Update(std::map<std::string, std::shared_ptr<LevelObject>>& Objects)
 {
   m_MapDrawn.clear();
 

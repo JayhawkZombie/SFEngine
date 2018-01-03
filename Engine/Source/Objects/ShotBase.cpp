@@ -28,7 +28,8 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Objects\ShotBase.h"
+#include "Engine/stdafx.h"
+#include "Objects/ShotBase.h"
 
 ShotBase::ShotBase()
 {

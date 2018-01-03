@@ -37,26 +37,26 @@ SplinePath::SplinePath(UINT32 PathStyle)
   //m_Spline.setPrimitiveType(sf::Points);
 }
 
-void SplinePath::MakeCirclularPath(const sf::Vector2f & Center, SFLOAT Radius, UINT32 NumPts)
+void SplinePath::MakeCirclularPath(const sf::Vector2f & Center, float Radius, UINT32 NumPts)
 {
   assert(NumPts != 0);
 
-  SFLOAT Theta = 0.f;
-  SFLOAT dTheta = 2 * ____PI / NumPts;
+  float Theta = 0.f;
+  float dTheta = 2 * ____PI / NumPts;
 
-  SVector2F Point;
-  SFLOAT s = 0.f; SFLOAT c = 0.f;
+  sf::Vector2f Point;
+  float s = 0.f; float c = 0.f;
   for (UINT32 i = 0; i < NumPts; ++i) {
     s = std::sin(Theta);
     c = std::cos(Theta);
     Theta += dTheta;
 
-    Point = Center + Radius * SVector2F(c, s);
+    Point = Center + Radius * sf::Vector2f(c, s);
     m_Spline.addVertex(Point);
   }
 
   //Connect the last/first point
-  Point = Center + Radius * SVector2F(1, 0);
+  Point = Center + Radius * sf::Vector2f(1, 0);
   m_Spline.addVertex(Point);
 
   if (m_Style & SplinePath::Cubic)
@@ -68,7 +68,7 @@ void SplinePath::MakeCirclularPath(const sf::Vector2f & Center, SFLOAT Radius, U
   m_Spline.update();
 }
 
-void SplinePath::SetThickness(SFLOAT Thickness)
+void SplinePath::SetThickness(float Thickness)
 {
   m_Spline.setThickness(Thickness);
 }

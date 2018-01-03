@@ -53,9 +53,9 @@ public:
 
   ~LightSource() = default;
 
-  SVector2F m_Position;
-  SFLOAT m_Attenuation;
-  SFLOAT m_Intensity;
+  sf::Vector2f m_Position;
+  float m_Attenuation;
+  float m_Intensity;
   sf::Color m_Hue;
   std::string m_Name;
   sf::CircleShape m_OutlinedCircleArea;
@@ -68,7 +68,7 @@ public:
   LightSystem();
   ~LightSystem();
 
-  void Update(std::map<std::string, SPtrShared<LevelObject>>& Objects);
+  void Update(std::map<std::string, std::shared_ptr<LevelObject>>& Objects);
   void RenderOnTexture(std::shared_ptr<sf::RenderTexture> Texture, sf::View View);
 
   void AddLight(sf::Vector2f Pos, float Atten, sf::Color Color, std::string Name);
@@ -89,12 +89,12 @@ protected:
   sf::RenderStates RenderState;
   sf::Texture m_RadialLightTexture;
 
-  std::vector<SPtrShared<Collider2D>> m_MapDrawn;
+  std::vector<std::shared_ptr<Collider2D>> m_MapDrawn;
 
   std::shared_ptr<sf::RenderTexture> m_MapTexture;
 
   std::map<std::string, std::shared_ptr<LightSource>> m_Lights;
-  std::map<std::string, SPtrShared<sf::RenderTexture>> m_LightTextures;
+  std::map<std::string, std::shared_ptr<sf::RenderTexture>> m_LightTextures;
   sf::Shader m_BlendingShader;
     
   sf::Shader m_LightShader;

@@ -31,10 +31,8 @@
 ////////////////////////////////////////////////////////////
 
 #include "BasicLevel.h"
-#include "Actor\Actor.h"
 #include "Physics\Physics.h"
 #include "Lights\LightingSystem.h"
-#include "Tiles\TileSheet.h"
 
 #include "SelbaWard\TileMap.hpp"
 
@@ -44,28 +42,6 @@ class GameMain;
 class Editor;
 #endif
 
-class Layer : public BaseEngineInterface
-{
-public:
-  Layer();
-  Layer(const Layer &) = delete;
-  ~Layer();
-
-  void TickUpdate(const double &delta) override;
-  void Render(std::shared_ptr<sf::RenderTarget> Target) override;
-  void OnShutDown() override;
-  void SerializeOut(std::ofstream &out) override;
-  void SerializeIn(std::ifstream &in) override;
-
-protected:
-  std::shared_ptr<sf::Texture> TileTexture;
-  std::vector<sf::VertexArray> TileVertices;
-
-  std::vector<std::shared_ptr<LevelObject>> Objects;
-  std::vector<std::shared_ptr<GenericLightSource>> Lights;
-  std::vector<std::shared_ptr<GenericActor>> Actors;
-};
-
 class Level : public BasicLevel
 {
 
@@ -73,7 +49,7 @@ public:
   friend class GameMain;
   TYPEDEF_PARENT_CLASS(BasicLevel);
 
-  static SPtrShared<Level> DefaultEmptyLevel();
+  static std::shared_ptr<Level> DefaultEmptyLevel();
 
   Level();
   Level(const sf::Vector2u &LevelSize, const sf::FloatRect &DefaultView, bool showlines = false, const sf::Vector2f &GridSpacing = { 0,0 });
@@ -103,10 +79,6 @@ public:
   void LoadLevel(const std::string &lvlfile) override;
   void OnBegin() override;
   void OnEnd() override;
-
-  std::size_t GetNumLayers() const {
-    return Layers.size();
-  }
 
   virtual std::string GetClass() const override;
 
@@ -197,7 +169,6 @@ private:
     
   void UpdateObjectPhysics() override;
   std::vector<unsigned char> lvlData;
-  std::vector<Layer> Layers;
 
   //functions for loading from file
   void LoadFromFile(const std::string &file) override;

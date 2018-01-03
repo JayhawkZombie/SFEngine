@@ -28,9 +28,10 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Level\Level.h"
-#include "Engine\Console.h"
-#include "Physics\Collider.h"
+#include "Engine/stdafx.h"
+
+#include "Level/Level.h"
+#include "Physics/Collider.h"
 
 void Level::RenderOnTexture(std::shared_ptr<sf::RenderTexture> Texture)
 {

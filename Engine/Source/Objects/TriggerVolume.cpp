@@ -28,6 +28,7 @@
 //
 ////////////////////////////////////////////////////////////
 
+#include "Engine/stdafx.h"
 #include "Objects/TriggerVolume.h"
 
 TriggerVolume::TriggerVolume(TriggerMethod Method)

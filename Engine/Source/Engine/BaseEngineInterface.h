@@ -30,11 +30,9 @@
 //
 ////////////////////////////////////////////////////////////
 
+#include "Minimal.h"
 #include "BasicIncludes.h"
 #include "Events\EventHandler.h"
-#include "Exceptions\Exceptions.h"
-
-#include "ThirdParty\cereal\cereal.hpp"
 
 /**
 * Necessary forward declaration
@@ -158,16 +156,21 @@ public:
   virtual std::string GetID() const;
   virtual void SetID(const std::string &ID);
 
-  virtual std::uint32_t GetInternalID() const {
+  virtual std::uint32_t GetInternalID() const 
+  {
     return InternalID;
   }
-  virtual void SetInternalD(const std::uint32_t &ID) {
+  
+  virtual void SetInternalD(const std::uint32_t &ID) 
+  {
     InternalID = ID;
   }
 
-  virtual std::string GetClass() const = 0 {
+  virtual std::string GetClass() const = 0 
+  {
     return "BaseEngineInterface";
   }
+
 protected:
   static void NO_ACTION(BaseEngineInterface *item, const sf::Vector2i &i);
   static void NO_ACTION(BaseEngineInterface *item, const sf::Mouse::Button &);
@@ -194,5 +197,3 @@ public:
   }
 
 };
-
-CEREAL_REGISTER_TYPE(BaseEngineInterface);

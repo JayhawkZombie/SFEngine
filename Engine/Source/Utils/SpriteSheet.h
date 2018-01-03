@@ -40,8 +40,8 @@ public:
 
   ~SpriteSheet();
 
-  void SetTexture(SharedTexture tex);
-  SharedTexture GetTexture() const;
+  void SetTexture(std::shared_ptr<sf::Texture> tex);
+  std::shared_ptr<sf::Texture> GetTexture() const;
 
   virtual void SerializeIn(std::ifstream &in);
   virtual void SerializeOut(std::ofstream &out);
@@ -52,7 +52,7 @@ public:
   std::shared_ptr<sf::Sprite> GetSprite(std::size_t index);
 
 private:
-  SharedTexture Texture;
+  std::shared_ptr<sf::Texture> Texture;
   std::vector<sf::IntRect> Frames;
 
   std::vector<std::shared_ptr<sf::Sprite>> Sprites;

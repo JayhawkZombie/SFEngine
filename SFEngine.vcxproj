@@ -26,6 +26,7 @@
     <ClCompile Include="Engine\Source\Camera\2DCamera.cpp" />
     <ClCompile Include="Engine\Source\Components\CollisionComponent.cpp" />
     <ClCompile Include="Engine\Source\Components\ComponentBase.cpp" />
+    <ClCompile Include="Engine\Source\Components\ComponentManager.cpp" />
     <ClCompile Include="Engine\Source\Components\InteractionComponent.cpp" />
     <ClCompile Include="Engine\Source\Components\ScriptComponent.cpp" />
     <ClCompile Include="Engine\Source\CoreTests\EventHandlerTests.cpp" />
@@ -52,7 +53,6 @@
     <ClCompile Include="Engine\Source\Events\EventSequence.cpp" />
     <ClCompile Include="Engine\Source\Factory\Factory.cpp" />
     <ClCompile Include="Engine\Source\Level\BasicLevel.cpp" />
-    <ClCompile Include="Engine\Source\Level\Layer.cpp" />
     <ClCompile Include="Engine\Source\Level\Level.cpp" />
     <ClCompile Include="Engine\Source\Level\LevelObject.cpp" />
     <ClCompile Include="Engine\Source\Level\Loader.cpp" />
@@ -68,6 +68,11 @@
     <ClCompile Include="Engine\Source\main.cpp" />
     <ClCompile Include="Engine\Source\Messaging\CoreMessager.cpp" />
     <ClCompile Include="Engine\Source\Objects\Equippable.cpp" />
+    <ClCompile Include="Engine\Source\Objects\GameObject.cpp" />
+    <ClCompile Include="Engine\Source\Objects\IDamage.cpp" />
+    <ClCompile Include="Engine\Source\Objects\IObjectAffector.cpp" />
+    <ClCompile Include="Engine\Source\Objects\IObjectAnimator.cpp" />
+    <ClCompile Include="Engine\Source\Objects\IPaths.cpp" />
     <ClCompile Include="Engine\Source\Objects\ProjectileBase.cpp" />
     <ClCompile Include="Engine\Source\Objects\Property.cpp" />
     <ClCompile Include="Engine\Source\Objects\ShotBase.cpp" />
@@ -90,7 +95,6 @@
     <ClCompile Include="Engine\Source\Threading\WorkerThread.cpp" />
     <ClCompile Include="Engine\Source\Tiles\LevelTile.cpp" />
     <ClCompile Include="Engine\Source\Tiles\TileGrid.cpp" />
-    <ClCompile Include="Engine\Source\Tiles\TileSheet.cpp" />
     <ClCompile Include="Engine\Source\Tiles\TMXMap.cpp" />
     <ClCompile Include="Engine\Source\Time\RealTimeClock.cpp" />
     <ClCompile Include="Engine\Source\Time\TimedSequence.cpp" />
@@ -98,6 +102,7 @@
     <ClCompile Include="Engine\Source\Time\TimerManager.cpp" />
     <ClCompile Include="Engine\Source\Time\TimeStep.cpp" />
     <ClCompile Include="Engine\Source\UI\UIIconSheet.cpp" />
+    <ClCompile Include="Engine\Source\UI\Widgets\Widget.cpp" />
     <ClCompile Include="Engine\Source\Utils\AssetConverters.cpp" />
     <ClCompile Include="Engine\Source\Utils\CacheIni.cpp" />
     <ClCompile Include="Engine\Source\Utils\Convert.cpp" />
@@ -119,8 +124,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Engine\Tests\Encoding\EncodingTests.cpp" />
+    <ClCompile Include="Engine\Tests\Parsing\ParsingTests.cpp" />
     <ClCompile Include="Engine\Tests\Scripting\ScriptingTests.cpp" />
     <ClCompile Include="Engine\Tests\Serialization\ScriptSerializationTests.cpp" />
+    <ClCompile Include="Engine\Tests\Serialization\SFMLSerializationTests.cpp" />
     <ClCompile Include="Engine\ThirdParty\IMGUI\imgui-SFML.cpp" />
     <ClCompile Include="Engine\ThirdParty\IMGUI\imgui.cpp" />
     <ClCompile Include="Engine\ThirdParty\IMGUI\imgui_demo.cpp" />
@@ -186,6 +193,7 @@
     <ClCompile Include="Engine\ThirdParty\SelbaWard\TileMap.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Editor\Source\Project\SFEngineProject.h" />
     <ClInclude Include="Engine\EngineRequirements.h" />
     <ClInclude Include="Engine\ProjectIncludes.h" />
     <ClInclude Include="Engine\Source\Actor\Actor.h" />
@@ -196,8 +204,10 @@
     <ClInclude Include="Engine\Source\Camera\2DCamera.h" />
     <ClInclude Include="Engine\Source\Components\CollisionComponent.h" />
     <ClInclude Include="Engine\Source\Components\ComponentBase.h" />
+    <ClInclude Include="Engine\Source\Components\ComponentManager.h" />
     <ClInclude Include="Engine\Source\Components\InteractionComponent.h" />
     <ClInclude Include="Engine\Source\Components\ScriptComponent.h" />
+    <ClInclude Include="Engine\Source\CoreForward.h" />
     <ClInclude Include="Engine\Source\CoreTests\CoreTests.h" />
     <ClInclude Include="Engine\Source\CoreTests\TestDefs.h" />
     <ClInclude Include="Engine\Source\DefsX64.h" />
@@ -225,6 +235,12 @@
     <ClInclude Include="Engine\Source\Lights\LightObject.h" />
     <ClInclude Include="Engine\Source\Logging\Logger.h" />
     <ClInclude Include="Engine\Source\Messaging\CoreMessager.h" />
+    <ClInclude Include="Engine\Source\Minimal.h" />
+    <ClInclude Include="Engine\Source\Objects\GameObject.h" />
+    <ClInclude Include="Engine\Source\Objects\IDamage.h" />
+    <ClInclude Include="Engine\Source\Objects\IObjectAffector.h" />
+    <ClInclude Include="Engine\Source\Objects\IObjectAnimator.h" />
+    <ClInclude Include="Engine\Source\Objects\IPaths.h" />
     <ClInclude Include="Engine\Source\Objects\Property.h" />
     <ClInclude Include="Engine\Source\Objects\Equippable.h" />
     <ClInclude Include="Engine\Source\Objects\ProjectileBase.h" />
@@ -253,15 +269,17 @@
     <ClInclude Include="Engine\Source\Threading\WorkerThread.h" />
     <ClInclude Include="Engine\Source\Tiles\LevelTile.h" />
     <ClInclude Include="Engine\Source\Tiles\TileGrid.h" />
-    <ClInclude Include="Engine\Source\Tiles\TileSheet.h" />
     <ClInclude Include="Engine\Source\Tiles\TMXMap.h" />
     <ClInclude Include="Engine\Source\Time\RealTimeClock.h" />
     <ClInclude Include="Engine\Source\Time\TimedSequence.h" />
     <ClInclude Include="Engine\Source\Time\Timer.h" />
     <ClInclude Include="Engine\Source\Time\TimerManager.h" />
     <ClInclude Include="Engine\Source\Time\TimeStep.h" />
+    <ClInclude Include="Engine\Source\UI\Policies.h" />
+    <ClInclude Include="Engine\Source\UI\PropertyAnimator.h" />
     <ClInclude Include="Engine\Source\UI\UIIconSheet.h" />
     <ClInclude Include="Engine\Source\UI\UIMacros.h" />
+    <ClInclude Include="Engine\Source\UI\Widgets\Widget.h" />
     <ClInclude Include="Engine\Source\Utils\AssetConverters.h" />
     <ClInclude Include="Engine\Source\Utils\CacheIni.h" />
     <ClInclude Include="Engine\Source\Utils\CollisionHelpers.h" />
@@ -287,8 +305,10 @@
     <ClInclude Include="Engine\Source\WindowsDefs.h" />
     <ClInclude Include="Engine\stdafx.h" />
     <ClInclude Include="Engine\Tests\Encoding\EncodingTests.h" />
+    <ClInclude Include="Engine\Tests\Parsing\ParsingTests.h" />
     <ClInclude Include="Engine\Tests\Scripting\ScriptingTests.h" />
     <ClInclude Include="Engine\Tests\Serialization\ScriptSerializationTests.h" />
+    <ClInclude Include="Engine\Tests\Serialization\SFMLSerializationTests.h" />
     <ClInclude Include="Engine\ThirdParty\basen\basen.hpp" />
     <ClInclude Include="Engine\ThirdParty\cereal\access.hpp" />
     <ClInclude Include="Engine\ThirdParty\cereal\archives\adapters.hpp" />
@@ -543,7 +563,7 @@
       <OpenMPSupport>true</OpenMPSupport>
       <PrecompiledHeaderFile>Engine/stdafx.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>Engine/stdafx.h</ForcedIncludeFiles>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

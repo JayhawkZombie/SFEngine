@@ -28,8 +28,11 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Events\EventHandler.h"
-#include "Level\BasicLevel.h"
+#include "Engine/stdafx.h"
+
+#include "EventHandler.h"
+#include "Level/BasicLevel.h"
+#include "Globals/GlobalHooks.h"
 
 EventHandler::EventHandler()
 {

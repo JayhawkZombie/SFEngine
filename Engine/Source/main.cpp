@@ -124,12 +124,17 @@
 #include "Tests\Encoding\EncodingTests.h"
 #include "Tests\Scripting\ScriptingTests.h"
 #include "Tests\Serialization\ScriptSerializationTests.h"
+#include "Tests\Serialization\SFMLSerializationTests.h"
+#include "Tests\Parsing\ParsingTests.h"
 
 int main(int argc, char **argv)
 {
   //TestEncoding();
   //RunScriptingTests();
-  RunScriptSerializationTests();
+  //RunScriptSerializationTests();
+  //RunSFMLSerializationTests();
+
+  RunParsingTests();
 
   SFEngine GameEngine;
   return (GameEngine.Go(argc, argv));

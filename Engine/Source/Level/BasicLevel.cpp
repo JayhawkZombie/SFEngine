@@ -28,11 +28,16 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Level\BasicLevel.h"
-#include "Actor\Actor.h"
-#include "Physics\Collider.h"
-#include "Tiles\TileSheet.h"
-#include "Physics\Occluder.h"
+#include "Engine/stdafx.h"
+
+#include "BasicLevel.h"
+#include "Globals/GlobalHooks.h"
+#include "Exceptions/Exceptions.h"
+#include "Actor/Actor.h"
+#include "Physics/Collider.h"
+#include "Physics/Occluder.h"
+
+#include <cereal/archives/portable_binary.hpp>
 
 namespace
 {
@@ -449,28 +454,7 @@ void BasicLevel::LoadSheet(const Json::Value & value)
 {
   try
   {
-    auto texname = value["Name"].asString();
-    auto sheet_data = value["Sheet"];
-    auto frames = sheet_data["Frames"];
-
-    TileSheets[texname] = std::make_shared<TileSheet>();
-
-    Json::Value rect;
-    std::string tilename{ "" };
-    sf::IntRect IRect{ 0, 0, 0, 0 };
-
-    for (auto & frame : frames) {
-      tilename = frame["Name"].asString();
-      rect = frame["Rect"];
-
-      IRect.left = rect[0].asInt();
-      IRect.top = rect[1].asInt();
-      IRect.width = rect[2].asInt();
-      IRect.height = rect[3].asInt();
-
-      TileSheets[texname]->AddTile(texname, IRect);
-      TileSheets[texname]->SetTexture(Textures[sheet_data["Texture"].asString()]);
-    }
+    
   }
   catch (Json::Exception &err)
   {
@@ -545,3 +529,5 @@ void BasicLevel::UpdateObjectPhysics()
 
   UpdatePhysics(Colliders, SegVector);
 }
+
+CEREAL_REGISTER_TYPE(BasicLevel);

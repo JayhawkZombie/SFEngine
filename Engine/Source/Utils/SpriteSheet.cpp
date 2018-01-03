@@ -68,7 +68,7 @@ void SpriteSheet::SerializeOut(std::ofstream &out)
     Encode::Rect<>(frame, out);
 }
 
-void SpriteSheet::SetTexture(SharedTexture tex)
+void SpriteSheet::SetTexture(std::shared_ptr<sf::Texture> tex)
 {
   Texture = tex;
 
@@ -84,7 +84,7 @@ std::shared_ptr<sf::Sprite> SpriteSheet::GetSprite(std::size_t index)
   throw EngineRuntimeError({ ExceptionCause::InvalidObjectUsed }, EXCEPTION_MESSAGE("Sprite index out of boudns"));
 }
 
-SharedTexture SpriteSheet::GetTexture() const
+std::shared_ptr<sf::Texture> SpriteSheet::GetTexture() const
 {
   return Texture;
 }

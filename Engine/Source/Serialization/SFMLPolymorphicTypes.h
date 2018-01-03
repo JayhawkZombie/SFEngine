@@ -30,6 +30,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
+#include <SFML/Audio.hpp>
 
 #include "SFMLTypes.h"
 

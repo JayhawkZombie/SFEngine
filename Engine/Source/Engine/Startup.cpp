@@ -28,9 +28,10 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Engine\Engine.h"
-
-#include "Level\Level.h"
+#include "Engine/stdafx.h"
+#include "Engine/Engine.h"
+#include "Engine/ReturnValues.h"
+#include "Level/Level.h"
 
 void SFEngine::InitRenderWindow()
 {

@@ -65,12 +65,12 @@ struct Config
   bool               Window_bFullscreen;
   bool               Window_bShowSplashScreen;
   bool               Window_bPlaySplashScreenAudio;
-  UINT32             Window_uiDepthBits;
-  UINT32             Window_uiStencilBits;
+  uint32_t           Window_uiDepthBits;
+  uint32_t           Window_uiStencilBits;
 
   //Effects ini settings
   bool              Effects_bPostProcessEnabled;
-  UINT32            Effects_uiMaxNumParticles;
+  uint32_t          Effects_uiMaxNumParticles;
   std::vector<std::string> Effects_strShaderPath; //Vector of paths to shaders
   std::vector<std::string> Effects_strShader;     //Vector of the names of the shaders
 };

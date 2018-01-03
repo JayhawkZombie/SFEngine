@@ -28,8 +28,10 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Objects\Static.h"
-#include "Physics\Collider.h"
+#include "Engine/stdafx.h"
+#include "Globals/GlobalHooks.h"
+#include "Objects/Static.h"
+#include "Physics/Collider.h"
 
 #include <cassert>
 

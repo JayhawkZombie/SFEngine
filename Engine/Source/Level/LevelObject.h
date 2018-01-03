@@ -90,7 +90,7 @@ friend class BasicLevel;
 
   virtual void HandleCollisionWithObject(LevelObject *Object);
   virtual void SetCollisionHandleCallback(std::function<void(LevelObject*)> Callback);
-  virtual void HandleCollisionWithCollider(SPtrShared<Collider2D> Collider);
+  virtual void HandleCollisionWithCollider(std::shared_ptr<Collider2D> Collider);
   virtual void HandleCollisionWithSegment(PhysicsEngineSegmentType *Segment);
   virtual void SetSegmentCollisionCallback(std::function<void(PhysicsEngineSegmentType*)> Callback);
 

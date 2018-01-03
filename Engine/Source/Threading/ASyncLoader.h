@@ -30,7 +30,7 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "BasicIncludes.h"
+#include "Minimal.h"
 
 #include <thread>
 #include <mutex>
@@ -49,7 +49,7 @@ struct ASyncThreadStatus
   std::mutex StatusLock;
   std::condition_variable   ThreadCond;
   std::function<void(void)> NotifyCompleted;
-  SPtrShared<BasicLevel> LoadingLevel;
+  std::shared_ptr<BasicLevel> LoadingLevel;
 };
 
 struct ASyncThreadRequest
@@ -62,12 +62,12 @@ struct ASyncThreadRequest
 class ASyncLevelStreamThread
 {
 public:
-  static SPtrShared<ASyncThreadStatus> Launch();
+  static std::shared_ptr<ASyncThreadStatus> Launch();
   static void Shutdown();
 
-  static bool Load(std::function<SPtrShared<BasicLevel>(void)> LoadFtn, std::string LevelName);
+  static bool Load(std::function<std::shared_ptr<BasicLevel>(void)> LoadFtn, std::string LevelName);
   static std::thread::id GetThreadID();
-  static SPtrShared<ASyncThreadStatus> GetThreadStatus();
+  static std::shared_ptr<ASyncThreadStatus> GetThreadStatus();
 
 protected:
   ASyncLevelStreamThread();
@@ -76,13 +76,13 @@ protected:
   static ASyncLevelStreamThread* Get();
     
   //Level to stream data into
-  SPtrShared<BasicLevel> m_StreamingLevel;
+  std::shared_ptr<BasicLevel> m_StreamingLevel;
 
   //Lock to secure the queue
-  SPtrSharedMutex m_QueueLock;
+  std::shared_ptr<std::mutex> m_QueueLock;
 
   //Request to query
-  SPtrShared<ASyncThreadStatus> m_StreamerStatus;
+  std::shared_ptr<ASyncThreadStatus> m_StreamerStatus;
 
   //The thread
   std::thread m_Thread;
@@ -91,9 +91,9 @@ protected:
   std::thread::id m_ThreadID;
 
   //Queue to push requests into
-  SPtrShared<
+  std::shared_ptr<
     std::queue<
-      std::pair<std::string, std::function<SPtrShared<BasicLevel>(void)>>
+      std::pair<std::string, std::function<std::shared_ptr<BasicLevel>(void)>>
     >> m_LoadingQueue;
 };
 
@@ -115,7 +115,7 @@ protected:
   ~ASyncLoadManager();
 
   std::thread m_LoaderThread;
-  SPtrShared<std::mutex> m_ThreadMutex;
-  SPtrShared<std::mutex> m_ThreadStatusLock;
-  SPtrShared<ASyncThreadStatus> m_ThreadCompleted;
+  std::shared_ptr<std::mutex> m_ThreadMutex;
+  std::shared_ptr<std::mutex> m_ThreadStatusLock;
+  std::shared_ptr<ASyncThreadStatus> m_ThreadCompleted;
 };

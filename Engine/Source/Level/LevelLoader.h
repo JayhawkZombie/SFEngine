@@ -88,7 +88,7 @@ private:
   std::vector<std::string> PairTexts;
 
   std::vector<std::shared_ptr<LevelTile>> BaseTiles;
-  SharedTexture TileSheet;
+  std::shared_ptr<sf::Texture> TileSheet;
   std::shared_ptr<SpriteSheet> TileSpriteSheet;
 
   void DebugPrintData();

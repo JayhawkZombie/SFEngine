@@ -28,6 +28,7 @@
 //
 ////////////////////////////////////////////////////////////
 
+#include "Engine/stdafx.h"
 #include "Engine\Engine.h"
 
 SFEngine::SFEngine()

@@ -48,7 +48,7 @@ public:
   Occluder2D() = default;
   ~Occluder2D() = default;
 
-  void SetOccluder(SPtrShared<PhysicsEngineBaseMeshType> Mesh) {
+  void SetOccluder(std::shared_ptr<PhysicsEngineBaseMeshType> Mesh) {
     m_OccluderMesh = Mesh;
   }
 
@@ -76,7 +76,7 @@ public:
 
 protected:
   bool m_CastSoftShadow = false;
-  SPtrShared<PhysicsEngineBaseMeshType> m_OccluderMesh;
+  std::shared_ptr<PhysicsEngineBaseMeshType> m_OccluderMesh;
 
   std::vector<::vec2d> m_SortingPoints;
 

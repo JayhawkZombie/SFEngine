@@ -28,6 +28,8 @@
 //
 ////////////////////////////////////////////////////////////
 
+#include "Engine/stdafx.h"
+
 #include "Globals\GlobalHooks.h"
 #include "Engine\Engine.h"
 #include  "Level\BasicLevel.h"
@@ -54,7 +56,7 @@ std::unordered_map<std::string, std::shared_ptr<BasicLevel>> Levels;
 BasicLevel *CurrentLevel = nullptr;
 std::string EntryLevelName;
 InputDeviceState InputState;
-SPtrSharedMutex LevelsLock;
+std::shared_ptr<std::mutex> LevelsLock;
 volatile double TimeScaleFactor = 1.0;
 std::string WindowTitle = "<NO TITLE>";
 sf::Uint32 WindowStyle;

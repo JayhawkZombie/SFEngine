@@ -30,10 +30,7 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "BasicIncludes.h"
 #include "Engine\BaseEngineInterface.h"
-
-class LevelObject;
 
 class EquippableBase : public BaseEngineInterface
 {

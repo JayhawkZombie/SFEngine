@@ -28,7 +28,8 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Lights\LightObject.h"
+#include "Engine/stdafx.h"
+#include "Lights/LightObject.h"
 
 
 void SORT2(std::vector<std::pair<KS::Vec2<float>, float>> &Vertices, const int &first, const int &last)

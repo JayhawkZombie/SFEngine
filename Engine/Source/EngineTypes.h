@@ -65,27 +65,3 @@
 #else
 #include "DefsX86.h"
 #endif
-
-using SVector2F   = sf::Vector2<SFLOAT>;
-using SVector2I   = sf::Vector2i;
-using SVector2U   = sf::Vector2u;
-using SVector2U32 = sf::Vector2<UINT32>;
-using SVector2U64 = sf::Vector2<UINT64>;
-using SVector2C = sf::Vector2<char>;
-using SVector3F = sf::Vector3<SFLOAT>;
-using SVector3I = sf::Vector3i;
-using SVector3U = sf::Vector3<unsigned int>;
-using SVector3C = sf::Vector3<char>;
-
-using SharedTexture = std::shared_ptr<sf::Texture>;
-
-template<typename T>
-using SPtrShared      = std::shared_ptr<T>;
-using SPtrSharedMutex = SPtrShared<std::mutex>;
-using STexture        = SPtrShared<sf::Texture>;
-using STextureMap     = std::map<std::string, STexture>;
-
-template<typename T>
-using SPtrUnique = std::unique_ptr<T>;
-using SClockHigh = std::chrono::high_resolution_clock;
-using SClockSys  = std::chrono::system_clock;

@@ -28,9 +28,12 @@
 //
 ////////////////////////////////////////////////////////////
 
+#include "Engine/stdafx.h"
+
 #include "Engine\Engine.h"
 #include "Resources\ResourceManager.h"
 #include "Messaging\CoreMessager.h"
+#include "Engine/ReturnValues.h"
 
 UINT32 SFEngine::Shutdown()
 {

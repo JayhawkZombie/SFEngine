@@ -28,13 +28,14 @@
 //
 ////////////////////////////////////////////////////////////
 
+#include "Engine/stdafx.h"
+
 #include "Factory\Factory.h"
 #include "Actor\Actor.h"
 #include "Actor\Player.h"
 #include "Animation\Animation.h"
 #include "Level\Level.h"
 #include "Tiles\LevelTile.h"
-#include "Tiles\TileSheet.h"
 
 #include "json\json.h"
 

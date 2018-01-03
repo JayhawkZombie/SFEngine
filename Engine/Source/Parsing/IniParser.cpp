@@ -41,7 +41,148 @@ void IniParser::Parse(const std::string &Filename)
 
 void IniParser::Parse(std::stringstream &stream)
 {
-  boost::char_separator<char> seps("", "[]=\n");
-  TTokenizer tokens(stream.str(), seps);
+  boost::char_separator<char> seps("\n", "[]=");
+  const std::string str = stream.str();
 
+  TTokenizer tokens(str, seps);
+
+  auto tok = tokens.begin();
+
+  std::string SectionString;
+  std::string KeyString;
+  std::string ValueString;
+
+  while (tok != tokens.end())
+  {
+
+    /* If the token is '[', extract the section string */
+    if (*tok == "[")
+    {
+
+      /* The next token should be the key, and the next after that should be ']' */
+
+      if (++tok == tokens.end())
+      {
+        std::cerr << "IniParser::Error: Expected string after \"]\" but reached end of input\n";
+        ErrorSectionHeaderInvalid();
+        break;
+      }
+
+      SectionString = *tok;
+
+      if (++tok == tokens.end())
+      {
+        std::cerr << "IniParser::Error: Expected \"]\" but reached end of input\n";
+        ErrorSectionHeaderInvalid();
+        break;
+      }
+
+      /* Verify this token is "]" */
+      if (*tok != "]")
+      {
+        std::cerr << "IniParser::Error: Expected \"]\" but found \"" << *tok << "\"\n";
+        ErrorSectionHeaderInvalid();
+        break;
+      }
+
+      tok++;
+
+      m_ValueMap.try_emplace(SectionString);
+
+    } // if (*tok == "[")
+
+    else if (*tok != "\n")
+    {
+      /* If not a section header, we should try to parse a key-value pair */
+
+      KeyString = *tok;
+
+      if (++tok == tokens.end())
+      {
+        std::cerr << "IniParser::Error: Expected \"=\" but reached end of input\n";
+        ErrorKeyInvalid(KeyString);
+        break;
+      }
+
+      if (*tok != "=")
+      {
+        std::cerr << "IniParser::Error: Expected \"=\" but found \"" << *tok << "\"\n";
+        ErrorValueInvalid(KeyString);
+        break;
+      }
+
+      if (++tok == tokens.end())
+      {
+        std::cerr << "IniParser::Error: Expected to find value string but reached end of input\n";
+        ErrorValueInvalid(KeyString);
+        break;
+      }
+
+      ValueString = *tok;
+
+      ++tok;
+
+      m_ValueMap[SectionString].try_emplace(KeyString, ValueString);
+
+    } // else (not a section header)
+    else
+    {
+      tok++;
+    }
+
+  } // while (tok != tokens.end())
+}
+
+bool IniParser::HasSection(const std::string &Name)
+{
+  return ( m_ValueMap.find(Name) != m_ValueMap.end() );
+}
+
+bool IniParser::HasKey(const std::string &Section, const std::string &KeyString)
+{
+  auto optl = TryGetValue(Section, KeyString);
+
+  return optl.has_value();
+}
+
+std::optional<std::string> IniParser::TryGetValue(const std::string &Section, const std::string &KeyString)
+{
+  auto sectn = m_ValueMap.find(Section);
+
+  if (sectn != m_ValueMap.end())
+  {
+    auto key = ( *sectn ).second.find(KeyString);
+
+    if (key != ( *sectn ).second.end())
+    {
+      return std::make_optional(( *key ).second);
+    }
+  }
+
+  return std::nullopt;
+}
+
+bool IniParser::TryParseHeader()
+{
+  return false;
+}
+
+bool IniParser::TryParseValues()
+{
+  return false;
+}
+
+void IniParser::ErrorSectionHeaderInvalid()
+{
+  std::cerr << "IniParser::SectionHeaderInvalid\n";
+}
+
+void IniParser::ErrorKeyInvalid(const std::string &KeyStr)
+{
+  std::cerr << "IniParser::KeyInvalid (Key is \"" << KeyStr << "\"\n";
+}
+
+void IniParser::ErrorValueInvalid(const std::string &KeyStr)
+{
+  std::cerr << "IniParser::ValueInvalid (Key was \"" << KeyStr << "\"\n";
 }

@@ -28,6 +28,7 @@
 //
 ////////////////////////////////////////////////////////////
 
+#include "Engine/stdafx.h"
 #include "Engine\InputInterface.h"
 
 void InputInterface::BindMethods(chaiscript::ModulePtr mptr)

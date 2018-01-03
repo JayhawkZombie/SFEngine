@@ -169,8 +169,8 @@ std::shared_ptr<Collider2D> Collider2D::CreateExpandingMesh
   sf::Color Color
 )
 {
-  SPtrShared<PhysicsEngineBaseMeshType> Polygon = BuildExpandPolygonMesh(numSides, radiusWhenFull, IAngle, InitialPosition, InitialVelocity, Mass, CoeffOfRest, GrowSpeed, Color);
-  SPtrShared<Collider2D> Collider = std::make_shared<Collider2D>();
+  std::shared_ptr<PhysicsEngineBaseMeshType> Polygon = BuildExpandPolygonMesh(numSides, radiusWhenFull, IAngle, InitialPosition, InitialVelocity, Mass, CoeffOfRest, GrowSpeed, Color);
+  std::shared_ptr<Collider2D> Collider = std::make_shared<Collider2D>();
   Collider->m_Mesh = Polygon;
   return Collider;
 }

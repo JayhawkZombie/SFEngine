@@ -28,8 +28,9 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Objects\TriggerObject.h"
-#include "Physics\Collider.h"
+#include "Engine/stdafx.h"
+#include "Objects/TriggerObject.h"
+#include "Physics/Collider.h"
 
 TriggerObject::TriggerObject(TriggerMethod Method)
   : m_TriggerMethod(Method)

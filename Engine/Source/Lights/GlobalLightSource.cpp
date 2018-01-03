@@ -28,7 +28,8 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Lights\GlobalLightSource.h"
+#include "Engine/stdafx.h"
+#include "Lights/GlobalLightSource.h"
 
 std::shared_ptr<GlobalLightSource> GlobalLightSource::Create()
 {

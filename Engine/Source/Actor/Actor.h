@@ -57,7 +57,7 @@ public:
   virtual void SerializeIn(std::ifstream &in) override;
 
   virtual void SetCollisionHandleCallback(std::function<void(LevelObject *)> Callback) override;
-  virtual void HandleCollisionWithCollider(SPtrShared<Collider2D> Collider) override;
+  virtual void HandleCollisionWithCollider(std::shared_ptr<Collider2D> Collider) override;
   virtual void HandleCollisionWithObject(LevelObject *Object) override;
   virtual void HandleInputEvent(const UserEvent &evnt) override;
   virtual bool WantsInputEvent(const Events &evnt) const;

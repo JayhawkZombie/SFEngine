@@ -28,7 +28,11 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Engine\BaseEngineInterface.h"
+#include "Engine/stdafx.h"
+
+#include "Engine/BaseEngineInterface.h"
+#include "Exceptions/Exceptions.h"
+#include <cereal/archives/portable_binary.hpp>
 
 BaseEngineInterface::BaseEngineInterface()
 {
@@ -136,3 +140,5 @@ void BaseEngineInterface::SetID(const std::string &ID)
 {
   ItemID = ID;
 }
+
+CEREAL_REGISTER_TYPE(BaseEngineInterface)

@@ -97,7 +97,7 @@ namespace chaiscript {
 //forward declaration of BasicLevel class for the global Levels object
 class BasicLevel;
 
-extern SPtrSharedMutex LevelsLock;
+extern std::shared_ptr<std::mutex> LevelsLock;
 extern std::unordered_map<std::string, std::shared_ptr<BasicLevel>> Levels;
 extern std::string EntryLevelName;
 extern BasicLevel *CurrentLevel;

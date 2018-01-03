@@ -37,15 +37,6 @@
 #include "ThirdParty/PhysicsEngine.h"
 #include "ThirdParty/SelbaWard\TileMap.hpp"
 
-class LevelObject;
-class TileSheet;
-class Animation;
-class Collider2D;
-class GenericActor;
-class ProjectileBase;
-class WeatherSystem;
-class WeatherEvent;
-
 class BasicLevel : public BaseEngineInterface
 {
 public:
@@ -116,7 +107,6 @@ public:
   std::vector<SegmentPtr> Segments;
   std::vector<WaveSegmentPtr> Waves;
   std::map<std::string, std::shared_ptr<sf::Texture>> Textures;
-  std::map<std::string, std::shared_ptr<TileSheet>> TileSheets;
   std::map<std::string, std::shared_ptr<Animation>> Animations;
   std::map<std::string, std::shared_ptr<sf::SoundBuffer>> SoundBuffers;
 

@@ -28,25 +28,190 @@
 //
 ////////////////////////////////////////////////////////////
 
+#include "Engine/stdafx.h"
+
 #include "Components/CollisionComponent.h"
 #include "ThirdParty/PhysicsEngine.h"
 
+mvHit * CollisionComponent::GetMesh() const
+{
+  switch (m_MeshType)
+  {
+    case ECollisionComponentMeshType::Ball:
+    {
+      return ( mvHit * ) ( std::addressof(ballMesh) );
+    }
+
+    case ECollisionComponentMeshType::BallGo:
+    {
+      return ( mvHit * ) ( std::addressof(ballGoMesh) );
+    }
+
+    case ECollisionComponentMeshType::Block:
+    {
+      return ( mvHit * ) ( std::addressof(blockMesh) );
+    }
+
+    case ECollisionComponentMeshType::ExpandPolygon:
+    {
+      return ( mvHit * ) ( std::addressof(expandMesh) );
+    }
+
+    case ECollisionComponentMeshType::RegPolygon:
+    {
+      return ( mvHit * ) ( std::addressof(polyMesh) );
+    }
+
+    case ECollisionComponentMeshType::WaveSeg:
+    {
+      return ( mvHit * ) ( std::addressof(waveMesh) );
+    }
+
+    default:
+    {
+      return nullptr;
+    }
+  }
+}
+
+
 CollisionComponent::CollisionComponent()
 {
-  ComponentName = "CollisionComponent";
+  ballMesh = ball();
+}
+
+
+CollisionComponent::CollisionComponent(const CollisionComponent &Component)
+  : m_IsHidden(Component.m_IsHidden)
+  , m_IsSleeping(Component.m_IsSleeping)
+  , m_MeshType(Component.m_MeshType)
+  , m_UseOnlyForOverlapTesting(Component.m_UseOnlyForOverlapTesting)
+{
+  switch (Component.m_MeshType)
+  {
+    case ECollisionComponentMeshType::Ball:
+    {
+      ballMesh = Component.ballMesh;
+      break;
+    }
+
+    case ECollisionComponentMeshType::BallGo:
+    {
+      ballGoMesh = Component.ballGoMesh;
+      break;
+    }
+
+    case ECollisionComponentMeshType::Block:
+    {
+      blockMesh = Component.blockMesh;
+      break;
+    }
+
+    case ECollisionComponentMeshType::ExpandPolygon:
+    {
+      expandMesh = Component.expandMesh;
+      break;
+    }
+
+    case ECollisionComponentMeshType::RegPolygon:
+    {
+      polyMesh = Component.polyMesh;
+      break;
+    }
+
+    case ECollisionComponentMeshType::WaveSeg:
+    {
+      waveMesh = Component.waveMesh;
+      break;
+    }
+
+    default:
+    {
+      ballMesh = ball();
+    }
+  }
+}
+
+
+CollisionComponent::CollisionComponent(CollisionComponent &&Component)
+  : m_IsHidden(Component.m_IsHidden)
+  , m_IsSleeping(Component.m_IsSleeping)
+  , m_MeshType(Component.m_MeshType)
+  , m_UseOnlyForOverlapTesting(Component.m_UseOnlyForOverlapTesting)
+{
+  switch (Component.m_MeshType)
+  {
+    case ECollisionComponentMeshType::Ball:
+    {
+      ballMesh = std::move(Component.ballMesh);
+      break;
+    }
+
+    case ECollisionComponentMeshType::BallGo:
+    {
+      ballGoMesh = std::move(Component.ballGoMesh);
+      break;
+    }
+
+    case ECollisionComponentMeshType::Block:
+    {
+      blockMesh = std::move(Component.blockMesh);
+      break;
+    }
+
+    case ECollisionComponentMeshType::ExpandPolygon:
+    {
+      expandMesh = std::move(Component.expandMesh);
+      break;
+    }
+
+    case ECollisionComponentMeshType::RegPolygon:
+    {
+      polyMesh = std::move(Component.polyMesh);
+      break;
+    }
+
+    case ECollisionComponentMeshType::WaveSeg:
+    {
+      waveMesh = std::move(Component.waveMesh);
+      break;
+    }
+
+    default:
+    {
+      ballMesh = ball();
+    }
+  }
 }
 
 CollisionComponent::~CollisionComponent()
 {
+  //Fuck you VisualStudio - I want to DEFAULT this destructor
 }
 
-void CollisionComponent::CreateMesh(std::shared_ptr<PhysicsEngineBaseMeshType> Mesh)
+void CollisionComponent::SetMesh(const SCollisionMeshData &Data)
 {
-    
+  switch (Data.Type)
+  {
+    case ECollisionComponentMeshType::Ball:
+    case ECollisionComponentMeshType::BallGo:
+    case ECollisionComponentMeshType::Block:
+    case ECollisionComponentMeshType::ExpandPolygon:
+    case ECollisionComponentMeshType::RegPolygon:
+    case ECollisionComponentMeshType::WaveSeg:
+    default:
+      return;
+  }
 }
 
-std::shared_ptr<Collider2D> CollisionComponent::GetCollider()
+ECollisionComponentMeshType CollisionComponent::GetMeshType() const
 {
-  return
-    Enabled ? CollisionMesh : nullptr;
+  return m_MeshType;
+}
+
+CollisionComponent::operator bool() const
+{
+  return ( m_MeshType != ECollisionComponentMeshType::None &&
+           ! m_IsHidden && !m_IsSleeping 
+         );
 }

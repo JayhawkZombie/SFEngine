@@ -28,6 +28,8 @@
 //
 ////////////////////////////////////////////////////////////
 
+#include "Engine/stdafx.h"
+
 #include "Engine\Engine.h"
 #include "Lights\LightingSystem.h"
 

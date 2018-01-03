@@ -28,6 +28,8 @@
 //
 ////////////////////////////////////////////////////////////
 
+#include "Engine/stdafx.h"
+
 #include "Engine\Engine.h"
 
 void SFEngine::HandleMouseMovement(const sf::Vector2i &mousePos)

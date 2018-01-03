@@ -28,7 +28,8 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Logging\Logger.h"
+#include "Engine/stdafx.h"
+#include "Logging/Logger.h"
 
 
 Logger::Logger()

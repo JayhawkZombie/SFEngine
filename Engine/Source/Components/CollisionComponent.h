@@ -35,17 +35,70 @@
 
 class mvHit;
 class Collider2D;
+class CollisionComponent;
 
-class CollisionComponent : protected ComponentBase
+enum class ECollisionComponentMeshType
+{
+  RegPolygon,
+  Ball,
+  BallGo,
+  ExpandPolygon,
+  Block,
+  WaveSeg,
+  None
+};
+
+struct SCollisionMeshData
+{
+  ECollisionComponentMeshType Type;
+  sf::Vector2f Position;
+  sf::Vector2f Velocity;
+  sf::Vector2f Size;
+  float CoefficientOfRestitution;
+  float DragCoefficient;
+  float Mass;
+  bool IsFree;
+};
+
+class CollisionComponent
 {
 public:
+
   CollisionComponent();
   ~CollisionComponent();
 
-  void CreateMesh(std::shared_ptr<::mvHit> Mesh);
-  std::shared_ptr<Collider2D> GetCollider();
+  CollisionComponent(const CollisionComponent &);
+  CollisionComponent(CollisionComponent &&);
 
-protected:
-  std::shared_ptr<Collider2D> CollisionMesh;
-  bool Enabled = true;
+  void SetMesh(const SCollisionMeshData &Data);
+
+  mvHit * GetMesh() const;
+
+  ECollisionComponentMeshType GetMeshType() const;
+
+  operator bool() const;
+
+private:
+
+  ECollisionComponentMeshType m_MeshType = ECollisionComponentMeshType::None;
+
+  bool m_IsSleeping = false;
+  bool m_IsHidden = false;
+  
+  /* True if we only want to use the mesh for testing overlaps
+   * but NOT generate any HIT callbacks OR cause any mesh to think it
+   * has collided with it
+   * */
+  bool m_UseOnlyForOverlapTesting = false;
+
+  union 
+  {
+    regPolygon    polyMesh;
+    ball          ballMesh;
+    ball_go       ballGoMesh;
+    expandPolygon expandMesh;
+    block         blockMesh;
+    waveSeg       waveMesh;
+  };
+
 };

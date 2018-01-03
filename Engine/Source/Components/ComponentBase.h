@@ -32,6 +32,13 @@
 
 #include "Globals/GlobalHooks.h"
 
+struct ComponentHandle
+{
+  std::size_t ComponentIndex;
+  std::function<void()> ComponentDestroyedFunction
+    = [] () {};
+};
+
   class ComponentBase
   {
   public:

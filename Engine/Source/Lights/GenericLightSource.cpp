@@ -28,7 +28,8 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Lights\GenericLightSource.h"
+#include "Engine/stdafx.h"
+#include "Lights/GenericLightSource.h"
 
 GenericLightSource::GenericLightSource()
 {

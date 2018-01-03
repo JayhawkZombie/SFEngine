@@ -28,7 +28,8 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Objects\Equippable.h"
+#include "Engine/stdafx.h"
+#include "Objects/Equippable.h"
 
 EquippableBase::EquippableBase()
   : BaseEngineInterface()

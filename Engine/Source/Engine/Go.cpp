@@ -28,8 +28,11 @@
 //
 ////////////////////////////////////////////////////////////
 
+#include "Engine/stdafx.h"
+
 #include "Engine\Engine.h"
 #include "Exceptions\Exceptions.h"
+#include "Engine/ReturnValues.h"
 
 void TerminateHandler()
 {
@@ -41,7 +44,7 @@ void TerminateHandler()
   }
 }
 
-UINT32 SFEngine::Go(int argc, char **argv)
+uint32_t SFEngine::Go(int argc, char **argv)
 {
   CurrentEngine = this;
   std::set_terminate(TerminateHandler);

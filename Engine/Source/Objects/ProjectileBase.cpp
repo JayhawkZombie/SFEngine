@@ -28,8 +28,9 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Objects\ProjectileBase.h"
-#include "Physics\Collider.h"
+#include "Engine/stdafx.h"
+#include "Objects/ProjectileBase.h"
+#include "Physics/Collider.h"
 
 ProjectileBase::ProjectileBase()
   : m_Origin({ 0,0 }), m_Direction({ 0,0 }), m_Velocity({ 0,0 })

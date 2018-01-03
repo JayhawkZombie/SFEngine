@@ -28,9 +28,8 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Tiles\LevelTile.h"
-#include "Tiles\TileGrid.h"
-#include "Tiles\TileSheet.h"
+#include "Tiles/LevelTile.h"
+#include "Tiles/TileGrid.h"
 
 LevelTile::LevelTile()
   : LevelObject()
