@@ -30,7 +30,7 @@
 
 #include "Components/ScriptComponent.h"
 #include "Globals/GlobalHooks.h"
-#include "Level/LevelObject.h"
+#include "Objects/GameObject.h"
 
 inline std::string arglist(const std::vector<std::string> &args) {
   if (args.size() == 0)

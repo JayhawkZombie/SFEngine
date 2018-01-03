@@ -83,7 +83,7 @@ QuadTree::~QuadTree()
   CollidingMeshes.clear();
 }
 
-void QuadTree::InsertObject(std::shared_ptr<LevelObject> Object)
+void QuadTree::InsertObject(std::shared_ptr<GameObject> Object)
 {
   //First, see if it fits in any of our children
   if (FitsInsideAnyChild(Object)) {
@@ -111,9 +111,9 @@ void QuadTree::PlaceInsideChild(const sf::FloatRect & rect)
 
 }
 
-std::vector<std::shared_ptr<LevelObject>> QuadTree::GetContainedObjectsInRange(const sf::FloatRect &Region)
+std::vector<std::shared_ptr<GameObject>> QuadTree::GetContainedObjectsInRange(const sf::FloatRect &Region)
 {
-  return std::vector<std::shared_ptr<LevelObject>>();
+  return std::vector<std::shared_ptr<GameObject>>();
 }
 
 void QuadTree::GetColliderObjectsInRange(const sf::FloatRect &Region, std::vector<std::shared_ptr<Collider2D>> & Colliders)
@@ -130,14 +130,14 @@ void QuadTree::GetColliderObjectsInRange(const sf::FloatRect &Region, std::vecto
   if (IntersectsChild(Region, NW.get()))
     NW->GetColliderObjectsInRange(Region, Colliders);
 
-  for (auto & coll : ContainedObjects) {
-    if (coll->GetGlobalBounds().intersects(Region)) {
-      auto vec = coll->GetColliders();
-      auto it = vec.end() - 1;
-      for (auto & v : vec)
-        Colliders.push_back(v);
-    }
-  }
+  //for (auto & coll : ContainedObjects) {
+  //  if (coll->GetGlobalBounds().intersects(Region)) {
+  //    auto vec = coll->GetColliders();
+  //    auto it = vec.end() - 1;
+  //    for (auto & v : vec)
+  //      Colliders.push_back(v);
+  //  }
+  //}
 }
 
 std::vector<std::shared_ptr<Collider2D>> QuadTree::GetContainedCollidingMeshesInRange(const sf::FloatRect & Region)
@@ -166,13 +166,14 @@ bool QuadTree::IntersectsChild(const sf::FloatRect & Region, QuadTree * Child)
   return (Child->Bounds.intersects(Region));
 }
 
-int QuadTree::FitsInsideAnyChild(std::shared_ptr<LevelObject> LObject)
+int QuadTree::FitsInsideAnyChild(std::shared_ptr<GameObject> LObject)
 {
-  //will return true if the height and width and less than half ours
-  auto bounds = LObject->GetGlobalBounds();
+  ////will return true if the height and width and less than half ours
+  //auto bounds = LObject->GetGlobalBounds();
 
-  //AND the center of us is not contained within the rect
-  return ((bounds.width < Width / 2.f) && (bounds.height < Height / 2.f));
+  ////AND the center of us is not contained within the rect
+  //return ((bounds.width < Width / 2.f) && (bounds.height < Height / 2.f));
+  return false;
 }
 
 //int QuadTree::FitsInsideAnyChild(std::shared_ptr<Engine::LightObject> LObject)

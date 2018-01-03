@@ -73,6 +73,11 @@ public:
   sf::Vector2f GetVelocity() const;
   sf::Vector2f GetAcceleration() const;
 
+  void SetPosition(const sf::Vector2f &Pos);
+  void SetSize(const sf::Vector2f &Size);
+  void SetVelocity(const sf::Vector2f &Vel);
+  void SetAcceleration(const sf::Vector2f &Acc);
+
   double GetTimeSinceSpawned();
   double GetTimeSinceCreated();
 

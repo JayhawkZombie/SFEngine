@@ -34,7 +34,6 @@ class Engine;
 
 class BasicLevel;
 class Level;
-class LevelObject;
 
 class EventHandler;
 

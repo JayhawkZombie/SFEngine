@@ -43,17 +43,17 @@ void Level::TickUpdate(const double &delta)
 #endif
   //Only want to update the physics 60 times per second, since it does not time itself ((((UGH))))
     
-  for (auto & obj : LevelObjects)
+  for (auto & obj : m_GameObjects)
     obj.second->TickUpdate(delta);
 
   if (cumulative > updateInterval) {
 
-    if (DoUpdatePhysics && ( LevelObjects.size() > 0 || Segments.size() > 0) ) {
+    if (DoUpdatePhysics && ( m_GameObjects.size() > 0 || Segments.size() > 0) ) {
       UpdateObjectPhysics();
 
-      for (auto & obj : LevelObjects) {
-        obj.second->PhysicsUpdate();
-      }
+      //for (auto & obj : LevelObjects) {
+      //  obj.second->PhysicsUpdate();
+      //}
     }
 
     cumulative = 0.f;
@@ -77,12 +77,12 @@ void Level::UpdateObjectPhysics()
   SegVector.clear();
   Colliders.clear();
 
-  for (auto & obj : LevelObjects) {
-    auto vec = obj.second->GetColliders();
-    for (auto & mesh : vec) {
-      Colliders.push_back(mesh);
-    }
-  }
+  //for (auto & obj : m_GameObjects) {
+  //  auto vec = obj.second->GetColliders();
+  //  for (auto & mesh : vec) {
+  //    Colliders.push_back(mesh);
+  //  }
+  //}
     
   for (auto & seg : Segments)
     SegVector.push_back(seg.get());

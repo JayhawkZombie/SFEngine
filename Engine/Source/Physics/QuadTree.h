@@ -30,8 +30,9 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Level\LevelObject.h"
-#include "Lights\LightObject.h"
+#include "Objects/GameObject.h"
+#include "Lights/LightObject.h"
+#include "ThirdParty/PhysicsEngine.h"
 
 #include <SFML/Graphics.hpp>
 #include <memory>
@@ -47,7 +48,7 @@ public:
   QuadTree(const sf::Vector2f &cen, float wid, float hei, QuadTree *prnt, std::size_t level = 0);
   ~QuadTree();
 
-  void InsertObject(std::shared_ptr<LevelObject> Object);
+  void InsertObject(std::shared_ptr<GameObject> Object);
   //void InsertShadowCaster(std::shared_ptr<Engine::LightObject> Caster);
   void InsertCollidingMesh(std::shared_ptr<PhysicsEngineBaseMeshType> Mesh);
 
@@ -57,7 +58,7 @@ public:
   bool ShapeFitsInside(const sf::FloatRect &shape);
   void PlaceInsideChild(const sf::FloatRect &rect);
 
-  std::vector<std::shared_ptr<LevelObject>> GetContainedObjectsInRange(const sf::FloatRect &Region);
+  std::vector<std::shared_ptr<GameObject>> GetContainedObjectsInRange(const sf::FloatRect &Region);
   void GetColliderObjectsInRange(const sf::FloatRect &Region, std::vector<std::shared_ptr<Collider2D>> &Colliders);
   //std::vector<std::shared_ptr<Engine::LightObject>> GetContainedShadowCastingObjectsInRange(const sf::FloatRect &Region);
   std::vector<std::shared_ptr<Collider2D>> GetContainedCollidingMeshesInRange(const sf::FloatRect &Region);
@@ -67,7 +68,7 @@ private:
   void GetCollidersInRangeSelf(std::vector<std::shared_ptr<Collider2D>> &Colliders);
   void GetCollidersInRangeChild(std::vector<std::shared_ptr<Collider2D>> &Colliders, QuadTree *Child);
   inline bool IntersectsChild(const sf::FloatRect &Region, QuadTree *Child);
-  int FitsInsideAnyChild(std::shared_ptr<LevelObject> LObject);
+  int FitsInsideAnyChild(std::shared_ptr<GameObject> LObject);
   //int FitsInsideAnyChild(std::shared_ptr<Engine::LightObject> LightObject);
   int FitsInsideAnyChild(std::shared_ptr<PhysicsEngineBaseMeshType> Mesh);
   int PlaceInChild(std::shared_ptr<QuadTree> Tree);
@@ -88,7 +89,7 @@ public:
     
   std::vector<std::shared_ptr<Collider2D>> ContainedColliders;
 
-  std::vector<std::shared_ptr<LevelObject>> ContainedObjects;
+  std::vector<std::shared_ptr<GameObject>> ContainedObjects;
   //std::vector<std::shared_ptr<Engine::LightObject>> ShadowCastingObjects;
   std::vector<std::shared_ptr<PhysicsEngineBaseMeshType>> CollidingMeshes;
 };

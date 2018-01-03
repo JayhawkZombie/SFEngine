@@ -31,10 +31,9 @@
 ////////////////////////////////////////////////////////////
 
 #include "BasicIncludes.h"
-#include "Physics\Occluder.h"
-#include "Utils\RayCast.h"
-
-#include "Level\LevelObject.h"
+#include "Physics/Occluder.h"
+#include "Utils/RayCast.h"
+#include "Objects/GameObject.h"
 
 #define COSPIBY4 0.25
 
@@ -68,7 +67,7 @@ public:
   LightSystem();
   ~LightSystem();
 
-  void Update(std::map<std::string, std::shared_ptr<LevelObject>>& Objects);
+  void Update(std::map<std::string, std::shared_ptr<GameObject>>& Objects);
   void RenderOnTexture(std::shared_ptr<sf::RenderTexture> Texture, sf::View View);
 
   void AddLight(sf::Vector2f Pos, float Atten, sf::Color Color, std::string Name);

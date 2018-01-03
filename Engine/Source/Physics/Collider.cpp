@@ -28,9 +28,9 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Physics\Collider.h"
-#include "Level\LevelObject.h"
-#include "Physics\Occluder.h"
+#include "Physics/Collider.h"
+#include "Objects/GameObject.h"
+#include "Physics/Occluder.h"
 
 #include "PhysicsEngine.h"
 
@@ -344,10 +344,10 @@ sf::Vector2f Collider2D::GetPosition() const
 bool Collider2D::HandleCollision(std::weak_ptr<Collider2D> Collider)
 {
   if (m_Status.test(ColliderProp::Active) && m_Status.test(ColliderProp::Enabled)) {
-    if (m_MyObject) {
+    /*if (m_MyObject) {
       m_MyObject->HandleCollisionWithCollider(Collider.lock());
       m_MyObject->HandleCollisionWithObject(Collider.lock()->m_MyObject);
-    }
+    }*/
     if (m_CollisionCallback) {
       m_CollisionCallback(Collider.lock()->m_MyObject);
     }
@@ -365,8 +365,8 @@ bool Collider2D::HandleCollision(std::weak_ptr<Occluder2D> Occluder)
 bool Collider2D::HandleCollisionWithSegment(PhysicsEngineSegmentType *Collider)
 {
   if (m_Status.test(ColliderProp::Active) && m_Status.test(ColliderProp::Enabled)) {
-    if (m_MyObject)
-      m_MyObject->HandleCollisionWithSegment(Collider);
+    /*if (m_MyObject)
+      m_MyObject->HandleCollisionWithSegment(Collider);*/
     if (m_HitSegmentCallback)
       m_HitSegmentCallback(Collider);
   }

@@ -35,7 +35,6 @@
 #include "Actor\Player.h"
 #include "Animation\Animation.h"
 #include "Level\Level.h"
-#include "Tiles\LevelTile.h"
 
 #include "json\json.h"
 

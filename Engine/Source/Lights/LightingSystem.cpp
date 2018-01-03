@@ -106,16 +106,16 @@ LightSystem::~LightSystem()
 {
 }
 
-void LightSystem::Update(std::map<std::string, std::shared_ptr<LevelObject>>& Objects)
+void LightSystem::Update(std::map<std::string, std::shared_ptr<GameObject>>& Objects)
 {
   m_MapDrawn.clear();
 
-  for (auto & obj : Objects) {
+  //for (auto & obj : Objects) {
 
-    for (auto & occluder : obj.second->GetOccluders()) {
-      m_MapDrawn.push_back(occluder);
-    }
-  }
+  //  for (auto & occluder : obj.second->GetOccluders()) {
+  //    m_MapDrawn.push_back(occluder);
+  //  }
+  //}
 
   /* Sort based on angle from light source */
   ::vec2d _v1, _v2;

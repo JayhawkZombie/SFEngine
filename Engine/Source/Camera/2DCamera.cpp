@@ -67,7 +67,7 @@ void Camera2D::CenterOnActor()
 {
   sf::FloatRect ActorBounds = (
     m_AttachedTo.lock() ?
-        m_AttachedTo.lock()->GetGlobalBounds() :
+    sf::FloatRect(m_AttachedTo.lock()->GetPosition(), m_AttachedTo.lock()->GetSize()) :
         sf::FloatRect(0, 0, 0, 0)
     );
 

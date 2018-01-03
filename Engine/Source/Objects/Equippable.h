@@ -38,8 +38,8 @@ public:
   EquippableBase();
   ~EquippableBase();
 
-  virtual void OnEquipped(LevelObject *EquippedOn) = 0;
-  virtual void OnUnequipped(LevelObject *EquippedOff) = 0;
+  virtual void OnEquipped(GameObject *EquippedOn) = 0;
+  virtual void OnUnequipped(GameObject *EquippedOff) = 0;
 
   virtual std::string GetEquipType() const;
   virtual void SetEquipType(const std::string &Type);
@@ -47,6 +47,6 @@ public:
 protected:
   std::string m_EquipType;
 
-  LevelObject *m_ObjectAttachedTo;
+  GameObject *m_ObjectAttachedTo;
 
 };

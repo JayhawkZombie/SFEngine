@@ -112,11 +112,6 @@ void Player::HandleInputEvent(const UserEvent & evnt)
 {
 }
 
-bool Player::WantsInputEvent(const Events &evnt) const
-{
-  return false;
-}
-
 void Player::KeyWasPressed(const sf::Keyboard::Key &k)
 {
     

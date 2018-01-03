@@ -30,7 +30,7 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Level\LevelObject.h"
+#include "Objects/GameObject.h"
 
 #include "PhysicsEngine.h"
 
@@ -42,7 +42,7 @@ public:
 
   virtual std::shared_ptr<ProjectileBase> Clone() = 0;
 
-  virtual void OnObjectHit(LevelObject *objectHit) = 0;
+  virtual void OnObjectHit(GameObject *objectHit) = 0;
   void SetOrigin(const sf::Vector2f &Point);
   void SetDirection(const sf::Vector2f &Dir);
   void SetVelocity(const sf::Vector2f &Vel);

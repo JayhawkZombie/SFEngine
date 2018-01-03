@@ -54,7 +54,6 @@
     <ClCompile Include="Engine\Source\Factory\Factory.cpp" />
     <ClCompile Include="Engine\Source\Level\BasicLevel.cpp" />
     <ClCompile Include="Engine\Source\Level\Level.cpp" />
-    <ClCompile Include="Engine\Source\Level\LevelObject.cpp" />
     <ClCompile Include="Engine\Source\Level\Loader.cpp" />
     <ClCompile Include="Engine\Source\Level\Render.cpp" />
     <ClCompile Include="Engine\Source\Level\SerializeIn.cpp" />
@@ -76,7 +75,6 @@
     <ClCompile Include="Engine\Source\Objects\ProjectileBase.cpp" />
     <ClCompile Include="Engine\Source\Objects\Property.cpp" />
     <ClCompile Include="Engine\Source\Objects\ShotBase.cpp" />
-    <ClCompile Include="Engine\Source\Objects\Static.cpp" />
     <ClCompile Include="Engine\Source\Objects\TriggerObject.cpp" />
     <ClCompile Include="Engine\Source\Objects\TriggerVolume.cpp" />
     <ClCompile Include="Engine\Source\Parsing\IniParser.cpp" />
@@ -93,9 +91,6 @@
     <ClCompile Include="Engine\Source\Threading\ASyncLoadThread.cpp" />
     <ClCompile Include="Engine\Source\Threading\ThreadSafe.cpp" />
     <ClCompile Include="Engine\Source\Threading\WorkerThread.cpp" />
-    <ClCompile Include="Engine\Source\Tiles\LevelTile.cpp" />
-    <ClCompile Include="Engine\Source\Tiles\TileGrid.cpp" />
-    <ClCompile Include="Engine\Source\Tiles\TMXMap.cpp" />
     <ClCompile Include="Engine\Source\Time\RealTimeClock.cpp" />
     <ClCompile Include="Engine\Source\Time\TimedSequence.cpp" />
     <ClCompile Include="Engine\Source\Time\Timer.cpp" />
@@ -228,7 +223,6 @@
     <ClInclude Include="Engine\Source\Level\BasicLevel.h" />
     <ClInclude Include="Engine\Source\Level\Level.h" />
     <ClInclude Include="Engine\Source\Level\LevelLoader.h" />
-    <ClInclude Include="Engine\Source\Level\LevelObject.h" />
     <ClInclude Include="Engine\Source\Lights\GenericLightSource.h" />
     <ClInclude Include="Engine\Source\Lights\GlobalLightSource.h" />
     <ClInclude Include="Engine\Source\Lights\LightingSystem.h" />
@@ -245,7 +239,6 @@
     <ClInclude Include="Engine\Source\Objects\Equippable.h" />
     <ClInclude Include="Engine\Source\Objects\ProjectileBase.h" />
     <ClInclude Include="Engine\Source\Objects\ShotBase.h" />
-    <ClInclude Include="Engine\Source\Objects\Static.h" />
     <ClInclude Include="Engine\Source\Objects\TriggerObject.h" />
     <ClInclude Include="Engine\Source\Objects\TriggerVolume.h" />
     <ClInclude Include="Engine\Source\OSXDefs.h" />
@@ -267,9 +260,6 @@
     <ClInclude Include="Engine\Source\Threading\ASyncLoader.h" />
     <ClInclude Include="Engine\Source\Threading\ThreadSafe.h" />
     <ClInclude Include="Engine\Source\Threading\WorkerThread.h" />
-    <ClInclude Include="Engine\Source\Tiles\LevelTile.h" />
-    <ClInclude Include="Engine\Source\Tiles\TileGrid.h" />
-    <ClInclude Include="Engine\Source\Tiles\TMXMap.h" />
     <ClInclude Include="Engine\Source\Time\RealTimeClock.h" />
     <ClInclude Include="Engine\Source\Time\TimedSequence.h" />
     <ClInclude Include="Engine\Source\Time\Timer.h" />

@@ -30,11 +30,13 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Level\LevelObject.h"
+#include "Objects/GameObject.h"
 
-class LightningBolt : public LevelObject
+class LightningBolt : public GameObject
 {
 public:
+  TYPEDEF_PARENT_CLASS(GameObject);
+
   LightningBolt();
   ~LightningBolt();
 
@@ -63,9 +65,11 @@ protected:
   std::vector<sf::VertexArray> m_Points;
 };
 
-class CrawlingLightningBolt : public LevelObject
+class CrawlingLightningBolt : public GameObject
 {
 public:
+  TYPEDEF_PARENT_CLASS(GameObject);
+
   CrawlingLightningBolt();
   ~CrawlingLightningBolt();
 

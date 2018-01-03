@@ -118,41 +118,6 @@ void LevelLoader::LoadConfigInfo(std::ifstream &infile)
   //Get the width and height of the level
   LevelWidth = Util::GetUnsignedIntConfig("Config", "LevelWidth", 0, LevelFile, infile);
   LevelHeight = Util::GetUnsignedIntConfig("Config", "LevelHeight", 0, LevelFile, infile);
-
-  //Get the height and width of the tiles
-  TileWidth = Util::GetUnsignedIntConfig("Config", "TileWidth", 0, LevelFile, infile);
-  TileHeight = Util::GetUnsignedIntConfig("Config", "TileHeight", 0, LevelFile, infile);
-
-  //Divide the level into tiles
-  NumTilesWide = LevelWidth;
-  NumTilesHigh = LevelHeight;
-
-  //Load the tile sheet
-  TileSheetPath = Util::GetStringConfig("Config", "TileSheet", "", LevelFile, infile);
-  TileSheet = std::shared_ptr<sf::Texture>(new sf::Texture);
-  if (!TileSheet->loadFromFile(TileSheetPath)) {
-    std::cerr << "Unable to load tile sheet" << std::endl;
-    throw std::runtime_error("Unable to load tile sheet");
-  }
-
-  TileSpriteSheet = std::shared_ptr<SpriteSheet>(new SpriteSheet);
-  TileSpriteSheet->SetTexture(TileSheet);
-  TileSpriteSheet->EvenlyDivideFrames(TileWidth, TileHeight);
-
-  //Create a temporary storage for the tiles
-  //Allocate in 1D array for speed
-  Tiles = new std::shared_ptr<LevelTile>[NumTilesWide * NumTilesHigh];
-
-  ////Create the blank tiles
-  //for (std::size_t y = 0; y < NumTilesHigh; ++y) {
-
-  //  for (std::size_t x = 0; x < NumTilesWide; ++x) {
-
-  //    Tiles[y * NumTilesWide + x] = Factory::Tile();
-
-  //  }
-
-  //}
     
   //Load the rest of the information
   LoadTileInfo(infile);

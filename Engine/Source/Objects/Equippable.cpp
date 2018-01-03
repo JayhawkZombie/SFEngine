@@ -40,11 +40,11 @@ EquippableBase::~EquippableBase()
 {
 }
 
-void EquippableBase::OnEquipped(LevelObject * EquippedOn)
+void EquippableBase::OnEquipped(GameObject * EquippedOn)
 {
 }
 
-void EquippableBase::OnUnequipped(LevelObject * EquippedOff)
+void EquippableBase::OnUnequipped(GameObject * EquippedOff)
 {
 }
 

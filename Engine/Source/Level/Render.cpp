@@ -42,9 +42,6 @@ void Level::RenderOnTexture(std::shared_ptr<sf::RenderTexture> Texture)
       Texture->draw(arr);
   }
 
-  for (auto & obj : LevelObjects)
-    Texture->draw(obj.second->Sprite);
-
   //If we are using the editor, draw the meshes too
   //Make this configurable later
 #ifdef WITH_EDITOR

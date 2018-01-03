@@ -123,6 +123,26 @@ sf::Vector2f GameObject::GetAcceleration() const
   return m_Acceleration;
 }
 
+void GameObject::SetPosition(const sf::Vector2f &Pos)
+{
+  m_Position = Pos;
+}
+
+void GameObject::SetSize(const sf::Vector2f &Size)
+{
+  m_Size = Size;
+}
+
+void GameObject::SetVelocity(const sf::Vector2f &Vel)
+{
+  m_Velocity = Vel;
+}
+
+void GameObject::SetAcceleration(const sf::Vector2f &Acc)
+{
+  m_Acceleration = Acc;
+}
+
 double GameObject::GetTimeSinceSpawned()
 {
   return 0.0;

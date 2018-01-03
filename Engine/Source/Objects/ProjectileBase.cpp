@@ -41,7 +41,7 @@ ProjectileBase::~ProjectileBase()
 {
 }
 
-void ProjectileBase::OnObjectHit(LevelObject * objectHit)
+void ProjectileBase::OnObjectHit(GameObject * objectHit)
 {
 }
 

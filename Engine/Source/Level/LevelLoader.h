@@ -30,13 +30,12 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Globals\GlobalHooks.h"
-#include "Level\LevelObject.h"
-#include "Actor\Player.h"
-#include "Tiles\LevelTile.h"
-#include "Lights\GlobalLightSource.h"
-#include "Physics\QuadTree.h"
-#include "Factory\Factory.h"
+#include "Globals/GlobalHooks.h"
+#include "Objects/GameObject.h"
+#include "Actor/Player.h"
+#include "Lights/GlobalLightSource.h"
+#include "Physics/QuadTree.h"
+#include "Factory/Factory.h"
 
 struct LoaderLayer {
   QuadTree ObjectTree;
@@ -87,9 +86,7 @@ private:
   std::vector<DoubleStringPair> TilePairs;
   std::vector<std::string> PairTexts;
 
-  std::vector<std::shared_ptr<LevelTile>> BaseTiles;
   std::shared_ptr<sf::Texture> TileSheet;
-  std::shared_ptr<SpriteSheet> TileSpriteSheet;
 
   void DebugPrintData();
 
