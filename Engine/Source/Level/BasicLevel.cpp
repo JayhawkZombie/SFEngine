@@ -162,7 +162,7 @@ void BasicLevel::LoadLevel(const std::string & lvlfile)
 
 void BasicLevel::Init()
 {
-
+  
 }
 
 void BasicLevel::OnBegin()

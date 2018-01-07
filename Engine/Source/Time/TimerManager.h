@@ -45,6 +45,20 @@ public:
    *  This will freeze if you do so
    **/
   void AddTimer(double duration, bool repeat, double delay, double scale, const std::function<void()> &callback);
+
+  template<typename ClassType>
+  void AddTimer(double duration, bool repeat, double delay, double scale, ClassType *objectPtr, void (ClassType::*MemPtr)())
+  {
+    Timer timer;
+    timer.IsPeriodic = repeat;
+    timer.ExpirationTime = m_TotalElapsedTime + ( duration / scale ) * 1000.0;
+    timer.Duration = duration;
+    timer.TimeScale = scale;
+    timer.Callback = std::bind(MemPtr, objectPtr);
+
+    m_DeferredTimerAdds.push_back(timer);
+  }
+
   void Restart();
   void Tick(double RealTime);
   bool IsHandleValid(const TimerHandle &Handle);
