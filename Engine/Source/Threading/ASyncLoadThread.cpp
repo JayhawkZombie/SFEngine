@@ -30,13 +30,17 @@
 
 #include "Threading\ASyncLoader.h"
 #include "Level\BasicLevel.h"
+#include "Utils/Serializer.h"
 
 std::shared_ptr<ASyncThreadStatus> ASyncLevelStreamThread::Launch()
 {
   auto Streamer = Get();
-  Streamer->m_LoadingQueue = std::make_shared<std::queue<std::pair<std::string, std::function<std::shared_ptr<BasicLevel>(void)>>>>();
+  Streamer->m_LoadingQueue = std::make_shared<std::queue<std::string>>();
   Streamer->m_QueueLock = std::make_shared<std::mutex>();
   Streamer->m_StreamerStatus = std::make_shared<ASyncThreadStatus>();
+  Streamer->m_ShouldQuit = std::make_shared<bool>();
+
+  Streamer->m_ShouldQuit = false;
 
   Messager::PostToActivityLog(SystemMessage(SystemMessageType::ActivityLog, 0, 0, "ASyncLevelStreamThread launching"));
     
@@ -71,14 +75,14 @@ void ASyncLevelStreamThread::Shutdown()
   delete Streamer;
 }
 
-bool ASyncLevelStreamThread::Load(std::function<std::shared_ptr<BasicLevel>(void)> LoadFtn, std::string LevelName)
+bool ASyncLevelStreamThread::Load(std::string LevelName)
 {
   auto Streamer = Get();
   if (!Streamer)
     return false;
 
   Streamer->m_QueueLock->lock();
-  Streamer->m_LoadingQueue->push(std::pair<std::string, std::function<std::shared_ptr<BasicLevel>(void)>>(LevelName, LoadFtn));
+  Streamer->m_LoadingQueue->push(LevelName);
   Streamer->m_QueueLock->unlock();
 
   Streamer->m_StreamerStatus->StatusLock.lock();
@@ -143,38 +147,46 @@ void ASyncLevelStreamThread::ThreadLoop()
     m_StreamerStatus->StatusLock.unlock();
 
     //If the queue is not empty, pop of the queue and attempt to load the level
-    std::function<std::shared_ptr<BasicLevel>(void)> LoadFunction;
     std::string LevelName{ "" };
 
     if (!m_LoadingQueue->empty()) {
       //Load the level
       m_QueueLock->lock();
 
-      LevelName = m_LoadingQueue->front().first;
-      LoadFunction = m_LoadingQueue->front().second;
+      LevelName = m_LoadingQueue->front();
 
       m_LoadingQueue->pop();
       m_QueueLock->unlock();
 
-      if (LoadFunction) {
-        m_StreamerStatus->StatusLock.lock();
-        m_StreamerStatus->bIsLoading = true;
-        m_StreamerStatus->StatusLock.unlock();
 
-        std::shared_ptr<BasicLevel> LoadedLevel;
-        try
+      m_StreamerStatus->StatusLock.lock();
+      m_StreamerStatus->bIsLoading = true;
+      m_StreamerStatus->StatusLock.unlock();
+
+      std::shared_ptr<BasicLevel> LoadedLevel;
+      try
+      {
+
+        /* Try to deserialize the file, then init it */
+
+        if (!DeserializeFromArchive(LoadedLevel, LevelName + ".lvl"))
         {
-          LoadedLevel = LoadFunction();
+          ERR_STREAM << "Failed to load requested level from: " << LevelName << ".lvl\n";
+        }
+        else
+        {
           LevelsLock->lock();
           Levels[LevelName] = LoadedLevel;
+          LoadedLevel->Init();
           LevelsLock->unlock();
         }
-        catch (EngineRuntimeError& e)
-        {
-          std::cerr << "Exception loading level" << std::endl;
-          LoadedLevel = nullptr;
-        }
-      } // if (LoadFunction)
+      }
+      catch (EngineRuntimeError& e)
+      {
+        std::cerr << "Exception loading level" << std::endl;
+        LoadedLevel = nullptr;
+      }
+
     } // if (!m_LoadingQueue->empty())
   } // while (!m_StreamStatus->bNeedsShutdown)
 }

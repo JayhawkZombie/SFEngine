@@ -1,3 +1,5 @@
+#pragma once
+
 ////////////////////////////////////////////////////////////
 //
 // MIT License
@@ -28,44 +30,45 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Minimal.h"
-#include "Engine/BaseEngineInterface.h"
+#include "TriggerVolume.h"
 
-enum ETriggerRestriction
+enum EKillVolumeActorKillRestriction
 {
-  TriggerByAnyObject,
-  TriggerByPlayerOnly
+  KillOnlyPlayerActor,
+  KillActorByName,
+  KillAnyActor
 };
 
-class GameObject;
-
-class Triggerable
+class KillVolume : public TriggerVolume
 {
 public:
-  Triggerable();
-  virtual ~Triggerable();
+  KillVolume();
+  virtual ~KillVolume() override;
 
-  void Enable();
-  void Disable();
-  
-  virtual void Trigger(GameObject *TriggeringObject);
+  virtual void Trigger(GameObject *TriggeringObject) override;
 
-  ETriggerRestriction eRestriction = ETriggerRestriction::TriggerByAnyObject;
-
+  EKillVolumeActorKillRestriction ActorKillRestriction;
+  std::string ActorIDToKill;
 
   /* Serialization */
-public:
-  
+
   template<class Archive>
   void save(Archive & ar) const
   {
-    ar(eRestriction);
+    ar(cereal::base_class<TriggerVolume>(this));
+
+    ar(ActorKillRestriction);
+    ar(ActorIDToKill);
   }
 
   template<class Archive>
   void load(Archive & ar)
   {
-    ar(eRestriction);
+    ar(cereal::base_class<TriggerVolume>(this));
+
+    ar(ActorKillRestriction);
+    ar(ActorIDToKill);
   }
+
 
 };

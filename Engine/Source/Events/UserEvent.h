@@ -94,4 +94,37 @@ public:
   sf::Mouse::Wheel MouseWheenScrolled;
 
   UserEventType EventType;
+
+  /* Serialization */
+
+  template<class Archive>
+  void save(Archive & ar) const
+  {
+    ar(MouseButtonWasPressed, MouseButtonWasReleased);
+    ar(KeyWasPressed, KeyWasReleased, KeyRepeat);
+    ar(TextWasEntered, MouseScrolled);
+    ar(MouseScrollDelta);
+    ar(TextUnicode);
+    ar(Key);
+    ar(Button);
+    ar(CurrentMousePosition, PreviousMousePosition);
+    ar(MouseWheenScrolled);
+    ar(EventType);
+  }
+
+  template<class Archive>
+  void load(Archive & ar)
+  {
+    ar(MouseButtonWasPressed, MouseButtonWasReleased);
+    ar(KeyWasPressed, KeyWasReleased, KeyRepeat);
+    ar(TextWasEntered, MouseScrolled);
+    ar(MouseScrollDelta);
+    ar(TextUnicode);
+    ar(Key);
+    ar(Button);
+    ar(CurrentMousePosition, PreviousMousePosition);
+    ar(MouseWheenScrolled);
+    ar(EventType);
+  }
+
 };

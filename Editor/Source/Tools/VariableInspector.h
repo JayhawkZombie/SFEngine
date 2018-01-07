@@ -1,3 +1,5 @@
+#pragma once
+
 ////////////////////////////////////////////////////////////
 //
 // MIT License
@@ -28,44 +30,24 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Minimal.h"
-#include "Engine/BaseEngineInterface.h"
+#ifdef WITH_EDITOR
 
-enum ETriggerRestriction
-{
-  TriggerByAnyObject,
-  TriggerByPlayerOnly
-};
+#include <TGUI/TGUI.hpp>
 
-class GameObject;
-
-class Triggerable
+class VariableInspector
 {
 public:
-  Triggerable();
-  virtual ~Triggerable();
+  VariableInspector();
+  virtual ~VariableInspector();
 
-  void Enable();
-  void Disable();
-  
-  virtual void Trigger(GameObject *TriggeringObject);
+  virtual void Init(std::shared_ptr<tgui::Gui> gui) = 0;
+  virtual void Cleanup(std::shared_ptr<tgui::Gui> gui) = 0;
 
-  ETriggerRestriction eRestriction = ETriggerRestriction::TriggerByAnyObject;
+protected:
 
-
-  /* Serialization */
-public:
-  
-  template<class Archive>
-  void save(Archive & ar) const
-  {
-    ar(eRestriction);
-  }
-
-  template<class Archive>
-  void load(Archive & ar)
-  {
-    ar(eRestriction);
-  }
+  tgui::Button::Ptr  ChangeButton;
+  tgui::Button::Ptr  CancelButton;
 
 };
+
+#endif

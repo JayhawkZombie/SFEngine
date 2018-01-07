@@ -3,6 +3,8 @@
 #include "lineSeg.h"
 #include "arcSeg.h"
 
+#include <cereal/archives/portable_binary.hpp>
+
 bool ball::hit(regPolygon& py) {
   return py.hit(*static_cast<ball*>(this));
 }
@@ -281,3 +283,5 @@ bool ball::is_thruMe(vec2d pt1, vec2d pt2, vec2d& Pimp, float& fos)const// for b
 
   return true;
 }
+
+CEREAL_REGISTER_TYPE(ball);

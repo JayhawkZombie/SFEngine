@@ -1,3 +1,5 @@
+#pragma once
+
 ////////////////////////////////////////////////////////////
 //
 // MIT License
@@ -28,44 +30,93 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Minimal.h"
-#include "Engine/BaseEngineInterface.h"
+#include "Serialization.h"
+#include <optional>
+#include <cereal/types/unordered_map.hpp>
 
-enum ETriggerRestriction
+struct PackedTextureAsset
 {
-  TriggerByAnyObject,
-  TriggerByPlayerOnly
-};
+  std::vector<unsigned char> RawData;
 
-class GameObject;
-
-class Triggerable
-{
-public:
-  Triggerable();
-  virtual ~Triggerable();
-
-  void Enable();
-  void Disable();
-  
-  virtual void Trigger(GameObject *TriggeringObject);
-
-  ETriggerRestriction eRestriction = ETriggerRestriction::TriggerByAnyObject;
-
-
-  /* Serialization */
-public:
-  
   template<class Archive>
   void save(Archive & ar) const
   {
-    ar(eRestriction);
+    ar(RawData);
   }
 
   template<class Archive>
   void load(Archive & ar)
   {
-    ar(eRestriction);
+    ar(RawData);
   }
+};
+
+struct PackedAudioAsset
+{
+  std::vector<unsigned char> RawData;
+
+  template<class Archive>
+  void save(Archive & ar) const
+  {
+    ar(RawData);
+  }
+
+  template<class Archive>
+  void load(Archive & ar)
+  {
+    ar(RawData);
+  }
+};
+
+struct PackedFontAsset
+{
+  std::vector<unsigned char> RawData;
+
+  template<class Archive>
+  void save(Archive & ar) const
+  {
+    ar(RawData);
+  }
+
+  template<class Archive>
+  void load(Archive & ar)
+  {
+    ar(RawData);
+  }
+};
+
+class AssetPacker
+{
+public:
+  AssetPacker() = default;
+  ~AssetPacker() = default;
+
+  bool PackTexture(const std::string &Filename);
+  bool PackAudio(const std::string &Filename);
+  bool PackFont(const std::string &Filename); 
+
+  std::optional<PackedTextureAsset*> GetTexture(const std::string &Filename);
+  std::optional<PackedAudioAsset*>GetSoundBuffer(const std::string &Filename);
+  std::optional<PackedFontAsset*> GetFont(const std::string &Filename);
+
+  template<class Archive>
+  void save(Archive & ar) const
+  {
+    ar(m_AudioAssets);
+    ar(m_TextureAssets);
+    ar(m_FontAssets);
+  }
+
+  template<class Archive>
+  void load(Archive & ar)
+  {
+    ar(m_AudioAssets);
+    ar(m_TextureAssets);
+    ar(m_FontAssets);
+  }
+
+  std::unordered_map<std::string, PackedAudioAsset> m_AudioAssets;
+  std::unordered_map<std::string, PackedFontAsset> m_FontAssets;
+  std::unordered_map<std::string, PackedTextureAsset> m_TextureAssets;
 
 };

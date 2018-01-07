@@ -1,3 +1,5 @@
+#pragma once
+
 ////////////////////////////////////////////////////////////
 //
 // MIT License
@@ -28,11 +30,57 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Engine/stdafx.h"
-
-#include "Level\Level.h"
-
-void Level::SerializeIn(std::ifstream &in)
+template<class T>
+Interpolator<T>::Interpolator(const sf::Vector2f &MinPt, const sf::Vector2f &InterpPoint1, const sf::Vector2f &InterpPoint2, const sf::Vector2f &MaxPt)
+  : m_First(MinPt)
+  , m_Last(MaxPt)
+  , m_Point1(InterpPoint1)
+  , m_Point2(InterpPoint2)
 {
 
+}
+
+template<class T>
+T Interpolator<T>::GetPoint2() const
+{
+  return m_Point1;
+}
+
+template<class T>
+T Interpolator<T>::GetPoint1() const
+{
+  return m_Point2;
+}
+
+template<class T>
+T Interpolator<T>::GetValue(float TimePercElapsed) const
+{
+  sf::Vector2f point = m_First;
+
+  float a = 1.f - TimePercElapsed;
+  float b = a * a;
+  float y = TimePercElapsed * TimePercElapsed;
+
+  point += a * b * m_First;
+  point += 3 * b * TimePercElapsed * m_Point1;
+  point += 3 * a * y * m_Point2;
+  point += y * TimePercElapsed * m_Last;
+
+  point = std::clamp(point, m_First, m_Last);
+
+  return point;
+}
+
+template<class T>
+void Interpolator<T>::SetInterpolationPoints(const sf::Vector2f &P1, const sf::Vector2f &P2)
+{
+  m_Point1 = P1;
+  m_Point2 = P2;
+}
+
+template<class T>
+void Interpolator<T>::SetInterpolationEndpoints(const sf::Vector2f &First, const sf::Vector2f &Second)
+{
+  m_First = First;
+  m_Last = Second;
 }

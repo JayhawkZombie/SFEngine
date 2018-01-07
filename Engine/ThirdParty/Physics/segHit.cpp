@@ -1,6 +1,8 @@
 #include "segHit.h"
 #include "mvHit.h"
 
+#include <cereal/archives/portable_binary.hpp>
+
 segHit::segHit(std::istream& fin) {
   init(fin);
 }
@@ -47,3 +49,5 @@ return true;
 
 return false;
 }   */
+
+CEREAL_REGISTER_TYPE(segHit);

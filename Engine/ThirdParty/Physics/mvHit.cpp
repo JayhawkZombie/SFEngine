@@ -1,5 +1,7 @@
 #include "mvHit.h"
 
+#include <cereal/archives/portable_binary.hpp>
+
 float mvHit::wdwW, mvHit::wdwH;
 float mvHit::wdwCf = 0.0f;// friction coeff
 bool mvHit::windowTopOpen = false;
@@ -145,3 +147,5 @@ float Ek_Cm(const mvHit& A, const mvHit& B)
 sf::Vector2f Equate(vec2d v2d) {
   return sf::Vector2f(v2d.x, v2d.y);
 }
+
+CEREAL_REGISTER_TYPE(mvHit);

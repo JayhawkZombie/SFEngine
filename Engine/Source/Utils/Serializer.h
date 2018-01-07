@@ -1,3 +1,5 @@
+#pragma once
+
 ////////////////////////////////////////////////////////////
 //
 // MIT License
@@ -28,44 +30,58 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Minimal.h"
-#include "Engine/BaseEngineInterface.h"
+#include <cereal/archives/portable_binary.hpp>
+#include <fstream>
+#include <string>
+#include <memory>
 
-enum ETriggerRestriction
+template<typename T>
+bool SerializeToArchive(std::shared_ptr<T> ToSerialize, const std::string &Filename)
 {
-  TriggerByAnyObject,
-  TriggerByPlayerOnly
-};
+  std::ofstream ofile(Filename, std::ios_base::binary);
 
-class GameObject;
+  if (!ofile)
+    return false;
 
-class Triggerable
-{
-public:
-  Triggerable();
-  virtual ~Triggerable();
-
-  void Enable();
-  void Disable();
-  
-  virtual void Trigger(GameObject *TriggeringObject);
-
-  ETriggerRestriction eRestriction = ETriggerRestriction::TriggerByAnyObject;
-
-
-  /* Serialization */
-public:
-  
-  template<class Archive>
-  void save(Archive & ar) const
+  try
   {
-    ar(eRestriction);
+    {
+      cereal::PortableBinaryOutputArchive archive(ofile);
+      archive(*ToSerialize);
+    }
+
+    return true;
+  }
+  catch (const std::exception &err)
+  {
+    ERR_STREAM << "Error serializing to file \"" << Filename << "\": " << err.what() << "\n";
+    return false;
   }
 
-  template<class Archive>
-  void load(Archive & ar)
+}
+
+template<typename T>
+bool DeserializeFromArchive(std::shared_ptr<T> ToDeserialize, const std::string &Filename)
+{
+  std::ifstream ifile(Filename, std::ios_base::binary);
+
+  if (!ifile)
+    return false;
+
+  try
   {
-    ar(eRestriction);
+    {
+      cereal::PortableBinaryInputArchive archive(ifile);
+      archive(*ToDeserialize);
+    }
+
+    return true;
+  }
+  catch (const std::exception &err)
+  {
+    ERR_STREAM << "Error deserializing from file \"" << Filename << "\": " << err.what() << "\n";
+    return false;
   }
 
-};
+}
+

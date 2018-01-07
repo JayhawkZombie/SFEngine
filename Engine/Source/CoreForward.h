@@ -78,7 +78,7 @@ class ThreadSafe;
 class RealTimeClock;
 class TimedSequence;
 class UntimedSequence;
-class Timer;
+struct Timer;
 class TimerManager;
 class TimeStep;
 

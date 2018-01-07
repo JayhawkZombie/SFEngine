@@ -114,24 +114,6 @@
     <ClCompile Include="Engine\Source\Level\BasicLevel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Source\Level\Level.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\Level\Loader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\Level\Render.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\Level\SerializeIn.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\Level\SerializeOut.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\Level\Update.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Source\Lights\GenericLightSource.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -157,12 +139,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\Objects\ShotBase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\Objects\TriggerObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\Objects\TriggerVolume.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\Physics\Collider.cpp">
@@ -510,6 +486,24 @@
     <ClCompile Include="Engine\Source\Components\ComponentManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Tests\Streams\DataStreamTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Objects\Volumes\TriggerVolume.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Objects\Volumes\KillVolume.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Objects\TriggerObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\Source\Tools\VariableInspector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Serialization\AssetPack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Source\Actor\Actor.h">
@@ -584,12 +578,6 @@
     <ClInclude Include="Engine\Source\Level\BasicLevel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\Level\Level.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\Level\LevelLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Source\Lights\GenericLightSource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -615,12 +603,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\Objects\ShotBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\Objects\TriggerObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\Objects\TriggerVolume.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\Parsing\IniParser.h">
@@ -1334,6 +1316,42 @@
     <ClInclude Include="Engine\Source\Components\ComponentManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\Particles\Particleh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Utils\Interpolators.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Particles\ParticleEmitter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Tests\Streams\DataStreamTests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Scripting\ScriptFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Objects\Volumes\TriggerVolume.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Objects\Volumes\KillVolume.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Objects\TriggerObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\Source\Tools\VariableInspector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\Source\Tools\FloatInspector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Utils\Serializer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Serialization\AssetPack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\Source\Streams\DataStream.inl">
@@ -1345,6 +1363,9 @@
     <None Include="Engine\ThirdParty\cereal\external\rapidxml\manual.html" />
     <None Include="Engine\ThirdParty\rapidxml-1.13\manual.html" />
     <None Include="Engine\ThirdParty\SelbaWard\TileMap.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Engine\Source\Utils\Interpolators.inl">
       <Filter>Header Files</Filter>
     </None>
   </ItemGroup>

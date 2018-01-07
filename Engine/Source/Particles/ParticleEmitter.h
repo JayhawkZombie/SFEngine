@@ -1,3 +1,5 @@
+#pragma once
+
 ////////////////////////////////////////////////////////////
 //
 // MIT License
@@ -28,12 +30,17 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Engine/stdafx.h"
+#include "Particleh.h"
+#include "Utils/Interpolators.h"
 
-#include "Level\Level.h"
-
-void Level::SerializeOut(std::ofstream &out)
+class ParticleEmitter
 {
+public:
+  ParticleEmitter() = default;
+  ~ParticleEmitter() = default;
 
+private:
 
-}
+  std::vector<Particle> m_Particles;
+
+};

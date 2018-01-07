@@ -117,6 +117,11 @@ UINT32 SFEngine::GameLoop()
   sf::Time fTime = { sf::seconds(0) };
   EngineRenderSettings.BGClearColor = sf::Color::Black;
 
+
+  Gravity.y = .3f;
+  currentRenderWindow->setVerticalSyncEnabled(true);
+  SetGravity(&Gravity);
+
   while (true) {
     //When the window gets closed, we will be alerted, break out, and alert everything that we're closing down
     Closed = Handler.PollEvents(currentRenderWindow, evnt, true);
@@ -134,7 +139,9 @@ UINT32 SFEngine::GameLoop()
       UpdateStart = std::chrono::high_resolution_clock::now();
 
       fTime = dClock.restart();
-        
+       
+      m_GlobalTimerManager->Tick(TickDelta);
+
       if (CurrentLevel) {
         CurrentLevel->TickUpdate(TickDelta);
       }

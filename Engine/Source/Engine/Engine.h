@@ -40,6 +40,7 @@
 #include "Logging\Logger.h"
 #include "Globals\GlobalHooks.h"
 #include "Events\UserEvent.h"
+#include "Time/TimerManager.h"
 
 #include <TGUI/TGUI.hpp>
 
@@ -71,7 +72,16 @@ public:
       return{ 0, 0 };
   }
 
+  TimerManager* GetTimerManager();
+
 private:
+
+  /*
+   *  Settings map
+   **/
+  std::unordered_map<std::string, std::unordered_map<std::string, std::string>> m_SettingsMap;
+
+  std::unique_ptr<TimerManager> m_GlobalTimerManager;
 
   //event objects
   UserEvent UEvent;

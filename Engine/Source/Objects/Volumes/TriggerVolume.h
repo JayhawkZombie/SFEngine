@@ -1,3 +1,5 @@
+#pragma once
+
 ////////////////////////////////////////////////////////////
 //
 // MIT License
@@ -28,44 +30,58 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Minimal.h"
-#include "Engine/BaseEngineInterface.h"
+#include "BasicIncludes.h"
+#include "Objects/TriggerObject.h"
+#include "Components/CollisionComponent.h"
 
-enum ETriggerRestriction
+class LevelObject;
+
+enum class TriggerMethod
 {
-  TriggerByAnyObject,
-  TriggerByPlayerOnly
+  Touch_PhysicalResponse = 0,
+  Touch_NoPhysicalResponse,
+  MinimumOverlap_NoPhysicalResponse
 };
 
-class GameObject;
+enum ETriggerCollisionRestriction
+{
+  TriggerOnHit,
+  TriggerOnOverlap
+};
 
-class Triggerable
+
+class TriggerVolume : public Triggerable
 {
 public:
-  Triggerable();
-  virtual ~Triggerable();
-
-  void Enable();
-  void Disable();
   
-  virtual void Trigger(GameObject *TriggeringObject);
+  TriggerVolume();
+  virtual ~TriggerVolume() override;
 
-  ETriggerRestriction eRestriction = ETriggerRestriction::TriggerByAnyObject;
+  virtual void Trigger(GameObject *TriggeringObject) override;
 
+  ETriggerCollisionRestriction eTriggerRestriction = ETriggerCollisionRestriction::TriggerOnHit;
 
   /* Serialization */
 public:
-  
+
   template<class Archive>
   void save(Archive & ar) const
   {
-    ar(eRestriction);
+    ar(cereal::base_class<Triggerable>(this));
+
+    ar(m_Collision);
   }
 
   template<class Archive>
   void load(Archive & ar)
   {
-    ar(eRestriction);
+    ar(cereal::base_class<Triggerable>(this));
+
+    ar(m_Collision);
   }
+    
+protected:
+
+  CollisionComponent m_Collision;
 
 };

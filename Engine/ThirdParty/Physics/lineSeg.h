@@ -10,6 +10,24 @@ public:
   float len;// magnitude of L
   sf::Vertex vtx[2];
 
+  template<class Archive>
+  void save(Archive & ar) const
+  {
+    ar(cereal::base_class<segHit>(this));
+
+    ar(L, N, len);
+    ar(vtx[0], vtx[1]);
+  }
+
+  template<class Archive>
+  void load(Archive & ar)
+  {
+    ar(cereal::base_class<segHit>(this));
+
+    ar(L, N, len);
+    ar(vtx[0], vtx[1]);
+  }
+
   // funcs
   lineSeg() {}// don't use a default constructed lineSeg
   lineSeg(float x1, float y1, float x2, float y2, sf::Color clr = sf::Color::Green);

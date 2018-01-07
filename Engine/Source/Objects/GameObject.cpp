@@ -293,6 +293,11 @@ void GameObject::EmitSound(const std::string &SoundName)
 
 }
 
+bool GameObject::IsPlayer() const
+{
+  return m_IsPlayerActor;
+}
+
 bool GameObject::HasAssociatedCollider()
 {
   return false;

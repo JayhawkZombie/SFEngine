@@ -29,3 +29,28 @@
 ////////////////////////////////////////////////////////////
 
 #include "TriggerObject.h"
+
+Triggerable::Triggerable()
+{
+
+}
+
+Triggerable::~Triggerable()
+{
+
+}
+
+void Triggerable::Enable()
+{
+
+}
+
+void Triggerable::Disable()
+{
+
+}
+
+void Triggerable::Trigger(GameObject *TriggeringObject)
+{
+
+}

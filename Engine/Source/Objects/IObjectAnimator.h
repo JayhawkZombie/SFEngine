@@ -54,13 +54,13 @@ public:
   template<class Archive>
   void load(Archive & ar)
   {
-
+    ar(cereal::base_class<IGameObjectAffector>(this));
   }
 
   template<class Archive>
   void save(Archive & ar) const
   {
-
+    ar(cereal::base_class<IGameObjectAffector>(this));
   }
 
 protected:

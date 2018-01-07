@@ -15,6 +15,24 @@ public:
   float r;// radius
   sf::CircleShape img;// image
 
+  template<class Archive>
+  void save(Archive & ar) const
+  {
+    ar(cereal::base_class<mvHit>(this));
+
+    ar(r);
+    ar(img);
+  }
+
+  template<class Archive>
+  void load(Archive & ar)
+  {
+    ar(cereal::base_class<mvHit>(this));
+
+    ar(r);
+    ar(img);
+  }
+
   ball(std::istream& fin);
   ball();
   virtual mvHit* clone() const {

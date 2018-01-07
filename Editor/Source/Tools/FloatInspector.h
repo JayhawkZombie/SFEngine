@@ -1,3 +1,5 @@
+#pragma once
+
 ////////////////////////////////////////////////////////////
 //
 // MIT License
@@ -28,44 +30,21 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Minimal.h"
-#include "Engine/BaseEngineInterface.h"
+#include "VariableInspector.h"
 
-enum ETriggerRestriction
-{
-  TriggerByAnyObject,
-  TriggerByPlayerOnly
-};
-
-class GameObject;
-
-class Triggerable
+class FloatInspector : public VariableInspector
 {
 public:
-  Triggerable();
-  virtual ~Triggerable();
+  FloatInspector(const std::function<void(float)> &OnChangedCallback);
+  virtual ~FloatInspector() override;
 
-  void Enable();
-  void Disable();
-  
-  virtual void Trigger(GameObject *TriggeringObject);
+  void Init(std::shared_ptr<tgui::Gui> gui) override;
+  void Cleanup(std::shared_ptr<tgui::Gui> gui) override;
 
-  ETriggerRestriction eRestriction = ETriggerRestriction::TriggerByAnyObject;
+protected:
 
+  tgui::EditBox EditBox;
 
-  /* Serialization */
-public:
-  
-  template<class Archive>
-  void save(Archive & ar) const
-  {
-    ar(eRestriction);
-  }
-
-  template<class Archive>
-  void load(Archive & ar)
-  {
-    ar(eRestriction);
-  }
+  std::function<void(float)> Callback;
 
 };

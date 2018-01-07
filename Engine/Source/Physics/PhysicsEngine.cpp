@@ -564,6 +564,40 @@ std::stringstream GetFormattedSegSwingData
 }
 
 
+void UpdateAllPhysics(std::vector<std::shared_ptr<mvHit>> &MVHITS, std::vector<std::shared_ptr<lineSeg>> &LINESEGS)
+{
+  for (auto & hit : MVHITS)
+  {
+    hit->update(gravity);
+  }
+
+  for (auto & seg : LINESEGS)
+  {
+    seg->update();
+  }
+
+
+  for (auto & seg : LINESEGS)
+  {
+    for (auto & mvhit : MVHITS)
+    {
+      seg->hit(*mvhit);
+    }
+  }
+
+  for (auto & hit1 : MVHITS)
+  {
+    for (auto & hit2 : MVHITS)
+    {
+      if (hit1 == hit2)
+        continue;
+
+      hit1->hit(*hit2);
+    }
+  }
+
+}
+
 std::stringstream GetFormattedBallConstructionData
 (
   char BallType, 

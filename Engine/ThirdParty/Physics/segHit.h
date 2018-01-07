@@ -22,6 +22,22 @@ public:
   bool is_bulletProof = false;
   int hitSide = 0;// -1 = !Nside, 1 = Nside, 0 = both sides
 
+  template<class Archive>
+  void save(Archive & ar) const
+  {
+    ar(pos);
+    ar(testEnd1, testEnd2);
+    ar(Cf, friction_on, is_hard, is_bulletProof, hitSide);
+  }
+
+  template<class Archive>
+  void load(Archive & ar)
+  {
+    ar(pos);
+    ar(testEnd1, testEnd2);
+    ar(Cf, friction_on, is_hard, is_bulletProof, hitSide);
+  }
+
   segHit() {}
   segHit(std::istream& fin);
   virtual ~segHit() {}

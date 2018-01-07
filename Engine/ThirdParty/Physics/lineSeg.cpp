@@ -1,6 +1,8 @@
 #include "lineSeg.h"
 #include "mvHit.h"
 
+#include <cereal/archives/portable_binary.hpp>
+
 lineSeg::lineSeg(std::istream& fin) : segHit() {
   init(fin);
 }
@@ -164,3 +166,5 @@ return true;
 
 return false;
 }   */
+
+CEREAL_REGISTER_TYPE(lineSeg);

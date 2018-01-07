@@ -28,44 +28,27 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Minimal.h"
-#include "Engine/BaseEngineInterface.h"
+#include "Engine/stdafx.h"
+#include "Objects/Volumes/TriggerVolume.h"
 
-enum ETriggerRestriction
+#include <cereal/archives/portable_binary.hpp>
+
+
+
+CEREAL_REGISTER_TYPE(TriggerVolume);
+
+TriggerVolume::TriggerVolume()
+  : Triggerable()
 {
-  TriggerByAnyObject,
-  TriggerByPlayerOnly
-};
 
-class GameObject;
+}
 
-class Triggerable
+TriggerVolume::~TriggerVolume()
 {
-public:
-  Triggerable();
-  virtual ~Triggerable();
 
-  void Enable();
-  void Disable();
-  
-  virtual void Trigger(GameObject *TriggeringObject);
+}
 
-  ETriggerRestriction eRestriction = ETriggerRestriction::TriggerByAnyObject;
+void TriggerVolume::Trigger(GameObject *TriggeringObject)
+{
 
-
-  /* Serialization */
-public:
-  
-  template<class Archive>
-  void save(Archive & ar) const
-  {
-    ar(eRestriction);
-  }
-
-  template<class Archive>
-  void load(Archive & ar)
-  {
-    ar(eRestriction);
-  }
-
-};
+}

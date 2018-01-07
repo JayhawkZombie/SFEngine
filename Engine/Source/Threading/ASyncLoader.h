@@ -65,7 +65,7 @@ public:
   static std::shared_ptr<ASyncThreadStatus> Launch();
   static void Shutdown();
 
-  static bool Load(std::function<std::shared_ptr<BasicLevel>(void)> LoadFtn, std::string LevelName);
+  static bool Load(std::string LevelName);
   static std::thread::id GetThreadID();
   static std::shared_ptr<ASyncThreadStatus> GetThreadStatus();
 
@@ -81,6 +81,8 @@ protected:
   //Lock to secure the queue
   std::shared_ptr<std::mutex> m_QueueLock;
 
+  std::shared_ptr<bool> m_ShouldQuit;
+
   //Request to query
   std::shared_ptr<ASyncThreadStatus> m_StreamerStatus;
 
@@ -91,10 +93,7 @@ protected:
   std::thread::id m_ThreadID;
 
   //Queue to push requests into
-  std::shared_ptr<
-    std::queue<
-      std::pair<std::string, std::function<std::shared_ptr<BasicLevel>(void)>>
-    >> m_LoadingQueue;
+  std::shared_ptr<std::queue<std::string>> m_LoadingQueue;
 };
 
 class ASyncLoadManager

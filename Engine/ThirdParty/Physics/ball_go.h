@@ -6,6 +6,23 @@
 class ball_go : public ball
 {
 public:
+
+  template<class Archive>
+  void save(Archive & ar) const
+  {
+    ar(cereal::base_class<ball>(this));
+
+    ar(maxVel);
+  }
+
+  template<class Archive>
+  void load(Archive & ar)
+  {
+    ar(cereal::base_class<ball>(this));
+
+    ar(maxVel);
+  }
+
   float maxVel;// magnitude, so > 0
 
                // functions

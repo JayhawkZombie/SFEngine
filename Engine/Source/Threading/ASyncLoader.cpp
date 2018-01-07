@@ -69,6 +69,10 @@ bool ASyncLoadManager::QueryFinished()
 
 void ASyncLoadManager::Halt()
 {
+  auto &Loader = Get();
+  Loader.m_ThreadStatusLock->lock();
+
+  Loader.m_ThreadStatusLock->unlock();
 }
 
 ASyncLoadManager::ASyncLoadManager()

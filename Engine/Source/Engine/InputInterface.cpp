@@ -31,11 +31,6 @@
 #include "Engine/stdafx.h"
 #include "Engine\InputInterface.h"
 
-void InputInterface::BindMethods(chaiscript::ModulePtr mptr)
-{
-
-}
-
 bool InputInterface::IsKeyDown(const sf::Keyboard::Key & key)
 {
   return sf::Keyboard::isKeyPressed(key);

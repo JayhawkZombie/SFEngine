@@ -1,3 +1,5 @@
+#pragma once
+
 ////////////////////////////////////////////////////////////
 //
 // MIT License
@@ -28,58 +30,36 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Engine/stdafx.h"
-#include "Objects/TriggerVolume.h"
+#include "Minimal.h"
 
-TriggerVolume::TriggerVolume(TriggerMethod Method)
+struct Particle
 {
-}
-TriggerVolume::TriggerVolume(std::function<void(void)> TriggerCB, std::function<bool(std::shared_ptr<LevelObject>)> TriggerCheckCB, bool DoTriggerCheck)
-{
-}
-TriggerVolume::~TriggerVolume()
-{
-}
-TriggerVolume::TriggerVolume(const TriggerVolume &)
-{
-}
-std::shared_ptr<TriggerVolume> TriggerVolume::Clone() const
-{
-  return std::shared_ptr<TriggerVolume>();
-}
-void TriggerVolume::TickUpdate(const double & TickDelta)
-{
-}
-void TriggerVolume::Render(std::shared_ptr<sf::RenderTarget> Target)
-{
-}
-void TriggerVolume::DoTriggerChecks(std::map<std::string, std::shared_ptr<LevelObject>>& Objects)
-{
-}
-void TriggerVolume::Cleanup()
-{
-}
-void TriggerVolume::Sleep(bool MakeDefault)
-{
-}
-void TriggerVolume::Wake()
-{
-}
-void TriggerVolume::SleepFor(double Ms)
-{
-}
-void TriggerVolume::Enable(bool MakeDefault)
-{
-}
-void TriggerVolume::Disable(bool MakeDefault)
-{
-}
-void TriggerVolume::Reset()
-{
-}
-void TriggerVolume::SetCollider(std::shared_ptr<Collider2D> Collider)
-{
-}
-void TriggerVolume::SetTriggerMethod(TriggerMethod Method, bool MakeDefault)
-{
-}
+  sf::Color Color = sf::Color::White;
+  sf::Vector2f Position = sf::Vector2f(0.f, 0.f);
+  sf::Vector2f Velocity = sf::Vector2f(0.f, 0.f);
+  
+  float Radius = 0.f;
+  double Lifetime = 0.0;
+  double TimeSinceSpawned = 0.0;
+
+  template<class Archive>
+  void save(Archive & ar) const
+  {
+    ar(Color);
+    ar(Position, Velocity);
+    ar(Radius);
+    ar(Lifetime);
+    ar(TimeSinceSpawned);
+  }
+
+  template<class Archive>
+  void load(Archive & ar)
+  {
+    ar(Color);
+    ar(Position, Velocity);
+    ar(Radius);
+    ar(Lifetime);
+    ar(TimeSinceSpawned);
+  }
+
+};

@@ -7,6 +7,19 @@
 class vec2d
 {
 public:
+
+  template<class Archive>
+  void save(Archive & ar) const
+  {
+    ar(x, y);
+  }
+
+  template<class Archive>
+  void load(Archive & ar)
+  {
+    ar(x, y);
+  }
+
   float x, y;
   explicit operator sf::Vector2f() const {
     return sf::Vector2f(x, y);

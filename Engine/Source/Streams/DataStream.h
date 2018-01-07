@@ -35,6 +35,40 @@
 #include <queue>
 #include <string>
 
+class FormattedDataStream
+{
+public:
+  
+  template<typename T>
+  friend FormattedDataStream& operator>>(FormattedDataStream &DataStream, T &Val);
+
+  template<typename T>
+  friend FormattedDataStream& operator<<(FormattedDataStream &DataStream, const T &Val);
+
+private:
+
+  std::stringstream m_Stream;
+
+};
+
+template<typename T>
+FormattedDataStream& operator>>(FormattedDataStream &DataStream, T &Val)
+{
+  T try_val;
+
+  DataStream.m_Stream >> Val;
+
+  return DataStream;
+}
+
+template<typename T>
+FormattedDataStream& operator<<(FormattedDataStream &DataStream, const T &Val)
+{
+  DataStream.m_Stream << Val << ' ';
+
+  return DataStream;
+}
+
 template<typename T>
 class DataStream
 {

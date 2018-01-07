@@ -9,6 +9,8 @@
 #include "vec2d.h"
 #include "stateTypes.h"
 
+#include "Serialization/Serialization.h"
+
 class ball;// fwd declare
 class regPolygon;
 
@@ -18,6 +20,22 @@ class arcSeg;
 class mvHit
 {
 public:
+  
+  template<class Archive>
+  void save(Archive & ar) const
+  {
+    ar(pos, v, siz);
+    ar(m, Cr, is_free);
+
+  }
+
+  template<class Archive>
+  void load(Archive & ar)
+  {
+    ar(pos, v, siz);
+    ar(m, Cr, is_free);
+  }
+
   static float wdwW, wdwH;
   static float wdwCf;// friction coeff
   static bool windowTopOpen;// allow passage above top of window

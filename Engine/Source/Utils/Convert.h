@@ -49,7 +49,7 @@ namespace Util
   template<typename T>
   sf::Vector2<T> StringToVec2(const std::string &s)
   {
-    T a, b;
+    T a = T(0), b = T(0);
 
     std::string astr, bstr;
 
@@ -57,12 +57,12 @@ namespace Util
     std::size_t comment = s.find_first_not_of("-0123456789", comma);
 
     astr = s.substr(1, comma - 1);
-    bstr = s.substr(comma + 1, comment);
+    bstr = s.substr(comma + 1, comment - 1);
 
     std::stringstream converta(astr), convertb(bstr);
 
-    a = (converta >> a ? a : T());
-    a = (convertb >> b ? b : T());
+    converta >> a;
+    convertb >> b;
 
     return sf::Vector2<T>(a, b);
   }

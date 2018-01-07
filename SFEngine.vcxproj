@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Editor\Source\Tools\VariableInspector.cpp" />
     <ClCompile Include="Engine\Source\Actor\Actor.cpp" />
     <ClCompile Include="Engine\Source\Actor\Player.cpp" />
     <ClCompile Include="Engine\Source\AI\BehaviorTree.cpp" />
@@ -53,12 +54,6 @@
     <ClCompile Include="Engine\Source\Events\EventSequence.cpp" />
     <ClCompile Include="Engine\Source\Factory\Factory.cpp" />
     <ClCompile Include="Engine\Source\Level\BasicLevel.cpp" />
-    <ClCompile Include="Engine\Source\Level\Level.cpp" />
-    <ClCompile Include="Engine\Source\Level\Loader.cpp" />
-    <ClCompile Include="Engine\Source\Level\Render.cpp" />
-    <ClCompile Include="Engine\Source\Level\SerializeIn.cpp" />
-    <ClCompile Include="Engine\Source\Level\SerializeOut.cpp" />
-    <ClCompile Include="Engine\Source\Level\Update.cpp" />
     <ClCompile Include="Engine\Source\Lights\GenericLightSource.cpp" />
     <ClCompile Include="Engine\Source\Lights\GlobalLightSource.cpp" />
     <ClCompile Include="Engine\Source\Lights\LightingSystem.cpp" />
@@ -75,8 +70,9 @@
     <ClCompile Include="Engine\Source\Objects\ProjectileBase.cpp" />
     <ClCompile Include="Engine\Source\Objects\Property.cpp" />
     <ClCompile Include="Engine\Source\Objects\ShotBase.cpp" />
+    <ClCompile Include="Engine\Source\Objects\Volumes\KillVolume.cpp" />
     <ClCompile Include="Engine\Source\Objects\TriggerObject.cpp" />
-    <ClCompile Include="Engine\Source\Objects\TriggerVolume.cpp" />
+    <ClCompile Include="Engine\Source\Objects\Volumes\TriggerVolume.cpp" />
     <ClCompile Include="Engine\Source\Parsing\IniParser.cpp" />
     <ClCompile Include="Engine\Source\Physics\Collider.cpp" />
     <ClCompile Include="Engine\Source\Physics\Physics.cpp" />
@@ -85,6 +81,7 @@
     <ClCompile Include="Engine\Source\Render\Renderer.cpp" />
     <ClCompile Include="Engine\Source\Resources\ResourceManager.cpp" />
     <ClCompile Include="Engine\Source\Resources\ResourceManagerThread.cpp" />
+    <ClCompile Include="Engine\Source\Serialization\AssetPack.cpp" />
     <ClCompile Include="Engine\Source\State\DeviceState.cpp" />
     <ClCompile Include="Engine\Source\Streams\DataStream.cpp" />
     <ClCompile Include="Engine\Source\Threading\ASyncLoader.cpp" />
@@ -123,6 +120,7 @@
     <ClCompile Include="Engine\Tests\Scripting\ScriptingTests.cpp" />
     <ClCompile Include="Engine\Tests\Serialization\ScriptSerializationTests.cpp" />
     <ClCompile Include="Engine\Tests\Serialization\SFMLSerializationTests.cpp" />
+    <ClCompile Include="Engine\Tests\Streams\DataStreamTests.cpp" />
     <ClCompile Include="Engine\ThirdParty\IMGUI\imgui-SFML.cpp" />
     <ClCompile Include="Engine\ThirdParty\IMGUI\imgui.cpp" />
     <ClCompile Include="Engine\ThirdParty\IMGUI\imgui_demo.cpp" />
@@ -189,6 +187,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Editor\Source\Project\SFEngineProject.h" />
+    <ClInclude Include="Editor\Source\Tools\FloatInspector.h" />
+    <ClInclude Include="Editor\Source\Tools\VariableInspector.h" />
     <ClInclude Include="Engine\EngineRequirements.h" />
     <ClInclude Include="Engine\ProjectIncludes.h" />
     <ClInclude Include="Engine\Source\Actor\Actor.h" />
@@ -221,8 +221,6 @@
     <ClInclude Include="Engine\Source\Factory\Factory.h" />
     <ClInclude Include="Engine\Source\Globals\GlobalHooks.h" />
     <ClInclude Include="Engine\Source\Level\BasicLevel.h" />
-    <ClInclude Include="Engine\Source\Level\Level.h" />
-    <ClInclude Include="Engine\Source\Level\LevelLoader.h" />
     <ClInclude Include="Engine\Source\Lights\GenericLightSource.h" />
     <ClInclude Include="Engine\Source\Lights\GlobalLightSource.h" />
     <ClInclude Include="Engine\Source\Lights\LightingSystem.h" />
@@ -239,16 +237,21 @@
     <ClInclude Include="Engine\Source\Objects\Equippable.h" />
     <ClInclude Include="Engine\Source\Objects\ProjectileBase.h" />
     <ClInclude Include="Engine\Source\Objects\ShotBase.h" />
+    <ClInclude Include="Engine\Source\Objects\Volumes\KillVolume.h" />
     <ClInclude Include="Engine\Source\Objects\TriggerObject.h" />
-    <ClInclude Include="Engine\Source\Objects\TriggerVolume.h" />
+    <ClInclude Include="Engine\Source\Objects\Volumes\TriggerVolume.h" />
     <ClInclude Include="Engine\Source\OSXDefs.h" />
     <ClInclude Include="Engine\Source\Parsing\IniParser.h" />
+    <ClInclude Include="Engine\Source\Particles\ParticleEmitter.h" />
+    <ClInclude Include="Engine\Source\Particles\Particleh.h" />
     <ClInclude Include="Engine\Source\Physics\Collider.h" />
     <ClInclude Include="Engine\Source\Physics\Occluder.h" />
     <ClInclude Include="Engine\Source\Physics\Physics.h" />
     <ClInclude Include="Engine\Source\Physics\QuadTree.h" />
     <ClInclude Include="Engine\Source\Render\Render.h" />
     <ClInclude Include="Engine\Source\Resources\ResourceManager.h" />
+    <ClInclude Include="Engine\Source\Scripting\ScriptFunctions.h" />
+    <ClInclude Include="Engine\Source\Serialization\AssetPack.h" />
     <ClInclude Include="Engine\Source\Serialization\Serialization.h" />
     <ClInclude Include="Engine\Source\Serialization\SFMLEvent.h" />
     <ClInclude Include="Engine\Source\Serialization\SFMLPolymorphicTypes.h" />
@@ -277,11 +280,13 @@
     <ClInclude Include="Engine\Source\Utils\Decoders.h" />
     <ClInclude Include="Engine\Source\Utils\Encoders.h" />
     <ClInclude Include="Engine\Source\Utils\Filereader.h" />
+    <ClInclude Include="Engine\Source\Utils\Interpolators.h" />
     <ClInclude Include="Engine\Source\Utils\ListTemplates.h" />
     <ClInclude Include="Engine\Source\Utils\Mat2D.h" />
     <ClInclude Include="Engine\Source\Utils\NullType.h" />
     <ClInclude Include="Engine\Source\Utils\RayCast.h" />
     <ClInclude Include="Engine\Source\Utils\ReadIni.h" />
+    <ClInclude Include="Engine\Source\Utils\Serializer.h" />
     <ClInclude Include="Engine\Source\Utils\SplinePath.h" />
     <ClInclude Include="Engine\Source\Utils\SpriteSheet.h" />
     <ClInclude Include="Engine\Source\Utils\String.h" />
@@ -299,6 +304,7 @@
     <ClInclude Include="Engine\Tests\Scripting\ScriptingTests.h" />
     <ClInclude Include="Engine\Tests\Serialization\ScriptSerializationTests.h" />
     <ClInclude Include="Engine\Tests\Serialization\SFMLSerializationTests.h" />
+    <ClInclude Include="Engine\Tests\Streams\DataStreamTests.h" />
     <ClInclude Include="Engine\ThirdParty\basen\basen.hpp" />
     <ClInclude Include="Engine\ThirdParty\cereal\access.hpp" />
     <ClInclude Include="Engine\ThirdParty\cereal\archives\adapters.hpp" />
@@ -466,6 +472,7 @@
   <ItemGroup>
     <None Include="Engine\Source\Streams\DataStream.inl" />
     <None Include="Engine\Source\Utils\CacheIni.inl" />
+    <None Include="Engine\Source\Utils\Interpolators.inl" />
     <None Include="Engine\ThirdParty\cereal\external\rapidxml\manual.html" />
     <None Include="Engine\ThirdParty\rapidxml-1.13\manual.html" />
     <None Include="Engine\ThirdParty\SelbaWard\TileMap.inl" />
@@ -541,7 +548,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;SFML_STATIC;TGUI_STATIC;_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;SFML_STATIC;TGUI_STATIC;_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;WITH_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)/Dependencies;$(ProjectDir)/Engine/ThirdParty;$(ProjectDir)/Engine/Source;$(ProjectDir)/Engine;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <AdditionalOptions>/volatile:iso /bigobj %(AdditionalOptions)</AdditionalOptions>

@@ -1,3 +1,5 @@
+#pragma once
+
 ////////////////////////////////////////////////////////////
 //
 // MIT License
@@ -28,43 +30,6 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Engine/stdafx.h"
+#include "Streams/DataStream.h"
 
-#include "Level/Level.h"
-#include "Physics/Collider.h"
-
-void Level::RenderOnTexture(std::shared_ptr<sf::RenderTexture> Texture)
-{
-  //SceneBlendTexture->clear(sf::Color::Transparent);
-
-  if (ShowGridLines) {
-    for (auto & arr : GridLines)
-      Texture->draw(arr);
-  }
-
-  //If we are using the editor, draw the meshes too
-  //Make this configurable later
-#ifdef WITH_EDITOR
-  
-#endif
-}
-
-void Level::Render(std::shared_ptr<sf::RenderTarget> Target)
-{
-
-}
-
-std::string Level::GetClass() const
-{
-  return std::string("Level");
-}
-
-void Level::RenderRegular()
-{
-
-}
-
-void Level::RenderLoadingScreen()
-{
-
-}
+extern void RunDataStreamTests();

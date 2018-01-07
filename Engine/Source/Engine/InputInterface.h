@@ -36,7 +36,6 @@
 class InputInterface
 {
 public:
-  static void BindMethods(chaiscript::ModulePtr mptr);
 
   static bool IsKeyDown(const sf::Keyboard::Key &key);
   static bool IsKeyUp(const sf::Keyboard::Key &key);

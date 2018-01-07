@@ -17,6 +17,22 @@ public:
   std::vector<vec2d> ptVec;// official
   std::vector<sf::Vertex> vtxVec;// visual
 
+  template<class Archive>
+  void save(Archive & ar) const
+  {
+    ar(cereal::base_class<mvHit>(this));
+    
+    ar(r, nSides, ptVec, vtxVec);
+  }
+
+  template<class Archive>
+  void load(Archive & ar)
+  {
+    ar(cereal::base_class<mvHit>(this));
+
+    ar(r, nSides, ptVec, vtxVec);
+  }
+
   regPolygon(std::istream& fin);
   regPolygon();
   virtual mvHit* clone() const {

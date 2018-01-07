@@ -1,6 +1,8 @@
 #include "expandPolygon.h"
 #include "ball.h"
 
+#include <cereal/archives/portable_binary.hpp>
+
 //bool expandPolygon::hit( mvHit& mh ) { return mh.hit( *static_cast<regPolygon*>(this) ); }
 
 
@@ -194,3 +196,5 @@ else growState = -1;
 rFull = R;
 }
 */
+
+CEREAL_REGISTER_TYPE(expandPolygon);

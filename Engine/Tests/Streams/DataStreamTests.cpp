@@ -28,44 +28,38 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Minimal.h"
-#include "Engine/BaseEngineInterface.h"
+#include "DataStreamTests.h"
 
-enum ETriggerRestriction
+void RunDataStreamTests()
 {
-  TriggerByAnyObject,
-  TriggerByPlayerOnly
-};
 
-class GameObject;
+  float fVal = 500.f;
+  int iVal = -25;
+  unsigned int uiVal = 37;
 
-class Triggerable
-{
-public:
-  Triggerable();
-  virtual ~Triggerable();
+  FormattedDataStream FStream;
 
-  void Enable();
-  void Disable();
-  
-  virtual void Trigger(GameObject *TriggeringObject);
-
-  ETriggerRestriction eRestriction = ETriggerRestriction::TriggerByAnyObject;
-
-
-  /* Serialization */
-public:
-  
-  template<class Archive>
-  void save(Archive & ar) const
+  try
   {
-    ar(eRestriction);
-  }
+    FStream << fVal;
+    FStream << iVal;
+    FStream << uiVal;
 
-  template<class Archive>
-  void load(Archive & ar)
+    float extFVal;
+    int extIVal;
+    unsigned int extUIVal;
+
+    FStream >> extFVal;
+    FStream >> extIVal;
+    FStream >> extUIVal;
+
+    std::cout << "FVal  : " << extFVal << "\n";
+    std::cout << "IVal  : " << extIVal << "\n";
+    std::cout << "UIVal : " << extUIVal << "\n";
+  }
+  catch (std::runtime_error &err)
   {
-    ar(eRestriction);
+    std::cout << "FormattedDataStream error\n";
   }
+}
 
-};

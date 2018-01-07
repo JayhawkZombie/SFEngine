@@ -220,6 +220,8 @@ public:
    **/
   void EmitSound(const std::string &SoundName);
   
+  /* Returns true if this GameObject is currently controlled by the player */
+  bool IsPlayer() const;
 
   /*
    *  Physics-related methods
@@ -290,8 +292,10 @@ protected:
   bool m_ShouldTickEveryFrame = false;
   double m_TickInterval = -1.0;
 
-  std::atomic_bool m_HasInitializedScripts = false;
-  std::atomic_bool m_IsReadyToSpawn = false;
+  bool m_IsPlayerActor = false;
+
+  bool m_HasInitializedScripts = false;
+  bool m_IsReadyToSpawn = false;
 
   sf::Vector2f m_Position;
   sf::Vector2f m_Size;
@@ -300,6 +304,43 @@ protected:
 
   TimePoint m_TimeWhenCreated;
   TimePoint m_TimeWhenSpawned;
+
+
+  /* Serialization */
+public:
+
+  template<class Archive>
+  void save(Archive & ar) const
+  {
+    ar(m_ColliderSelectivity);
+    ar(m_IsFrozen, m_HasSetLifetime, m_SetLifetime);
+    ar(m_ShouldTickEveryFrame, m_TickInterval);
+    ar(m_HasInitializedScripts, m_IsReadyToSpawn);
+    ar(m_Position, m_Size, m_Velocity, m_Acceleration);
+    ar(m_TimeWhenCreated, m_TimeWhenSpawned);
+    ar(bCanTakeDamage, bCanInflictDamage, bCanBeKilled);
+    ar(bCanBeMoved, bCanBeControlled, bCanAcceptInput);
+    ar(bCanUpdateWhilePaused, bWillRespondToHits);
+    ar(bWillRespondToOverlaps, bCanActivateTriggers);
+    ar(m_IsPlayerActor);
+  }
+
+  template<class Archive>
+  void load(Archive & ar)
+  {
+    ar(m_ColliderSelectivity);
+    ar(m_IsFrozen, m_HasSetLifetime, m_SetLifetime);
+    ar(m_ShouldTickEveryFrame, m_TickInterval);
+    ar(m_HasInitializedScripts, m_IsReadyToSpawn);
+    ar(m_Position, m_Size, m_Velocity, m_Acceleration);
+    ar(m_TimeWhenCreated, m_TimeWhenSpawned);
+    ar(bCanTakeDamage, bCanInflictDamage, bCanBeKilled);
+    ar(bCanBeMoved, bCanBeControlled, bCanAcceptInput);
+    ar(bCanUpdateWhilePaused, bWillRespondToHits);
+    ar(bWillRespondToOverlaps, bCanActivateTriggers);
+    ar(m_IsPlayerActor);
+  }
+
 };
 
 struct GameObjectHandle

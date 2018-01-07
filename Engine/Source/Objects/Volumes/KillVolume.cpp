@@ -28,44 +28,39 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Minimal.h"
-#include "Engine/BaseEngineInterface.h"
+#include "KillVolume.h"
 
-enum ETriggerRestriction
+#include "Objects/GameObject.h"
+
+KillVolume::KillVolume()
 {
-  TriggerByAnyObject,
-  TriggerByPlayerOnly
-};
 
-class GameObject;
+}
 
-class Triggerable
+KillVolume::~KillVolume()
 {
-public:
-  Triggerable();
-  virtual ~Triggerable();
 
-  void Enable();
-  void Disable();
-  
-  virtual void Trigger(GameObject *TriggeringObject);
+}
 
-  ETriggerRestriction eRestriction = ETriggerRestriction::TriggerByAnyObject;
+void KillVolume::Trigger(GameObject *TriggeringObject)
+{
+  if (!TriggeringObject)
+    return;
 
-
-  /* Serialization */
-public:
-  
-  template<class Archive>
-  void save(Archive & ar) const
+  switch (ActorKillRestriction)
   {
-    ar(eRestriction);
+    case EKillVolumeActorKillRestriction::KillActorByName:
+    {
+      if (TriggeringObject->GetID() == ActorIDToKill)
+      {
+        TriggeringObject->Kill();
+      }
+    }
+
+    case EKillVolumeActorKillRestriction::KillOnlyPlayerActor:
+    {
+      
+    }
   }
 
-  template<class Archive>
-  void load(Archive & ar)
-  {
-    ar(eRestriction);
-  }
-
-};
+}

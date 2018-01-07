@@ -10,6 +10,21 @@ public:
   float rFull;
   int growState;// usual -1, 0, +1 scheme
 
+  template<class Archive>
+  void save(Archive & ar) const
+  {
+    ar(cereal::base_class<regPolygon>(this));
+
+    ar(growSpeed, rFull, growState);
+  }
+
+  template<class Archive>
+  void load(Archive & ar)
+  {
+    ar(cereal::base_class<regPolygon>(this));
+
+    ar(growSpeed, rFull, growState);
+  }
 
   virtual mvHit* clone() const {
     return new expandPolygon(*this);

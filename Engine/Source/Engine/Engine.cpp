@@ -33,12 +33,18 @@
 
 SFEngine::SFEngine()
 {
-    
+  
 }
 
 SFEngine::~SFEngine()
 {
 
+}
+
+
+TimerManager* SFEngine::GetTimerManager()
+{
+  return m_GlobalTimerManager.get();
 }
 
 void SFEngine::LoadLevel(std::string lvl)

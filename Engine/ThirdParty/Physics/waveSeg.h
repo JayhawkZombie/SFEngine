@@ -39,6 +39,32 @@ public:
   std::vector<sf::Vertex> wvVtxVec;
   sf::Vertex underQuad[4];
 
+  template<class Archive>
+  void save(Archive & ar) const
+  {
+    ar(cereal::base_class<lineSeg>(this));
+
+    ar(wvSpeed, Amp_wvLt, K_wvRt, rotFreqRt, phsRt);
+    ar(Amp_wvLt, K_wvLt, rotFreqLt, phsLt);
+    ar(magL, viewLt, viewRt, viewSeg);
+    ar(viewBelow, underColor, grav_N, Elev, airDensity);
+    ar(Depth, fluidDensity, Npts_wv);
+    ar(wvVec, wvVecLt, wvVecRt, wvVtxVec, underQuad);
+  }
+
+  template<class Archive>
+  void load(Archive & ar)
+  {
+    ar(cereal::base_class<lineSeg>(this));
+
+    ar(wvSpeed, Amp_wvLt, K_wvRt, rotFreqRt, phsRt);
+    ar(Amp_wvLt, K_wvLt, rotFreqLt, phsLt);
+    ar(magL, viewLt, viewRt, viewSeg);
+    ar(viewBelow, underColor, grav_N, Elev, airDensity);
+    ar(Depth, fluidDensity, Npts_wv);
+    ar(wvVec, wvVecLt, wvVecRt, wvVtxVec, underQuad);
+  }
+
   // funcs
   waveSeg() {}// defs here
   virtual ~waveSeg() {}

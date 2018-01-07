@@ -4,6 +4,8 @@
 #include "lineSeg.h"
 #include "arcSeg.h"
 
+#include <cereal/archives/portable_binary.hpp>
+
 bool regPolygon::hit(mvHit& mh)
 {
   return mh.hit(*static_cast<regPolygon*>(this));
@@ -953,3 +955,5 @@ mhFree.setPosition( mhFree.pos );
 
 return;
 }   */
+
+CEREAL_REGISTER_TYPE(regPolygon);

@@ -16,6 +16,9 @@
 # Ignore dependencies
 **/Dependencies/
 
+# Ignore files used for testing
+**/TestFiles/
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 

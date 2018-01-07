@@ -61,7 +61,7 @@ struct Config
   float              Timing_fMaxTick;
 
   //Window ini settings
-  sf::Vector2f       Window_v2fWindowSize;
+  sf::Vector2u       Window_v2uWindowSize;
   bool               Window_bFullscreen;
   bool               Window_bShowSplashScreen;
   bool               Window_bPlaySplashScreenAudio;
@@ -73,4 +73,8 @@ struct Config
   uint32_t          Effects_uiMaxNumParticles;
   std::vector<std::string> Effects_strShaderPath; //Vector of paths to shaders
   std::vector<std::string> Effects_strShader;     //Vector of the names of the shaders
+
+  //Context settings
+  unsigned int Context_VersionMinor;
+  unsigned int Context_VersionMajor;
 };

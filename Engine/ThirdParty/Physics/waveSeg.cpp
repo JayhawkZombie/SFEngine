@@ -1,6 +1,8 @@
 #include "waveSeg.h"
 #include "mvHit.h"
 
+#include <cereal/archives/portable_binary.hpp>
+
 float waveSeg::PIx2 = 6.283185f;
 
 waveSeg::waveSeg(std::istream& is) {
@@ -282,3 +284,5 @@ mh.v.y += vShift_y;
 return Hit;
 }
 */
+
+CEREAL_REGISTER_TYPE(waveSeg);

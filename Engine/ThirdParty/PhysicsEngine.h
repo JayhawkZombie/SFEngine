@@ -312,6 +312,8 @@ std::stringstream GetFormattedSegSwingData
   float Mass
 );
 
+
+void UpdateAllPhysics(std::vector<std::shared_ptr<mvHit>> &MVHITS, std::vector<std::shared_ptr<lineSeg>> &LINESEGS);
 void UpdatePhysics(std::vector<PhysicsEngineBaseMeshType *> &Meshes, std::vector<PhysicsEngineSegmentType *> Segments, std::size_t Steps = 1);
 void UpdatePhysics(std::vector<std::shared_ptr<Collider2D>> Colliders, std::vector<PhysicsEngineSegmentType *> Segments, std::size_t steps = 1);
 void UpdatePhysics(std::vector<std::shared_ptr<Occluder2D>> Occluders, std::vector<std::shared_ptr<Collider2D>> Colliders, std::vector<PhysicsEngineSegmentType *> Segments, std::size_t steps = 1);

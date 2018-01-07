@@ -33,6 +33,7 @@
 #include "Globals\GlobalHooks.h"
 #include "Engine\Engine.h"
 #include  "Level\BasicLevel.h"
+#include "Time/TimerManager.h"
 
 #include <vector>
 #include <TGUI\TGUI.hpp>
@@ -61,6 +62,11 @@ volatile double TimeScaleFactor = 1.0;
 std::string WindowTitle = "<NO TITLE>";
 sf::Uint32 WindowStyle;
 volatile unsigned int FramerateLimit;
+
+TimerManager* GetGlobalTimerManager()
+{
+  return CurrentEngine->GetTimerManager();
+}
 
 void SetKeyRepeatEnabled(bool enabled)
 {

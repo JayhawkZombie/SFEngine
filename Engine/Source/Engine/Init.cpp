@@ -31,6 +31,8 @@
 #include "Engine/stdafx.h"
 #include "Engine\Engine.h"
 #include "Messaging\CoreMessager.h"
+#include "Time/TimerManager.h"
+#include "Parsing/IniParser.h"
 
 UINT32 SFEngine::Init(int argc, char **argv)
 {
@@ -38,6 +40,9 @@ UINT32 SFEngine::Init(int argc, char **argv)
   Messager::Init();
   ASyncLevelStreamThread::Launch();
   LevelsLock = std::make_shared<std::mutex>();
+
+  //Init timer manager
+  m_GlobalTimerManager = std::make_unique<TimerManager>();
 
   Messager::PostLogMessage(0, SystemMessage(SystemMessageType::ActivityLog, 0, 0, "EngineStartup"), MessageLogLevel::Normal);
 

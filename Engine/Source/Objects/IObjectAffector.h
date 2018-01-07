@@ -68,13 +68,13 @@ public:
   template<class Archive>
   void load(Archive & ar)
   {
-
+    ar(m_AffectorScale);
   }
 
   template<class Archive>
   void save(Archive & ar) const
   {
-
+    ar(m_AffectorScale);
   }
 
 protected:

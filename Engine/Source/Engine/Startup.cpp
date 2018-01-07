@@ -31,7 +31,9 @@
 #include "Engine/stdafx.h"
 #include "Engine/Engine.h"
 #include "Engine/ReturnValues.h"
-#include "Level/Level.h"
+#include "Level/BasicLevel.h"
+#include "Parsing/IniParser.h"
+#include "Utils/Convert.h"
 
 void SFEngine::InitRenderWindow()
 {
@@ -43,10 +45,15 @@ void SFEngine::InitRenderWindow()
   if (currentRenderWindow)
     delete currentRenderWindow;
 
+  csettings.majorVersion = EngineConfig.Context_VersionMajor;
+  csettings.minorVersion = EngineConfig.Context_VersionMinor;
+
 #ifdef WITH_EDITOR
   WindowStyle = sf::Style::Resize | sf::Style::Close | sf::Style::Titlebar;
   WindowTitle = "SFEngine";
-  Window = new sf::RenderWindow(sf::VideoMode(1700, 900), "SFEngine", sf::Style::Resize | sf::Style::Close | sf::Style::Titlebar, csettings);
+  Window = new sf::RenderWindow(sf::VideoMode(EngineConfig.Window_v2uWindowSize.x, EngineConfig.Window_v2uWindowSize.y), "SFEngine", 
+    sf::Style::Resize | sf::Style::Close | sf::Style::Titlebar, csettings);
+
   WindowSize = static_cast<sf::Vector2f>(Window->getSize());
 #else
   Window = new sf::RenderWindow(sf::VideoMode(EngineConfig.Window_v2fWindowSize.x, EngineConfig.Window_v2fWindowSize.y), "SFEngine V0.1.1", sf::Style::Default, ContextSettings);
@@ -117,34 +124,32 @@ UINT32 SFEngine::Startup()
   Handler.BindCallback(Events::MouseScrolled,
                         [this](const sf::Vector2i &v, sf::Mouse::Wheel w, float d) { this->HandleMouseScroll(v, w, d); });
 
-  std::ifstream _IN("SFEngine/Config/Engine.ini");
-  sf::Vector2u lSize;
-  sf::Vector2f gridSpac;
-  sf::FloatRect initView;
-  bool showgrid;
-  if (_IN.fail()) {
-    std::cerr << "Failed to open configuration file: \"Engine.ini\"" << std::endl;
+  //Parse engine ini file
+  IniParser parser;
+  parser.Parse("Engine.ini");
 
-  }
-  else {
-    EngineConfig.Window_v2fWindowSize   = Util::GetVec2fConfig("Window", "WindowSize", sf::Vector2f(800, 800), "Engine.ini", _IN);
-    //WindowSize = EngineConfig.Window_v2fWindowSize;
-    InitialLevel                        = Util::GetStringConfig("Game", "InitialLevel", "test.map", "Engine.ini", _IN);
-    EngineRenderSettings.Brightness     = Util::GetFloatConfig("Render", "Brightness", 1, "Engine.ini", _IN);
-    EngineRenderSettings.Contrast       = Util::GetFloatConfig("Render", "Contrast", 0.5, "Engine.ini", _IN);
-    EngineRenderSettings.Gamma          = Util::GetFloatConfig("Render", "Gamma", 0.5, "Engine.ini", _IN);
-    EngineRenderSettings.PostProcess    = Util::GetUnsignedIntConfig("Render", "PostProcess", 0, "Engine.ini", _IN);
-    EngineRenderSettings.BGClearColor.r = static_cast<sf::Uint8>(Util::GetUnsignedIntConfig("Render", "ClearColor.r", 0, "Engine.ini", _IN));
-    EngineRenderSettings.BGClearColor.g = static_cast<sf::Uint8>(Util::GetUnsignedIntConfig("Render", "ClearColor.g", 0, "Engine.ini", _IN));
-    EngineRenderSettings.BGClearColor.b = static_cast<sf::Uint8>(Util::GetUnsignedIntConfig("Render", "ClearColor.b", 0, "Engine.ini", _IN));
-
-    ContextSettings.antialiasingLevel   = Util::GetUnsignedIntConfig("Render", "uiAALevel", 1, "Engine.ini", _IN);
-    ContextSettings.depthBits           = Util::GetUnsignedIntConfig("Render", "uiDepthBits", 0, "Engine.ini", _IN);
-    ContextSettings.sRgbCapable         = Util::GetBooleanConfig("Render", "bSRGBCapable", true, "Engine.ini", _IN);
-    ContextSettings.stencilBits         = Util::GetUnsignedIntConfig("Render", "uiStencilBits", 0, "Engine.ini", _IN);
-    _IN.clear();
-    _IN.close();
-  }
+  auto winSize = parser.TryGetValue("Window", "WindowSize");
+  auto initLevel = parser.TryGetValue("Game", "LevelFile");
+  auto brightness = parser.TryGetValue("Render", "Brightness");
+  auto contrast = parser.TryGetValue("Render", "Contrast");
+  auto gamma = parser.TryGetValue("Render", "Gamma");
+  auto clearcolor_r = parser.TryGetValue("Render", "ClearColor.r");
+  auto clearcolor_g = parser.TryGetValue("Render", "Clearcolor.g");
+  auto clearcolor_b = parser.TryGetValue("Render", "ClearColor.b");
+  auto aalevel = parser.TryGetValue("Render", "uiAALevel");
+  auto majorversion = parser.TryGetValue("Render", "MajorVersion");
+  auto minorversion = parser.TryGetValue("Render", "MinorVersion");
+  
+  EngineConfig.Window_v2uWindowSize = Util::StringToVec2<unsigned int>(winSize.value_or("(1700, 900)"));
+  InitialLevel = initLevel.value_or("none");
+  EngineRenderSettings.Brightness = Util::StringToType<float>(brightness.value_or("1"));
+  EngineRenderSettings.Contrast = Util::StringToType<float>(contrast.value_or("0.5"));
+  EngineRenderSettings.Gamma = Util::StringToType<float>(gamma.value_or("0.5"));
+  EngineRenderSettings.BGClearColor.r = Util::StringToType<sf::Uint8>(clearcolor_r.value_or("0"));
+  EngineRenderSettings.BGClearColor.g = Util::StringToType<sf::Uint8>(clearcolor_g.value_or("0"));
+  EngineRenderSettings.BGClearColor.b = Util::StringToType<sf::Uint8>(clearcolor_b.value_or("0"));
+  EngineConfig.Context_VersionMajor = Util::StringToType<unsigned int>(majorversion.value_or("3"));
+  EngineConfig.Context_VersionMinor = Util::StringToType<unsigned int>(minorversion.value_or("0"));
 
   InitRenderWindow();
   //Create the GUI window immediately
@@ -153,7 +158,7 @@ UINT32 SFEngine::Startup()
   tgui::ToolTip::setTimeToDisplay(sf::milliseconds(300));
 
 
-  if (!EngineLogoTexture.loadFromFile("./SFEngine/Samples/Logos/SFEngineLogoLarge.png")) {
+  if (!EngineLogoTexture.loadFromFile("SFEngineLogoLarge.png")) {
     std::cerr << "Unable to load EngineLogo texture" << std::endl;
   }
   else {
@@ -161,7 +166,7 @@ UINT32 SFEngine::Startup()
     Window->draw(EngineLogoSprite);
   }
 
-  if (!EngineLoadingFont.loadFromFile("./SFEngine/Samples/Fonts/PressStart2P.ttf")) {
+  if (!EngineLoadingFont.loadFromFile("NotoSans-Regular.ttf")) {
     std::cerr << "Unable to load EngineLoadingFont" << std::endl;
   }
   else {
@@ -180,7 +185,9 @@ UINT32 SFEngine::Startup()
   Window->display();
   Window->clear();
 
-  Levels["Main"] = Level::DefaultEmptyLevel();
+  Levels["Main"] = BasicLevel::DefaultEmptyLevel();
+
+  CurrentLevel = Levels["Main"].get();
   auto ret = GameLoop();
 
   if (ret)

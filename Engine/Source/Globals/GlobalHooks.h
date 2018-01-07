@@ -69,6 +69,7 @@
 #include <Thor/Vectors/PolarVector2.hpp>
 #include <Thor/Math/Distributions.hpp>
 
+/* FUCK OFF MICROSOFT! */
 #ifdef _WINUSER_
 #pragma push_macro("MessageBox")
 #undef MessageBox
@@ -79,20 +80,12 @@ const std::string EngineVersionString{ "0.0.1" };
 const std::string EditorVersionString{ "0.0.1.B-fIncomplete" };
 const std::string CORE_PATH{ "./SFEngine/Source/CoreFiles/" };
 
-//remove this to launch the engine without editing tools
-#define WITH_EDITOR
 //Change this to redirect all error output
 #define ERR_STREAM std::cerr
 
 //define away some of the longest C++ paths
 typedef std::chrono::high_resolution_clock hres_clock;
 typedef std::chrono::high_resolution_clock::time_point hres_time_point;
-
-namespace chaiscript {
-  class ChaiScript;
-  class Module;
-  typedef std::shared_ptr<Module> ModulePtr;
-}
 
 //forward declaration of BasicLevel class for the global Levels object
 class BasicLevel;
@@ -295,6 +288,9 @@ class InputDeviceState;
 
 extern DataStream<UserEvent> EngineEventStream;
 extern InputDeviceState InputState;
+
+class TimerManager;
+extern TimerManager* GetGlobalTimerManager();
 
 #ifdef WITH_EDITOR
 class SFEngine;

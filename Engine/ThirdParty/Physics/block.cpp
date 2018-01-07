@@ -1,6 +1,8 @@
 #include "block.h"
 #include "ball.h"
 
+#include <cereal/archives/portable_binary.hpp>
+
 block::block(std::istream& fin) {
   init(fin);
 }// from file data
@@ -211,3 +213,5 @@ return true;
 
 return false;
 }   */
+
+CEREAL_REGISTER_TYPE(block);

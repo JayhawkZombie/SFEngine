@@ -101,4 +101,100 @@ private:
     waveSeg       waveMesh;
   };
 
+  /* Serialization */
+
+public:
+
+  template<class Archive>
+  void save(Archive & ar) const
+  {
+    ar(m_IsHidden, m_IsSleeping);
+    ar(m_MeshType);
+
+    switch (m_MeshType)
+    {
+      case ECollisionComponentMeshType::Ball:
+      {
+        ar(ballMesh);
+        break;
+      }
+
+      case ECollisionComponentMeshType::BallGo:
+      {
+        ar(ballGoMesh);
+        break;
+      }
+
+      case ECollisionComponentMeshType::Block:
+      {
+        ar(blockMesh);
+        break;
+      }
+
+      case ECollisionComponentMeshType::ExpandPolygon:
+      {
+        ar(expandMesh);
+        break;
+      }
+
+      case ECollisionComponentMeshType::RegPolygon:
+      {
+        ar(polyMesh);
+        break;
+      }
+
+      case ECollisionComponentMeshType::WaveSeg:
+      {
+        ar(waveMesh);
+        break;
+      }
+    } //switch (m_MeshType)
+  } // save
+  
+  template<class Archive>
+  void load(Archive & ar)
+  {
+    ar(m_IsHidden, m_IsSleeping);
+    ar(m_MeshType);
+
+    switch (m_MeshType)
+    {
+      case ECollisionComponentMeshType::Ball:
+      {
+        ar(ballMesh);
+        break;
+      }
+
+      case ECollisionComponentMeshType::BallGo:
+      {
+        ar(ballGoMesh);
+        break;
+      }
+
+      case ECollisionComponentMeshType::Block:
+      {
+        ar(blockMesh);
+        break;
+      }
+
+      case ECollisionComponentMeshType::ExpandPolygon:
+      {
+        ar(expandMesh);
+        break;
+      }
+
+      case ECollisionComponentMeshType::RegPolygon:
+      {
+        ar(polyMesh);
+        break;
+      }
+
+      case ECollisionComponentMeshType::WaveSeg:
+      {
+        ar(waveMesh);
+        break;
+      }
+    } //switch (m_MeshType)
+  }
+
 };
