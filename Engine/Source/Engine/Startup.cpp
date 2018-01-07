@@ -185,6 +185,9 @@ UINT32 SFEngine::Startup()
   Window->display();
   Window->clear();
 
+  //Init timer manager
+  m_GlobalTimerManager = std::make_unique<TimerManager>();
+
   Levels["Main"] = BasicLevel::DefaultEmptyLevel();
 
   CurrentLevel = Levels["Main"].get();

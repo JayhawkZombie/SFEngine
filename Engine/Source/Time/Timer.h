@@ -58,15 +58,15 @@ struct Timer
 
   friend bool operator< (const Timer &t1, const Timer &t2);
 
-  bool operator < (const Timer &timer)
-  {
-    return (ExpirationTime < timer.ExpirationTime);
-  }
+  //bool operator < (const Timer &timer)
+  //{
+  //  return (ExpirationTime > timer.ExpirationTime);
+  //}
 
-  bool operator > (const Timer &timer)
-  {
-    return (ExpirationTime > timer.ExpirationTime);
-  }
+  //bool operator > (const Timer &timer)
+  //{
+  //  return (ExpirationTime > timer.ExpirationTime);
+  //}
 
   bool operator == (const Timer &timer)
   {

@@ -41,9 +41,6 @@ UINT32 SFEngine::Init(int argc, char **argv)
   ASyncLevelStreamThread::Launch();
   LevelsLock = std::make_shared<std::mutex>();
 
-  //Init timer manager
-  m_GlobalTimerManager = std::make_unique<TimerManager>();
-
   Messager::PostLogMessage(0, SystemMessage(SystemMessageType::ActivityLog, 0, 0, "EngineStartup"), MessageLogLevel::Normal);
 
   std::vector<std::string> Commands;

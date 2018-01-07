@@ -37,6 +37,7 @@
 #include "Physics/Collider.h"
 #include "Physics/Occluder.h"
 #include "Exceptions/Exceptions.h"
+#include "Time/TimerManager.h"
 
 #include <cereal/archives/portable_binary.hpp>
 
@@ -168,6 +169,12 @@ void BasicLevel::OnBegin()
 {
   for (auto & obj : m_GameObjects)
     obj.second->BeginPlay();
+
+
+  auto timers = GetGlobalTimerManager();
+
+  timers->AddTimer(1.0, true, 0.0, 1.0, [] () { std::cout << "1 sec repeat timer\n"; });
+  timers->AddTimer(5.0, true, 0.0, 1.0, [] () { std::cout << "5 sec delay timer\n"; });
 }
 
 void BasicLevel::OnEnd()

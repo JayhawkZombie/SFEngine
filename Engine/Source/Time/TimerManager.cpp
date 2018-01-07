@@ -35,11 +35,17 @@ void TimerManager::AddTimer(double duration, bool repeat, double delay, double s
 {
   Timer timer;
   timer.IsPeriodic = repeat;
-  timer.ExpirationTime = m_TotalElapsedTime + (duration / scale);
+  timer.ExpirationTime = m_TotalElapsedTime + (duration / scale) * 1000.0;
   timer.Duration = duration;
   timer.TimeScale = scale;
+  timer.Callback = callback;
 
   m_DeferredTimerAdds.push_back(timer);
+}
+
+void TimerManager::Restart()
+{
+  m_TotalElapsedTime = 0.0;
 }
 
 void TimerManager::Tick(double RealTime)
@@ -50,28 +56,22 @@ void TimerManager::Tick(double RealTime)
   {
     Timer timer = m_Timers.top();
 
-    auto iter = m_Timers.begin();
-    auto handle = boost::heap::fibonacci_heap<Timer>::s_handle_from_iterator(iter);
-
     if (m_TotalElapsedTime >= timer.ExpirationTime)
     {
       /* Timer is done - execute it */
-      iter->Callback();
+      timer.Callback();
       
       /* If it should loop, set its future expiration and 
        * add it back into the queue
        * */
-      if (iter->IsPeriodic)
+      if (timer.IsPeriodic)
       {
-        Timer newtimer = *iter;
-        newtimer.ExpirationTime = m_TotalElapsedTime + (newtimer.Duration / newtimer.TimeScale);
+        Timer newtimer = timer;
 
-        m_Timers.update(handle, newtimer);
+        m_DeferredTimerAdds.push_back(newtimer);
       }
-      else
-      {
-        m_Timers.erase(handle);
-      }
+
+      m_Timers.pop();
     }
     else
     {
@@ -85,11 +85,12 @@ void TimerManager::Tick(double RealTime)
    **/
   for (auto & timer : m_DeferredTimerAdds)
   {
-    timer.ExpirationTime = m_TotalElapsedTime + (timer.Duration / timer.TimeScale);
+    timer.ExpirationTime = m_TotalElapsedTime + ( timer.Duration / timer.TimeScale ) * 1000.0;
 
     m_Timers.push(timer);
   }
 
+  m_DeferredTimerAdds.clear();
 }
 
 bool TimerManager::IsHandleValid(const TimerHandle &Handle)
@@ -99,6 +100,6 @@ bool TimerManager::IsHandleValid(const TimerHandle &Handle)
 
 void TimerManager::ClearAllTimers()
 {
-  m_Timers.clear();
+  m_Timers = std::priority_queue<Timer>();
   m_DeferredTimerAdds.clear();
 }

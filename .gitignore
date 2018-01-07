@@ -19,6 +19,9 @@
 # Ignore files used for testing
 **/TestFiles/
 
+# Ignore music folder
+**/Music/
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 

@@ -37,16 +37,6 @@
 
 #endif
 
-void func()
-{
-  std::cerr << "Func called" << std::endl;
-}
-
-void SomeCallback(std::shared_ptr<sf::Texture> tex, const std::string &ID)
-{
-  std::cerr << "<<<<< OOOOOOOH!!!!!" << std::endl;
-}
-
 UINT32 SFEngine::GameLoop()
 {
   Messager::PostLogMessage(0, SystemMessage(SystemMessageType::ActivityLog, 0, 0, "Engine GameLoop"), MessageLogLevel::Normal);
@@ -64,21 +54,7 @@ UINT32 SFEngine::GameLoop()
   double UpdateDelta = 0.0;
   sf::Event evnt;
 
-  std::shared_ptr<sf::RenderTexture> GameMainTexture = std::make_shared<sf::RenderTexture>();
-  GameMainTexture->create(static_cast<unsigned int>(std::ceil(WindowSize.x)), static_cast<unsigned int>(std::ceil(WindowSize.y)));
-
-  sf::Sprite GameSprite;
-  GameSprite.setTexture(GameMainTexture->getTexture());
-
   Window->clear(sf::Color::Black);
-  std::shared_ptr<sf::RenderTexture> EditorTexture(new sf::RenderTexture);
-  EditorTexture->create(static_cast<unsigned int>(std::ceil(WindowSize.x)), static_cast<unsigned int>(std::ceil(WindowSize.y)));
-  EditorTexture->clear(sf::Color::Transparent);
-
-  sf::Sprite EditorSprite;
-  EditorSprite.setTexture(EditorTexture->getTexture());
-
-  //Window->setFramerateLimit(120);
   Window->setVerticalSyncEnabled(false);
   Window->setKeyRepeatEnabled(false);
   bool Closed = false;
@@ -100,8 +76,10 @@ UINT32 SFEngine::GameLoop()
   sf::RectangleShape LevelRect;
   LevelRect.setPosition({ 0, 0 });
   LevelRect.setSize({ 1700, 900 });
-  LevelRect.setTexture(&(EditorTexture->getTexture()));
+  LevelRect.setTexture(&(LevelTexture->getTexture()));
   LevelRect.setTextureRect({ 0, 0, 1700, 900 });
+
+  
 
   //There should already have been a Main level loaded in Startup
   auto it = Levels.find("Main");
@@ -122,6 +100,7 @@ UINT32 SFEngine::GameLoop()
   currentRenderWindow->setVerticalSyncEnabled(true);
   SetGravity(&Gravity);
 
+  m_GlobalTimerManager->Restart();
   while (true) {
     //When the window gets closed, we will be alerted, break out, and alert everything that we're closing down
     Closed = Handler.PollEvents(currentRenderWindow, evnt, true);
@@ -150,13 +129,13 @@ UINT32 SFEngine::GameLoop()
       RenderStart = std::chrono::high_resolution_clock::now();
 
       Window->clear(sf::Color::Black);
-      EditorTexture->clear(sf::Color::Black); 
+      LevelTexture->clear(sf::Color::Black); 
         
       if (CurrentLevel) {
-        CurrentLevel->RenderOnTexture(EditorTexture);
+        CurrentLevel->RenderOnTexture(LevelTexture);
       }
 
-      EditorTexture->display();
+      LevelTexture->display();
       Window->draw(LevelRect); 
 
       GUI->draw();
@@ -171,7 +150,6 @@ UINT32 SFEngine::GameLoop()
     }
 
   }
-  EditorTexture.reset();
   LevelTexture.reset();
 
   CurrentLevel = nullptr;

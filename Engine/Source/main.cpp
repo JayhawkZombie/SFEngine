@@ -121,14 +121,6 @@
 #  error SFML_STATIC must be defined
 #endif
 
-#include "Tests\Encoding\EncodingTests.h"
-#include "Tests\Scripting\ScriptingTests.h"
-#include "Tests\Serialization\ScriptSerializationTests.h"
-#include "Tests\Serialization\SFMLSerializationTests.h"
-#include "Tests\Parsing\ParsingTests.h"
-#include "Tests\Streams\DataStreamTests.h"
-#include "Serialization\AssetPack.h"
-
 int main(int argc, char **argv)
 {
   SFEngine GameEngine;

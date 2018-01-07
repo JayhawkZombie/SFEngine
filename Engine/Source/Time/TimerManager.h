@@ -45,7 +45,7 @@ public:
    *  This will freeze if you do so
    **/
   void AddTimer(double duration, bool repeat, double delay, double scale, const std::function<void()> &callback);
-
+  void Restart();
   void Tick(double RealTime);
   bool IsHandleValid(const TimerHandle &Handle);
   void ClearAllTimers();
@@ -54,7 +54,8 @@ private:
 
   double m_TotalElapsedTime = 0.0;
 
-  boost::heap::fibonacci_heap<Timer> m_Timers;
+  std::priority_queue<Timer> m_Timers;
+
   std::vector<Timer> m_DeferredTimerAdds;
   std::vector<Timer> m_StoppedTimers;
 };
