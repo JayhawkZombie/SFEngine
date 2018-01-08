@@ -498,10 +498,13 @@
     <ClCompile Include="Engine\Source\Objects\TriggerObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Editor\Source\Tools\VariableInspector.cpp">
+    <ClCompile Include="Engine\Source\Serialization\AssetPack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Source\Serialization\AssetPack.cpp">
+    <ClCompile Include="Engine\Source\Engine\ShowEditor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\Source\Tools\IniEditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1340,16 +1343,13 @@
     <ClInclude Include="Engine\Source\Objects\TriggerObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Editor\Source\Tools\VariableInspector.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Editor\Source\Tools\FloatInspector.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Source\Utils\Serializer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\Serialization\AssetPack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\Source\Tools.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1368,6 +1368,7 @@
     <None Include="Engine\Source\Utils\Interpolators.inl">
       <Filter>Header Files</Filter>
     </None>
+    <None Include="Engine.ini" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Engine\ThirdParty\Jinx\LICENSE" />

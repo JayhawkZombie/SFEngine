@@ -49,6 +49,11 @@ public:
 
   std::optional<std::string> TryGetValue(const std::string &Section, const std::string &KeyString);
 
+  const std::unordered_map<std::string, std::unordered_map<std::string, std::string>>& GetValueMap() const;
+
+  void AddSection(const std::string &Name);
+  void AddKeyValuePair(const std::string &Section, const std::string &Key, const std::string &Value);
+
 private:
 
   bool TryParseHeader();

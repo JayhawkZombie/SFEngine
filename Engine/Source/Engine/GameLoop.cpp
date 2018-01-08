@@ -59,14 +59,6 @@ UINT32 SFEngine::GameLoop()
   Window->setKeyRepeatEnabled(false);
   bool Closed = false;
 
-#ifdef WITH_EDITOR
-  sf::Clock dClock;
-  ImGui::SFML::Init(*currentRenderWindow);
-#endif
-
-#ifdef WITH_EDITOR
-  
-#endif
   vec2d Gravity;
 
   AssignBoundaries(900, 1700);
@@ -91,16 +83,18 @@ UINT32 SFEngine::GameLoop()
   else {
     FlagForClose = true;
   }
-    
-  sf::Time fTime = { sf::seconds(0) };
-  EngineRenderSettings.BGClearColor = sf::Color::Black;
-
-
+  
   Gravity.y = .3f;
   currentRenderWindow->setVerticalSyncEnabled(true);
   SetGravity(&Gravity);
 
   m_GlobalTimerManager->Restart();
+
+#ifdef WITH_EDITOR
+  sf::Clock IMGUIClock;
+  ImGui::SFML::Init(*Window);
+#endif
+
   while (true) {
     //When the window gets closed, we will be alerted, break out, and alert everything that we're closing down
     Closed = Handler.PollEvents(currentRenderWindow, evnt, true);
@@ -116,14 +110,18 @@ UINT32 SFEngine::GameLoop()
 
       TickDelta *= TimeScaleFactor;
       UpdateStart = std::chrono::high_resolution_clock::now();
-
-      fTime = dClock.restart();
        
       m_GlobalTimerManager->Tick(TickDelta);
 
       if (CurrentLevel) {
         CurrentLevel->TickUpdate(TickDelta);
       }
+
+#ifdef WITH_EDITOR
+      ImGui::SFML::Update(*Window, IMGUIClock.restart());
+
+      ShowEditor();
+#endif
 
       UpdateEnd = std::chrono::high_resolution_clock::now();
       RenderStart = std::chrono::high_resolution_clock::now();
@@ -139,6 +137,11 @@ UINT32 SFEngine::GameLoop()
       Window->draw(LevelRect); 
 
       GUI->draw();
+
+#ifdef WITH_EDITOR
+      ImGui::SFML::Render(*Window);
+#endif
+
       Window->display();
 
       RenderEnd = std::chrono::high_resolution_clock::now();
@@ -155,5 +158,11 @@ UINT32 SFEngine::GameLoop()
   CurrentLevel = nullptr;
 
   Messager::PostLogMessage(0, SystemMessage(SystemMessageType::ActivityLog, 0, 0, "Engine Beginning Shutdown"), MessageLogLevel::Normal);
+
+#ifdef WITH_EDITOR
+  Messager::PostLogMessage(0, SystemMessage(SystemMessageType::ActivityLog, 0, 0, "IMGUI Shutting down"), MessageLogLevel::Normal);
+  ImGui::SFML::Shutdown();
+#endif
+
   return Shutdown();
 }

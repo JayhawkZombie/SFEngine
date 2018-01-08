@@ -34,8 +34,28 @@
 #include "Time/TimerManager.h"
 #include "Parsing/IniParser.h"
 
+#include <filesystem>
+#include <boost/stacktrace.hpp>
+#include <boost/stacktrace/stacktrace.hpp>
+
+namespace filesystem = std::experimental::filesystem;
+
 UINT32 SFEngine::Init(int argc, char **argv)
 {
+
+  if (filesystem::exists(filesystem::current_path() / "crash_trace.dump"))
+  {
+    std::ifstream trace("crash_trace.dump");
+
+    boost::stacktrace::stacktrace st = boost::stacktrace::stacktrace::from_dump(trace);
+
+    std::cout << "Previous run crashed: \n" << st << "\n";
+
+    trace.close();
+    filesystem::remove("crash_trace.dump");
+  }
+
+
   //Initialize the messager
   Messager::Init();
   ASyncLevelStreamThread::Launch();

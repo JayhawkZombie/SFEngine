@@ -164,7 +164,11 @@ bool EventHandler::PollEvents(sf::RenderWindow *win, sf::Event &evnt, const bool
 {
   v2iMousePosArg = sf::Mouse::getPosition(*currentRenderWindow);
   while (win->pollEvent(evnt)) {
+
+#ifdef WITH_EDITOR
     ImGui::SFML::ProcessEvent(evnt);
+#endif
+
     if (CurrentLevel)
       CurrentLevel->EventUpdate(evnt);
 

@@ -1,3 +1,5 @@
+#ifdef WITH_EDITOR
+
 ////////////////////////////////////////////////////////////
 //
 // MIT License
@@ -28,14 +30,45 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "VariableInspector.h"
+#include "Editor/Source/Tools.h"
+#include "Engine/Engine.h"
+#include "Globals/GlobalHooks.h"
 
-VariableInspector::VariableInspector()
+void SFEngine::ShowEditor()
 {
+  
+  static bool bShowIniEditor = false;
+
+  if (ImGui::BeginMainMenuBar())
+  {
+
+    if (ImGui::BeginMenu("File"))
+    {
+
+      if (ImGui::MenuItem("Exit"))
+      {
+        FlagForClose = true;
+      }
+
+      if (ImGui::MenuItem("Ini Editor"))
+      {
+        bShowIniEditor = true;
+      }
+
+      ImGui::EndMenu();
+    }
+
+    ImGui::EndMainMenuBar();
+
+
+    if (bShowIniEditor)
+    {
+      ShowIniEditor();
+    }
+
+
+  }
 
 }
 
-VariableInspector::~VariableInspector()
-{
-
-}
+#endif

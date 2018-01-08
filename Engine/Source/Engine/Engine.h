@@ -115,6 +115,10 @@ private:
   void Render();
   void InitRenderWindow();
 
+#ifdef WITH_EDITOR
+  void ShowEditor();
+#endif
+
   sf::Shader *VertexShader;
   sf::Shader *FragmentShader;
 

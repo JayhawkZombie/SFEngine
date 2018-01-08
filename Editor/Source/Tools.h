@@ -1,3 +1,5 @@
+#ifdef WITH_EDITOR
+
 #pragma once
 
 ////////////////////////////////////////////////////////////
@@ -30,24 +32,9 @@
 //
 ////////////////////////////////////////////////////////////
 
-#ifdef WITH_EDITOR
+#include "Minimal.h"
+#include "Globals/GlobalHooks.h"
 
-#include <TGUI/TGUI.hpp>
-
-class VariableInspector
-{
-public:
-  VariableInspector();
-  virtual ~VariableInspector();
-
-  virtual void Init(std::shared_ptr<tgui::Gui> gui) = 0;
-  virtual void Cleanup(std::shared_ptr<tgui::Gui> gui) = 0;
-
-protected:
-
-  tgui::Button::Ptr  ChangeButton;
-  tgui::Button::Ptr  CancelButton;
-
-};
+void ShowIniEditor();
 
 #endif

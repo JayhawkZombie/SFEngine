@@ -41,7 +41,7 @@ void IniParser::Parse(const std::string &Filename)
 
 void IniParser::Parse(std::stringstream &stream)
 {
-  boost::char_separator<char> seps("\n", "[]=");
+  boost::char_separator<char> seps("\n\r", "[]=");
   const std::string str = stream.str();
 
   TTokenizer tokens(str, seps);
@@ -160,6 +160,32 @@ std::optional<std::string> IniParser::TryGetValue(const std::string &Section, co
   }
 
   return std::nullopt;
+}
+
+const std::unordered_map<std::string, std::unordered_map<std::string, std::string>>& IniParser::GetValueMap() const
+{
+  return m_ValueMap;
+}
+
+void IniParser::AddSection(const std::string &Name)
+{
+  auto it = m_ValueMap.find(Name);
+
+  if (it != m_ValueMap.end())
+  {
+    m_ValueMap[Name] = {};
+  }
+}
+
+void IniParser::AddKeyValuePair(const std::string &Section, const std::string &Key, const std::string &Value)
+{
+  auto it = m_ValueMap.find(Section);
+
+  if (it != m_ValueMap.end())
+  {
+
+    ( *it ).second.insert({ Key, Value });
+  }
 }
 
 bool IniParser::TryParseHeader()

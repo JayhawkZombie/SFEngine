@@ -34,14 +34,11 @@
 #include "Exceptions\Exceptions.h"
 #include "Engine/ReturnValues.h"
 
+#include <boost/stacktrace.hpp>
+
 void TerminateHandler()
 {
-  if (CurrentEngine) {
-    CurrentEngine->HandleEngineCrash();
-  }
-  else {
-    std::cerr << "The terminate handler was unable to invoke an engine recovery method" << std::endl;
-  }
+  boost::stacktrace::safe_dump_to("crash_trace.dump");
 }
 
 uint32_t SFEngine::Go(int argc, char **argv)

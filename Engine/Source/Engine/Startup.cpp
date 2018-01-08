@@ -152,6 +152,7 @@ UINT32 SFEngine::Startup()
   EngineConfig.Context_VersionMinor = Util::StringToType<unsigned int>(minorversion.value_or("0"));
 
   InitRenderWindow();
+
   //Create the GUI window immediately
   GUI = std::make_shared<tgui::Gui>(*currentRenderWindow);
 
