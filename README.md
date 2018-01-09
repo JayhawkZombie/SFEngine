@@ -5,8 +5,6 @@
 
 ### This project is still in pre-alpha, and is nowhere near ready for any sort of release  
 
-**This repo is frozen**. The code base has been migrated to a new repo for further development.  It will be posted here when the migration is complete.  
-
 ## License
 MIT License
 
@@ -41,13 +39,13 @@ an acknowledgment of the software used is required.
 *  [Selba Ward](https://github.com/Hapaxia/SelbaWard)  
 *  [JsonCPP](https://github.com/open-source-parsers/jsoncpp)  
 *  [Cereal](http://uscilab.github.io/cereal/)  
-*  [Chaiscript](http://chaiscript.com/)  
+*  [Jinx](https://github.com/JamesBoer/Jinx)  
+*  [basen](https://github.com/azawadzki/base-n)  
+*  [BOOST](http://www.boost.org/)  
+*  [IMGUI](https://github.com/ocornut/imgui)
+*  [IMGUI-SFML](https://github.com/eliasdaler/imgui-sfml)  
 
-### SFML
-Used under license  
-Used for all rendering and graphics features.  
-SFML is used under license according to the SFML license terms.  
-[SFML License](https://github.com/SFML/SFML/blob/master/license.txt)  
+## Licenses
 
 ### Physics  
 Used with permission of the author.  Credit is attributed to Derek Slagle  

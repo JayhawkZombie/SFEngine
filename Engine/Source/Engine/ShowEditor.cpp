@@ -36,8 +36,6 @@
 
 void SFEngine::ShowEditor()
 {
-  
-  static bool bShowIniEditor = false;
 
   if (ImGui::BeginMainMenuBar())
   {
@@ -50,22 +48,10 @@ void SFEngine::ShowEditor()
         FlagForClose = true;
       }
 
-      if (ImGui::MenuItem("Ini Editor"))
-      {
-        bShowIniEditor = true;
-      }
-
       ImGui::EndMenu();
     }
 
     ImGui::EndMainMenuBar();
-
-
-    if (bShowIniEditor)
-    {
-      ShowIniEditor();
-    }
-
 
   }
 

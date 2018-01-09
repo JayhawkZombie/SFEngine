@@ -97,7 +97,7 @@ void ShowIniEditor()
     {
       ImGui::Indent();
 
-      if (ImGui::CollapsingHeader(section.first.c_str()))
+      if (ImGui::TreeNode(section.first.c_str()))
       {
         ImGui::Indent();
 
@@ -119,6 +119,7 @@ void ShowIniEditor()
         }
 
         ImGui::Columns(1);
+        ImGui::TreePop();
         ImGui::Unindent();
       } // if (CollapsingHeader)
 
