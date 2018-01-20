@@ -507,6 +507,9 @@
     <ClCompile Include="Editor\Source\Tools\IniEditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Source\Level\World.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Source\Actor\Actor.h">
@@ -1331,9 +1334,6 @@
     <ClInclude Include="Engine\Tests\Streams\DataStreamTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\Scripting\ScriptFunctions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Source\Objects\Volumes\TriggerVolume.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1350,6 +1350,162 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Editor\Source\Tools.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Serialization\Box2DTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Level\World.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Utils\TypeTraits.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\any.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\bad_boxed_cast.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\bind_first.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\bootstrap.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\bootstrap_stl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\boxed_cast.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\boxed_cast_helper.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\boxed_number.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\boxed_value.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\callable_traits.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\dispatchkit.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\dynamic_object.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\dynamic_object_detail.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\exception_specification.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\function_call.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\function_call_detail.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\handle_return.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\operators.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\proxy_constructors.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\proxy_functions.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\proxy_functions_detail.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\register_function.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\short_alloc.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\type_conversions.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\dispatchkit\type_info.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\language\chaiscript_algebraic.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\language\chaiscript_common.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\language\chaiscript_engine.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\language\chaiscript_eval.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\language\chaiscript_optimizer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\language\chaiscript_parser.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\language\chaiscript_posix.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\language\chaiscript_prelude.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\language\chaiscript_prelude_docs.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\language\chaiscript_tracer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\language\chaiscript_unknown.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\language\chaiscript_windows.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\utility\fnv1a.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\utility\json.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\utility\json_wrap.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\utility\static_string.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\utility\utility.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\chaiscript.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\chaiscript_basic.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\chaiscript_defines.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\chaiscript_stdlib.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\chaiscript\chaiscript_threading.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Scripting\ArithmeticScriptFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Scripting\ChaiscriptFunctionNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1369,6 +1525,9 @@
       <Filter>Header Files</Filter>
     </None>
     <None Include="Engine.ini" />
+    <None Include="Engine\Source\Scripting\ArithmeticScriptFunctions.inl">
+      <Filter>Header Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Engine\ThirdParty\Jinx\LICENSE" />

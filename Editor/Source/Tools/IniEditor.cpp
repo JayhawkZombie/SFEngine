@@ -67,6 +67,8 @@ void ShowIniEditor()
 
       for (const auto & section : val_map)
       {
+        const auto &[sec_str, sec_vals] = section;
+
         parser_value_bufs[section.first] = {};
 
         /* Copy values over into their buffers */

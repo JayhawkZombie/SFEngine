@@ -48,18 +48,21 @@ namespace
 
 BasicLevel::BasicLevel(const BaseEngineInterface & Copy)
   : BaseEngineInterface(Copy)
+,   World(WorldGravity)
 {
   
 }
 
 BasicLevel::BasicLevel(const sf::FloatRect &DefaultView)
   : CurrentView(DefaultView), Gravity(new ::vec2d)
+  , World(WorldGravity)
 {
     
 }
 
 BasicLevel::BasicLevel()
   : Gravity(new ::vec2d)
+  , World(WorldGravity)
 {
 
 }

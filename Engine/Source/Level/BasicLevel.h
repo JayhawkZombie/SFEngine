@@ -38,6 +38,8 @@
 #include "ThirdParty/SelbaWard/TileMap.hpp"
 #include "Objects/GameObject.h"
 
+#include <Box2D/Box2D.h>
+
 class BasicLevel : public BaseEngineInterface
 {
 public:
@@ -84,6 +86,9 @@ public:
   
   virtual void CleanUp();
   virtual std::string GetClass() const override;
+
+  b2Vec2 WorldGravity = b2Vec2(0.f, -10.f);
+  b2World World;
 
   bool DoUpdatePhysics = true;
   float updateInterval = 16.667f;
