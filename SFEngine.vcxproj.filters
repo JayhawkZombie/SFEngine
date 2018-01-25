@@ -510,6 +510,9 @@
     <ClCompile Include="Engine\Source\Level\World.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Source\Statistical\Distributions\SpacialDistributions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Source\Actor\Actor.h">
@@ -1508,6 +1511,12 @@
     <ClInclude Include="Engine\Source\Scripting\ChaiscriptFunctionNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\Statistical\Distributions\NumericalDistributions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Statistical\Distributions\SpacialDistributions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\Source\Streams\DataStream.inl">
@@ -1531,5 +1540,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Engine\ThirdParty\Jinx\LICENSE" />
+    <Text Include="ChaiscriptLicense" />
   </ItemGroup>
 </Project>

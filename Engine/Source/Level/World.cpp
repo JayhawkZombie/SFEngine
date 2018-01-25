@@ -33,17 +33,26 @@
 
 void WorldCollisionCache::AddBeginContact(b2Contact *Contact)
 {
+  WorldCollisionCacheData data;
+  data.FixtureA = Contact->GetFixtureA();
+  data.FixtureB = Contact->GetFixtureB();
 
+  m_BeginOverlapCache.push_back(data);
 }
 
 void WorldCollisionCache::AddEndContact(b2Contact *Contact)
 {
+  WorldCollisionCacheData data;
+  data.FixtureA = Contact->GetFixtureA();
+  data.FixtureB = Contact->GetFixtureB();
 
+  m_EndOverlapCache.push_back(data);
 }
 
 void WorldCollisionCache::Clear()
 {
-
+  m_BeginOverlapCache.clear();
+  m_EndOverlapCache.clear();
 }
 
 WorldCollisionListener::WorldCollisionListener(WorldCollisionCache &Cache)
@@ -59,12 +68,12 @@ WorldCollisionListener::~WorldCollisionListener()
 
 void WorldCollisionListener::BeginContact(b2Contact* contact)
 {
-
+  m_Cache.AddBeginContact(contact);
 }
 
 void WorldCollisionListener::EndContact(b2Contact* contact)
 {
-
+  m_Cache.AddEndContact(contact);
 }
 
 void WorldCollisionListener::PreSolve(b2Contact* contact, const b2Manifold* oldManifold)
@@ -90,5 +99,5 @@ World::~World()
 
 void World::TickUpdate(const double &delta)
 {
-
+  m_B2World.Step(( float32 )delta, 8, 3);
 }

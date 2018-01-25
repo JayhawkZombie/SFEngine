@@ -85,6 +85,7 @@
     <ClCompile Include="Engine\Source\Resources\ResourceManagerThread.cpp" />
     <ClCompile Include="Engine\Source\Serialization\AssetPack.cpp" />
     <ClCompile Include="Engine\Source\State\DeviceState.cpp" />
+    <ClCompile Include="Engine\Source\Statistical\Distributions\SpacialDistributions.cpp" />
     <ClCompile Include="Engine\Source\Streams\DataStream.cpp" />
     <ClCompile Include="Engine\Source\Threading\ASyncLoader.cpp" />
     <ClCompile Include="Engine\Source\Threading\ASyncLoadThread.cpp" />
@@ -263,6 +264,8 @@
     <ClInclude Include="Engine\Source\Shaders\Shader.h" />
     <ClInclude Include="Engine\Source\State\DeviceState.h" />
     <ClInclude Include="Engine\Source\State\State.h" />
+    <ClInclude Include="Engine\Source\Statistical\Distributions\NumericalDistributions.h" />
+    <ClInclude Include="Engine\Source\Statistical\Distributions\SpacialDistributions.h" />
     <ClInclude Include="Engine\Source\Streams\DataStream.h" />
     <ClInclude Include="Engine\Source\Threading\ASyncLoader.h" />
     <ClInclude Include="Engine\Source\Threading\ThreadSafe.h" />
@@ -532,6 +535,7 @@
     <None Include="Engine\ThirdParty\SelbaWard\TileMap.inl" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="ChaiscriptLicense" />
     <Text Include="Engine\ThirdParty\Jinx\LICENSE" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
