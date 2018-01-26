@@ -45,7 +45,7 @@ UINT32 SFEngine::GameLoop()
   std::chrono::high_resolution_clock::time_point RenderStart;
   std::chrono::high_resolution_clock::time_point RenderEnd;
 
-  double TickDelta = 0.0;
+  double TickDelta   = 0.0;
   double RenderDelta = 0.0;
   double UpdateDelta = 0.0;
   sf::Event evnt;
@@ -94,7 +94,7 @@ UINT32 SFEngine::GameLoop()
     try
     {
       CurrentFrameStart = std::chrono::high_resolution_clock::now();
-      TickDelta = std::chrono::duration<double, std::milli>(CurrentFrameStart - LastFrameStart).count();
+      TickDelta   = std::chrono::duration<double, std::milli>(CurrentFrameStart - LastFrameStart).count();
       UpdateDelta = std::chrono::duration<double, std::milli>(UpdateEnd - UpdateStart).count();
       RenderDelta = std::chrono::duration<double, std::milli>(RenderEnd - RenderStart).count();
 
@@ -113,7 +113,7 @@ UINT32 SFEngine::GameLoop()
       ShowEditor();
 #endif
 
-      UpdateEnd = std::chrono::high_resolution_clock::now();
+      UpdateEnd   = std::chrono::high_resolution_clock::now();
       RenderStart = std::chrono::high_resolution_clock::now();
 
       currentRenderWindow->clear(sf::Color::Black);
@@ -134,7 +134,7 @@ UINT32 SFEngine::GameLoop()
 
       currentRenderWindow->display();
 
-      RenderEnd = std::chrono::high_resolution_clock::now();
+      RenderEnd      = std::chrono::high_resolution_clock::now();
       LastFrameStart = CurrentFrameStart;
     }
     catch (std::runtime_error &err )

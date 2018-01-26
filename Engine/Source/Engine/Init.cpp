@@ -95,35 +95,35 @@ UINT32 SFEngine::Init(int argc, char **argv)
   }
   
   parser.Parse(DefaultOptionsFile);
-  auto winSize = parser.TryGetValue("Window", "WindowSize");
-  auto initLevel = parser.TryGetValue("Game", "LevelFile");
-  auto brightness = parser.TryGetValue("Render", "Brightness");
-  auto contrast = parser.TryGetValue("Render", "Contrast");
-  auto gamma = parser.TryGetValue("Render", "Gamma");
+  auto winSize      = parser.TryGetValue("Window", "WindowSize");
+  auto initLevel    = parser.TryGetValue("Game", "LevelFile");
+  auto brightness   = parser.TryGetValue("Render", "Brightness");
+  auto contrast     = parser.TryGetValue("Render", "Contrast");
+  auto gamma        = parser.TryGetValue("Render", "Gamma");
   auto clearcolor_r = parser.TryGetValue("Render", "ClearColor.r");
   auto clearcolor_g = parser.TryGetValue("Render", "Clearcolor.g");
   auto clearcolor_b = parser.TryGetValue("Render", "ClearColor.b");
-  auto aalevel = parser.TryGetValue("Render", "uiAALevel");
+  auto aalevel      = parser.TryGetValue("Render", "uiAALevel");
   auto majorversion = parser.TryGetValue("Render", "MajorVersion");
   auto minorversion = parser.TryGetValue("Render", "MinorVersion");
-  auto use_vsync = parser.TryGetValue("Render", "bVsyncEnabled");
+  auto use_vsync    = parser.TryGetValue("Render", "bVsyncEnabled");
 
-  EngineConfig.Window_v2uWindowSize = Util::StringToVec2<unsigned int>(winSize.value_or("(1700, 900)"));
-  InitialLevel = initLevel.value_or("none");
-  EngineRenderSettings.Brightness = Util::StringToType<float>(brightness.value_or("1"));
-  EngineRenderSettings.Contrast = Util::StringToType<float>(contrast.value_or("0.5"));
-  EngineRenderSettings.Gamma = Util::StringToType<float>(gamma.value_or("0.5"));
-  EngineRenderSettings.BGClearColor.r = Util::StringToType<sf::Uint8>(clearcolor_r.value_or("0"));
-  EngineRenderSettings.BGClearColor.g = Util::StringToType<sf::Uint8>(clearcolor_g.value_or("0"));
-  EngineRenderSettings.BGClearColor.b = Util::StringToType<sf::Uint8>(clearcolor_b.value_or("0"));
-  EngineConfig.Context_VersionMajor = Util::StringToType<unsigned int>(majorversion.value_or("4"));
-  EngineConfig.Context_VersionMinor = Util::StringToType<unsigned int>(minorversion.value_or("1"));
-  EngineConfig.Render_bVsyncEnabled = Util::StringToBool(use_vsync.value_or("true"));
-  EngineConfig.Render_uiAALevel = Util::StringToType<unsigned int>(aalevel.value_or("4"));
-  EngineConfig.Window_uiDepthBits = 24;
-  EngineConfig.Window_uiStencilBits = 0;
+  EngineConfig.Window_v2uWindowSize     = Util::StringToVec2<unsigned int>(winSize.value_or("(1700, 900)"));
+  InitialLevel                          = initLevel.value_or("none");
+  EngineRenderSettings.Brightness       = Util::StringToType<float>(brightness.value_or("1"));
+  EngineRenderSettings.Contrast         = Util::StringToType<float>(contrast.value_or("0.5"));
+  EngineRenderSettings.Gamma            = Util::StringToType<float>(gamma.value_or("0.5"));
+  EngineRenderSettings.BGClearColor.r   = Util::StringToType<sf::Uint8>(clearcolor_r.value_or("0"));
+  EngineRenderSettings.BGClearColor.g   = Util::StringToType<sf::Uint8>(clearcolor_g.value_or("0"));
+  EngineRenderSettings.BGClearColor.b   = Util::StringToType<sf::Uint8>(clearcolor_b.value_or("0"));
+  EngineConfig.Context_VersionMajor     = Util::StringToType<unsigned int>(majorversion.value_or("4"));
+  EngineConfig.Context_VersionMinor     = Util::StringToType<unsigned int>(minorversion.value_or("1"));
+  EngineConfig.Render_bVsyncEnabled     = Util::StringToBool(use_vsync.value_or("true"));
+  EngineConfig.Render_uiAALevel         = Util::StringToType<unsigned int>(aalevel.value_or("4"));
+  EngineConfig.Window_uiDepthBits       = 24;
+  EngineConfig.Window_uiStencilBits     = 0;
   EngineConfig.Window_u32AttributeFlags = sf::ContextSettings::Attribute::Default;
-  EngineConfig.Window_ui8Style = sf::Style::Default;
+  EngineConfig.Window_ui8Style          = sf::Style::Default;
 
   //Init timer manager
   m_GlobalTimerManager = std::make_unique<TimerManager>();
