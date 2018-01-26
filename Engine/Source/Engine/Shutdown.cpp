@@ -43,19 +43,18 @@ UINT32 SFEngine::Shutdown()
     lvl.second->OnShutDown();
   Levels.clear();
 
+  Messager::PostLogMessage(0, SystemMessage(SystemMessageType::ActivityLog, 0, 0, "Cleaning up gpu and system resources"), MessageLogLevel::Normal);
+
   ClearTextures();
   ClearShaders();
   ClearFonts();
   ClearSoundBuffers();
 
   GUI.reset();
-  delete Window;
 
   currentRenderWindow = nullptr;
 
-  delete FragmentShader;
-  delete VertexShader;
-
+  Messager::PostLogMessage(0, SystemMessage(SystemMessageType::ActivityLog, 0, 0, "Shutting down level streaming thread"), MessageLogLevel::Normal);
   ASyncLevelStreamThread::Shutdown();
   LevelsLock.reset();
 

@@ -43,6 +43,7 @@ public:
 
   void Parse(const std::string &Filename);
   void Parse(std::stringstream &stream);
+  void ParseOption(const std::string &OptionString);
 
   bool HasSection(const std::string &Name);
   bool HasKey(const std::string &Section, const std::string &KeyString);

@@ -11,7 +11,7 @@ public:
     : m_Engine(m_RDevice()) { }
 
   UniformIntegralDistribution(T Low, T High)
-    : UniformIntegralDistribution()
+    : m_Engine(m_RDevice())
     , m_Distribution(Low, High) { }
 
   UniformIntegralDistribution(const UniformIntegralDistribution &IDist)
@@ -27,7 +27,6 @@ public:
     m_Engine = IDist.m_Engine;
     m_Max = IDist.m_Max;
     m_Min = IDist.m_Min;
-    m_RDevice = IDist.m_RDevice;
     return *this;
   }
 
@@ -63,7 +62,7 @@ public:
     : m_Engine(m_RDevice()) { }
 
   UniformRealDistribution(T Low, T High)
-    : UniformRealDistribution()
+    : m_Engine(m_RDevice())
     , m_Distribution(Low, High) { }
 
   UniformRealDistribution(const UniformRealDistribution &UDist)
@@ -80,7 +79,6 @@ public:
     m_Engine = UDist.m_Engine;
     m_Max = UDist.m_Max;
     m_Min = UDist.m_Min;
-    m_RDevice = UDist.m_RDevice;
     return *this;
   }
 

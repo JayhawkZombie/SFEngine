@@ -44,37 +44,40 @@ struct Config
   */
 
   //Diagnostic ini settings
-  bool           Diagnostic_bDisplayFrameStats; //Whether to display the FPS/Timing counter in the corner
-  bool           Diagnostic_bBenchmarkShaders;  //Whether to benchmark increase in rendering times due to using shaders, can identify slow pipelines
-  unsigned int   Diagnostic_uiLogLevel;         //How high of log levels to log
-  std::string    Diagnostic_strDiagnosticFont;  //Font to use for rendered text
+  bool           Diagnostic_bDisplayFrameStats = true;  //Whether to display the FPS/Timing counter in the corner
+  bool           Diagnostic_bBenchmarkShaders = false;  //Whether to benchmark increase in rendering times due to using shaders, can identify slow pipelines
+  unsigned int   Diagnostic_uiLogLevel = 1;             //How high of log levels to log
+  std::string    Diagnostic_strDiagnosticFont;          //Font to use for rendered text
 
                                                 //Render ini settings
-  bool               Render_bVsyncEnabled;
-  bool               Render_bUseRenderTexture;
-  bool               Render_bTextureSmoothingEnabled;
-  unsigned int       Render_uiAALevel;
-  bool               Render_bShadersEnabled;
+  bool               Render_bVsyncEnabled = true;
+  bool               Render_bUseRenderTexture = true;
+  bool               Render_bTextureSmoothingEnabled = true;
+  unsigned int       Render_uiAALevel = 4;
+  bool               Render_bShadersEnabled = true;
 
   //Timing ini settings
-  float              Timing_fMinTick;
-  float              Timing_fMaxTick;
+  float              Timing_fMinTick = 0.f;
+  float              Timing_fMaxTick = 0.2f;
 
   //Window ini settings
   sf::Vector2u       Window_v2uWindowSize;
-  bool               Window_bFullscreen;
-  bool               Window_bShowSplashScreen;
-  bool               Window_bPlaySplashScreenAudio;
-  uint32_t           Window_uiDepthBits;
-  uint32_t           Window_uiStencilBits;
+  bool               Window_bFullscreen = false;
+  bool               Window_bShowSplashScreen = true;
+  bool               Window_bPlaySplashScreenAudio = true;
+  uint32_t           Window_uiDepthBits = 24;
+  uint32_t           Window_uiStencilBits = 0;
+  std::string        Window_strTitle;
+  sf::Uint8          Window_ui8Style = sf::Style::Default;
+  sf::Uint32         Window_u32AttributeFlags = sf::ContextSettings::Attribute::Core;
 
   //Effects ini settings
-  bool              Effects_bPostProcessEnabled;
-  uint32_t          Effects_uiMaxNumParticles;
+  bool              Effects_bPostProcessEnabled = true;
+  uint32_t          Effects_uiMaxNumParticles = 1000;
   std::vector<std::string> Effects_strShaderPath; //Vector of paths to shaders
   std::vector<std::string> Effects_strShader;     //Vector of the names of the shaders
 
   //Context settings
-  unsigned int Context_VersionMinor;
-  unsigned int Context_VersionMajor;
+  unsigned int Context_VersionMinor = 0;
+  unsigned int Context_VersionMajor = 4;
 };

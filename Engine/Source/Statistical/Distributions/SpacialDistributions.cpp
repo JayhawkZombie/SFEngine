@@ -97,6 +97,9 @@ sf::Vector2f RectangularDistribution::operator()()
 {
   auto x = m_XDirDist();
   auto y = m_YDirDist();
+
+  sf::Vector2f pos(x, y);
+  return pos;
 }
 
 void RectangularDistribution::SetBounds(float left, float top, float width, float height)

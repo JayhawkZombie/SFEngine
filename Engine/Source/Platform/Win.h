@@ -1,3 +1,5 @@
+#pragma once
+
 ////////////////////////////////////////////////////////////
 //
 // MIT License
@@ -28,38 +30,15 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Engine/stdafx.h"
+#ifdef  SPLATFORM_WINDOWS
 
-#include "Engine\Engine.h"
-#include "Exceptions\Exceptions.h"
-#include "Engine/ReturnValues.h"
+using MessageBoxText_t = LPCWSTR;
 
-#include <boost/stacktrace.hpp>
-
-void TerminateHandler()
+inline int ShowErrorDialogueModal(MessageBoxText_t MessageText, MessageBoxText_t CaptionText)
 {
-  boost::stacktrace::safe_dump_to("crash_trace.dump");
+  int Ret = MessageBoxW(currentRenderWindow->getSystemHandle(), MessageText, CaptionText, MB_SYSTEMMODAL | MB_ICONSTOP);
 
-  CurrentEngine->HandleEngineCrash();
+  return Ret;
 }
 
-uint32_t SFEngine::Go(int argc, char **argv)
-{
-  CurrentEngine = this;
-  std::set_terminate(TerminateHandler);
-
-  UINT32 result = 0;
-  try
-  {
-    result = Init(argc, argv);
-    return result;
-  }
-  catch (EngineRuntimeError &err)
-  {
-    std::cerr << "There was a critical error, and it could not be recovered from\n";
-    std::string err_string = err.UnwindTrace();
-
-    std::cerr << "The following stack trace was provided: \n\n" << err_string << std::endl;
-    return Error::RUNTIME_UNKNOWN_ERROR;
-  }
-}
+#endif

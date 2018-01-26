@@ -1,3 +1,5 @@
+#pragma once
+
 ////////////////////////////////////////////////////////////
 //
 // MIT License
@@ -28,38 +30,49 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Engine/stdafx.h"
+#include <SFML/Graphics.hpp>
 
-#include "Engine\Engine.h"
-#include "Exceptions\Exceptions.h"
-#include "Engine/ReturnValues.h"
-
-#include <boost/stacktrace.hpp>
-
-void TerminateHandler()
+namespace Math
 {
-  boost::stacktrace::safe_dump_to("crash_trace.dump");
 
-  CurrentEngine->HandleEngineCrash();
-}
-
-uint32_t SFEngine::Go(int argc, char **argv)
-{
-  CurrentEngine = this;
-  std::set_terminate(TerminateHandler);
-
-  UINT32 result = 0;
-  try
+  template<typename T>
+  T Dot(const sf::Vector2<T> & V1, const sf::Vector2<T> &V2)
   {
-    result = Init(argc, argv);
-    return result;
+    return ( V1.x * V2.x + V1.y * V2.y );
   }
-  catch (EngineRuntimeError &err)
-  {
-    std::cerr << "There was a critical error, and it could not be recovered from\n";
-    std::string err_string = err.UnwindTrace();
 
-    std::cerr << "The following stack trace was provided: \n\n" << err_string << std::endl;
-    return Error::RUNTIME_UNKNOWN_ERROR;
+  template<typename T>
+  float Mag(const sf::Vector2<T> &Vector)
+  {
+    return std::hypot(Vector.x, Vector.y);
   }
+
+  template<typename T>
+  void Normalize(sf::Vector2<T> &Vector)
+  {
+    auto m = Mag(Vector);
+
+    if (m > std::numeric_limits<float>::epsilon())
+      Vector /= m;
+  }
+
+  template<typename T>
+  float ScalarProject(const sf::Vector2<T> &a, const sf::Vector2<T> &b)
+  {
+    const auto d = Dot(a, b);
+
+    return ( d / Mag(b) );
+  }
+
+  template<typename T>
+  sf::Vector2f VectorProject(const sf::Vector2<T> &a, const sf::Vector2<T> & b)
+  {
+    const auto scalarP = ScalarProject(a, b);
+
+    const auto vec = b;
+    Normalize(vec);
+
+    return ( scalarP * vec );
+  }
+
 }

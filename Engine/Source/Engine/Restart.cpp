@@ -28,13 +28,13 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Engine\Engine.h"
+#include "Engine/Engine.h"
 
-  void SFEngine::HandleEngineCrash()
-  {
-    std::cerr << "Handling engine crash" << std::endl;
+uint32_t SFEngine::TryRestartEngine()
+{
+  Messager::PostLogMessage(0, SystemMessage(SystemMessageType::ActivityLog, 0, 0, "Beginning application restart procedure"), MessageLogLevel::Critical);
 
-    for (auto & level : Levels) {
-      level.second->OnShutDown();
-    }
-  }
+
+  Messager::PostLogMessage(0, SystemMessage(SystemMessageType::ActivityLog, 0, 0, "Successfully restarted application"), MessageLogLevel::Normal);
+  return Startup();
+}

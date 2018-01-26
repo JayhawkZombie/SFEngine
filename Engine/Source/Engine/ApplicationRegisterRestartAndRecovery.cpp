@@ -28,38 +28,54 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Engine/stdafx.h"
+#include "Engine/Engine.h"
 
-#include "Engine\Engine.h"
-#include "Exceptions\Exceptions.h"
-#include "Engine/ReturnValues.h"
+#ifdef SPLATFORM_WINDOWS
+#include <Windows.h>
+#endif
 
-#include <boost/stacktrace.hpp>
-
-void TerminateHandler()
+DWORD WINAPI TryRecover(PVOID Parameter)
 {
-  boost::stacktrace::safe_dump_to("crash_trace.dump");
+  BOOL DidCancel = 0;
+  BOOL WasSuccessful = 1;
 
-  CurrentEngine->HandleEngineCrash();
+  HRESULT InProgressResult = ApplicationRecoveryInProgress(&DidCancel);
+
+  CurrentEngine->ApplicationRecovery();
+
+  /* Application terminates after this is called -
+  DO NOT add additional calls after this
+  */
+  ApplicationRecoveryFinished(WasSuccessful);
+
+  return 0;
 }
 
-uint32_t SFEngine::Go(int argc, char **argv)
+bool SFEngine::SetApplicationRestartAndRecovery()
 {
-  CurrentEngine = this;
-  std::set_terminate(TerminateHandler);
+#ifdef SPLATFORM_WINDOWS
 
-  UINT32 result = 0;
-  try
-  {
-    result = Init(argc, argv);
-    return result;
-  }
-  catch (EngineRuntimeError &err)
-  {
-    std::cerr << "There was a critical error, and it could not be recovered from\n";
-    std::string err_string = err.UnwindTrace();
+  HRESULT RegisterResult = RegisterApplicationRestart
+  (
+    PCWSTR("--restart"),
+    RESTART_NO_PATCH | RESTART_NO_REBOOT
+  );
 
-    std::cerr << "The following stack trace was provided: \n\n" << err_string << std::endl;
-    return Error::RUNTIME_UNKNOWN_ERROR;
-  }
+  HRESULT RecResult = RegisterApplicationRecoveryCallback(
+    &TryRecover,
+    NULL,
+    RECOVERY_DEFAULT_PING_INTERVAL,
+    0
+  );
+
+  return ( RegisterResult == S_OK && RecResult == S_OK );
+#endif
+}
+
+void SFEngine::ApplicationRecovery()
+{
+
+
+
+
 }

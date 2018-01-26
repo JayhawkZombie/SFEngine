@@ -1,3 +1,5 @@
+#pragma once
+
 ////////////////////////////////////////////////////////////
 //
 // MIT License
@@ -28,38 +30,25 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Engine/stdafx.h"
-
-#include "Engine\Engine.h"
-#include "Exceptions\Exceptions.h"
-#include "Engine/ReturnValues.h"
-
-#include <boost/stacktrace.hpp>
-
-void TerminateHandler()
+template<typename T>
+T LinearInterpolate(T low, T high, float Factor)
 {
-  boost::stacktrace::safe_dump_to("crash_trace.dump");
-
-  CurrentEngine->HandleEngineCrash();
+  return ( ( 1.f - Factor ) * low + Factor * high );
 }
 
-uint32_t SFEngine::Go(int argc, char **argv)
+template<typename T>
+T CubicInterpolate(const T &P0, const T & P1, const T & P2, const T & P3, float Factor)
 {
-  CurrentEngine = this;
-  std::set_terminate(TerminateHandler);
+  const float one_minus = 1.f - Factor;
+  const float om_2 = one_minus * one_minus;
+  const float om_3 = om_2 * one_minus;
+  const float f2 = Factor * Factor;
+  const float f3 = f2 * Factor;
 
-  UINT32 result = 0;
-  try
-  {
-    result = Init(argc, argv);
-    return result;
-  }
-  catch (EngineRuntimeError &err)
-  {
-    std::cerr << "There was a critical error, and it could not be recovered from\n";
-    std::string err_string = err.UnwindTrace();
+  T value = om_3 * P0
+          + ( 3.f * om_2 * Factor ) * P1
+          + ( 3.f * one_minus * f2 ) * P2
+          + f3 * P3;
 
-    std::cerr << "The following stack trace was provided: \n\n" << err_string << std::endl;
-    return Error::RUNTIME_UNKNOWN_ERROR;
-  }
+  return value;
 }

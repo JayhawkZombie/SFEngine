@@ -133,6 +133,57 @@ void IniParser::Parse(std::stringstream &stream)
   } // while (tok != tokens.end())
 }
 
+void IniParser::ParseOption(const std::string &OptionString)
+{
+  boost::char_separator<char> seps("", "[]=\"");
+
+  TTokenizer tokens(OptionString, seps);
+
+
+  auto tok = tokens.begin();
+
+  std::string KeyString{ "" };
+  std::string ValueString{ "" };
+  std::string StringLiteral{ "" };
+  bool InStringLiteral = false;
+
+  if (tok == tokens.end())
+  {
+    ErrorValueInvalid("Error parsing key-value string");
+    return;
+  }
+
+  KeyString = *tok;
+
+  ++tok;
+
+  if (tok == tokens.end())
+  {
+    ErrorValueInvalid("Expected \"=\" but reached end of string");
+    return;
+  }
+
+  ++tok;
+
+  if (*tok != "=")
+  {
+    ErrorValueInvalid("Expected \"=\" but found \"" + *tok + "\" instead");
+    return;
+  }
+
+  ++tok;
+
+  /* We'll just add all tokens until the end of input to the value string */
+
+  while (tok != tokens.end())
+  {
+    ValueString += *tok;
+    ++tok;
+  }
+
+  m_ValueMap["Global"][ValueString] = KeyString;
+}
+
 bool IniParser::HasSection(const std::string &Name)
 {
   return ( m_ValueMap.find(Name) != m_ValueMap.end() );

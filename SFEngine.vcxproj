@@ -32,9 +32,11 @@
     <ClCompile Include="Engine\Source\Components\ScriptComponent.cpp" />
     <ClCompile Include="Engine\Source\CoreTests\EventHandlerTests.cpp" />
     <ClCompile Include="Engine\Source\CoreTests\ResourceManagerTests.cpp" />
+    <ClCompile Include="Engine\Source\Engine\ApplicationRegisterRestartAndRecovery.cpp" />
     <ClCompile Include="Engine\Source\Engine\BaseEngineInterface.cpp" />
+    <ClCompile Include="Engine\Source\Engine\DisplaySettings.cpp" />
     <ClCompile Include="Engine\Source\Engine\Engine.cpp" />
-    <ClCompile Include="Engine\Source\Engine\EngineCrashRecovery.cpp" />
+    <ClCompile Include="Engine\Source\Engine\HandleEngineCrash.cpp" />
     <ClCompile Include="Engine\Source\Engine\EngineRender.cpp" />
     <ClCompile Include="Engine\Source\Engine\Engine_ExposedScriptMethods.cpp" />
     <ClCompile Include="Engine\Source\Engine\Externs.cpp" />
@@ -48,6 +50,7 @@
     <ClCompile Include="Engine\Source\Engine\HandleWindowResized.cpp" />
     <ClCompile Include="Engine\Source\Engine\Init.cpp" />
     <ClCompile Include="Engine\Source\Engine\InputInterface.cpp" />
+    <ClCompile Include="Engine\Source\Engine\Restart.cpp" />
     <ClCompile Include="Engine\Source\Engine\ShowEditor.cpp" />
     <ClCompile Include="Engine\Source\Engine\Shutdown.cpp" />
     <ClCompile Include="Engine\Source\Engine\Startup.cpp" />
@@ -229,6 +232,9 @@
     <ClInclude Include="Engine\Source\Lights\LightingSystem.h" />
     <ClInclude Include="Engine\Source\Lights\LightObject.h" />
     <ClInclude Include="Engine\Source\Logging\Logger.h" />
+    <ClInclude Include="Engine\Source\Math\Interpolation.h" />
+    <ClInclude Include="Engine\Source\Math\Matrix.h" />
+    <ClInclude Include="Engine\Source\Math\Vector.h" />
     <ClInclude Include="Engine\Source\Messaging\CoreMessager.h" />
     <ClInclude Include="Engine\Source\Minimal.h" />
     <ClInclude Include="Engine\Source\Objects\GameObject.h" />
@@ -251,6 +257,7 @@
     <ClInclude Include="Engine\Source\Physics\Occluder.h" />
     <ClInclude Include="Engine\Source\Physics\Physics.h" />
     <ClInclude Include="Engine\Source\Physics\QuadTree.h" />
+    <ClInclude Include="Engine\Source\Platform\Win.h" />
     <ClInclude Include="Engine\Source\Render\Render.h" />
     <ClInclude Include="Engine\Source\Resources\ResourceManager.h" />
     <ClInclude Include="Engine\Source\Scripting\ArithmeticScriptFunctions.h" />
@@ -606,7 +613,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;SFML_STATIC;TGUI_STATIC;_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;WITH_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;SFML_STATIC;TGUI_STATIC;_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;WITH_EDITOR;BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)/Dependencies;$(ProjectDir)/Engine/ThirdParty;$(ProjectDir)/Engine/Source;$(ProjectDir)/Engine;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <AdditionalOptions>/volatile:iso /bigobj %(AdditionalOptions)</AdditionalOptions>

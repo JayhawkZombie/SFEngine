@@ -31,9 +31,20 @@
 #include "Engine/stdafx.h"
 #include "Engine\Engine.h"
 
+#ifdef SPLATFORM_WINDOWS
+#include "Processsnapshot.h"
+#endif
+
 SFEngine::SFEngine()
 {
-  
+  CommmandLineArgumentsDescription.add_options()
+    ( "benchmark", "benchmark performance" )
+    ( "restart", "restart from previous run" )
+    ( "report", "report crash from previous run" )
+    ( "?", boost::program_options::value<std::vector<std::string>>(), "add initialization key/value pair (as if from ini)" )
+    ( "defaults-file", boost::program_options::value<std::string>(), "file containing default initialization values" )
+    ( "options-file", boost::program_options::value<std::string>(), "file containing additional configuration options" )
+    ;
 }
 
 SFEngine::~SFEngine()

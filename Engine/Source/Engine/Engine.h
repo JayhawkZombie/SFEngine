@@ -44,6 +44,8 @@
 
 #include <TGUI/TGUI.hpp>
 
+#include <boost/program_options.hpp>
+
 class SFEngine
 {
 public:
@@ -66,10 +68,7 @@ public:
   }
 
   sf::Vector2u GetCurrentWindowsize() const {
-    if (Window)
-      return Window->getSize();
-    else
-      return{ 0, 0 };
+    return currentRenderWindow->getSize();
   }
 
   TimerManager* GetTimerManager();
@@ -93,6 +92,20 @@ private:
 
   uint32_t Shutdown();
   uint32_t GameLoop();
+  void CheckPlatformDisplaySettings();
+  void CheckForNeededDisplayScaling();
+
+  bool SetApplicationRestartAndRecovery();
+
+  uint32_t TryRestartEngine();
+
+public:
+
+  void ApplicationRecovery();
+
+private:
+
+  void ShowModalAlert(LPCTSTR Text, LPCTSTR Caption);
 
   static bool IsKeyLeftDown();
 
@@ -119,9 +132,6 @@ private:
   void ShowEditor();
 #endif
 
-  sf::Shader *VertexShader;
-  sf::Shader *FragmentShader;
-
   sf::RenderStates RenderStates;
   RenderSettings RSettings;
   sf::ContextSettings ContextSettings;
@@ -129,9 +139,11 @@ private:
   Config EngineConfig;
 
   sf::View MaximumWindowView;
-  sf::RenderWindow *Window;
 
   EventHandler Handler;
+
+  boost::program_options::variables_map CommandLineArguments;
+  boost::program_options::options_description CommmandLineArgumentsDescription;
 
   /**
     * Engine configuration settings

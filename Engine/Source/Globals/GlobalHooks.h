@@ -242,6 +242,12 @@ extern std::uint32_t MaxIDGenerationAttempts; //max # of times we will try to ge
 
 //ENGINE GLOBAL API EXTERNS
 extern sf::Vector2u GetCurrentWindowSize();
+
+#ifdef SPLATFORM_WINDOWS
+
+#include <Platform/Win.h>
+
+#endif
   
 extern decltype(auto) GetCurrentOpenGLVersionMajor();
 extern decltype(auto) GetCurrentOpenGLVersionMinor();

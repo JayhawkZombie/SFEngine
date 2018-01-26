@@ -33,10 +33,6 @@
 #include "Engine\Engine.h"
 #include "Lights\LightingSystem.h"
 
-#ifdef WITH_EDITOR
-
-#endif
-
 UINT32 SFEngine::GameLoop()
 {
   Messager::PostLogMessage(0, SystemMessage(SystemMessageType::ActivityLog, 0, 0, "Engine GameLoop"), MessageLogLevel::Normal);
@@ -53,15 +49,12 @@ UINT32 SFEngine::GameLoop()
   double RenderDelta = 0.0;
   double UpdateDelta = 0.0;
   sf::Event evnt;
-
-  Window->clear(sf::Color::Black);
-  Window->setVerticalSyncEnabled(false);
-  Window->setKeyRepeatEnabled(false);
+  
   bool Closed = false;
 
   vec2d Gravity;
 
-  AssignBoundaries(900, 1700);
+  AssignBoundaries(EngineConfig.Window_v2uWindowSize.x, EngineConfig.Window_v2uWindowSize.y);
 
   std::shared_ptr<sf::RenderTexture> LevelTexture = std::make_shared<sf::RenderTexture>();
   LevelTexture->create(1700, 900);
@@ -70,8 +63,6 @@ UINT32 SFEngine::GameLoop()
   LevelRect.setSize({ 1700, 900 });
   LevelRect.setTexture(&(LevelTexture->getTexture()));
   LevelRect.setTextureRect({ 0, 0, 1700, 900 });
-
-  
 
   //There should already have been a Main level loaded in Startup
   auto it = Levels.find("Main");
@@ -85,14 +76,13 @@ UINT32 SFEngine::GameLoop()
   }
   
   Gravity.y = .3f;
-  currentRenderWindow->setVerticalSyncEnabled(true);
   SetGravity(&Gravity);
 
   m_GlobalTimerManager->Restart();
 
 #ifdef WITH_EDITOR
   sf::Clock IMGUIClock;
-  ImGui::SFML::Init(*Window);
+  ImGui::SFML::Init(*currentRenderWindow);
 #endif
 
   while (true) {
@@ -118,7 +108,7 @@ UINT32 SFEngine::GameLoop()
       }
 
 #ifdef WITH_EDITOR
-      ImGui::SFML::Update(*Window, IMGUIClock.restart());
+      ImGui::SFML::Update(*currentRenderWindow, IMGUIClock.restart());
 
       ShowEditor();
 #endif
@@ -126,7 +116,7 @@ UINT32 SFEngine::GameLoop()
       UpdateEnd = std::chrono::high_resolution_clock::now();
       RenderStart = std::chrono::high_resolution_clock::now();
 
-      Window->clear(sf::Color::Black);
+      currentRenderWindow->clear(sf::Color::Black);
       LevelTexture->clear(sf::Color::Black); 
         
       if (CurrentLevel) {
@@ -134,15 +124,15 @@ UINT32 SFEngine::GameLoop()
       }
 
       LevelTexture->display();
-      Window->draw(LevelRect); 
+      currentRenderWindow->draw(LevelRect);
 
       GUI->draw();
 
 #ifdef WITH_EDITOR
-      ImGui::SFML::Render(*Window);
+      ImGui::SFML::Render(*currentRenderWindow);
 #endif
 
-      Window->display();
+      currentRenderWindow->display();
 
       RenderEnd = std::chrono::high_resolution_clock::now();
       LastFrameStart = CurrentFrameStart;
@@ -164,5 +154,5 @@ UINT32 SFEngine::GameLoop()
   ImGui::SFML::Shutdown();
 #endif
 
-  return Shutdown();
+  return 0;
 }

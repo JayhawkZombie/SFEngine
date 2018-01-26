@@ -28,38 +28,11 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Engine/stdafx.h"
-
 #include "Engine\Engine.h"
-#include "Exceptions\Exceptions.h"
-#include "Engine/ReturnValues.h"
 
-#include <boost/stacktrace.hpp>
-
-void TerminateHandler()
-{
-  boost::stacktrace::safe_dump_to("crash_trace.dump");
-
-  CurrentEngine->HandleEngineCrash();
-}
-
-uint32_t SFEngine::Go(int argc, char **argv)
-{
-  CurrentEngine = this;
-  std::set_terminate(TerminateHandler);
-
-  UINT32 result = 0;
-  try
+  void SFEngine::HandleEngineCrash()
   {
-    result = Init(argc, argv);
-    return result;
+    /* TODO : implement alert for issuing message to the user
+       for the next time the application is run
+    */
   }
-  catch (EngineRuntimeError &err)
-  {
-    std::cerr << "There was a critical error, and it could not be recovered from\n";
-    std::string err_string = err.UnwindTrace();
-
-    std::cerr << "The following stack trace was provided: \n\n" << err_string << std::endl;
-    return Error::RUNTIME_UNKNOWN_ERROR;
-  }
-}
