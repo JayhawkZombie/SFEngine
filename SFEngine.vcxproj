@@ -264,6 +264,8 @@
     <ClInclude Include="Engine\Source\Scripting\ChaiscriptFunctionNode.h" />
     <ClInclude Include="Engine\Source\Serialization\AssetPack.h" />
     <ClInclude Include="Engine\Source\Serialization\Box2DTypes.h" />
+    <ClInclude Include="Engine\Source\Streams\BinaryDataStream.h" />
+    <ClInclude Include="Engine\Source\Streams\DataPacket.h" />
     <ClInclude Include="Engine\Source\Serialization\Serialization.h" />
     <ClInclude Include="Engine\Source\Serialization\SFMLEvent.h" />
     <ClInclude Include="Engine\Source\Serialization\SFMLPolymorphicTypes.h" />
