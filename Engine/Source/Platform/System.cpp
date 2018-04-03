@@ -30,7 +30,6 @@
 
 #include "System.h"
 
-
 SystemInfo::SystemInfo()
 {
 #ifdef SPLATFORM_WINDOWS
