@@ -83,6 +83,7 @@
     <ClCompile Include="Engine\Source\Physics\Physics.cpp" />
     <ClCompile Include="Engine\Source\Physics\PhysicsEngine.cpp" />
     <ClCompile Include="Engine\Source\Physics\QuadTree.cpp" />
+    <ClCompile Include="Engine\Source\Platform\System.cpp" />
     <ClCompile Include="Engine\Source\Render\Renderer.cpp" />
     <ClCompile Include="Engine\Source\Resources\ResourceManager.cpp" />
     <ClCompile Include="Engine\Source\Resources\ResourceManagerThread.cpp" />
@@ -194,6 +195,8 @@
   <ItemGroup>
     <ClInclude Include="Editor\Source\Project\SFEngineProject.h" />
     <ClInclude Include="Editor\Source\Tools.h" />
+    <ClInclude Include="Engine\Config\RenderSettings.h" />
+    <ClInclude Include="Engine\Config\WindowSettings.h" />
     <ClInclude Include="Engine\EngineRequirements.h" />
     <ClInclude Include="Engine\ProjectIncludes.h" />
     <ClInclude Include="Engine\Source\Actor\Actor.h" />
@@ -234,6 +237,7 @@
     <ClInclude Include="Engine\Source\Logging\Logger.h" />
     <ClInclude Include="Engine\Source\Math\Interpolation.h" />
     <ClInclude Include="Engine\Source\Math\Matrix.h" />
+    <ClInclude Include="Engine\Source\Math\ValueBounded.hpp" />
     <ClInclude Include="Engine\Source\Math\Vector.h" />
     <ClInclude Include="Engine\Source\Messaging\CoreMessager.h" />
     <ClInclude Include="Engine\Source\Minimal.h" />
@@ -257,6 +261,8 @@
     <ClInclude Include="Engine\Source\Physics\Occluder.h" />
     <ClInclude Include="Engine\Source\Physics\Physics.h" />
     <ClInclude Include="Engine\Source\Physics\QuadTree.h" />
+    <ClInclude Include="Engine\Source\Platform\System.h" />
+    <ClInclude Include="Engine\Source\Platform\Platforms.h" />
     <ClInclude Include="Engine\Source\Platform\Win.h" />
     <ClInclude Include="Engine\Source\Render\Render.h" />
     <ClInclude Include="Engine\Source\Resources\ResourceManager.h" />
@@ -300,6 +306,7 @@
     <ClInclude Include="Engine\Source\Utils\ListTemplates.h" />
     <ClInclude Include="Engine\Source\Utils\Mat2D.h" />
     <ClInclude Include="Engine\Source\Utils\NullType.h" />
+    <ClInclude Include="Engine\Source\Utils\Numerical\Accumulator.h" />
     <ClInclude Include="Engine\Source\Utils\RayCast.h" />
     <ClInclude Include="Engine\Source\Utils\ReadIni.h" />
     <ClInclude Include="Engine\Source\Utils\Serializer.h" />
@@ -628,6 +635,7 @@
       <PrecompiledHeaderFile>Engine/stdafx.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>Engine/stdafx.h</ForcedIncludeFiles>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
