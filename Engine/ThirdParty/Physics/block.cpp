@@ -1,22 +1,19 @@
 #include "block.h"
 #include "ball.h"
 
-#include <cereal/archives/portable_binary.hpp>
-
-block::block(std::istream& fin) {
-  init(fin);
-}// from file data
+block::block(std::istream& fin) { init(fin); }// from file data
 
 void block::init(std::istream& fin)// from file data
 {
   nSides = 4;
   fin >> W >> H;
-  r = sqrtf(W*W + H*H);
+  r = sqrtf(W*W + H * H);
 
   float iAngle = 0.0f;
   fin >> iAngle;
   fin >> pos.x >> pos.y >> v.x >> v.y;
   fin >> m >> Cr;// new
+                 //    sf::Uint8 rd,gn,bu;
   unsigned int rd, gn, bu;
   fin >> rd >> gn >> bu;
 
@@ -33,7 +30,7 @@ void block::init(std::istream& fin)// from file data
   pt0.x *= -1.0f;
   ptVec.push_back( pt0 ); */
 
-  std::cerr << "block ctor: nSides=" << nSides << " W = " << W << " H = " << H << '\n';
+  //   std::cerr << "block ctor: nSides=" << nSides << " W = " << W << " H = " << H << '\n';
 
   float hW = W / 2.0f, hH = H / 2.0f;
   ptVec.push_back(vec2d(-hW, -hH));// up lt
@@ -131,7 +128,7 @@ bool block::is_inMe(const ball& rB, vec2d& sep, vec2d& N, float& dSep)const
     if (bDotT > 0.0f) return Hit;// neither face is across arc
   }
 
-  sep = b - T*bDotT;
+  sep = b - T * bDotT;
   sepMag = sep.mag();
   sepSq = sep.dot(sep);
 
@@ -143,6 +140,22 @@ bool block::is_inMe(const ball& rB, vec2d& sep, vec2d& N, float& dSep)const
   }
 
   return false;
+}
+
+bool block::intersect(ball& rB)
+{
+  vec2d sep = pos - rB.pos;
+  float sepMag = sep.mag();
+  vec2d uh = ptVec[1] - ptVec[2]; uh /= uh.mag();
+  float projH = fabs(sep.dot(uh));
+  vec2d uw = ptVec[1] - ptVec[0]; uw /= uw.mag();
+  float projW = fabs(sep.dot(uw));
+  if (projH < H / 2.0f && projW < W / 2.0f) return true;// may be entirely within.
+
+                                                        //   vec2d sep, N;
+  vec2d N;
+  float a;
+  return is_inMe(rB, sep, N, a);
 }
 
 /*
@@ -213,5 +226,3 @@ return true;
 
 return false;
 }   */
-
-CEREAL_REGISTER_TYPE(block);

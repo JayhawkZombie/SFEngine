@@ -47,7 +47,7 @@ vec2d vec2d::operator/(float c)const
 vec2d vec2d::get_LH_norm()const
 {
   vec2d temp(y, -x);
-  temp *= 1.0f / sqrtf(x*x + y*y);
+  temp *= 1.0f / sqrtf(x*x + y * y);
   return temp;
 }
 
@@ -55,8 +55,8 @@ vec2d vec2d::from_base(vec2d baseT)const// get components in base
 {
   vec2d baseN(baseT.get_LH_norm());
   vec2d res;
-  res.x = x*baseT.x + y*baseN.x;
-  res.y = x*baseT.y + y*baseN.y;
+  res.x = x * baseT.x + y * baseN.x;
+  res.y = x * baseT.y + y * baseN.y;
   return res;
 }
 
@@ -67,7 +67,7 @@ vec2d vec2d::to_base(vec2d baseT)const// get components in base
 
 vec2d vec2d::Rotate(float ang)const
 {
-  return vec2d(x*cosf(ang) - y*sinf(ang), x*sinf(ang) + y*cosf(ang));
+  return vec2d(x*cosf(ang) - y * sinf(ang), x*sinf(ang) + y * cosf(ang));
 }
 
 // non member funcs

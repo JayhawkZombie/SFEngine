@@ -46,6 +46,8 @@ public:
   double GetTimeSinceStart();
   double GetTimeSince(const TimePoint &tp);
 
+  static double GetCurrentTime();
+
 private:
 
   bool m_IsPaused = false;

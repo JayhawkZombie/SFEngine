@@ -1,0 +1,130 @@
+{
+  "controller_mappings":
+  {
+    "version": 1,
+    "name": "Generic Controller",
+
+    "groups":
+    {
+      "four_buttons":
+      {
+        "button_a":
+        {
+          "activation":
+          {
+            "press": "controller_input button_a",
+            "release": "controller_input button_a"
+          }
+        },
+        "button_b":
+        {
+          "activation":
+          {
+            "press": "controller_input button_b",
+            "release": "controller_input button_b"
+          }
+        },
+        "button_x":
+        {
+          "activation":
+          {
+            "press": "controller_input button_x",
+            "release": "controller_input button_x"
+          }
+        },
+        "button_y":
+        {
+          "activation":
+          {
+            "press": "controller_input button_y",
+            "release": "controller_input button_y"
+          }
+        }
+      },
+
+      "dpad":
+      {
+        "dpad_up":
+        {
+          "activation":
+          {
+            "press": "controller_input dpad_up",
+            "release": "controller_input dpad_up"
+          }
+        },
+        "dpad_down":
+        {
+          "activation":
+          {
+            "press": "controller_input dpad_down",
+            "release": "controller_input dpad_down"
+          }
+        },
+        "dpad_left":
+        {
+          "activation":
+          {
+            "press": "controller_input dpad_left",
+            "release": "controller_input dpad_left"
+          }
+        },
+        "dpad_right":
+        {
+          "activation":
+          {
+            "press": "controller_input dpad_right",
+            "release": "controller_input dpad_right"
+          }
+        }
+      },
+
+      "joysticks":
+      {
+        "joystick_left":
+        {
+          "activation":
+          {
+            "press": "controller_input joystick_left",
+            "release": "controller_input joystick_left",
+            "move": "controller_input joystick_moved"
+          }
+        }
+
+        "bindings":
+        {
+          "press": "controller_input joystick_left_press",
+          "release": "controller_input joystick_left_release",
+          "move": "controller_input joystick_left_move"
+        }
+      },
+
+      "joystick_right":
+      {
+        "bindings":
+        {
+          "press": "controller_input joystick_right_press",
+          "release": "controller_input joystick_right_release",
+          "move": "controller_input joystick_right_move"
+        }
+      },
+
+      "select":
+      {
+        "bindings":
+        {
+          "press": "controller_input button_select"
+        }
+      },
+
+      "start":
+      {
+        "bindings":
+        {
+          "press": "controller_input button_start"
+        }
+      }
+
+    },
+
+  }
+}

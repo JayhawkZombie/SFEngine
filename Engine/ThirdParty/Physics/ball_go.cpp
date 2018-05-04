@@ -8,8 +8,8 @@ ball_go::ball_go(std::istream& fin)// from file data
 void ball_go::init(std::istream& fin)// from file data
 {
   ball::init(fin);
-  //   fin >> maxVel;// >> maxAcc;
-  maxVel = 0.0f;
+  fin >> maxVel;// >> maxAcc;
+                //   maxVel = 0.0f;
 }
 
 void ball_go::respond(float dV, bool isFric)// assumes velocity components are T(x) and N(y) to obstacle

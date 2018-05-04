@@ -17,6 +17,14 @@
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="TestsDebug|Win32">
+      <Configuration>TestsDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="TestsDebug|x64">
+      <Configuration>TestsDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Editor\Source\Tools\IniEditor.cpp" />
@@ -79,6 +87,9 @@
     <ClCompile Include="Engine\Source\Objects\TriggerObject.cpp" />
     <ClCompile Include="Engine\Source\Objects\Volumes\TriggerVolume.cpp" />
     <ClCompile Include="Engine\Source\Parsing\IniParser.cpp" />
+    <ClCompile Include="Engine\Source\Particles\VectorFields\ConstantVectorField.cpp" />
+    <ClCompile Include="Engine\Source\Particles\VectorFields\FadeVectorField.cpp" />
+    <ClCompile Include="Engine\Source\Particles\VectorFields\PowerVectorField.cpp" />
     <ClCompile Include="Engine\Source\Physics\Collider.cpp" />
     <ClCompile Include="Engine\Source\Physics\Physics.cpp" />
     <ClCompile Include="Engine\Source\Physics\PhysicsEngine.cpp" />
@@ -121,6 +132,7 @@
     <ClCompile Include="Engine\Source\Weather\WeatherSystem.cpp" />
     <ClCompile Include="Engine\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='TestsDebug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Engine\Tests\Encoding\EncodingTests.cpp" />
     <ClCompile Include="Engine\Tests\Parsing\ParsingTests.cpp" />
@@ -128,6 +140,7 @@
     <ClCompile Include="Engine\Tests\Serialization\ScriptSerializationTests.cpp" />
     <ClCompile Include="Engine\Tests\Serialization\SFMLSerializationTests.cpp" />
     <ClCompile Include="Engine\Tests\Streams\DataStreamTests.cpp" />
+    <ClCompile Include="Engine\Tests\Time\TimeStep.cpp" />
     <ClCompile Include="Engine\ThirdParty\IMGUI\imgui-SFML.cpp" />
     <ClCompile Include="Engine\ThirdParty\IMGUI\imgui.cpp" />
     <ClCompile Include="Engine\ThirdParty\IMGUI\imgui_demo.cpp" />
@@ -170,9 +183,9 @@
     <ClCompile Include="Engine\ThirdParty\Physics\mvHit.cpp" />
     <ClCompile Include="Engine\ThirdParty\Physics\pipeSeg.cpp" />
     <ClCompile Include="Engine\ThirdParty\Physics\polyHitFuncs.cpp" />
-    <ClCompile Include="Engine\ThirdParty\Physics\rec.cpp" />
     <ClCompile Include="Engine\ThirdParty\Physics\regPolygon.cpp" />
     <ClCompile Include="Engine\ThirdParty\Physics\segHit.cpp" />
+    <ClCompile Include="Engine\ThirdParty\Physics\stateTypes.cpp" />
     <ClCompile Include="Engine\ThirdParty\Physics\vec2d.cpp" />
     <ClCompile Include="Engine\ThirdParty\Physics\waveSeg.cpp" />
     <ClCompile Include="Engine\ThirdParty\SelbaWard\BitmapFont.cpp" />
@@ -256,7 +269,12 @@
     <ClInclude Include="Engine\Source\OSXDefs.h" />
     <ClInclude Include="Engine\Source\Parsing\IniParser.h" />
     <ClInclude Include="Engine\Source\Particles\ParticleEmitter.h" />
-    <ClInclude Include="Engine\Source\Particles\Particleh.h" />
+    <ClInclude Include="Engine\Source\Particles\Particle.h" />
+    <ClInclude Include="Engine\Source\Particles\ParticleSystem.h" />
+    <ClInclude Include="Engine\Source\Particles\VectorFields\ConstantVectorField.h" />
+    <ClInclude Include="Engine\Source\Particles\VectorFields\FadeVectorField.h" />
+    <ClInclude Include="Engine\Source\Particles\VectorFields\PowerVectorField.h" />
+    <ClInclude Include="Engine\Source\Particles\VectorFields\VectorField.h" />
     <ClInclude Include="Engine\Source\Physics\Collider.h" />
     <ClInclude Include="Engine\Source\Physics\Occluder.h" />
     <ClInclude Include="Engine\Source\Physics\Physics.h" />
@@ -270,6 +288,7 @@
     <ClInclude Include="Engine\Source\Scripting\ChaiscriptFunctionNode.h" />
     <ClInclude Include="Engine\Source\Serialization\AssetPack.h" />
     <ClInclude Include="Engine\Source\Serialization\Box2DTypes.h" />
+    <ClInclude Include="Engine\Source\Statistical\Distributions\Distributions.h" />
     <ClInclude Include="Engine\Source\Streams\BinaryDataStream.h" />
     <ClInclude Include="Engine\Source\Streams\DataPacket.h" />
     <ClInclude Include="Engine\Source\Serialization\Serialization.h" />
@@ -305,6 +324,7 @@
     <ClInclude Include="Engine\Source\Utils\Interpolators.h" />
     <ClInclude Include="Engine\Source\Utils\ListTemplates.h" />
     <ClInclude Include="Engine\Source\Utils\Mat2D.h" />
+    <ClInclude Include="Engine\Source\Utils\Math\Lerp.h" />
     <ClInclude Include="Engine\Source\Utils\NullType.h" />
     <ClInclude Include="Engine\Source\Utils\Numerical\Accumulator.h" />
     <ClInclude Include="Engine\Source\Utils\RayCast.h" />
@@ -508,7 +528,6 @@
     <ClInclude Include="Engine\ThirdParty\Physics\mvHit.h" />
     <ClInclude Include="Engine\ThirdParty\Physics\pipeSeg.h" />
     <ClInclude Include="Engine\ThirdParty\Physics\polyHitFuncs.h" />
-    <ClInclude Include="Engine\ThirdParty\Physics\rec.h" />
     <ClInclude Include="Engine\ThirdParty\Physics\regPolygon.h" />
     <ClInclude Include="Engine\ThirdParty\Physics\segHit.h" />
     <ClInclude Include="Engine\ThirdParty\Physics\stateTypes.h" />
@@ -542,6 +561,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine.ini" />
+    <None Include="Engine\Config\GenericController.ini" />
+    <None Include="Engine\Config\GenericController.json" />
     <None Include="Engine\Source\Scripting\ArithmeticScriptFunctions.inl" />
     <None Include="Engine\Source\Streams\DataStream.inl" />
     <None Include="Engine\Source\Utils\CacheIni.inl" />
@@ -551,7 +572,7 @@
     <None Include="Engine\ThirdParty\SelbaWard\TileMap.inl" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ChaiscriptLicense" />
+    <Text Include="Licenses\ChaiscriptLicense" />
     <Text Include="Engine\ThirdParty\Jinx\LICENSE" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -567,6 +588,12 @@
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TestsDebug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -575,6 +602,12 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TestsDebug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
@@ -595,10 +628,16 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='TestsDebug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='TestsDebug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -608,7 +647,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TestsDebug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TestsDebug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -644,7 +689,61 @@
       <AdditionalDependencies>sfml-graphics-s-d.lib;sfml-window-s-d.lib;sfml-audio-s-d.lib;sfml-system-s-d.lib;thor-s-d.lib;flac.lib;freetype.lib;jpeg.lib;ogg.lib;openal32.lib;vorbis.lib;vorbisenc.lib;vorbisfile.lib;opengl32.lib;winmm.lib;sfml-main-d.lib;tgui-s-d.lib;ole32.lib;Dbgeng.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='TestsDebug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;SFML_STATIC;TGUI_STATIC;_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;WITH_EDITOR;BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)/Dependencies;$(ProjectDir)/Engine/ThirdParty;$(ProjectDir)/Engine/Source;$(ProjectDir)/Engine;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalOptions>/volatile:iso /bigobj %(AdditionalOptions)</AdditionalOptions>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <DisableSpecificWarnings>4305; 4800;4100;4055;4054;4189;4984;</DisableSpecificWarnings>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
+      <OpenMPSupport>true</OpenMPSupport>
+      <PrecompiledHeaderFile>Engine/stdafx.h</PrecompiledHeaderFile>
+      <ForcedIncludeFiles>Engine/stdafx.h</ForcedIncludeFiles>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)/Dependencies/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-s-d.lib;sfml-window-s-d.lib;sfml-audio-s-d.lib;sfml-system-s-d.lib;thor-s-d.lib;flac.lib;freetype.lib;jpeg.lib;ogg.lib;openal32.lib;vorbis.lib;vorbisenc.lib;vorbisfile.lib;opengl32.lib;winmm.lib;sfml-main-d.lib;tgui-s-d.lib;ole32.lib;Dbgeng.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)/Dependencies;$(ProjectDir)/Engine/ThirdParty;$(ProjectDir)/Dependencies;$(ProjectDir)/Engine/Source;$(ProjectDir)/Engine;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <StringPooling>true</StringPooling>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
+      <OpenMPSupport>true</OpenMPSupport>
+      <PrecompiledHeaderFile>Engine/stdafx.h</PrecompiledHeaderFile>
+      <DisableSpecificWarnings>4100; 4189</DisableSpecificWarnings>
+      <ForcedIncludeFiles>Engine/stdafx.h</ForcedIncludeFiles>
+      <AdditionalOptions>/std:c++14 /volatile:iso /bigobj %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)/Dependencies/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-s-d.lib;sfml-window-s-d.lib;sfml-audio-s-d.lib;sfml-system-s-d.lib;thor-s-d.lib;flac.lib;freetype.lib;jpeg.lib;ogg.lib;openal32.lib;vorbis.lib;vorbisenc.lib;vorbisfile.lib;opengl32.lib;winmm.lib;sfml-main-d.lib;tgui-s-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='TestsDebug|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>

@@ -30,17 +30,17 @@ void lineSegElevator::to_file(std::ofstream& fout)
   unsigned int rd = vtx[0].color.r, gn = vtx[0].color.g, bu = vtx[0].color.b;
   fout << rd << ' ' << gn << ' ' << bu << '\n';
   //   fout << vel.x << ' '  << vel.y << '\n';
-  fout << magVel*uVel.x << ' ' << magVel*uVel.y << '\n';
+  fout << magVel * uVel.x << ' ' << magVel * uVel.y << '\n';
   fout << sMin << ' ' << sMax;
 }
 
-void lineSegElevator::update()
+void lineSegElevator::update(float dt)
 {
   if (state == 0) return;
 
   if (state == 1)// going up
   {
-    s += magVel;
+    s += magVel * dt;
     if (s > sMax)
     {
       s = sMax;
@@ -51,7 +51,7 @@ void lineSegElevator::update()
   }
   else// going down
   {
-    s -= magVel;
+    s -= magVel * dt;
     if (s < sMin)
     {
       s = sMin;
@@ -61,7 +61,7 @@ void lineSegElevator::update()
     }
   }
 
-  lineSeg::setPosition(iPos + uVel*s);
+  lineSeg::setPosition(iPos + uVel * s);
 
   return;
 }
@@ -71,12 +71,12 @@ bool lineSegElevator::hit(mvHit& mh)
   vec2d Pimp, Nh;
   float dSep;
 
-  if (mh.is_inMe(*static_cast<const lineSeg*>(this), Pimp, Nh, dSep))
+  if (mh.is_inMe(*static_cast< const lineSeg* >(this), Pimp, Nh, dSep))
   {
     mh.v -= vel;// relative to co-moving reference frame
     mh.bounce(Cf, Nh, friction_on);// velocity response
     mh.v += vel;// relative to co-moving reference frame
-    mh.setPosition(mh.pos + Nh*dSep);// position change response
+    mh.setPosition(mh.pos + Nh * dSep);// position change response
     return true;
   }
 
@@ -86,7 +86,7 @@ bool lineSegElevator::hit(mvHit& mh)
 void lineSegElevator::setPosition(vec2d Pos)
 {
   iPos = Pos;
-  lineSeg::setPosition(iPos + uVel*s);
+  lineSeg::setPosition(iPos + uVel * s);
 }
 
 void lineSegElevator::setVel(vec2d V)
@@ -102,7 +102,7 @@ void lineSegElevator::init_up()// trigger actions
 
   state = 1;
   isDn = false;
-  vel = uVel*magVel;
+  vel = uVel * magVel;
 }
 
 void lineSegElevator::init_dn()
@@ -111,7 +111,7 @@ void lineSegElevator::init_dn()
 
   state = -1;
   isUp = false;
-  vel = uVel*(-magVel);
+  vel = uVel * (-magVel);
 }
 
 void lineSegElevator::set_up()// set state
@@ -120,7 +120,7 @@ void lineSegElevator::set_up()// set state
   isUp = true;
   isDn = false;
   state = 0;
-  lineSeg::setPosition(iPos + uVel*s);
+  lineSeg::setPosition(iPos + uVel * s);
   vel *= 0.0f;
 }
 
@@ -130,6 +130,48 @@ void lineSegElevator::set_dn()
   isUp = false;
   isDn = true;
   state = 0;
-  lineSeg::setPosition(iPos + uVel*s);
+  lineSeg::setPosition(iPos + uVel * s);
   vel *= 0.0f;
+}
+
+state_ab* lineSegElevator::newState()
+{ std::cout << "\nusing getState()"; return new state_fn(std::bind(&lineSegElevator::getState, this, std::placeholders::_1), std::bind(&lineSegElevator::setState, this, std::placeholders::_1), 2); }
+
+void lineSegElevator::setState(const float* pf)
+{
+  s = pf[0];
+  int I = ( int ) pf[1];
+  switch (I)
+  {
+    case 0:// state= -1 going down
+      if (state != -1) init_dn();
+      break;
+    case 1:// state= 0 stopped
+      if (state != 0) stop();
+      break;
+    case 2:// state= 1 going up
+      if (state != 1) init_up();
+      break;
+    case 3:// state= 0 is up
+      if (state != 0) set_up();
+      break;
+    case 4:// state= 0 is dn
+      if (state != 0) set_dn();
+      break;
+  }
+
+  lineSeg::setPosition(iPos + uVel * s);
+}
+
+void lineSegElevator::getState(float* pf)const
+{
+  pf[0] = s;
+  pf[1] = ( float ) state + 1.5f;// 0,1,2
+  if (state == 0)
+  {
+    if (isUp) pf[1] = 3.5f;
+    else if (isDn) pf[1] = 4.5f;
+  }
+
+
 }

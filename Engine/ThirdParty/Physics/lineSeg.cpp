@@ -1,11 +1,7 @@
 #include "lineSeg.h"
 #include "mvHit.h"
 
-#include <cereal/archives/portable_binary.hpp>
-
-lineSeg::lineSeg(std::istream& fin) : segHit() {
-  init(fin);
-}
+lineSeg::lineSeg(std::istream& fin) : segHit() { init(fin); }
 
 lineSeg::~lineSeg() {}
 
@@ -36,9 +32,7 @@ void lineSeg::to_file(std::ofstream& fout)
   fout << rd << ' ' << gn << ' ' << bu;
 }
 
-lineSeg::lineSeg(float x1, float y1, float x2, float y2, sf::Color clr) {
-  init(x1, y1, x2, y2, clr);
-}
+lineSeg::lineSeg(float x1, float y1, float x2, float y2, sf::Color clr) { init(x1, y1, x2, y2, clr); }
 
 void lineSeg::init(float x1, float y1, float x2, float y2, sf::Color clr)
 {
@@ -92,7 +86,7 @@ bool lineSeg::hit(mvHit& mh)
                                                           //     mh.v.x *= -mh.Cr;
                                                           //     mh.v = mh.v.from_base(N);
     deflect(mh);
-    mh.setPosition(pos + Pimp + dSep*mh.v);
+    mh.setPosition(pos + Pimp + dSep * mh.v);
     return true;
   }
 
@@ -104,7 +98,7 @@ bool lineSeg::hit(mvHit& mh)
     if (is_hard)
     {
       mh.bounce(Cf, Nh, friction_on);// velocity response
-      mh.setPosition(mh.pos + Nh*dSep);// position change response
+      mh.setPosition(mh.pos + Nh * dSep);// position change response
     }
     else
     {
@@ -130,7 +124,7 @@ bool lineSeg::is_thruMe(vec2d pt1, vec2d pt2, vec2d& Pimp, float& fos)const
   float vn = (Sf - Si).dot(N);
   if (vn == 0.0f) return false;// travelling paralel
   fos = Sfn / vn;
-  Pimp = Sf - fos*(Sf - Si);
+  Pimp = Sf - fos * (Sf - Si);
   //    float magL = L.mag();
   //    vec2d T = L/magL;
   vec2d T = L / len;
@@ -151,6 +145,19 @@ void lineSeg::deflect(mvHit& mh)
   return;
 }
 
+vec2d lineSeg::getNearestPoint(vec2d pt)// returns vector from pt to nearest point on lineSeg
+{
+  vec2d sep = pt - pos;
+  vec2d Lu = L / len;
+  float d = sep.dot(Lu);
+
+  if (d > 0.0f && d < len)// perpendicular to L
+    return (d / len)*L - sep;
+
+  if (d <= 0.0f) return -sep;// to pos end
+  return L - sep;    // to pos + L end
+}
+
 /*
 bool lineSeg::hit( mvHit& mh )
 {
@@ -166,5 +173,3 @@ return true;
 
 return false;
 }   */
-
-CEREAL_REGISTER_TYPE(lineSeg);

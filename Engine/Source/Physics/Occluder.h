@@ -53,7 +53,7 @@ public:
   }
 
   std::vector<::vec2d> GetVertices() {
-    return m_OccluderMesh->get_verts();
+    return {  };
   }
 
   void Move(const sf::Vector2f &delta) {

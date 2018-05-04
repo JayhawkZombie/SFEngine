@@ -1,8 +1,6 @@
 #include "expandPolygon.h"
 #include "ball.h"
 
-#include <cereal/archives/portable_binary.hpp>
-
 //bool expandPolygon::hit( mvHit& mh ) { return mh.hit( *static_cast<regPolygon*>(this) ); }
 
 
@@ -13,7 +11,7 @@ bool expandPolygon::hit(mvHit& mh)
   if (growState == 0) return mh.hit(*static_cast<regPolygon*>(this));// mh call your version of hit(regPolygon&)
   vec2d N = mh.pos - pos;
   N /= N.mag();
-  vec2d v_Shift = N*((float)growState*growSpeed);
+  vec2d v_Shift = N * (( float ) growState*growSpeed);
   v += v_Shift;
   bool Hit = mh.hit(*static_cast<regPolygon*>(this));
   v -= v_Shift;
@@ -28,7 +26,7 @@ bool expandPolygon::hit(ball& rB)
   if (growState == 0) return regPolygon::hit(rB);
   vec2d N = rB.pos - pos;
   N /= N.mag();
-  vec2d v_Shift = N*((float)growState*growSpeed);
+  vec2d v_Shift = N * (( float ) growState*growSpeed);
   v += v_Shift;
   bool Hit = regPolygon::hit(rB);
   v -= v_Shift;
@@ -41,7 +39,7 @@ bool expandPolygon::hit(regPolygon& rpg)
   if (growState == 0) return regPolygon::hit(rpg);
   vec2d N = rpg.pos - pos;
   N /= N.mag();
-  vec2d v_Shift = N*((float)growState*growSpeed);
+  vec2d v_Shift = N * (( float ) growState*growSpeed);
   v += v_Shift;
   bool Hit = regPolygon::hit(rpg);
   v -= v_Shift;
@@ -51,7 +49,7 @@ bool expandPolygon::hit(regPolygon& rpg)
 
 bool expandPolygon::bounce(float Cf, vec2d N, bool isFric)// rigid bounce. N is line of action
 {
-  vec2d v_Shift = N*((float)growState*growSpeed);
+  vec2d v_Shift = N * (( float ) growState*growSpeed);
   if (growState != 0) v -= v_Shift;
   bool Hit = mvHit::bounce(Cf, N, isFric);// base code
   if (growState != 0) v += v_Shift;
@@ -88,9 +86,7 @@ return Hit;
 //   return (float)growState*growSpeed;
 //}
 
-expandPolygon::expandPolygon(std::istream& fin) {
-  init(fin);
-}
+expandPolygon::expandPolygon(std::istream& fin) { init(fin); }
 
 void expandPolygon::init(std::istream& fin)
 {
@@ -98,6 +94,7 @@ void expandPolygon::init(std::istream& fin)
   fin >> nSides >> rFull >> iAngle;
   fin >> pos.x >> pos.y >> v.x >> v.y;
   fin >> m >> Cr >> growSpeed;// new
+                              //   sf::Uint8 rd,gn,bu;
   unsigned int rd, gn, bu;
   fin >> rd >> gn >> bu;
 
@@ -117,32 +114,26 @@ void expandPolygon::init(std::istream& fin)
   vtxVec.push_back(sf::Vertex(sf::Vector2f(pos.x + ptVec[0].x, pos.y + ptVec[0].y), sf::Color(gn, rd, bu)));
 }
 
-void expandPolygon::update()
+void expandPolygon::update(float dt)
 {
   if (growState != 0)// size is changing
   {
     float R = r;
     bool shrinkToFull = false;
     if (growState == -1 && R > rFull) shrinkToFull = true;
-    R += (float)growState*growSpeed;
+    R += ( float ) growState*growSpeed*dt;
 
     if (shrinkToFull)
     {
-      if (R <= rFull) {
-        R = rFull; growState = 0;
-      }
+      if (R <= rFull) { R = rFull; growState = 0; }
     }
-    else if (growState == 1 && R >= rFull) {
-      R = rFull; growState = 0;
-    }
-    else if (growState == -1 && R <= growSpeed) {
-      R = growSpeed; growState = 0;
-    }
+    else if (growState == 1 && R >= rFull) { R = rFull; growState = 0; }
+    else if (growState == -1 && R <= growSpeed) { R = growSpeed; growState = 0; }
 
     setRadius(R);
   }
 
-  regPolygon::update();
+  regPolygon::update(dt);
 }
 
 state_ab* expandPolygon::newState()
@@ -196,5 +187,3 @@ else growState = -1;
 rFull = R;
 }
 */
-
-CEREAL_REGISTER_TYPE(expandPolygon);

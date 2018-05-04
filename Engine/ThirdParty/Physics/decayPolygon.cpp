@@ -83,14 +83,14 @@ regPolygon* decayPolygon::split_reg(size_t n)// returns pointer to new n sided r
   //    pRP->pos = pos - (r+pRP->r);// create just right of hit one
   v = v.mag()*v.get_LH_norm();// arbitrary. Make correct. This makes the 2 polys velocity perpendicular to incident ball. Momentum conservation is violated.
   pRP->v = -1.0f*v;
-  pRP->pos = pos - v*((r + pRP->r) / v.mag());// create just right off of hit one. Also arbitrary, but should accomplish non-overlapping placement. Center of mass position shifts grossly.
+  pRP->pos = pos - v * ((r + pRP->r) / v.mag());// create just right off of hit one. Also arbitrary, but should accomplish non-overlapping placement. Center of mass position shifts grossly.
   pRP->m = m;// mass not conserved. Correct this
   pRP->Cr = Cr;// reasonable
   pt0.x = r; pt0.y = 0.0f;// default orientation ok?
-  dAngle = 6.283185f / (float)n;// I shouldn't be doing this. What is right way to define pi?
-                                //   vec2d pt0( r, 0.0f );// starter side
-                                //    pt0 = pt0.Rotate( iAngle );
-                                //   float dAngle = 6.283185f/nSides;
+  dAngle = 6.283185f / ( float ) n;// I shouldn't be doing this. What is right way to define pi?
+                                   //   vec2d pt0( r, 0.0f );// starter side
+                                   //    pt0 = pt0.Rotate( iAngle );
+                                   //   float dAngle = 6.283185f/nSides;
   for (size_t i = 0; i<pRP->nSides; ++i)// for the nSides points and the coincident sf::Vertex
   {
     pRP->ptVec.push_back(pt0);
@@ -109,7 +109,8 @@ void decayPolygon::absorb_reg(regPolygon& rpg)
   //   mvHit* pMH = nullptr;
   std::vector<mvHit*>& rMHvec = *p_mvHitVec;
   std::vector<mvHit*>::iterator it = rMHvec.begin();
-  for (std::vector<mvHit*>::iterator it = rMHvec.begin(); it != rMHvec.end(); ++it)
+  //    for( std::vector<mvHit*>::iterator it = rMHvec.begin(); it != rMHvec.end(); ++it )
+  for (it = rMHvec.begin(); it != rMHvec.end(); ++it)
   {
     if (*it == &rpg)// found it!
     {

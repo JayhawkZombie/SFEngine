@@ -282,15 +282,6 @@
     <ClCompile Include="Engine\ThirdParty\Physics\mvHit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\ThirdParty\Physics\pipeSeg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\ThirdParty\Physics\polyHitFuncs.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\ThirdParty\Physics\rec.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\ThirdParty\Physics\regPolygon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -523,6 +514,27 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\Platform\System.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Particles\VectorFields\ConstantVectorField.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Particles\VectorFields\FadeVectorField.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Particles\VectorFields\PowerVectorField.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Tests\Time\TimeStep.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ThirdParty\Physics\pipeSeg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ThirdParty\Physics\polyHitFuncs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ThirdParty\Physics\stateTypes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1073,15 +1085,6 @@
     <ClInclude Include="Engine\ThirdParty\Physics\mvHit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\ThirdParty\Physics\pipeSeg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\ThirdParty\Physics\polyHitFuncs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\ThirdParty\Physics\rec.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\ThirdParty\Physics\regPolygon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1337,9 +1340,6 @@
     <ClInclude Include="Engine\Source\Components\ComponentManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\Particles\Particleh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Source\Utils\Interpolators.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1565,6 +1565,36 @@
     <ClInclude Include="Engine\Source\Platform\System.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\Utils\Math\Lerp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Particles\ParticleSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Particles\Particle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Statistical\Distributions\Distributions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Particles\VectorFields\VectorField.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Particles\VectorFields\ConstantVectorField.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Particles\VectorFields\PowerVectorField.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Particles\VectorFields\FadeVectorField.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\Physics\pipeSeg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ThirdParty\Physics\polyHitFuncs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\Source\Streams\DataStream.inl">
@@ -1585,9 +1615,11 @@
     <None Include="Engine\Source\Scripting\ArithmeticScriptFunctions.inl">
       <Filter>Header Files</Filter>
     </None>
+    <None Include="Engine\Config\GenericController.ini" />
+    <None Include="Engine\Config\GenericController.json" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Engine\ThirdParty\Jinx\LICENSE" />
-    <Text Include="ChaiscriptLicense" />
+    <Text Include="Licenses\ChaiscriptLicense" />
   </ItemGroup>
 </Project>

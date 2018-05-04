@@ -188,7 +188,7 @@ int QuadTree::FitsInsideAnyChild(std::shared_ptr<GameObject> LObject)
 int QuadTree::FitsInsideAnyChild(std::shared_ptr<PhysicsEngineBaseMeshType> Mesh)
 {
   //will return true if the height and width and less than half ours
-  auto bounds = sf::FloatRect(Mesh->pos.x, Mesh->pos.y, Mesh->siz.x, Mesh->siz.y);
+  auto bounds = sf::FloatRect(Mesh->pos.x, Mesh->pos.y, Mesh->r, Mesh->r);
 
   //AND the center of us is not contained within the rect
   return ((bounds.width < Width / 2.f) && (bounds.height < Height / 2.f));

@@ -25,12 +25,12 @@ void lineSegSwing::to_file(std::ofstream& fout)
   fout << rotVel << ' ' << m << ' ' << grav.x << ' ' << grav.y;
 }
 
-void lineSegSwing::update()
+void lineSegSwing::update(float dt)
 {
-  float I = m*L.dot(L) / 3.0f;
-  if (gravity_on) rotVel -= grav.cross(L)*m / (2.0f*I);
+  float I = m * L.dot(L) / 3.0f;
+  if (gravity_on) rotVel -= dt * grav.cross(L)*m / (2.0f*I);
   // rotate L
-  L = L.Rotate(rotVel);
+  L = L.Rotate(rotVel*dt);
   vtx[1].position.x = pos.x + L.x; vtx[1].position.y = pos.y + L.y;
   N = L.get_LH_norm();
   return;
@@ -51,7 +51,7 @@ bool lineSegSwing::hit(mvHit& mh)
 
                        // adapt
                        //   mh.v = mh.v.to_base(T);
-    float I = m*L.dot(L) / 3.0f;
+    float I = m * L.dot(L) / 3.0f;
     float dw = 0.0f;//-1.0f*( 1.0f + mh.Cr )*( mh.v.y + d*rotVel )/( I/(mh.m*d) + d );
     float  dV = 0.0f;//-1.0f*(1.0f+mh.Cr)*mh.v.y;//I*dw/(mh.m*d);
 
@@ -60,21 +60,21 @@ bool lineSegSwing::hit(mvHit& mh)
     {
       mh.bounce(Cf, Nh, friction_on);
     }
-    else if (d >= magL)// moving end hit
-    {
-      mh.v += Nu*(magL*rotVel);
-      mh.bounce(Cf, Nh, friction_on);
-      mh.v -= Nu*(magL*rotVel);
-    }
+    //   else if( d >= magL )// moving end hit
+    //   {
+    //       mh.v += Nu*(magL*rotVel);
+    //       mh.bounce( Cf, Nh, friction_on );
+    //        mh.v -= Nu*(magL*rotVel);
+    //    }
     else// in the face
     {
       mh.v = mh.v.to_base(T);
-      dw = -1.0f*(1.0f + mh.Cr)*(mh.v.y + d*rotVel) / (I / (mh.m*d) + d);
-      dV = I*dw / (mh.m*d);
+      dw = -1.0f*(1.0f + mh.Cr)*(mh.v.y + d * rotVel) / (I / (mh.m*d) + d);
+      dV = I * dw / (mh.m*d);
 
       if (Nh.dot(Nu) > 0.0f)// "Nside"
       {
-        if (mh.v.y + d*rotVel < 0.0f)// pre-collision
+        if (mh.v.y + d * rotVel < 0.0f)// pre-collision
         {
           //    rB.respond( Cf*dV, friction_on );
           mh.v.y += dV;
@@ -82,19 +82,20 @@ bool lineSegSwing::hit(mvHit& mh)
           //    std::cout << "Nside hit on RLS\n";
         }
       }
-      else if (mh.v.y + d*rotVel > 0.0f)// pre-collision
+      else if (mh.v.y + d * rotVel > 0.0f)// pre-collision
       {
         //   rB.respond( Cf*dV, friction_on );
         mh.v.y += dV;
         rotVel += dw;
       }
 
+      if (d >= magL) mh.v.x *= -mh.Cr;// moving end hit - new
       mh.v = mh.v.from_base(T);
     }
 
     // end adapt
 
-    mh.setPosition(mh.pos + Nh*dSep);// position change response
+    mh.setPosition(mh.pos + Nh * dSep);// position change response
     return true;
   }
 

@@ -8,6 +8,10 @@
 #include "vec2d.h"
 #include "stateTypes.h"
 
+#include <cereal/types/base_class.hpp>
+#include <cereal/types/polymorphic.hpp>
+#include <cereal/archives/portable_binary.hpp>
+
 class mvHit;
 
 class segHit
@@ -22,45 +26,34 @@ public:
   bool is_bulletProof = false;
   int hitSide = 0;// -1 = !Nside, 1 = Nside, 0 = both sides
 
-  template<class Archive>
-  void save(Archive & ar) const
-  {
-    ar(pos);
-    ar(testEnd1, testEnd2);
-    ar(Cf, friction_on, is_hard, is_bulletProof, hitSide);
-  }
-
-  template<class Archive>
-  void load(Archive & ar)
-  {
-    ar(pos);
-    ar(testEnd1, testEnd2);
-    ar(Cf, friction_on, is_hard, is_bulletProof, hitSide);
-  }
-
   segHit() {}
   segHit(std::istream& fin);
   virtual ~segHit() {}
   virtual void init(std::istream& fin);
   virtual void to_file(std::ofstream& fout);
   virtual void setPosition(vec2d) = 0;
-  virtual vec2d getPosition()const {
-    return pos;
-  }
+  virtual vec2d getPosition()const { return pos; }
 
   virtual void draw(sf::RenderTarget&)const = 0;
-  virtual void update();// added so lineRotateSeg has in interface
+  virtual void update(float dt);// added so lineRotateSeg has in interface
 
-                        //    virtual bool hit( mvHit& );
+                                //    virtual bool hit( mvHit& );
   virtual bool hit(mvHit&) = 0;
   virtual bool is_thruMe(vec2d pt1, vec2d pt2, vec2d& Pimp, float& fos)const = 0;// for bulletproofing, laser sighting, etc.
 
-  virtual state_ab* newState() {
-    return nullptr;
-  }// over ride in waveSeg
+  virtual state_ab* newState() { return nullptr; }// over ride in waveSeg
 
-   //   virtual bool is_onMe( const mvHit& mh, vec2d& Pimp, vec2d& Nh, float& pen )const = 0;
-   //   virtual vec2d getSurfaceNormal( const mvHit& mh )const = 0;
+                                                  //   virtual bool is_onMe( const mvHit& mh, vec2d& Pimp, vec2d& Nh, float& pen )const = 0;
+                                                  //   virtual vec2d getSurfaceNormal( const mvHit& mh )const = 0;
+
+  template<class Archive>
+  void serialize(Archive & ar)
+  {
+    ar(pos, testEnd1, testEnd2, Cf, friction_on, is_hard, is_bulletProof, hitSide);
+  }
+
 };
+
+CEREAL_REGISTER_TYPE(segHit);
 
 #endif // SEGHIT_H_INCLUDED

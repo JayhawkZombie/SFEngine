@@ -34,7 +34,7 @@
 RealTimeClock::RealTimeClock()
   : m_StartTime(std::chrono::steady_clock::now())
 {
-
+  
 }
 
 void RealTimeClock::Pause()
@@ -76,4 +76,12 @@ double RealTimeClock::GetTimeSince(const TimePoint &tp)
     (std::chrono::steady_clock::now() - tp);
 
   return elapsed.count();
+}
+
+double RealTimeClock::GetCurrentTime()
+{
+  const auto mills = std::chrono::duration_cast< std::chrono::duration<double, std::chrono::milliseconds::period> >
+    (std::chrono::high_resolution_clock::now().time_since_epoch());
+  
+  return mills.count();
 }

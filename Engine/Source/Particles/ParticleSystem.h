@@ -4,7 +4,7 @@
 //
 // MIT License
 //
-// Copyright(c) 2017 Kurt Slagle - kurt_slagle@yahoo.com
+// Copyright(c) 2018 Kurt Slagle - kurt_slagle@yahoo.com
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files(the "Software"), to deal
@@ -30,36 +30,17 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Minimal.h"
+#include "Particle.h"
+#include "ParticleEmitter.h"
 
-struct Particle
+class ParticleSystem
 {
-  sf::Color Color = sf::Color::White;
-  sf::Vector2f Position = sf::Vector2f(0.f, 0.f);
-  sf::Vector2f Velocity = sf::Vector2f(0.f, 0.f);
-  
-  float Radius = 0.f;
-  double Lifetime = 0.0;
-  double TimeSinceSpawned = 0.0;
+public:
 
-  template<class Archive>
-  void save(Archive & ar) const
-  {
-    ar(Color);
-    ar(Position, Velocity);
-    ar(Radius);
-    ar(Lifetime);
-    ar(TimeSinceSpawned);
-  }
 
-  template<class Archive>
-  void load(Archive & ar)
-  {
-    ar(Color);
-    ar(Position, Velocity);
-    ar(Radius);
-    ar(Lifetime);
-    ar(TimeSinceSpawned);
-  }
+private:
+
+  std::vector<Particle> m_Particles;
+  std::vector<sf::Vertex> m_DrawParticles;
 
 };

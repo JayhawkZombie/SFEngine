@@ -81,7 +81,7 @@ sf::FloatRect Collider2D::GetGlobalBounds() const
 {
   return sf::FloatRect(
     m_Mesh->pos.x, m_Mesh->pos.y,
-    m_Mesh->siz.x, m_Mesh->siz.y
+    m_Mesh->r, m_Mesh->r
   );
 }
 
@@ -223,7 +223,7 @@ void Collider2D::SetColliderStatus(ColliderProp Status)
 void Collider2D::Update(const::vec2d & gravity)
 {
   if (m_Mesh)
-    m_Mesh->update(gravity);
+    m_Mesh->update(1.f);
 }
 
 void Collider2D::Sleep()
@@ -386,9 +386,6 @@ bool Collider2D::HandleTouch(std::weak_ptr<Collider2D> Collider)
 
 std::vector<::vec2d> Collider2D::GetVertices()
 {
-  if (m_Mesh)
-    return m_Mesh->get_verts();
-
   return { };
 }
 

@@ -4,11 +4,23 @@
 #include "lineSeg.h"
 #include "arcSeg.h"
 
-#include <cereal/archives/portable_binary.hpp>
+bool regPolygon::hit(mvHit& mh) { return mh.hit(*static_cast<regPolygon*>(this)); }
+bool regPolygon::intersect(mvHit& mh) { return mh.intersect(*static_cast<regPolygon*>(this)); }
 
-bool regPolygon::hit(mvHit& mh)
+bool regPolygon::intersect(ball& rB)
 {
-  return mh.hit(*static_cast<regPolygon*>(this));
+  if ((pos - rB.pos).mag() < r) return true;// may be entirely within.
+
+  vec2d sep, N;
+  float a;
+  return is_inMe(rB, sep, N, a);
+}
+
+bool regPolygon::intersect(regPolygon& py)
+{
+  vec2d sep, N;
+  float a;
+  return is_inMe(py, sep, N, a);
 }
 
 bool regPolygon::hit(regPolygon& rpg)
@@ -37,9 +49,7 @@ bool regPolygon::hit(ball& rB)
 
 regPolygon::regPolygon() {}// default
 
-regPolygon::regPolygon(std::istream& fin) {
-  init(fin);
-}// from file data
+regPolygon::regPolygon(std::istream& fin) { init(fin); }// from file data
 
 void regPolygon::init(std::istream& fin)// from file data
 {
@@ -47,6 +57,7 @@ void regPolygon::init(std::istream& fin)// from file data
   fin >> nSides >> r >> iAngle;
   fin >> pos.x >> pos.y >> v.x >> v.y;
   fin >> m >> Cr;// new
+                 //   sf::Uint8 rd,gn,bu;
   unsigned int rd, gn, bu;
   fin >> rd >> gn >> bu;
 
@@ -77,21 +88,12 @@ else { v.y += dV; if( v.y > 0.0f ) v.y = 0.0f; }
 return;
 }   */
 
-std::vector<vec2d> regPolygon::get_verts()
-{
-  static std::vector<vec2d> vec(this->nSides);
-  for (size_t i = 0; i < nSides; ++i) {
-    vec[i] = pos + ptVec[i];
-  }
-  return vec;
-}
-
-void regPolygon::update()
+void regPolygon::update(float dt)
 {
   if (!is_free) return;
 
   //   if( pGravity ) v += *pGravity;
-  pos += v;
+  pos += v * dt;
 
   float dr = 0.0f;
   vec2d N(-1.0f, 0.0f);
@@ -157,9 +159,7 @@ void regPolygon::update()
   return;
 }
 
-void regPolygon::draw(sf::RenderTarget& rRW)const {
-  rRW.draw(&(vtxVec[0]), vtxVec.size(), sf::LinesStrip);
-}
+void regPolygon::draw(sf::RenderTarget& rRW)const { rRW.draw(&(vtxVec[0]), vtxVec.size(), sf::LinesStrip); }
 
 //bool regPolygon::Float( vec2d Nsurf, vec2d Npen, float penAmt )
 bool regPolygon::Float(vec2d Nsurf, vec2d Npen, float penAmt, float grav_N, float airDensity, float fluidDensity)
@@ -172,8 +172,8 @@ bool regPolygon::Float(vec2d Nsurf, vec2d Npen, float penAmt, float grav_N, floa
     v = v.to_base(Nsurf);
     float Fbuoy = 2.0f*r*grav_N*(belowSurface*fluidDensity + (2.0f*r - belowSurface)*airDensity);
     v.x += Fbuoy / m;
-    if (v.x < 0.0f) v.x -= drag*fluidDensity*v.x*r*2.0f / m;
-    v.y -= drag*fluidDensity*v.y*belowSurface / m;
+    if (v.x < 0.0f) v.x -= drag * fluidDensity*v.x*r*2.0f / m;
+    v.y -= drag * fluidDensity*v.y*belowSurface / m;
     v = v.from_base(Nsurf);
     return true;
 
@@ -194,7 +194,7 @@ bool regPolygon::Float(vec2d Nsurf, float grav_N, float Density)
   v = v.to_base(Nsurf);
   float Fbuoy = 3.1416f*r*r*grav_N*Density;
   v.x += Fbuoy / m;
-  v -= drag*Density*v*r*2.0f / m;
+  v -= drag * Density*v*r*2.0f / m;
   v = v.from_base(Nsurf);
   return true;
 }
@@ -213,7 +213,7 @@ bool regPolygon::hit(const vec2d& pt)
       v.x *= -Cr;
     }
     v = v.from_base(N);
-    pos += N*a;
+    pos += N * a;
     return true;
   }
 
@@ -231,8 +231,8 @@ bool regPolygon::is_thruMe(vec2d pt1, vec2d pt2, vec2d& Pimp, float& fos)const//
   float b = Lu.cross(S);
   if (b < 0.0f && b < -r) return false;// missed
   if (b > 0.0f && b > r)  return false;// missed
-  float a = sqrtf(r*r - b*b);
-  Pimp = pos + b*N - a*Lu;
+  float a = sqrtf(r*r - b * b);
+  Pimp = pos + b * N - a * Lu;
   fos = (pt1 - Pimp).dot(Lu) / magL;
 
   return true;
@@ -240,6 +240,9 @@ bool regPolygon::is_thruMe(vec2d pt1, vec2d pt2, vec2d& Pimp, float& fos)const//
 
 bool regPolygon::is_inMe(const regPolygon& rpg, vec2d& sep, vec2d& N, float& dSep)const
 {
+  float sepSq = (pos - rpg.pos).dot(pos - rpg.pos);
+  if (sepSq > (r + rpg.r)*(r + rpg.r)) return false;// not touching
+
   bool Hit = false;
 
   for (auto& P : rpg.ptVec)
@@ -314,7 +317,7 @@ bool regPolygon::is_inMe(const ball& rB, vec2d& sep, vec2d& N, float& dSep)const
     vec2d b = *pPtMin1 + pos - rB.pos;
     float bDotT = b.dot(T);
     if (bDotT > 0.0f) return Hit;
-    sep = b - T*bDotT;
+    sep = b - T * bDotT;
     sepMag = sep.mag();
     sepSq = sep.dot(sep);
 
@@ -500,9 +503,7 @@ bool regPolygon::is_inMe(const lineSeg& LS, vec2d& Pimp, vec2d& Nh, float& dSep)
   float h = T.cross(s);// height above lineSeg.  s.dot(N) should work also
   bool Nside = false;
 
-  if (h < 0.0f) {
-    Nside = true; h *= -1.0f;
-  }
+  if (h < 0.0f) { Nside = true; h *= -1.0f; }
   if (!Nside) N *= -1.0f;
 
   if (h > r) return false;// too far away
@@ -523,20 +524,14 @@ bool regPolygon::is_inMe(const lineSeg& LS, vec2d& Pimp, vec2d& Nh, float& dSep)
 
       if (d < 0.0f)// at left end
       {
-        if (Nside) {
-          if ((P_prev - P).cross(LS.pos - (pos + P)) > 0.0f) continue;
-        }// undercut from above
+        if (Nside) { if ((P_prev - P).cross(LS.pos - (pos + P)) > 0.0f) continue; }// undercut from above
         else if ((P_next - P).cross(LS.pos - (pos + P)) < 0.0f) continue;// undercut from below
 
       }
       else if (d > magL)// at right end
       {
-        if (Nside) {
-          if ((P_next - P).cross(LS.pos + LS.L - (pos + P)) < 0.0f) continue;
-        }// undercut from above
-        else {
-          if ((P_prev - P).cross(LS.pos + LS.L - (pos + P)) > 0.0f) continue;
-        }// undercut from below
+        if (Nside) { if ((P_next - P).cross(LS.pos + LS.L - (pos + P)) < 0.0f) continue; }// undercut from above
+        else { if ((P_prev - P).cross(LS.pos + LS.L - (pos + P)) > 0.0f) continue; }// undercut from below
       }// ennd edge case handling
 
        // collision has occurred - respond
@@ -544,9 +539,7 @@ bool regPolygon::is_inMe(const lineSeg& LS, vec2d& Pimp, vec2d& Nh, float& dSep)
 
       Nh = LS.L.get_LH_norm();// unit normal
       dSep = -1.0f*Nh.dot(Pimp - LS.pos);// amount of penetration
-      if (dSep < 0.0f) {
-        Nh *= -1.0f; dSep *= -1.0f;
-      }
+      if (dSep < 0.0f) { Nh *= -1.0f; dSep *= -1.0f; }
 
       return true;
     }
@@ -632,9 +625,7 @@ bool regPolygon::is_inMe(const arcSeg& AS, vec2d& Pimp, vec2d& Nh, float& dSep)c
     // new
     Nh = Pimp - AS.pos; Nh /= Nh.mag();// unit normal
     dSep = AS.R - (Pimp - AS.pos).mag();// amount of penetration
-    if (dSep < 0.0f) {
-      Nh *= -1.0f; dSep *= -1.0f;
-    }
+    if (dSep < 0.0f) { Nh *= -1.0f; dSep *= -1.0f; }
 
     return true;
   }
@@ -652,7 +643,7 @@ bool regPolygon::is_inMe(const arcSeg& AS, vec2d& Pimp, vec2d& Nh, float& dSep)c
       if (bDotT1 > 0.0f) return false;// neither face is across arc
     }
 
-    Pimp = b - T1*bDotT1;
+    Pimp = b - T1 * bDotT1;
 
     //    if( Pimp.dot(Pimp) < R*R )
     if (Pimp.dot(Pimp) < AS.R*AS.R && (Pimp.cross(AS.s[0]) > 0.0f && Pimp.cross(AS.s[1]) < 0.0f))// in circle and between ends
@@ -662,9 +653,7 @@ bool regPolygon::is_inMe(const arcSeg& AS, vec2d& Pimp, vec2d& Nh, float& dSep)c
       // new
       Nh = Pimp - AS.pos; Nh /= Nh.mag();// unit normal
       dSep = AS.R - (Pimp - AS.pos).mag();// amount of penetration
-      if (dSep < 0.0f) {
-        Nh *= -1.0f; dSep *= -1.0f;
-      }
+      if (dSep < 0.0f) { Nh *= -1.0f; dSep *= -1.0f; }
 
       return true;
     }
@@ -955,5 +944,3 @@ mhFree.setPosition( mhFree.pos );
 
 return;
 }   */
-
-CEREAL_REGISTER_TYPE(regPolygon);

@@ -568,12 +568,12 @@ void UpdateAllPhysics(std::vector<std::shared_ptr<mvHit>> &MVHITS, std::vector<s
 {
   for (auto & hit : MVHITS)
   {
-    hit->update(gravity);
+    hit->update(1.f);
   }
 
   for (auto & seg : LINESEGS)
   {
-    seg->update();
+    seg->update(1.f);
   }
 
 
@@ -753,12 +753,12 @@ void UpdatePhysics(std::vector<PhysicsEngineBaseMeshType *> &Meshes, std::vector
   for (std::size_t _step = 0; _step < Steps; ++_step) {
 
     for (std::size_t i = 0; i < Meshes.size(); ++i) {
-      Meshes[i]->update(gravity);
+      Meshes[i]->update(1.f);
     }
 
     //Update segments
     for (auto & segPtr : Segments) {
-      segPtr->update();
+      segPtr->update(1.f);
     }
 
     //Do collision testing and response
@@ -788,7 +788,7 @@ void UpdatePhysics(std::vector<std::shared_ptr<Collider2D>> Colliders, std::vect
     }
 
     for (auto & seg : Segments)
-      seg->update();
+      seg->update(1.f);
 
     for (auto & coll : Colliders) {
       for (auto & seg : Segments) {
@@ -858,7 +858,7 @@ void UpdatePhysics
   for (std::size_t _step = 0; _step < steps; ++_step) {
 
     for (auto & occluder : Occluders)
-      occluder->GetMesh().lock()->update(gravity);
+      occluder->GetMesh().lock()->update(1.f);
 
     for (auto & seg : Segments) {
       for (auto & occluder : Occluders) {

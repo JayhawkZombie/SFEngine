@@ -1,11 +1,9 @@
 #include "arcSeg.h"
 #include "mvHit.h"
 
-arcSeg::arcSeg(std::istream& fin) {
-  init(fin);
-}
+arcSeg::arcSeg(std::istream& fin) { init(fin); }
 
-arcSeg::arcSeg(float x1, float y1, float x2, float y2, float radius, sf::Color clr)
+void arcSeg::init(float x1, float y1, float x2, float y2, float radius, sf::Color clr)
 {
   s[0].x = x1; s[0].y = y1;
   s[1].x = x2; s[1].y = y2;
@@ -16,7 +14,7 @@ arcSeg::arcSeg(float x1, float y1, float x2, float y2, float radius, sf::Color c
   vec2d arc = s[1] - s[0];
   arc *= 0.5f;
   float hfArcMag = arc.mag();
-  pos = s[0] + arc + arc.get_LH_norm()*sqrtf(R*R - hfArcMag*hfArcMag);
+  pos = s[0] + arc + arc.get_LH_norm()*sqrtf(R*R - hfArcMag * hfArcMag);
   //   std::cout << "pos at: " << pos.x << ", " << pos.y << '\n';
   //   vec2d R0 = s[0] - pos;
   s[0] -= pos;
@@ -27,7 +25,7 @@ arcSeg::arcSeg(float x1, float y1, float x2, float y2, float radius, sf::Color c
   float dA = angle / 19.0f;
   for (unsigned int i = 0; i<20; ++i)
   {
-    vec2d vtxPos = pos + s[0].Rotate(-1.0f*(float)i*dA);
+    vec2d vtxPos = pos + s[0].Rotate(-1.0f*( float ) i*dA);
     Q[i].position.x = vtxPos.x;
     Q[i].position.y = vtxPos.y;
   }
@@ -48,7 +46,7 @@ void arcSeg::init(std::istream& fin)
   vec2d arc = s[1] - s[0];
   arc *= 0.5f;
   float hfArcMag = arc.mag();
-  pos = s[0] + arc + arc.get_LH_norm()*sqrtf(R*R - hfArcMag*hfArcMag);
+  pos = s[0] + arc + arc.get_LH_norm()*sqrtf(R*R - hfArcMag * hfArcMag);
   std::cout << "pos at: " << pos.x << ", " << pos.y << '\n';
   //   vec2d R0 = s[0] - pos;
   s[0] -= pos;
@@ -59,7 +57,7 @@ void arcSeg::init(std::istream& fin)
   float dA = angle / 19.0f;
   for (unsigned int i = 0; i<20; ++i)
   {
-    vec2d vtxPos = pos + s[0].Rotate(-1.0f*(float)i*dA);
+    vec2d vtxPos = pos + s[0].Rotate(-1.0f*( float ) i*dA);
     Q[i].position.x = vtxPos.x;
     Q[i].position.y = vtxPos.y;
   }
@@ -122,7 +120,7 @@ bool arcSeg::hit(mvHit& mh)
     if (is_hard)
     {
       mh.bounce(Cf, Nh, friction_on);// velocity response
-      mh.setPosition(mh.pos + Nh*dSep);// position change response
+      mh.setPosition(mh.pos + Nh * dSep);// position change response
     }
     else
     {
@@ -142,6 +140,7 @@ bool arcSeg::hit(mvHit& mh)
 
 bool arcSeg::is_thruMe(vec2d pt1, vec2d pt2, vec2d& Pimp, float& fos)const
 {
+  ( void ) pt1; ( void ) pt2; ( void ) Pimp; ( void ) fos;
   return false;// for now
 }
 

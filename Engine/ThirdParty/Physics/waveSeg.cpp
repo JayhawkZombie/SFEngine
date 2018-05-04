@@ -1,13 +1,9 @@
 #include "waveSeg.h"
 #include "mvHit.h"
 
-#include <cereal/archives/portable_binary.hpp>
-
 float waveSeg::PIx2 = 6.283185f;
 
-waveSeg::waveSeg(std::istream& is) {
-  init(is);
-}
+waveSeg::waveSeg(std::istream& is) { init(is); }
 
 void waveSeg::init(std::istream& is)
 {
@@ -23,14 +19,14 @@ void waveSeg::init(std::istream& is)
   K_wvRt = PIx2 / L_wv;
   is >> rotFreqRt; if (rotFreqRt < 0.0f) rotFreqRt *= 0.0f;
 
-  wvSpeed = rotFreqRt*L_wv / PIx2;
+  wvSpeed = rotFreqRt * L_wv / PIx2;
 
   is >> Amp_wvLt >> L_wv;
   if (L_wv < magL / 100.0f) L_wv = magL / 100.0f;
   K_wvLt = PIx2 / L_wv;
   is >> rotFreqLt; if (rotFreqLt < 0.0f) rotFreqLt *= 0.0f;
 
-  rotFreqLt = wvSpeed*K_wvLt;
+  rotFreqLt = wvSpeed * K_wvLt;
 
   is >> Elev >> airDensity;
   is >> Depth >> fluidDensity;
@@ -40,34 +36,34 @@ void waveSeg::init(std::istream& is)
   wvVec.reserve(Npts_wv);
   wvVecLt.reserve(Npts_wv);
   wvVecRt.reserve(Npts_wv);
-  float dx = magL / (float)(Npts_wv - 1);
-  sf::Vertex vtx;
+  float dx = magL / ( float ) (Npts_wv - 1);
+  sf::Vertex vtx_loc;
   // right wave
-  vtx.color = sf::Color::Red;// right wave red
+  vtx_loc.color = sf::Color::Red;// right wave red
   for (int i = 0; i<Npts_wv; ++i)
   {
-    float x_rel = dx*(float)i;
-    vtx.position.x = pos.x + x_rel;
-    vtx.position.y = pos.y + y_wvRt(x_rel);
-    wvVecRt.push_back(vtx);
+    float x_rel = dx * ( float ) i;
+    vtx_loc.position.x = pos.x + x_rel;
+    vtx_loc.position.y = pos.y + y_wvRt(x_rel);
+    wvVecRt.push_back(vtx_loc);
   }
   // left wave
-  vtx.color = sf::Color::Green;// left wave green
+  vtx_loc.color = sf::Color::Green;// left wave green
   for (int i = 0; i<Npts_wv; ++i)
   {
-    float x_rel = dx*(float)i;
-    vtx.position.x = pos.x + x_rel;
-    vtx.position.y = pos.y + y_wvLt(x_rel);
-    wvVecLt.push_back(vtx);
+    float x_rel = dx * ( float ) i;
+    vtx_loc.position.x = pos.x + x_rel;
+    vtx_loc.position.y = pos.y + y_wvLt(x_rel);
+    wvVecLt.push_back(vtx_loc);
   }
   // resultant wave
-  vtx.color = sf::Color::Blue;// result is blue
+  vtx_loc.color = sf::Color::Blue;// result is blue
   for (int i = 0; i<Npts_wv; ++i)
   {
-    float x_rel = dx*(float)i;
-    vtx.position.x = pos.x + x_rel;
-    vtx.position.y = wvVecRt[i].position.y + wvVecLt[i].position.y - pos.y;
-    wvVec.push_back(vtx);
+    float x_rel = dx * ( float ) i;
+    vtx_loc.position.x = pos.x + x_rel;
+    vtx_loc.position.y = wvVecRt[i].position.y + wvVecLt[i].position.y - pos.y;
+    wvVec.push_back(vtx_loc);
   }
 
   // under water image
@@ -106,6 +102,7 @@ void waveSeg::initUnderView()
 
 void waveSeg::to_file(std::ofstream& fout)
 {
+  ( void ) fout;
   return;
 }
 
@@ -123,10 +120,10 @@ void waveSeg::draw(sf::RenderTarget& rRW)const
   }
 }
 
-void waveSeg::update()
+void waveSeg::update(float dt)
 {
-  phsLt += rotFreqLt; if (phsLt > PIx2) phsLt -= PIx2;
-  phsRt += rotFreqRt; if (phsRt > PIx2) phsRt -= PIx2;
+  phsLt += rotFreqLt * dt; if (phsLt > PIx2) phsLt -= PIx2;
+  phsRt += rotFreqRt * dt; if (phsRt > PIx2) phsRt -= PIx2;
   setState_1();
   /*   float dx = magL/(float)(Npts_wv-1);
   float x_rel = 0.0f;
@@ -152,11 +149,11 @@ void waveSeg::setState(float phase_left, float phase_right)
 
 void waveSeg::setState_1()
 {
-  float dx = magL / (float)(Npts_wv - 1);
+  float dx = magL / ( float ) (Npts_wv - 1);
   float x_rel = 0.0f;
   for (size_t i = 0; i<wvVec.size(); ++i)
   {
-    x_rel = dx*(float)i;
+    x_rel = dx * ( float ) i;
     if (viewRt && wvVecRt.size() == wvVec.size()) wvVecRt[i].position.y = pos.y + y_wvRt(x_rel);
     if (viewLt && wvVecLt.size() == wvVec.size()) wvVecLt[i].position.y = pos.y + y_wvLt(x_rel);
     wvVec[i].position.y = wvVecRt[i].position.y + wvVecLt[i].position.y - pos.y;
@@ -181,21 +178,21 @@ state_ab* waveSeg::newState()
 bool waveSeg::hit(mvHit& mh)
 {
   // above the top?
-  vec2d sepAtTop = mh.pos - (pos + N*Elev);// sep is rel position
+  vec2d sepAtTop = mh.pos - (pos + N * Elev);// sep is rel position
   float h = sepAtTop.dot(N);// > 0 if above
   if (h > 0.0f) return false;
   float d = N.cross(sepAtTop);
   if (d < 0.0f || d > L.mag()) return false;// not above seg
 
                                             // below the bottom?
-  vec2d sepAtBot = mh.pos - (pos - N*Depth);// sep is rel position
+  vec2d sepAtBot = mh.pos - (pos - N * Depth);// sep is rel position
   h = sepAtBot.dot(N);// > 0 if above
   if (h < 0.0f) return false;
 
   // will be treating hit
   vec2d sep = mh.pos - pos;// sep is rel position
   float yPm = wv_slope(sep.x);// new pos
-  float ampRes = y_res(sep.x) - mh.project(-N)*(sqrtf(1.0f + yPm*yPm) - 1.0f);// wave amplitude + set above
+  float ampRes = y_res(sep.x) - mh.project(-N)*(sqrtf(1.0f + yPm * yPm) - 1.0f);// wave amplitude + set above
   sep.y -= ampRes;
   h = sep.dot(N);// height above wave to mh.pos
                  //position shift
@@ -218,7 +215,7 @@ bool waveSeg::hit(mvHit& mh)
       mh.bounce(Cf, Nsurf, friction_on);// velocity response
       mh.pos.y += ampRes;
       mh.v.y += vShift_y;
-      mh.setPosition(mh.pos + Nh*dSep);// position change response
+      mh.setPosition(mh.pos + Nh * dSep);// position change response
       return true;
     }
     else
@@ -284,5 +281,3 @@ mh.v.y += vShift_y;
 return Hit;
 }
 */
-
-CEREAL_REGISTER_TYPE(waveSeg);

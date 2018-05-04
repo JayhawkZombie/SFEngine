@@ -465,13 +465,13 @@ void ConfirmAlert(const std::string &message, std::string OKText, std::string Ca
   OKButton->connect("Clicked", [mbox, OKcb]() { 
     if (OKcb) 
       OKcb(); 
-    mbox->hide();
+    mbox->setVisible(false);
     GUI->remove(mbox);
   });
   CancelButton->connect("Clicked", [mbox, Cancelcb]() {
     if (Cancelcb)
       Cancelcb();
-    mbox->hide();
+    mbox->setVisible(false);
     GUI->remove(mbox);
   });
   mbox->connect("Closed", [message, OKText, CancelText, OKcb, Cancelcb] { ConfirmAlert(message, OKText, CancelText, OKcb, Cancelcb); });
@@ -566,14 +566,16 @@ void MessageAlert(const std::string & message)
   mbox->add(btn);
 
   GUI->add(mbox, "errorAlert");
-  GUI->focusWidget(mbox);
+  //GUI->focusWidget(mbox);
+  mbox->setFocused(true);
   mbox->showWithEffect(tgui::ShowAnimationType::Scale, sf::milliseconds(150));
 
-  mbox->connect("closed", [mbox]() { mbox->hide(); GUI->remove(mbox); });
-  btn->connect("clicked", [mbox]() { mbox->hide(); GUI->remove(mbox); });
+  mbox->connect("closed", [mbox]() { mbox->setVisible(false); GUI->remove(mbox); });
+  btn->connect("clicked", [mbox]() { mbox->setVisible(false); GUI->remove(mbox); });
 }
 
 //if the editor is being used, link to the current engine and allow access to the global UI handler
 #ifdef WITH_EDITOR
 SFEngine *CurrentEngine = nullptr;
 #endif
+ 

@@ -26,8 +26,8 @@ bool lineSegConveyor::hit(mvHit& mh)
   //   Hit = mh.hit(pos+L);
   //   if( Hit ) return true;
 
-  mh.v -= vel*uVel;
+  mh.v -= vel * uVel;
   bool Hit = lineSeg::hit(mh);
-  mh.v += vel*uVel;
+  mh.v += vel * uVel;
   return Hit;
 }

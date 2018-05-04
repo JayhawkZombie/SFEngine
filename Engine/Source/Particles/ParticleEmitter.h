@@ -30,8 +30,9 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "Particleh.h"
+#include "Particle.h"
 #include "Utils/Interpolators.h"
+#include "Utils/Math/Lerp.h"
 
 class ParticleEmitter
 {

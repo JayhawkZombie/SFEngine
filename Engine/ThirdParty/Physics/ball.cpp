@@ -3,38 +3,36 @@
 #include "lineSeg.h"
 #include "arcSeg.h"
 
-#include <cereal/archives/portable_binary.hpp>
+bool ball::hit(regPolygon& py) { return py.hit(*static_cast<ball*>(this)); }
+bool ball::hit(mvHit& mh) { return mh.hit(*static_cast<ball*>(this)); }
 
-bool ball::hit(regPolygon& py) {
-  return py.hit(*static_cast<ball*>(this));
-}
-bool ball::hit(mvHit& mh) {
-  return mh.hit(*static_cast<ball*>(this));
-}
+bool ball::intersect(regPolygon& py) { return py.intersect(*static_cast<ball*>(this)); }
+bool ball::intersect(mvHit& mh) { return mh.intersect(*static_cast<ball*>(this)); }
 
-/*
-bool ball::hit( mvHit& mh )
-{
-vec2d& Pimp;
-float& fos;
-if( is_thruMe( vec2d pt1, vec2d pt2, vec2d& Pimp, float& fos ) )
-{
-return true;
-}
+bool ball::intersect(ball& rB) { return (pos - rB.pos).dot(pos - rB.pos) <= (r + rB.r)*(r + rB.r); }// touching
 
-return mh.hit( *static_cast<ball*>(this) );
-}   */
+                                                                                                    /*
+                                                                                                    bool ball::hit( mvHit& mh )
+                                                                                                    {
+                                                                                                    vec2d& Pimp;
+                                                                                                    float& fos;
+                                                                                                    if( is_thruMe( vec2d pt1, vec2d pt2, vec2d& Pimp, float& fos ) )
+                                                                                                    {
+                                                                                                    return true;
+                                                                                                    }
+
+                                                                                                    return mh.hit( *static_cast<ball*>(this) );
+                                                                                                    }   */
 
 ball::ball() {}// default
 
-ball::ball(std::istream& fin) {
-  init(fin);
-}// from file data
+ball::ball(std::istream& fin) { init(fin); }// from file data
 
 void ball::init(std::istream& fin)// from file data
 {
   fin >> pos.x >> pos.y >> v.x >> v.y >> r;
   fin >> m >> Cr;// new
+                 //    sf::Uint8 red,g,b;
   unsigned int red, g, b;
   fin >> red >> g >> b;
   img.setRadius(r);
@@ -42,6 +40,15 @@ void ball::init(std::istream& fin)// from file data
   img.setFillColor(sf::Color(red, g, b));
   img.setOrigin(r, r);
   //    std::cout << "ball.v = " << v.mag() << '\n';
+}
+
+void ball::init(vec2d Pos, vec2d vel, float R, float Mass, float cr, sf::Color clr)
+{
+  pos = Pos; v = vel; r = R; m = Mass; Cr = cr;
+  img.setRadius(r);
+  img.setPosition(pos.x, pos.y);
+  img.setFillColor(clr);
+  img.setOrigin(r, r);
 }
 
 /*
@@ -58,14 +65,14 @@ else { v.y += dV; if( v.y > 0.0f ) v.y = 0.0f; }
 return;
 }   */
 
-void ball::update()// virtual
+void ball::update(float dt)// virtual
 {
   if (!is_free) return;// new
 
   vec2d N(1.0f, 0.0f);
   bool Hit = false;
 
-  pos += v;
+  pos += v * dt;
 
   if (pos.x < r)
   {
@@ -101,9 +108,7 @@ void ball::update()// virtual
   img.setPosition(pos.x, pos.y);
 }
 
-void ball::draw(sf::RenderTarget& rRW)const {
-  rRW.draw(img);
-}
+void ball::draw(sf::RenderTarget& rRW)const { rRW.draw(img); }
 
 bool ball::hit(ball& rB)
 {
@@ -155,8 +160,8 @@ bool ball::Float(vec2d Nsurf, vec2d Npen, float penAmt, float grav_N, float airD
     float Fbuoy = 2.0f*r*grav_N*(belowSurface*fluidDensity + (2.0f*r - belowSurface)*airDensity);
     v.x += Fbuoy / m;
     //        v.x -= drag*v.x*r*2.0f/m;
-    if (v.x < 0.0f) v.x -= drag*fluidDensity*v.x*r*2.0f / m;
-    v.y -= drag*fluidDensity*v.y*belowSurface / m;
+    if (v.x < 0.0f) v.x -= drag * fluidDensity*v.x*r*2.0f / m;
+    v.y -= drag * fluidDensity*v.y*belowSurface / m;
     v = v.from_base(Nsurf);
     return true;
   }
@@ -170,7 +175,7 @@ bool ball::Float(vec2d Nsurf, float grav_N, float Density)// fully immersed
   v = v.to_base(Nsurf);
   float Fbuoy = 3.1416f*r*r*grav_N*Density;
   v.x += Fbuoy / m;
-  v -= drag*Density*v*r*2.0f / m;
+  v -= drag * Density*v*r*2.0f / m;
   v = v.from_base(Nsurf);
   return true;
 }
@@ -184,7 +189,7 @@ bool ball::hit(const vec2d& pt)
     v = v.to_base(N);
     if (v.x < 0.0f) v.x *= -Cr;// reverse component along sep
     v = v.from_base(N);
-    pos += N*dSep;
+    pos += N * dSep;
     return true;
   }
 
@@ -223,13 +228,11 @@ bool ball::is_inMe(const lineSeg& LS, vec2d& Pimp, vec2d& Nh, float& dSep)const/
 
   if ((d > 0.0f) && (d < magL))// center is between ends
   {
-    if (h > 0) Pimp = pos - r*N;// on Nside
-    else Pimp = pos + r*N;// on back side
+    if (h > 0) Pimp = pos - r * N;// on Nside
+    else Pimp = pos + r * N;// on back side
     Nh = LS.L.get_LH_norm();// unit normal
     dSep = -1.0f*Nh.dot(Pimp - LS.pos);// amount of penetration
-    if (dSep < 0.0f) {
-      Nh *= -1.0f; dSep *= -1.0f;
-    }
+    if (dSep < 0.0f) { Nh *= -1.0f; dSep *= -1.0f; }
     return true;
   }
   // test for end hits
@@ -254,14 +257,12 @@ bool ball::is_inMe(const arcSeg& AS, vec2d& Pimp, vec2d& Nh, float& dSep)const//
   if (sep.cross(AS.s[0]) < 0.0f || sep.cross(AS.s[1]) > 0.0f) return Hit;// ends missed
 
   sep /= sep.mag();// now a unit vector
-  if (sepSq > AS.R*AS.R) Pimp = pos - sep*r;// outside hit
-  else Pimp = pos + sep*r;// inside hit
+  if (sepSq > AS.R*AS.R) Pimp = pos - sep * r;// outside hit
+  else Pimp = pos + sep * r;// inside hit
 
   Nh = Pimp - AS.pos; Nh /= Nh.mag();// unit normal
   dSep = AS.R - (Pimp - AS.pos).mag();// amount of penetration
-  if (dSep < 0.0f) {
-    Nh *= -1.0f; dSep *= -1.0f;
-  }
+  if (dSep < 0.0f) { Nh *= -1.0f; dSep *= -1.0f; }
 
   return true;
 }
@@ -277,11 +278,9 @@ bool ball::is_thruMe(vec2d pt1, vec2d pt2, vec2d& Pimp, float& fos)const// for b
   float b = Lu.cross(S);
   if (b < 0.0f && b < -r) return false;// missed
   if (b > 0.0f && b > r)  return false;// missed
-  float a = sqrtf(r*r - b*b);
-  Pimp = pos + b*N - a*Lu;
+  float a = sqrtf(r*r - b * b);
+  Pimp = pos + b * N - a * Lu;
   fos = (pt1 - Pimp).dot(Lu) / magL;
 
   return true;
 }
-
-CEREAL_REGISTER_TYPE(ball);

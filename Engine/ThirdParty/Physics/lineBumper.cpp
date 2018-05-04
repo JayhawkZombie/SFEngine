@@ -11,7 +11,7 @@ void lineBumper::init(std::istream& fin)
   lineSeg::init(fin);// base overload
   float magV;
   fin >> magV >> bumpSteps;
-  vel = N*magV;
+  vel = N * magV;
   std::cerr << "lineBumper: vel.x = " << vel.x << "  vel.y = " << vel.y << '\n';
 }
 
@@ -25,7 +25,7 @@ void lineBumper::to_file(std::ofstream& fout)
   fout << vel.mag() << ' ' << bumpSteps;
 }
 
-void lineBumper::update()
+void lineBumper::update(float dt)
 {
   if (state == 0) return;
 
@@ -38,10 +38,10 @@ void lineBumper::update()
     if (--bumpIdx <= 0) state = 0;// motion done
   }
 
-  vtx[0].position.x = pos.x + (float)bumpIdx*vel.x;
-  vtx[0].position.y = pos.y + (float)bumpIdx*vel.y;
-  vtx[1].position.x = pos.x + L.x + (float)bumpIdx*vel.x;
-  vtx[1].position.y = pos.y + L.y + (float)bumpIdx*vel.y;
+  vtx[0].position.x = pos.x + ( float ) bumpIdx*vel.x*dt;
+  vtx[0].position.y = pos.y + ( float ) bumpIdx*vel.y*dt;
+  vtx[1].position.x = pos.x + L.x + ( float ) bumpIdx*vel.x*dt;
+  vtx[1].position.y = pos.y + L.y + ( float ) bumpIdx*vel.y*dt;
 
   return;
 }
@@ -87,7 +87,7 @@ bool lineBumper::hit(mvHit& mh)
       }
     }
 
-    mh.setPosition(mh.pos + Nh*dSep);// position change response
+    mh.setPosition(mh.pos + Nh * dSep);// position change response
     return true;
   }
 
